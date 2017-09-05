@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width,target-densitydpi=device-dpi">
+  <meta content="telephone=no" name="format-detection">
+  <meta name="apple-mobile-web-app-status-bar-style" content="white-translucent">
+  <title></title>
+
+  <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/home/home.css" rel="stylesheet">
+  <link href="css/active/active.css" rel="stylesheet">
+  <link href="css/msg/msg.css" rel="stylesheet">
+  <link href="css/pcenter/pcenter.css" rel="stylesheet">
+  <link href="css/register/register.css" rel="stylesheet">
+  <link href="css/font-style.css" rel="stylesheet">
+  <link href="css/mobiscroll.custom-3.0.0-beta.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/active/ng-animation.css">
+  <link rel="stylesheet" href="css/cpv/cpv.css">
+  <script src="lib/ionic.bundle.js"></script>
+  <!--会话换行插件-->
+  <script src="lib/elastic.js"></script>
+  <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+  <script src="lib/ng-cordova.js"></script>
+  <script src="lib/ng-file-upload-all.js"></script>
+  <script src="lib/jquery-2.2.1.min.js"></script>
+  <script src="js/jquery.slotmachine.js"></script>
+  <script src="lib/md5.js"></script>
+  <script src="lib/moment.min.js"></script>
+  <script src="lib/mobiscroll.custom-3.0.0-beta.min.js"></script>
+  <script src="lib/ionic-datepicker.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+  <!--&lt;!&ndash; 通用模块(common) start&ndash;&gt;-->
+  <script src="modules/common/filter/filter.js"></script>
+  <script src="modules/common/filter/httpInterceptor.js"></script>
+  <script src="modules/common/service/ConfigService.js"></script>
+  <script src="modules/common/service/IMSqliteUtilService.js"></script>
+  <script src="modules/common/service/pathMap.js"></script>
+  <script src="modules/common/service/SqliteUtilService.js"></script>
+  <script src="modules/common/service/StorageService.js"></script>
+  <script src="modules/common/service/FileCacheService.js"></script>
+  <script src="modules/common/service/UserService.js"></script>
+  <script src="modules/common/service/UtilService.js"></script>
+  <script src="modules/common/service/pinyinconvert.service.js"></script>
+  <script src="modules/common/service/BarcodeService.js"></script>
+  <!--&lt;!&ndash;-控制器--登录注册--&ndash;&gt;-->
+  <script src="modules/regiest/index.js"></script>
+  <script src="modules/regiest/shan.js"></script>
+  <!--&lt;!&ndash;-控制器--商家--&ndash;&gt;-->
+  <script src="modules/business/index.js"></script>
+  <script src="modules/business/service/BusinessService.js"></script>
+  <script src="modules/business/service/BusinessIndexService.js"></script>
+  <script src="modules/business/service/TabbindexService.js"></script>
+  <script src="modules/business/evaluate/index.js"></script>
+  <script src="modules/business/goods/index.js"></script>
+  <script src="modules/business/goods/service/GoodsService.js"></script>
+  <script src="modules/business/reputation/index.js"></script>
+  <script src="modules/business/evaluate/service/EvaluateService.js"></script>
+  <!--&lt;!&ndash;-控制器--发现(首页)--&ndash;&gt;-->
+  <script src="modules/home/index.js"></script>
+  <script src="modules/home/cantscan.controller.js"></script>
+  <script src="modules/home/scanfail.controller.js"></script>
+  <script src="modules/home/service/TaskIndexService.js"></script>
+  <script src="modules/home/service/BlackService.js"></script>
+  <script src="modules/home/service/BannerService.js"></script>
+  <script src="modules/home/service/MerchantIndexService.js"></script>
+  <script src="modules/home/service/NewHandService.js"></script>
+  <script src="modules/home/service/ExclusiveCouponService.js"></script>
+  <script src="modules/home/helpsell/index.js"></script>
+  <script src="modules/home/helpsell/service/HelpSaleDetailService.js"></script>
+  <script src="modules/home/helpsell/seller/index.js"></script>
+  <script src="modules/home/helpsell/teamhead/index.js"></script>
+  <script src="modules/home/helpsell/teamhead/service/TeamHeadService.js"></script>
+  <script src="modules/home/search/index.js"></script>
+  <script src="modules/home/search/service/SearchTaskService.js"></script>
+  <script src="modules/home/selectcity/index.js"></script>
+  <script src="modules/pcenter/recharge/controller/recharge.controller.js"></script>
+  <script src="modules/pcenter/recharge/service/recharge.service.js"></script>
+  <script src="modules/pcenter/service/PcenterIndexService.js"></script>
+  <script src="modules/pcenter/service/MyAttentionService.js"></script>
+  <script src="modules/pcenter/service/MyRecommendService.js"></script>
+  <script src="modules/pcenter/service/RecommendService.js"></script>
+  <script src="modules/pcenter/service/MyRedpackagService.js"></script>
+  <script src="modules/home/selectcity/service/CityService.js"></script>
+  <script src="modules/home/topic/index.js"></script>
+  <script src="modules/home/topic/service/TopicTaskService.js"></script>
+  <!--&lt;!&ndash;-控制器--个人中心--&ndash;&gt;-->
+  <script src="modules/pcenter/index.js"></script>
+  <script src="modules/pcenter/about/index.js"></script>
+  <script src="modules/pcenter/account/index.js"></script>
+  <script src="modules/pcenter/account/service/AccountService.js"></script>
+  <script src="modules/pcenter/collection/service/CollectionService.js"></script>
+  <script src="modules/pcenter/advice/index.js"></script>
+  <script src="modules/pcenter/collection/index.js"></script>
+  <script src="modules/pcenter/xtschool/controller/xtschoolindex.controller.js"></script>
+  <script src="modules/pcenter/xtschool/controller/xtsrelateme.controller.js"></script>
+  <script src="modules/pcenter/xtschool/service/xtschool.service.js"></script>
+  <script src="modules/pcenter/xtschool/service/xtschoolq.service.js"></script>
+  <script src="modules/pcenter/xtschool/service/xtschoola.service.js"></script>
+  <script src="modules/pcenter/xtschool/service/xtschoolrelate.service.js"></script>
+  <!--customer-->
+  <script src="modules/pcenter/customer/controller/customerManage.controller.js"></script>
+  <script src="modules/pcenter/customer/controller/customerSubmit.controller.js"></script>
+  <script src="modules/pcenter/customer/controller/addcustomer.controller.js"></script>
+  <script src="modules/pcenter/customer/controller/customerDetail.controller.js"></script>
+  <script src="modules/pcenter/customer/controller/customerDetail2.controller.js"></script>
+  <script src="modules/pcenter/customer/controller/customerDetail3.controller.js"></script>
+  <script src="modules/pcenter/customer/controller/customerDetail4.controller.js"></script>
+  <script src="modules/pcenter/customer/controller/complaint.controller.js"></script>
+  <script src="modules/pcenter/customer/service/CustomerService.js"></script>
+  <script src="modules/pcenter/customer/service/CustomerSubmitService.js"></script>
+  <!--end-->
+  <script src="modules/pcenter/evaluate/index.js"></script>
+  <script src="modules/pcenter/extension/index.js"></script>
+  <script src="modules/pcenter/extension/service/ExtensionService.js"></script>
+  <script src="modules/pcenter/help/index.js"></script>
+  <script src="modules/pcenter/info/index.js"></script>
+  <script src="modules/pcenter/info/service/InfoService.js"></script>
+  <script src="modules/pcenter/invite/index.js"></script>
+  <script src="modules/pcenter/invite/service/invite.service.js"></script>
+  <script src="modules/pcenter/myidentity/index.js"></script>
+  <script src="modules/pcenter/settings/index.js"></script>
+  <script src="modules/pcenter/service/MyCouponService.js"></script>
+  <!--&lt;!&ndash;-控制器--会话--&ndash;&gt;-->
+  <script src="modules/msg/index.js"></script>
+  <script src="modules/msg/service/MsgService.js"></script>
+  <script src="modules/msg/service/SysMsgService.js"></script>
+  <script src="modules/msg/applycommission/index.js"></script>
+  <script src="modules/msg/chat/index.js"></script>
+  <script src="modules/msg/chat/indexFaq.js"></script>
+
+  <script src="modules/msg/sendclient/index.js"></script>
+  <script src="modules/msg/applycommission/index.js"></script>
+  <script src="modules/msg/chat/indexSys.js"></script>
+  <script src="modules/msg/newFriend/index.js"></script>
+  <script src="modules/msg/perchat/index.js"></script>
+  <script src="modules/msg/phonebook/index.js"></script>
+  <script src="modules/msg/share/index.js"></script>
+
+  <script src="modules/msg/config/msg.route.js"></script>
+  <script src="modules/msg/config/emoji.data.js"></script>
+  <script src="modules/msg/service/searchContacts.service.js"></script>
+  <script src="modules/msg/service/groupChat.service.js"></script>
+  <script src="modules/msg/service/phonebook.service.js"></script>
+  <script src="modules/msg/controller/addgroup.controller.js"></script>
+  <script src="modules/msg/controller/addmore.controller.js"></script>
+  <script src="modules/msg/controller/changegroupname.controller.js"></script>
+  <script src="modules/msg/controller/deletegroupmenber.controller.js"></script>
+  <script src="modules/msg/controller/groupmember.controller.js"></script>
+  <script src="modules/msg/controller/groupmessage.controller.js"></script>
+  <script src="modules/msg/controller/invitegroup.controller.js"></script>
+  <script src="modules/msg/controller/msggroup.controller.js"></script>
+  <script src="modules/msg/controller/phonebook.controller.js"></script>
+  <script src="modules/msg/controller/phonebookfriend.controller.js"></script>
+  <script src="modules/msg/controller/searchfriend.controller.js"></script>
+
+  <script src="modules/home/topic/controller/nearlysale.controller.js"></script>
+  <script src="modules/home/topic/service/nearlysale.service.js"></script>
+  <script src="modules/home/topic/directive/nearlysale.directive.js"></script>
+  <script src="modules/home/fastget/controller/fastget.controller.js"></script>
+<!--3.5.1-->
+  <script src="modules/home/route/home.route.js"></script>
+  <script src="modules/home/controller/couponDetail.controller.js"></script>
+
+  <!-- 3.2-->
+  <script src="modules/home/fastget/controller/fastget.controller.js"></script>
+  <script src="modules/home/fastget/service/Fastget.service.js"></script>
+  <!-- 3.4-->
+  <script src="modules/common/service/OutLoginService.js"></script>
+  <script src="modules/pcenter/xtschool/controller/index.js"></script>
+  <script src="modules/pcenter/xtschool/controller/xtschoolquestion.controller.js"></script>
+  <script src="modules/pcenter/xtschool/controller/xtschooldetail.controller.js"></script>
+
+  <!--活动 -->
+  <script src="modules/home/active/route/active.route.js"></script>
+  <script src="modules/home/active/controller/merry.controller.js"></script>
+  <script src="modules/home/active/controller/newyear.controller.js"></script>
+  <script src="modules/home/active/service/merry.service.js"></script>
+  <!--关联手机号-->
+  <script src="modules/regiest/controller/relatednumber.controller.js"></script>
+  <script src="modules/regiest/controller/relatednumber2.controller.js"></script>
+  <script src="modules/regiest/controller/relatednumber3.controller.js"></script>
+  <script src="modules/regiest/controller/relatednumber4.controller.js"></script>
+  <script src="modules/regiest/controller/relatednumber5.controller.js"></script>
+
+  <!--cpv-->
+  <script src="modules/cpv/controller/cpv.controller.js"></script>
+  <script src="modules/cpv/controller/cpvdetail.controller.js"></script>
+  <script src="modules/cpv/route/cpv.route.js"></script>
+  <script src="modules/cpv/service/cpv.service.js"></script>
+  <script src="modules/cpv/service/businessIndexService.js"></script>
+  <script src="modules/cpv/controller/businessIndex.controller.js"></script>
+  <script src="modules/cpv/directive/businessIndex.directive.js"></script>
+  <script src="modules/cpv/controller/businessDetail.controller.js"></script>
+
+  <!--pcenter-->
+  <script src="modules/pcenter/controller/chooseHeadPic.controller.js"></script>
+  <script src="modules/pcenter/controller/myfocus.controller.js"></script>
+  <script src="modules/pcenter/controller/recommendList.controller.js"></script>
+  <script src="modules/pcenter/controller/mypurse.controller.js"></script>
+  <script src="modules/pcenter/controller/couponlist.controller.js"></script>
+  <script src="modules/pcenter/controller/salecoupon.controller.js"></script>
+  <script src="modules/pcenter/controller/couponcode.controller.js"></script>
+  <script src="modules/pcenter/controller/myrecommend.controller.js"></script>
+  <script src="modules/pcenter/route/pcenter.route.js"></script>
+
+</head>
+<body ng-app="xtui" ng-controller="main">
+<div class="mask hide updateper updatepop" style="top:0px"></div>
+<div class="update_box hide updateper">
+  <img src="./img/update_bg.png"/>
+  <div class="update_num"><span id="per"></span>%</div>
+  <div class="update_linebg">
+    <div class="update_line">
+      <img src="./img/update_load.gif"/>
+    </div>
+  </div>
+</div>
+<div class="mask-tab hide"></div>
+<div class="mask index-mask hide" style="z-index:1000;top:0px;"></div>
+<ion-nav-view></ion-nav-view>
+
+<audio id="notice_audio" src="audio/notice.mp3" style="visibility: hidden;height:0"></audio>
+
+<!--弹金币-->
+<div class="getmoney_area getmoney_area_animation" ng-if="showGetmoney">
+  <img src="img/public/getmoney.png">
+  <span class="getmoney_area_animation2">+{{deltamoney}}</span>
+</div>
+
+<div class="messagePopup" style="display:none">
+  <div class="body">
+    <div class="over-ellipsis2" id="noticeCon"></div>
+  </div>
+  <div class="buttonGroups clearfix">
+    <button class="xt-blue fl" ng-click="closenoticeBox()">取消</button>
+    <button class="xt-red fl" ng-click="shownoticeBox()">前往</button>
+  </div>
+</div>
+
+<!-- 赚取佣金弹窗 -->
+<div class="congratulationsBox" ng-if="congratulation">
+  <div class="congratulationContent congratulationSetAnimate">
+    <div class="titleHeader">昨日赚取</div>
+    <div class="monyNum" ng-cloak>{{yestodayMoney}}<span>元</span></div>
+    <div class="textContent" ng-cloak>超过了{{yestodayPer}}的享推用户</div>
+  </div>
+</div>
+
+<!--新手引导第二版 第一步 SLS 领5元-->
+<div class="guideMask giude01" ng-if="step1==1" ng-click="closeNewHandStepOne()">
+  <div class="guideIndex">
+    <img src="img/newguide/guide01.png"/>
+    <div class="guide01-text">
+      你的好友<br><span ng-bind="step1InviteName"></span>
+    </div>
+  </div>
+</div>
+
+<!--新手引导第二版 第一步 BLS 领5元-->
+<div class="guideMask giude02"  ng-if="step1==2" ng-click="closeNewHandStepOne()">
+  <div class="guideIndex2">
+    <img src="img/newguide/guide02-b.png"/>
+    <div class="guide02-head">
+      <div class="guide02-headpic">
+        <img src="{{step1InviteAvatar|avatefilter}}"/>
+      </div>
+      <div class="guide02-text">
+        <span ng-bind="step1InviteName"></span>送你
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--新手引导第二版 第一步 其他 领5元 -->
+<div class="guideMask giude01" ng-if="step1==3" ng-click="closeNewHandStepOne()">
+  <div class="guideIndex2-xt">
+    <img src="img/newguide/guide02-xt.png"/>
+  </div>
+</div>
+
+<!--新手引导第二版 第二步-->
+<div class="giudeCenter" ng-if="step2" ng-click="closeNewHandStepTwo()"></div>
+
+<!--新手引导第二版 第三步-->
+<div class="guide03" ng-class="{'noNavbar':!false && !showActive ,'noNavbarhasEvent':!false && showActive,'hasNavbarhasEvent':false && showActive}" ng-if="step3" ng-click="closeNewHandStepThree()"></div>
+
+<!--新手引导第二版 第五步 无回调的情况-->
+<div class="guideMask" ng-if="step5==2" ng-click="closeNewHandStepFive()">
+  <div class="guide05">
+    <img src="img/newguide/guide05-2.png"/>
+  </div>
+</div>
+
+<!--底部导航遮罩-->
+<div class="coverlay"></div>
+
+<div class="guideTabmask"></div>
+
+<!-- 圣诞活动弹窗 -->
+<!--<div class="merryChristmasGuide" ng-if="merryChirsBox" ng-click="closeMerryChristmas()"></div>-->
+<!-- 鸡祥金蛋活动弹窗 -->
+<div class="merryChristmasGuide" ng-if="merryChirsBox" ng-click="closeMerryChristmas()"></div>
+</body>

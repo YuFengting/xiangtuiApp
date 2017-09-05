@@ -1,0 +1,49 @@
+<ion-view>
+
+
+   <ion-content class="trans">
+     <!--<ion-refresher pulling-text="下拉刷新..." on-refresh=""></ion-refresher>-->
+
+     <div class="center_header trans_head" style="height: auto;padding-left: 0px;padding-right: 0px;padding-bottom: 32px">
+       <div class="back-area" ng-click="goback()"><i class="icon ion-ios-arrow-left"></i></div>
+       <div class="headpic_area"><img src="{{picserver}}{{avate}}" onerror="javascript:this.src='img/default-avatar.png'"/></div>
+       <div class="headname_area"><span class="name" ng-bind="nick"></span><br><span class="level_trans" ng-bind="level"></span></div>
+       <div class="head_leval_area">
+
+         <div class="head_leval_grey"></div>
+         <!--<div class="head_leval_light" style="position: relative;top: -76px" ng-class="{'level1':cpclevel=='初级','level2':cpclevel=='中级','level3':cpclevel=='高级'}"></div>-->
+         <div class="levellightanrea" style="position: relative;top: -76px;">
+           <div class="lev1 po1"></div>
+           <div class="prowai">
+             <div class="levProgre po2" style="width:{{cpcper1}}%"></div>
+           </div>
+           <div class="lev2 po3"  ng-if="cpclevel=='中级'||cpclevel=='高级'"></div>
+           <div class="prowai">
+             <div class="levProgre po4"   ng-if="cpclevel=='中级'||cpclevel=='高级'" style="width:{{cpcper2}}%"></div>
+           </div>
+           <div class="lev3 po5"  ng-if="cpclevel=='高级'"></div>
+         </div>
+       </div>
+       <div class="level_wenzi">
+         <span>传播力/V1初级</span>
+         <span>传播力/V2中级</span>
+         <span>传播力/V3高级</span>
+       </div>
+     </div>
+     <div class="trans_info">
+
+       <div class="linform border_bottom_dotted">
+         <div class="tittle xt-red">什么是传播力</div>
+         <div class="textinfo">传播力既分享内容产生的传播影响。坚持自然分享并且获得阅读收益，即可提升传播力。</div>
+       </div>
+       <!--<div class="linform border_bottom_dotted ">
+         <div class="tittle ">权益：</div>
+         <div class="textinfo">初级用户只能接取低价分享活动，且每天最多可接取5个；中级用户，每天最多可接取8个分享活动，其中高价活动最多为3个；高级用户，每天最多可接取10个分享活动，其中高价活动最多为5个。</div>
+       </div>-->
+       <div class="linform ">
+         <div class="tittle ">规则：</div>
+         <div class="textinfo">只有持续进行分享活动，才能够获得传播力的提升。当用户涉嫌非自然分享时，传播力会降低，甚至被降低传播力等级。当用户被处以降级其传播力等级的处罚时，只有坚持每天进行分享活动且保证无作弊违规行为才能等级恢复。</div>
+       </div>
+     </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,64 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">设置支付密码</span>
+
+  </ion-header-bar>
+
+  <ion-content class="find-pasword has-header" style="overflow-y: hidden;">
+
+
+    <div class="find-form paswordFormBox">
+      <div class="line border-bottom clearfix">
+        <!--<input class="fl" placeholder="请输入原密码" ng-model="user.pwd" ng-change="checkAllPwd()">-->
+        <input placeholder="请输入支付密码" type="password" class="fl" ng-if="!showPwdone" ng-model="user.ppwd1" ng-focus="showpswClear()" ng-blur="hidepswClear()" ng-change="showpay1()" />
+        <input placeholder="请输入支付密码" type="text" class="fl" ng-if="showPwdone" ng-model="user.ppwd1" ng-focus="showpswClear()" ng-blur="hidepswClear()" ng-change="showpay1()"/>
+
+        <i class="icon-xt2-close fl close xt-grey-icon"  ng-click="clearPwd()" ng-if="haspwd"></i>
+
+        <label class="fr toggle toggle-assertive"><input type="checkbox" ng-click="showpsw()"><div class="track"><div class="handle"></div></div></label>
+
+      </div>
+      <div class="line ">
+        <!--<input class="fl" placeholder="请设置新登录密码" ng-model="user.rpwd"  ng-change="checkAllPwd()">-->
+        <input placeholder="请确认支付密码" type="password" class="fl" ng-if="!showPwdtwo" ng-model="user.ppwd2" ng-focus="showppswClear()" ng-blur="hideppswClear()" ng-change="showpay2()" />
+        <input placeholder="请确认支付密码" type="text" class="fl" ng-if="showPwdtwo" ng-model="user.ppwd2" ng-focus="showppswClear()" ng-blur="hideppswClear()" ng-change="showpay2()"/>
+
+        <i class="icon-xt2-close fl close xt-grey-icon" ng-click="clearRPwd()" ng-if="hasrpwd"></i>
+
+        <label class="fr toggle toggle-assertive"><input type="checkbox"  ng-click="showpsw2()"><div class="track"><div class="handle"></div></div></label>
+
+
+
+      </div>
+
+    </div>
+
+    <div class="queren-btn">
+
+
+      <!--信息输入完成后，opacity ：1 并且 可以点击-->
+      <div style=" opacity:0.5" class="btn xt-red-bg" ng-if="showreset">
+        确定
+      </div>
+      <div style=" opacity:1" class="btn xt-red-bg" ng-click="setpwd()" ng-if="!showreset">
+        确定
+      </div>
+
+    </div>
+
+  </ion-content>
+
+  <div class="hit-message light wrong-show hide">
+    <i class="ion-ios-checkmark-outline font48"></i><br>
+
+
+    密码设置成功<br>
+
+  </div>
+
+
+</ion-view>

@@ -1,0 +1,31 @@
+<ion-view style="background:#f4f4f4;">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">选择你的技能</span>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <div class="baseInforSelectTitle">
+      <p class="lastInfor">你已选择行业方向：<span>{{title}}+{{name}}</span></p>
+      <p>请选择你的技能标签（最多5个）</p>
+    </div>
+    <div class="getInforListContent getPersonalTag">
+      <span class="current" ng-repeat="tag in tags">{{tag.name}}</span>
+      <!--<span>网页产品</span>
+      <span>PC客户端</span>
+      <span>交互设计</span>
+      <span>用户研究</span>
+      <span>数据运营</span>
+      <span>项目管理</span>
+      <span>数据分析</span>
+      <span>电商</span>
+      <span>社交/SNS</span>
+      <span>教育</span>
+      <span>企业</span>-->
+    </div>
+    <div class="commonBtn" ui-sref="info">确定</div>
+    <!--设置底部空白间隔-->
+    <div class="footerBottmHeight"></div>
+  </ion-content>
+</ion-view>

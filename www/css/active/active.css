@@ -1,0 +1,153 @@
+.active_festival_content{width:100%;min-height:100%;background: url(../../img/active/newyearBot.jpg) no-repeat center bottom;}
+.active_festival_content .active_festival_contentMain{width:100%;background-size:100% 100%;position: relative;}
+.active_festival_content .active_festival_contentMain.merryMain{height:925px;background: url(../../img/active/merry/merryTop.jpg) no-repeat;}
+.active_festival_content .active_festival_contentMain.newYearMain{height:941px;background: url(../../img/active/newyearTop.jpg) no-repeat;}
+.active_festival_content .appleNumBox .appleImg{width: 57px;height: 58px;}
+.active_festival_content .appleNumBox .goldeggImg{width: 52px;height: 72px;}
+.active_festival_content .appleNumBox{color:#f9e923;position: absolute;top:298px;left:48px;}
+.active_festival_content .appleNumBox.newYear{top: 288px;right: 50px;left: auto;color:#fff;}
+.active_festival_content .appleNumBox *{display: inline-block;vertical-align: middle;}
+.active_festival_content .appleNumBox .linkX{margin:0 6px;font-size:30px;}
+.active_festival_content .appleNumBox .numberBox{font-size:50px;height:60px;width:77px;background: rgba(157,32,32,0.8);border-radius: 10px;line-height: 60px;text-align: center;}
+.active_festival_content .appleNumBox.newYear .numberBox{background: rgba(244,135,7,0.8);width: 75px;height: 65px;line-height: 65px;}
+.active_festival_content .active_rules{position: absolute;top:318px;right:50px;background: url(../../img/active/guize.png) no-repeat;width:85px;height:35px;line-height: 34px;font-size:19px;color:#8d1d1d;padding-left: 30px;}
+.active_festival_content .active_rules.newYear{top:320px;left:50px;color:#d04000;}
+.active_festival_content .active_reward_box{width:526px;height:186px;background-image: url(../../img/active/deng1.png);background-repeat:no-repeat;position: absolute;top:375px;left:0px;right:0px;margin:auto;animation: deng 0.5s linear infinite;padding:30px;}
+@keyframes deng {
+   0%{
+     background-image:url(../../img/active/deng1.png);
+   }
+   100%{
+     background-image:url(../../img/active/deng2.png);
+   }
+ }
+@-webkit-keyframes deng {
+  0%{
+    background-image:url(../../img/active/deng1.png);
+  }
+  100%{
+    background-image:url(../../img/active/deng2.png);
+  }
+}
+.active_festival_content .active_reward_box .rewardBox{height:131px;width:103px;float: left;border-radius: 10px;overflow: hidden;}
+.active_festival_content .active_reward_box .rewardBox2,.active_festival_content .active_reward_box .rewardBox4{margin-left: 13px;}
+.active_festival_content .active_reward_box .rewardBox3{margin-left: 26px;}
+.active_festival_content .active_reward_box .rewardBox .reward{display: block;width:103px;height:131px;background-repeat:no-repeat;background-position: center;}
+.active_festival_content .active_reward_box .rewardBox .reward0{background-image: url(../../img/active/0.png);}
+.active_festival_content .active_reward_box .rewardBox .reward1{background-image: url(../../img/active/1.png);}
+.active_festival_content .active_reward_box .rewardBox .reward2{background-image: url(../../img/active/2.png);}
+.active_festival_content .active_reward_box .rewardBox .reward3{background-image: url(../../img/active/3.png);}
+.active_festival_content .active_reward_box .rewardBox .reward4{background-image: url(../../img/active/4.png);}
+.active_festival_content .active_reward_box .rewardBox .reward5{background-image: url(../../img/active/5.png);}
+.active_festival_content .active_reward_box .rewardBox .reward6{background-image: url(../../img/active/6.png);}
+.active_festival_content .active_reward_box .rewardBox .reward7{background-image: url(../../img/active/7.png);}
+.active_festival_content .active_reward_box .rewardBox .reward8{background-image: url(../../img/active/8.png);}
+.active_festival_content .active_reward_box .rewardBox .reward9{background-image: url(../../img/active/9.png);}
+.active_festival_content .active_reward_box .rewardBox .reward10{background-image: url(../../img/active/yuanbao.png);}
+.active_festival_content .yuanBox{background: url(../../img/active/yuan.png) no-repeat;width:67px;height:68px;position: absolute;top:440px;right:18px;}
+.active_festival_content .rewardBtn{background-image: url(../../img/active/rewardBtn_up.png);background-repeat:no-repeat;width:526px;height:132px;position: absolute;top:592px;right:0;left:0px;margin:auto;background-position: center bottom;}
+.active_festival_content .rewardBtn.newYear.activated,.active_festival_content .rewardBtn.newYear.active{background-image: url(../../img/active/rewardBtn_down.png);}
+.active_festival_content .rewardBtn.newYear{width:516px;height:158px;top:580px;}
+.active_festival_content .active_winning_name{width:340px;height:66px;position: absolute;left:190px;top:764px;overflow: hidden;}
+.active_festival_content .active_winning_name p{font-size:20px;color:#fff;line-height: 30px;margin-bottom: 0px;}
+.active_festival_content .active_winning_name p .money{color:#ffc208;}
+
+.active_festival_content .active_taskList{background: url(../../img/active/bg.png) repeat;width:100%;height:auto;}
+.active_festival_content .active_taskList.newYear{background: -webkit-linear-gradient(#f3311f,  #e71f19,#e7271c); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#f3311f,  #e71f19,#e7271c); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#f3311f,  #e71f19,#e7271c); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#f3311f,  #e71f19,#e7271c); /* 标准的语法 */}
+.active_festival_content .active_taskList .active_taskInfor{width:618px;min-height:308px;margin:0 auto;background: url(../../img/active/listBg.png) repeat;border-radius: 20px;padding:90px 15px 40px;position: relative;}
+.active_festival_content .active_taskList.newYear .active_taskInfor{background: #ffcc21;}
+.active_festival_content .active_taskList .activeTaskListTitle{background: url(../../img/active/taskListTitle.png) no-repeat;position: absolute;top:-24px;left:0px;width:448px;height:112px;}
+.active_festival_content .active_taskList.newYear .activeTaskListTitle{width:320px;height:55px;top:20px;}
+.active_festival_content .active_taskList .getMoneyRaiders{width:112px;height:42px;line-height:39px;background: #ffea00;border-radius: 10px;font-size:19px;color:#8d1d1d;text-align: center;position: absolute;top:27px;right:14px;}
+.active_festival_content .active_taskList .getMoneyRaiders.newYear{background: #f48707;color:#fff;}
+.active_festival_content .active_taskList .getMoneyRaiders img{width:20px;height:20px;margin-right:5px;}
+.active_festival_content .active_taskList .getMoneyRaiders *{display: inline-block;vertical-align: middle;}
+.active_festival_content .active_taskList .taskListBox{width:100%;height:168px;background: #fff;border-radius: 10px;margin-bottom:10px;padding:16px 17px;position: relative;overflow: hidden;}
+.active_festival_content .active_taskList .taskListBox .taskHeadImg{width:135px;height:135px;border-radius: 10px;overflow: hidden;position: absolute;left:17px;top:16px;}
+.active_festival_content .active_taskList .taskListBox .taskHeadImg img{width:100%;height:100%;display: block;}
+.active_festival_content .active_taskList .taskDetailInforBox{margin-left: 163px;}
+.active_festival_content .active_taskList .taskDetailInforBox p{color:#333333;font-size:24px;line-height: 36px;text-overflow: -o-ellipsis-lastline;overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;margin-bottom: 32px;}
+.active_festival_content .active_taskList .profitInfor .appleNum{width:102px;height:32px;border-radius: 10px;text-align: center;line-height: 28px;font-size:19px;}
+.active_festival_content .active_taskList .profitInfor .appleNum img{width:24px;height:25px;display: inline-block;vertical-align: middle;margin-left: 5px;}
+.active_festival_content .active_taskList .profitInfor .appleNum.noGetApple{border:1px solid #f07700;background: #ff9600;color:#fff;}
+.active_festival_content .active_taskList .profitInfor .appleNum.alreadyGetApple{border:1px solid #cccccc;background: #dcdcdc;color:#666666;}
+.active_festival_content .active_taskList .profitInfor .appleNum.alreadyReward{border:1px solid #40a386;background: #40a386;color:#fff;}
+.active_festival_content .active_taskList .profitInfor .appleNum.quickshare{border:1px solid #f22317;background: #ff3b2f;color:#fff;}
+.active_festival_content .active_taskList .profitInfor .myprofit{color:#999999;font-size:20px;}
+.active_festival_content .active_taskList .profitInfor .myprofit span{font-size:30px;color:#f42d00;margin-left: 10px;}
+.active_festival_content .active_taskList .taskHasEnded{background: url(../../img/active/getover.png) no-repeat;width:129px;height:79px;position: absolute;right:-40px;top:-80px;}
+.active_festival_content .active_taskList .taskListBox.getOver{ filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+ */filter: gray; /* IE6-9 */-webkit-filter: grayscale(100%); /* chrome 19+ & Safari 6+ */ }
+
+.active_festival_content .acitve_footer_text{font-size:19px;color:#000;text-align: center;line-height: 40px;padding:229px 0 10px;}
+
+.active_mask{width:100%;height:100%;background: rgba(0,0,0,0.6);position: fixed;left:0px;top:0px;}
+.active_festival_popup.active_merry_popup1{width:640px;height:700px;background: url(../../img/active/merrypopup1.png) no-repeat;position:fixed;top:50%;margin-top:-350px;left:0px;right:0px;padding: 55px 120px;}
+.active_festival_popup.active_newyear_popup{width:500px;height:auto;background:#fff;position:fixed;top:50%;left:0px;right:0px;margin:-335px auto;padding: 40px 50px;border-radius: 15px;}
+.active_festival_popup .popupTitle{height:56px;text-align: center;line-height: 56px;color:#fff;font-size:32px;margin:0 auto;}
+.active_festival_popup .popupTitle.merryChristmas{background: url(../../img/active/merry/poptitle.png) no-repeat;width:272px;}
+.active_festival_popup .popupTitle.newYear{background: url(../../img/active/newyear/poptitle.png) no-repeat;width:340px;}
+.active_festival_popup .popupContent{font-size:27px;color:#000;}
+.active_festival_popup .popupContent p{line-height: 40px;margin-bottom: 0px;}
+.active_festival_popup .popupContent p.title{margin-top:30px;}
+.active_festival_popup .popupContent dl{margin-bottom: 0px;}
+.active_festival_popup .popupContent dl dt{float:left;font-weight: normal;line-height: 40px;}
+.active_festival_popup .popupContent dl dd{margin-left:35px;line-height: 40px;}
+.active_popupFooter{text-align: center;margin-top:20px;}
+.active_popupFooter span{height:52px;line-height: 52px;width:175px;text-align:center;border-radius: 26px;color:#fff;display: inline-block;font-size:29px;}
+.active_popupFooter span.merryChristmas{background: #34b099;}
+.active_popupFooter span.newYear{background: #ff1300;}
+.active_festival_popup.active_merry_popup2{padding: 55px 110px;}
+.getrewardPopup{background: url(../../img/active/getWinBg.png) no-repeat center center;width:477px;height:438px;position: fixed;left:0px;right:0px;top:50%;margin:-256px auto 0;}
+.getrewardPopup .rewardInfor{color:#fff000;font-size:20px;padding:136px 0 110px 0;text-align: center;}
+.getrewardPopup .rewardInfor span{font-size:44px;}
+.getrewardPopup .rewardText{font-size:21px;color:#999;text-align: center;margin:15px 0;}
+.getrewardPopup .rewardText.newYear{color: #000;}
+.getrewardPopup .rewardText p{line-height: 36px;margin-bottom: 0px;}
+.nogetrewardPopup{background: url(../../img/active/nogetBg.png) no-repeat center center;width:477px;height:438px;position: fixed;left:0px;right:0px;top:50%;margin:-256px auto 0;padding-top:275px;}
+.nogetrewardPopup .rewardText{font-size:21px;color:#999999;text-align: center;margin:10px 0;line-height: 36px;}
+.nogetrewardPopup .rewardText.newYear{color: #000;}
+.nogetrewardPopup .rewardText p{line-height: 25px;margin-bottom: 0px;}
+.nogetrewardPopup .active_popupFooter{margin-top:15px;}
+
+.getBotArrow{background: url(../../img/active/getBotArrow.png) no-repeat;width:69px;height:64px;position: fixed;bottom:85px;left:0px;right:0px;margin: 0 auto;animation:getmove 0.3s linear infinite;-webkit-animation:getmove 1s ease infinite;}
+@keyframes getmove {
+  0%{
+    bottom:85px
+  }
+  100%{
+    bottom:105px
+  }
+}
+@-webkit-keyframes getmove {
+  0%{
+    bottom:85px
+  }
+  100%{
+    bottom:105px
+  }
+}
+
+.home_active_img{width:100%;height:auto;}
+.home_active_img img{width:606px;height:156px;display: block;margin:0 auto;}
+
+.merryChristmasGuide{position: fixed;left:0px;top:0px;width:100%;height:100%;background: url(../../img/active/newyear/active_mask.png) no-repeat center top;background-size:100%;z-index: 200;}
+.slotMachineBlurFast{-webkit-filter: blur(5px);-moz-filter: blur(5px);-o-filter: blur(5px);-ms-filter: blur(5px);filter: blur(5px);filter: url(#slotMachineBlurFilterFast);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='5')}
+.slotMachineBlurMedium{-webkit-filter: blur(3px);-moz-filter: blur(3px);-o-filter: blur(3px);-ms-filter: blur(3px);filter: blur(3px);filter: url(#slotMachineBlurFilterMedium);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='3')}
+.slotMachineBlurSlow{-webkit-filter: blur(1px);-moz-filter: blur(1px);-o-filter: blur(1px);-ms-filter: blur(1px);filter: blur(1px);filter: url(#slotMachineBlurFilterSlow);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='1')}
+.slotMachineGradient{-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,0)), color-stop(25%, rgba(0,0,0,1)), color-stop(75%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,0)) );mask: url(#slotMachineFadeMask);}
+
+
+/*修改位置固定问题*/
+.taskDetailInforBox{height: 100%;position: relative;}
+.profitInfor {position: absolute;bottom: 0px;width: 100%;}
+
+/*圣诞tabs图片*/
+.merry-tab-share{background: url(../../img/active/share.png) no-repeat center;background-position: top;background-size: contain;}
+.merry-tab-sale{background: url(../../img/active/sale.png) no-repeat center;background-position: top;background-size: contain;}
+.merry-tab-msg{background: url(../../img/active/msg.png) no-repeat center;background-position: top;background-size: contain;}
+.merry-tab-center{background: url(../../img/active/center.png) no-repeat center;background-position: top;background-size: contain;}
+.tab-item .icon{margin:5px auto 10px !important;height:45px !important;}
+.tab-item{opacity: 1 !important;}

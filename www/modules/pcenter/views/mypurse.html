@@ -1,0 +1,149 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">我的红包</span>
+    <div class="add_friend" ng-click="openPurseModal()">一键领取</div>
+  </ion-header-bar>
+  <ion-content class="has-header xt-grey-bg  whiteSpaceNormal">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="loadpurselist()"></ion-refresher>
+    <ion-list class="taskindex-list mypurselist">
+      <div class="indextabs_con "style="display:block;" >
+        <!--静态样式-->
+        <!--<ion-item>
+          <div class="indexlist_pic" ng-click="go('taskdetail', {'taskid': purse.taskid})">
+            <div ng-if="false">
+              <div ng-class="{'customerStatusBox2':true,'alreadysubmit':false}">
+                <span ng-if="true">审核中</span>
+                <span ng-if="false">已分享</span>
+              </div>
+            </div>
+            <div ng-if="false" >
+              <div ng-class="{'customerStatusBox2':true,'settlemented':true}">
+                <span >已结束</span>
+              </div>
+            </div>
+            <img src="img/default-avatar-square.png"/>
+          </div>
+          <div class="indexlist_info">
+            <div class="indexlist_title purseName">
+              <span>红包名称红包名称红包名称红包名称红包名称</span>的红包
+            </div>
+            <div class="indexlist_busname">商家名称商家名称商家名称商家名称商家名称商家名称</div>
+            <div class="purseMoney"  ng-if="true" ng-class="{'moneyfadein':purse.getredpackageflag==2}">￥<span ng-bind="purse.taskmoney-purse.redpackagemoney|number:2"></span></div>
+            <div class="purseMoney purseimg" id="$index" ng-if="false" ng-class="{'purseframes':true,'puesehide':false}" ng-click="purseClick($index,purse)"><img src="img/pcenter/mypurse-new.png"/></div>
+            <span class="purseAdd">0.5</span>
+          </div>
+        </ion-item>-->
+           <span>
+            <ion-item ng-repeat="purse in purselist">
+              <img class="purseExam" src="img/newguide/example.png" ng-if="purse.iseg"/>
+                <div class="indexlist_pic" >
+                  <div ng-if="false">
+                    <div ng-class="{'customerStatusBox2':true,'alreadysubmit':false}">
+                      <span ng-if="true">审核中</span>
+                      <span ng-if="false">已分享</span>
+                    </div>
+                  </div>
+                  <div ng-if="false" >
+                    <div ng-class="{'customerStatusBox2':true,'settlemented':true}">
+                      <span >已结束</span>
+                    </div>
+                  </div>
+                  <img src="{{purse.tasklogo | avatefilter}}" ng-if="!purse.iseg" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+                  <img src="img/newguide/guideExample.png" ng-if="purse.iseg" onerror="javascript:this.src='img/default-avatar.png'">
+                </div>
+                <div class="indexlist_info">
+                  <div class="indexlist_title purseName"><span>{{purse.busername}}</span> 的红包</div>
+                  <div class="indexlist_busname">{{purse.taskname}}</div>
+                  <div class="purseMoney" ng-if="purse.getredpackageflag!=1" ng-class="{'moneyfadein':purse.getredpackageflag==2}">￥<span ng-bind="purse.taskmoney-purse.redpackagemoney|number:2"></span></div>
+                  <div class="purseMoney purseimg" id="$index" ng-if="purse.getredpackageflag==1" ng-class="{'purseframes':purse.getredpackageflag==1,'puesehide':purseClicking||purseid==$index}" ng-click="purseClick($index,purse)"><img src="img/pcenter/mypurse-new.png"/></div>
+                  <span class="purseAdd" ng-if="purse.getredpackageflag==2">{{purse.redpackagemoney}}</span>
+                </div>
+            </ion-item>
+          </span>
+      </div>
+    </ion-list>
+
+
+    <div class="list_nomore" ng-if="!hasNextPage  && buserlist.length >0 && PageNo >= 1">
+      <div class="wenzi">暂时只有这些红包啦！</div>
+    </div>
+
+    <!--缺省页-->
+    <div class="nosearch" ng-if="hasnopurse" >
+      <div class="nointenet">
+        <img src="img/pcenter/none-purse.png" style="margin: 0px; width: auto" >
+        <div class="message-info">
+          <span>您还没有任何红包</span>
+        </div>
+      </div>
+    </div>
+
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+      on-infinite="loadmorepurselist()"
+      ng-if="hasNextPage"
+      distance="1%"
+      immediate-check="false">
+    </ion-infinite-scroll>
+
+    <div class="no-more-area2 moreTaskOrMerchant" ng-if="hasnomore">
+      <div class="wenzi">没有更多啦，往上看看吧~</div>
+    </div>
+
+  </ion-content>
+  <div class="giudeCenter01" ng-style="{'top':-433+stateH01+'px'}" ng-if="step6" ng-click="openpursenewhand()">
+    <img src="img/newguide/guide05-3.png">
+  </div>
+
+  <div class="guidelead1" ng-if="step6p&&openpurse" ng-click="closepursenewhand()">
+    <div class="guidelead02"  >
+      <img src="img/newguide/guidenewpokect.png">
+    </div>
+  </div>
+  <!--lodding特效-->
+  <div class="mask-loadding-all" ng-if="listloadding">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+
+  <script id="pursemodal.html" type="text/ng-template">
+    <div class="modal purseModal">
+      <ion-content>
+        <div class="purseGif" ng-class="{'purseflyup':purseShaked}">
+          <img src="img/pcenter/purse.gif" ng-show="!purseShaked && !pursePop"/>
+          <img src="img/pcenter/purse.png" ng-show="purseShaked && !pursePop" class="pursesmall"/>
+        </div>
+
+        <!-- 赚取佣金弹窗 -->
+        <div class="congratulationsBox pursepopLarge" ng-if="pursePop" style="background: transparent" ng-click="closePurseModal()">
+          <div class="congratulationContent">
+            <div class="titleHeader">您一共领取红包</div>
+            <div class="monyNum" ng-cloak>{{allmoney | number:2}}<span>元</span></div>
+            <div class="incomeBtn" ng-cloak>
+              <button class="incomeBtn" ng-click="closePurseModal()">爷笑纳了</button>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </div>
+
+
+  </script>
+
+  <!--加载中-->
+  <div class="loading_mask hide">
+    <div class="loading_icon">
+      <img class="loading_pic" />
+    </div>
+  </div>
+
+</ion-view>

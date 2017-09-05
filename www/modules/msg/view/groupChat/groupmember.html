@@ -1,0 +1,25 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">群聊成员({{groupinfo.members.length}})</span>
+    <div class="icon_like detial_like queren"  ng-click="goAddmoremember()" ng-if="groupinfo.bgroup==0"  style="width: auto;font-size: 25px">
+      添加
+    </div>
+  </ion-header-bar>
+  <ion-content class="has-header">
+
+    <ion-list class="membergroup">
+      <ion-item class="mamberitem clearfix"  ng-repeat="groupmember in groupinfo.members track by $index" ng-click="gotoDetail(groupmember)">
+          <div class="headpicitem fl">
+            <img src="{{groupmember.avate|avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+          </div>
+          <div class="name fl">
+            {{groupmember.name}}
+          </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+</ion-view>

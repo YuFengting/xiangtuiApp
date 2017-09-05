@@ -1,0 +1,71 @@
+<ion-view>
+
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">支付宝提现</span>
+  </ion-header-bar>
+
+  <ion-content class="bg-grey has-header withdraw" style="overflow-y: hidden;">
+    <div class="warning-message text-style">
+      新手引导获得的奖励需再赚5元才可提现。<br>
+      根据第三方支付费率规定，提现金额50元以下需支付1元手续费（1元内无法提现）；50元以上（含50元）享推将为您代付手续费。
+    </div>
+    <div class="find-form">
+
+      <div class="line border-bottom tx">
+
+        <span class="tip1">可提现金额（元）：</span>
+        <span class="tip2" ng-bind="'￥'+account.restmoney"></span>
+
+      </div>
+      <div class="line line2 tx">
+
+        <span class="tip1">提现至支付宝帐号：</span>
+        <span class="tip2" ng-bind="account.alipay"></span>
+
+        <div class="tixian-area clearfix">
+
+          <div class=" fl tip4">￥</div>
+          <input class="fl" style="line-height:36px;" type="number" ng-model="acc.money" placeholder="建议输入整数提现金额">
+          <div class="fr tip3 hide">建议输入整数提现金额</div>
+
+        </div>
+      </div>
+    </div>
+    <div class="queren-btn">
+      <!--信息输入完成后，opacity ：1 并且 可以点击-->
+      <div ng-click="goCashOut()" style=" opacity:1" class="btn xt-btn-green-bg">
+        提交
+      </div>
+
+    </div>
+
+
+  </ion-content>
+
+  <div class="hit-message light wrong-show" ng-if="showsucc">
+    <i class="ion-ios-checkmark-outline font48"></i><br>
+
+    您的提现申请已经提交成功，<br/>
+    我们的工作人员将会在<br/>
+    2-3个工作日之内帮您审核完毕，<br/>
+    请耐心等待！
+  </div>
+
+<style>
+  /*下方comfirm弹窗*/
+  .popup-head{border-bottom: none;padding: 0}
+  .popup-container .popup{width: 539px; border-radius: 10px;}
+  .popup-container{font-size: 25px;}
+  .popup-container .title{height: 0px;border: none}
+  .popup-container .withdraw-wenzi{font-size: 25px; font-family: "-apple-system", "microsoft yahei";padding:16px 20px; line-height: 45px; text-align: center;border-bottom:none;}
+  .popup-buttons{padding: 0px;}
+  .popup-buttons .button{font-size: 25px; font-family: "-apple-system", "microsoft yahei";background: transparent;height: 75px; line-height: 75px; width: 50%;padding: 0px; margin: 0px;}
+  .popup-buttons .button:first-child{border-right: 1px solid #d8d8d8;}
+  .button-cancel{ color: #1c8df6; font-size: 25px; line-height: 78px; border-right: 1px solid #d8d8d8;}
+  .button-go{ color: #ff3b30; font-size: 25px; line-height: 78px;}
+</style>
+</ion-view>

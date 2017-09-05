@@ -1,0 +1,54 @@
+<ion-view>
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">注册</span>
+  </ion-header-bar>
+  <div class="has-header loginIconContent bgGray">
+    <div class="registerProcessList">
+      <span>1.输入手机号</span><i>></i>
+      <span class="current">2.输入验证码</span><i>></i>
+      <span>3.设置密码</span><i>></i>
+    </div>
+    <div class="messageCode loginForm clearfix">
+      <input style="width:320px" class="regist2Input fl" type="tel" placeholder="请输入短信中的验证码" maxlength="6" ng-model="user.code"  ng-focus="showcodeClear()" ng-blur="hidecodeClear()" ng-change="codeChange()"/>
+      <i class="icon-xt2-close fl close" ng-if="showcodeclear" ng-click="cleancode()"></i>
+      <button class="fr" ng-if="countdownTask == null" ng-click="sendcode2('0','sms')">重获验证码</button>
+      <button class="fr" ng-if="countdownTask != null">重获验证码({{countdown}})</button>
+    </div>
+    <div class="registerTips">没有收到短信？
+      <i class="red" ng-if="countdownTask == null" ng-click="sendcode2('0','voice')">点击获取</i>
+      <i class="grey" ng-if="countdownTask != null">点击获取</i>
+      语音验证码！
+    </div>
+    <div class="loginBtn" ng-if="user.code.length == 6" ng-click="checkmesg()">设置密码</div>
+    <div class="loginBtn disabled" ng-if="user.code == null || user.code.length < 6">设置密码</div>
+  </ion-content>
+  <!-- 验证码弹窗 -->
+  <div class="vertifyCodeDailog" ng-if="checkpicshow">
+    <div class="contentBox">
+      <div class="codeInputImg clearfix">
+        <input class="codeInput fl" type="text" placeholder="请输入图片验证码"  ng-focus='textinputfocus()' ng-blur='textinputblur()' ng-model="user.fscode"/>
+        <img src="" id="imgpicurl" class="codeImg fl">
+        <i class="icon-xt2-refresh xt-red fl" ng-click="fscodeRefresh()"> </i>
+      </div>
+      <div class="commonBtn" ng-click="checkpicma('0','voice')">确定</div>
+    </div>
+  </div>
+  <div class="vertifyCodeMask" ng-if="checkpicshow" ng-click="hideTC()"></div>
+
+<!--
+  <style>
+    /*弹窗样式*/
+    .popup-container{ bottom: 0; top:0;}
+    .popup-container .popup{width: 450px;font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 10px;}
+    .popup-container .popup-title{font-family: "-apple-system", "microsoft yahei";font-size: 27px;padding: 35px;}
+    .popup-container .popup-buttons{padding: 0px;}
+    .popup-container .popup-buttons .button{font-family: "-apple-system", "microsoft yahei";font-size: 25px; color: #1c8df6; background: none;}
+    .popup-container .popup-buttons .button:first-child{border-right: 2px solid #e6e9ed}
+    .popup-head{border-bottom: 1px solid #e6e9ed}
+  </style>
+-->
+
+</ion-view>

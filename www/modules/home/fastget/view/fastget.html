@@ -1,0 +1,98 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" style="width: 350px;">分享</span>
+  </ion-header-bar>
+  <div class="fixfastgetposition" ng-if="city=='常州'">
+    <ion-scroll direction="x" scrollbar-x="false" scrollbar-y="false" class="nav-scroll-list"  delegate-handle="fastGetnavScroll">
+      <ul class="indexlist-nav clearfix fastgetMenuList " ng-style="fastgetMenuStyle">
+        <li ng-class="{active:(vm.sort==sort.indexvalue)}" ng-click="clicknavBox(sort)" ng-repeat="sort in vm.sortlist track by $index">
+          <a ng-bind="sort.name"></a>
+        </li>
+        <div class="borderBot" ng-style="borderBotStyle"></div>
+      </ul>
+    </ion-scroll>
+    <div class="menuSlideMask"></div>
+  </div>
+  <ion-content class="has-header xt-grey-bg materiallsitpage " ng-class="{'fastgetlist':city=='常州'}" delegate-handle="fastgetcontent">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="vm.doRefresh()"></ion-refresher>
+
+    <ion-list class="timegetlist">
+           <span ng-repeat="list in allsharelist track by $index" style="{{(choosesort.sort==$index)&&('display:block')||('display:none')}}">
+            <ion-item ng-repeat="cpctask in list track by $index" ng-click="vm.goCpcDetail(cpctask)">
+              <a class="item-content">
+                <div class="indexlist_pic">
+                  <div ng-if="cpctask.isshare == 1 || checkShare(cpctask.id)">
+                    <div ng-class="{'customerStatusBox2':true,'alreadysubmit':cpctask.isshare==1||checkShare(cpctask.id)}">
+                      <span ng-if="cpctask.isshare == 1 || checkShare(cpctask.id)">已分享</span>
+                    </div>
+                  </div>
+                  <div ng-if="cpctask.status == 2" >
+                    <div ng-class="{'customerStatusBox2':true,'settlemented':true}">
+                      <span >已结束</span>
+                    </div>
+                  </div>
+                  <img src="{{picserver}}{{cpctask.view}}" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+                  <div class="progressBarNumBox"ng-if="cpctask.status != 2 && 0<cpctask.moneyper && cpctask.moneyper<=30" ng-bind="'剩余:'+cpctask.moneyper+'%'"></div>
+                </div>
+                <div class="indexlist_info">
+                  <div class="indexlist_title indexlist_title3 {{(checkReaded(task.id))&&'taskListColor'||''}}">
+                    <span class="newI2 tipsinfo2" ng-if="cpctask.isnew">新</span>
+                    <span ng-bind="cpctask.name"></span>
+                  </div>
+                  <div class="indexlist_busname"><span class="bus_span" ng-bind="cpctask.bname"></span></div>
+                  <div class="indexlist_lf">
+                    <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">{{cpctask.worknum}}</i></div>
+                  </div>
+                  <!--cpc红包-->
+                  <div class="indexlist_rt" style="right: 0px;" ng-if="cpctask.incometype==0">
+                    <span class="rjsy">平均抢到:<span class="money clearfix"><i class="icon red_port_icon"></i><i class="moneyitem">{{cpctask.avgincome | number:2}}</i></span></span>
+                  </div>
+                  <!--cpc优惠券-->
+                  <div class="indexlist_rt" style="right: 0px;" ng-if="cpctask.incometype==1">
+                    <span class="rjsy" ng-if="cpctask.coupontype==0">最高抢:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>代</span></i><i class="moneyitem">{{cpctask.voucher}}元</i></span></span>
+                    <span class="rjsy" ng-if="cpctask.coupontype==1">抢折扣:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>折</span></i><i class="moneyitem">{{cpctask.discount | number:2}}折</i></span></span>
+                    <span class="rjsy" ng-if="cpctask.coupontype==2">抢优惠:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>兑</span></i><i class="moneyitem">查看详情</i></span></span>
+                  </div>
+                </div>
+              </a>
+            </ion-item>
+          </span>
+    </ion-list>
+
+    <ion-infinite-scroll
+      on-infinite="vm.loadMore()"
+      ng-if="vm.hasNextPage"
+      distance="10%"
+      immediate-check="false">
+    </ion-infinite-scroll>
+
+    <div class="nosearch " style="display:{{vm.notaskflg}};margin-top: 0px" ui-sref="tab.home">
+      <div class="nointenet"
+           style="position: fixed;top:0px;left: 0px;height: 100%;padding-top: 0px;background: #f4f4f4">
+        <img src="img/nosearchcircle.png" style="margin-left: 0px;margin-top: 0px;">
+        <div class="message-info">
+          <span>还没有相关推广</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-more-area2 moreTaskOrMerchant" ng-if="!vm.hasNextPage && allsharelist[choosesort.sort].length>0">
+      <div class="wenzi">没有更多啦，往上看看吧~</div>
+    </div>
+
+  </ion-content>
+  <div class="mask-loadding-all" ng-if="vm.showloading">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+      <!--</div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+</ion-view>

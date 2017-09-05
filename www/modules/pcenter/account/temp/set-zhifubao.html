@@ -1,0 +1,30 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <!--<span class="title" ng-if="account.alipay==''||angular.isUndefined(account.alipay)">绑定支付宝帐号</span>
+    <span class="title" ng-if="account.alipay!=''||angular.isDefined(account.alipay)">更换绑定的支付宝帐号</span>-->
+    <span class="title" ng-bind="title"></span>
+  </ion-header-bar>
+
+  <ion-content class="find-pasword has-header" style="overflow-y: hidden;">
+    <ion-item class="item-divider item"></ion-item>
+    <div class="find-form">
+      <div class="line border-bottom clearfix">
+        <input type="text" id="account_alipay" class="fl" placeholder="请输入您的支付宝账号" ng-model="account.alipay" ng-focus="showAlipayClear()" ng-blur="hideAlipayClear()" ng-change="checkAlipay()" style="width: 540px">
+        <i class="icon-xt2-close fr close" ng-if="showapcl" ng-click="clearAlipay()">
+        </i>
+      </div>
+      <div class="line clearfix">
+        <input type="text" id="account_name" class="fl" placeholder="请输入支付宝真实姓名" ng-model="account.name"  ng-focus="showNameClear()" ng-blur="hideNameClear()"  ng-change="checkName()" style="width: 540px">
+        <i class="icon-xt2-close fr close" ng-if="shownacl" ng-click="clearName()">
+        </i>
+      </div>
+    </div>
+
+    <div class="queren-btn">
+      <button class="btn xt-red-bg" ng-click="goCheckCode()" >下一步</button>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,23 @@
+<ion-view>
+    <ion-header-bar align-title="middle">
+        <div class="header_back" ng-click="goback()">
+            <i class="icon ion-ios-arrow-left"></i>
+        </div>
+        <span class="title">我的二维码</span>
+
+    </ion-header-bar>
+    <ion-content class="has-header myQRCodeContent mycodeLinearBg">
+        <div class="myQRCodeMain">
+            <div class="QRCodeBox">
+                <div class="codeInforBox clearfix">
+                    <img class="fl" src="{{user.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'"/>
+                    <span class="fl">{{user.nick}}</span>
+                </div>
+                <div class="QRcodeImg">
+                    <img src="{{user.qcodeurl | avatefilter}}" onerror="javascript:this.src='img/set-area.png'"/>
+                </div>
+                <p class="codeTipsBox">扫一扫二维码，加我为好友</p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,30 @@
+<ion-view>
+    <ion-header-bar align-title="middle" >
+        <div class="header_back" ng-click="closegetmoneytaskModal()">
+            <i class="icon ion-ios-arrow-left"></i>
+        </div>
+        <span class="title">收款</span>
+    </ion-header-bar>
+    <ion-content class="has-header  bgGray" >
+        <div class="toparea_head">
+            <div class="head_picarea">
+                <img src="{{avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+            </div>
+            <div class="tips">
+                <span>向{{otherusername}}收款</span>
+            </div>
+        </div>
+        <div class="inputareas">
+            <div class="inputarea clearfix">
+                <span class="fl">金额</span>
+                <input class="inputit fl" type="number" placeholder="免服务费" ng-model="pay.accmoney"/>
+            </div>
+            <div class="inputarea clearfix" style="border-top: 1px solid #e7e7e7">
+                <span class="fl">理由</span>
+                <input class="inputit fl" placeholder="选填" ng-model="pay.remark"/>
+            </div>
+        </div>
+        <div class="loginBtn" ng-click="commitMoney()">确认收款</div>
+    </ion-content>
+
+</ion-view>

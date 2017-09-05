@@ -1,0 +1,149 @@
+<ion-view class="xt-grey-bg">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <div class="header_search clearfix">
+      <span class="icon icon-xt-search search_icon"></span>
+      <form  ng-submit="selectData()">
+        <input type="search" ng-model="search.key" ng-change="showclose()" placeholder="请输入关键词"/>
+      </form>
+      <span class="icon icon-xt2-close search_close" ng-if="haskey" ng-click="searchClear()"></span>
+    </div>
+    <div class="header_searchbtn" ng-click="selectData()">搜索</div>
+  </ion-header-bar>
+
+  <ion-content class="has-header" on-touch="closekeyboardcopy()" delegate-handle="searchListHandler">
+    <!--没有搜索结果-->
+    <div ng-class="{'no_result':true,'hide':(hasmer == undefined || cpchastask == undefined || cpvhastask == undefined || hasmer == 1 || cpchastask > 0 || cpvhastask > 0)}" >
+      <i class="icon-aboutus"></i>
+      <p>抱歉，没有搜到“{{search.key}}”的相关商家和推广</p>
+      <p class="tj_text">以下推广，您可能喜欢</p>
+    </div>
+
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>
+
+    <!--cpc-->
+    <ion-list class="taskindex-list" ng-if="cpctasks.length > 0">
+      <ion-item>
+        <div class="search_title">{{cpchastask > 0 ? "" : "没有搜到相关内容，相关"}}分享推广</div>
+      </ion-item>
+      <ion-item ng-repeat="task in cpctasks track by $index" ng-click="goTaskDetail(task)">
+        <a class="item-content">
+          <div class="indexlist_pic">
+            <div ng-if="task.isshare == 1 && task.status != 2">
+              <div class="customerStatusBox2 alreadysubmit">
+                <span ng-if="task.audit == 1 && task.isshare != 1">审核中</span>
+                <span ng-if="task.isshare == 1">已分享</span>
+              </div>
+            </div>
+            <div ng-if="task.status == 2" >
+              <div class="customerStatusBox2 settlemented">
+                <span >已结束</span>
+              </div>
+            </div>
+            <img src="{{picserver}}{{task.view}}" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+            <div class="progressBarNumBox" ng-if="task.status != 2 && 0<task.moneyper && task.moneyper<=30">剩余:{{task.moneyper}}%</div>
+          </div>
+          <div class="indexlist_info">
+            <div class="indexlist_title indexlist_title3 {{(checkReaded(task.id))&&'taskListColor'||''}}">
+              <span class="newI2 tipsinfo2" ng-if="task.isnew == 1">新</span>
+              <span ng-bind="task.name"></span>
+            </div>
+            <div class="indexlist_busname"><span class="bus_span" ng-bind="task.bname"></span></div>
+            <div class="indexlist_lf">
+              <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap" ng-bind="task.worknum"></i></div>
+            </div>
+            <!--cpc红包-->
+            <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype==0">
+              <span class="rjsy">平均抢到:<span class="money clearfix"><i class="icon red_port_icon"></i><i class="moneyitem">{{task.avgincome | number:2}}</i></span></span>
+            </div>
+            <!--cpc优惠券-->
+            <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype==1">
+              <span class="rjsy" ng-if="task.coupontype==0">最高抢:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>代</span></i><i class="moneyitem">{{task.voucher}}元</i></span></span>
+              <span class="rjsy" ng-if="task.coupontype==1">抢折扣:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>折</span></i><i class="moneyitem">{{task.discount | number:2}}折</i></span></span>
+              <span class="rjsy" ng-if="task.coupontype==2">抢优惠:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>兑</span></i><i class="moneyitem">查看详情</i></span></span>
+            </div>
+          </div>
+        </a>
+      </ion-item>
+    </ion-list>
+
+    <!--cpv-->
+    <ion-list class="taskindex-list" ng-if="cpvtasks.length > 0">
+      <ion-item>
+        <div class="search_title">{{cpvhastask > 0 ? "" : "没有搜到相关内容，相关"}}推荐推广</div>
+      </ion-item>
+      <div class="cpvInforListsBox">
+        <div class="cpvInforBox" ng-click="goTaskDetail(cpv)" ng-repeat="cpv in cpvtasks track by $index" >
+          <img src="{{cpv.pic | avatefilter}}" onerror="javascript:this.src='img/cpv/CPV-default.png';">
+          <div class="cpvUsersNum"><i class="icon icon-join-user"></i><span>{{cpv.worknum}}人</span></div>
+          <div class="cpvNewBox" ng-if="cpv.isnew == 1&&cpv.isshare == 0"><span>新</span></div>
+          <div class="customerStatusBox2 alreadysubmit cpvlistStatusStyle" ng-if="cpv.isshare == 1">
+            <span>已分享</span>
+          </div>
+          <div class="cpvBusinessInfor">
+            <div class="cpvTitleBox" ng-bind="cpv.name"></div>
+            <div class="businessInfor clearfix">
+              <div class="businessName fl"><i class="icon icon-tab-home"></i><span ng-bind="cpv.bname"></span></div>
+              <div class="businessSet fr"><span class="text">推荐扫码：立得</span><i class="goldImg"></i><span class="cpv_profitNum">{{cpv.vprice}}元</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-list>
+
+    <!--商家列表模块-->
+    <ion-list class="taskindex-list marginTop16" ng-if ="merchantlist.length > 0"   >
+      <ion-item ng-if="merchantlist.length>0">
+        <div class="search_title">{{hasmer > 0 ? "" : "没有搜到相关内容，相关"}}商家</div>
+      </ion-item>
+
+      <ion-item ng-click="gobusiness(bus.id)" ng-repeat="bus in merchantlist track by $index ">
+
+        <a class="item-content">
+          <div class="indexlist_pic">
+
+            <img ng-src="{{picserver}}{{bus.clogopath}}" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+          </div>
+          <div class="indexlist_info">
+            <div class="indexlist_title indexlist_title3">
+              <span>{{bus.companyalias}}</span>
+            </div>
+            <div class="indexlist_busname">
+              <span class="tab_span" ng-if="bus.isnew == 1">新入驻</span>
+              <span class="tab_span" ng-if="bus.isqr == 1">审核快</span>
+              <span class="tab_span" ng-if="bus.high == 1">高佣金</span>
+              <span class="tab_span" ng-if="bus.ismore == 1">推广多</span>
+              <span class="tab_span" ng-if="bus.isactive == 1">高活跃</span>
+              <span class="tab_span" ng-if="bus.isauth == '1'">已认证</span>
+              <span class="tab_span" ng-if="bus.hasgf == 1">保障金</span>
+
+            </div>
+            <div class="indexlist_lf">
+              <!--<div class="cpc_businessName"><i class="icon icon-xt2-sj"></i><i class="bnamewrap">{{task.bname}}</i></div>-->
+              <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">{{bus.storenum || 0}}</i></div>
+            </div>
+            <div class="indexlist_rt" style="right: 0px;">
+              <span class="rjsy" ><span class="money clearfix"><i class="icon red_port_icon" ng-if="bus.hascpc==1"></i><i class="icon cpvTaskIcon" ng-if="bus.hascpv==1"></i></span></span>
+            </div>
+          </div>
+        </a>
+      </ion-item>
+    </ion-list>
+    <!--没有网络  -->
+    <div class="nosearch hide">
+      <img src="./img/nowifi.png"/><br/>
+      您的网络好像不给力~请稍后再试
+    </div>
+    <div class="mask-loadding-all" ng-if="showloading">
+      <div class="loader">
+        <!--<div class="loader-inner ball-pulse">-->
+          <!--<div></div>-->
+          <!--<div></div>-->
+          <!--<div></div>-->
+        <!--</div>-->
+        <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+      </div>
+    </div>
+</ion-view>

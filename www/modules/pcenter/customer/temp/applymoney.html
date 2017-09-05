@@ -1,0 +1,106 @@
+<ion-view>
+
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">客户详情</span>
+    <button class="header-right" ui-sref="complaint">申诉</button>
+  </ion-header-bar>
+
+  <ion-content class="has-header xt-grey-bg customerContentBox">
+    <div class="customerDetailInfor">
+        <div class="detailInforList clearfix">
+          <ul>
+            <li><i class="icon icon-user"></i><span>客户姓名：</span><span class="infor">刘雪静</span></li>
+            <li><i class="icon icon-uniE977"></i><span>联系电话：</span><span class="infor">13856489632</span></li>
+            <li><i class="icon icon-add"></i><span>自定字段：</span><span class="infor">苏D582ZY</span></li>
+            <li><i class="icon icon-add"></i><span>自定字段：</span><span class="infor">常州市武进区滆湖路凯尔风度</span></li>
+            <li><i class="icon icon-add"></i><span>自定字段：</span><span class="infor">常州市新北区太湖东路创意产业园</span></li>
+            <li><i class="icon icon-xt-tx"></i><span>备　　注：</span><span class="infor">这是一个优质客户，需要长期跟进。目前来说意向明确，抓紧时间联系。</span></li>
+          </ul>
+        </div>
+        <ul class="messageRecordBox">
+          <li>
+            <span class="processRecord">
+              信息记录
+              <i class="line processLine"></i>
+            </span>
+            <p class="recordInfor over-ellipsis">洞内发现神秘建筑，或为史前文明，惊呆了惊呆了惊呆了</p>
+            <p class="recordTime">2016-06-05 09:12:32</p>
+          </li>
+          <li>
+            <span class="processStepRound">
+              <i class="line1 processLine"></i>
+              <i class="line2 processLine"></i>
+            </span>
+            <p class="recordInfor over-ellipsis">信息提交</p>
+            <p class="recordTime">2016-06-05 09:12:32</p>
+          </li>
+          <li>
+            <span class="processStepRound">
+              <i class="line1 processLine"></i>
+              <i class="line2 processLine"></i>
+            </span>
+            <p class="recordInfor over-ellipsis">商家确认</p>
+            <p class="recordTime">2016-06-05 09:12:32</p>
+          </li>
+          <li>
+            <span class="processRecord">
+              结算
+              <i class="line3 processLine"></i>
+            </span>
+            <p class="recordInfor over-ellipsis">交易已达成</p>
+            <p class="recordTime">2016-06-05 09:12:32</p>
+          </li>
+        </ul>
+      <ul class="messageRecordBox applyMoneyBox">
+        <li>
+          <span class="processRecord">佣金</span>
+          <p class="recordInfor"><i>¥100.00</i><span>2天后到账</span></p>
+          <p class="recordTime">2016-06-05 09:12:32</p>
+        </li>
+        <li>
+          <span class="processRecord">到账</span>
+          <p class="recordInfor"><i>¥200.00</i><span>已到账</span></p>
+          <p class="recordTime">2016-06-05 09:12:32</p>
+        </li>
+        <li>
+          <span class="processRecord">撤销</span>
+          <p class="recordInfor"><i>¥100.00</i><span>商家撤销中</span></p>
+          <p class="recordTime">2016-06-05 09:12:32</p>
+          <div class="applySureCancelBtn"><span class="sureBtn">确定</span><span class="cancelBtn">取消</span></div>
+        </li>
+        <li>
+          <span class="processRecord">撤销</span>
+          <p class="recordInfor"><i>¥500.00</i><span>已撤销</span></p>
+          <p class="recordTime">2016-06-05 09:12:32</p>
+        </li>
+      </ul>
+    </div>
+    <div class="commonBtn addNewCustomer" ng-click="getevaluateBox()">评价</div>
+  </ion-content>
+  <div class="getEvaluateDailog hide">
+      <div class="evaluateInforBox">
+        <i class="icon icon-xt-close closebtn"></i>
+        <div class="title">对此次交易还满意吗？</div>
+        <ul class="evaluateList">
+          <li>
+            <span>售前支持：</span><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_grey"></i>
+          </li>
+          <li>
+            <span>结算速度：</span><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_grey"></i>
+          </li>
+          <li>
+            <span>产品畅销：</span><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_grey"></i>
+          </li>
+          <li>
+            <span>综合评分：</span><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_yellow"></i><i class="star_grey"></i>
+          </li>
+        </ul>
+        <textarea placeholder="说说哪里做的好？帮助大家选择好商家"></textarea>
+        <div class="commonBtn">提交</div>
+      </div>
+  </div>
+</ion-view>

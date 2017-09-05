@@ -1,0 +1,26 @@
+<ion-view style="background:#f4f4f4;">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">个人标签</span>
+    <button class="header-right bs-select-industry" ng-click="xipai(1)">
+      换一换
+    </button>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <div class="baseInforSelectTitle">
+      <!--<p class="lastInfor">请选择你的个人标签</p>-->
+      <div class="getInforListContent getPersonalTag selectedTagBox">
+        <span ng-repeat="lable1 in lables" ng-click="dealLables(lable1)">{{lable1.name}}<i class="icon icon-xt2-close"  ></i></span>
+      </div>
+    </div>
+    <div class="getInforListContent getPersonalTag">
+        <span  ng-repeat="lable2 in plables" ng-class="{'current':lable2.class==1}" ng-click="dealLables(lable2)" >{{lable2.name}}</span>
+        <!--<span class="current">音乐</span>-->
+    </div>
+    <div class="commonBtn" ng-click="settags()">确定</div>
+    <!--设置底部空白间隔-->
+    <div class="footerBottmHeight"></div>
+  </ion-content>
+</ion-view>

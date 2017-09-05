@@ -1,0 +1,387 @@
+<ion-view ng-conctrller="TaskIndexCtrl" hide-tabs>
+  <div class="index-nav-bar clearfix navBar" style="padding: 0px;">
+    <div class="clearfix">
+      <!--城市定位-->
+      <div class="light font24 mt5 fl top-icons" ng-click="openchooseCModal()"><span ng-cloak>{{city}}</span><i
+        class="icon icon-xt2-down ml10"></i></div>
+
+      <!--加号 -->
+      <button ng-click="indexPlus()" class="top-icon fr top-icons" style="text-align:right;" >
+        <!-- 搜索 -->
+        <i class="ion-plus light font35 fr"  style="margin-right:15px;"></i>
+      </button>
+      <button class="top-icon fr top-icons" style="text-align:right;" ng-click="goSearch()">
+        <!-- 搜索 -->
+        <i class="icon-home-search0 light font35 fr"></i>
+      </button>
+    </div>
+    <!--标题-->
+    <div class="font30 light tittle top-icons" style="position: relative;top: -70px;opacity:0;width: 190px;left: 225px">
+      分享
+    </div>
+  </div>
+  <div style="position:fixed; top:0; left:0; width:100%; min-height:100%; background:#f4f4f4;"></div>
+  <!--正文--><!-- on-scroll="topDynamic($event)" on-drag-down="dragdown()" on-release="release()" -->
+  <ion-content class="has-footer task-index" delegate-handle="Scroll"  on-scroll-index-content >
+    <!--下拉刷新-->
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()" on-pulling="doPulling()"></ion-refresher>
+    <!--焦点图-->
+
+    <div id="toparea" class="index-head xt-red-bg  index-bg" ng-click="updataBannerNum(bannerlist[0])">
+      <img src="{{picserver}}{{bannerlist[0].pic}}"    onerror="javascript:this.style='height:100%; position:absolute; top:50%;  left:50%; transform:translate(-50% , -50%)';this.src='img/banner.png';" >
+    </div>
+    <div id="indexBody" class="index-body" style="margin-top: -1px">
+      <!--四格分类-->
+      <ul class="classify_four clearfix">
+         <li class="clearfix border1" ng-click="goThemelist(1,topic1)">
+           <div class="picarea ">
+             <img class="picitem" src="{{picserver}}{{topic1.logo}}" />
+           </div>
+           <div class="wenziinfo">
+             <div class="tip" ng-bind="topic1.title"></div>
+             <div class="info" ng-bind="topic1.memo"></div>
+           </div>
+         </li>
+        <li class="clearfix border2" ng-click="goThemelist(2,topic2)">
+          <div class="picarea">
+            <img class="picitem" src="{{picserver}}{{topic2.logo}}" />
+          </div>
+          <div class="wenziinfo">
+            <div class="tip" ng-bind="topic2.title"></div>
+            <div class="info" ng-bind="topic2.memo"></div>
+          </div>
+        </li>
+        <li class="clearfix border3" ng-click="goThemelist(3,topic3)">
+          <div class="picarea">
+            <img class="picitem" src="{{picserver}}{{topic3.logo}}" />
+          </div>
+          <div class="wenziinfo">
+            <div class="tip" ng-bind="topic3.title"></div>
+            <div class="info" ng-bind="topic3.memo"></div>
+          </div>
+        </li>
+        <li class="clearfix" ng-click="goThemelist(4,topic4)">
+          <div class="picarea">
+            <img class="picitem" src="{{picserver}}{{topic4.logo}}" />
+          </div>
+          <div class="wenziinfo">
+            <div class="tip" ng-bind="topic4.title"></div>
+            <div class="info" ng-bind="topic4.memo"></div>
+          </div>
+        </li>
+      </ul>
+     <div class="div-top20" ng-show="showActive"></div>
+      <div class="home_active_img" ng-click="goMerry()" ng-show="showActive">
+        <img src="{{picserver}}{{active_img}}" />
+      </div>
+      <div class="div-top20"></div>
+      <ion-list class="taskindex-list">
+        <div class="indexNavBox" ng-if="city=='常州'">
+          <ion-scroll direction="x" scrollbar-x="false" scrollbar-y="false"  has-bouncing="true" class="nav-scroll-list" delegate-handle="navScroll_0" on-scroll="indexnavScroll0()" >
+            <ul class="indexlist-nav clearfix static-nav homeMenuList" ng-style="homeMenuStyle">
+              <li ng-class="{active:(type==0)}"   ng-click="clicknav(0,$event);" ><a>猜你喜欢</a></li>
+              <li ng-class="{active:(type==($index+1))}"   ng-click="clicknav($index+1,$event);"  ng-repeat="sort in sortlist track by $index"><a
+                ng-bind="sort.name"></a></li>
+              <div class="borderBot" ng-style="borderIndexBotStyle"></div>
+            </ul>
+          </ion-scroll>
+          <div class="menuSlideMask" ng-if="false"></div>
+        </div>
+
+        <div class="loading_list clearfix fl " ng-if="listloadding">
+          <div class="loading_icon1 loadding-animate fl"><i class="ion-load-c"></i></div>
+          <div class="loading_wenzi fl">加载中...</div>
+        </div>
+          <!--静态样式-->
+          <div class="indextabs_con " ng-repeat="list in indexlist track by $index" style="{{(type==$index)&&('display:block')||('display:none')}}" >
+
+            <!--优惠券样式-->
+            <!--静态样式-->
+           <!--<span>
+            <ion-item  ng-click="go('cpccoudetail')" >
+              <a class="item-content">
+                <div class="indexlist_pic">
+                  <div ng-if="true">
+                    <div class="customerStatusBox2 alreadysubmit">
+                      <span ng-if="true">审核中</span>
+                      <span ng-if="false">已分享</span>
+                    </div>
+                  </div>
+                  <div ng-if="false" >
+                    <div class="customerStatusBox2 settlemented">
+                      <span >已结束</span>
+                    </div>
+                  </div>
+                  <img src="../../../img/defaultcover/01.jpg" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+                  <div class="progressBarNumBox">剩余:22%</div>
+                </div>
+                <div class="indexlist_info">
+                  <div class="indexlist_title indexlist_title3">
+                    <span class="duiI2 tipsinfo2" >兑</span>
+                    <span>胡萝卜能提高视力？我们对视力的认知还不够</span>
+                  </div>
+                  <div class="indexlist_busname"><span class="bus_span">享推科技科技科技</span></div>
+                  <div class="indexlist_lf">
+                    &lt;!&ndash;<div class="cpc_businessName"><i class="icon icon-xt2-sj"></i><i class="bnamewrap">{{task.bname}}</i></div>&ndash;&gt;
+                    <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">22222</i></div>
+                  </div>
+                  <div class="indexlist_rt" style="right: 0px;">
+                    <span class="rjsy" >抢折扣:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span ng-if="true">折</span><span ng-if="false">兑</span><span ng-if="false">代</span></i><i class="moneyitem">3.36折</i></span></span>
+                  </div>
+                </div>
+              </a>
+            </ion-item>
+          </span>-->
+
+
+           <span ng-repeat="task in list track by task.id">
+            <ion-item ng-if="task.isbanner!=1" ng-click="goTaskdetail(task)">
+              <a class="item-content">
+                <div class="indexlist_pic">
+                  <div ng-if="task.isshare == 1 && task.status != 2">
+                    <div class="customerStatusBox2 alreadysubmit">
+                      <span ng-if="task.isaudit == 1&&task.isshare !== 1">审核中</span>
+                      <span ng-if="task.isshare == 1">已分享</span>
+                    </div>
+                  </div>
+                  <div ng-if="task.status == 2" >
+                    <div class="customerStatusBox2 settlemented">
+                      <span >已结束</span>
+                    </div>
+                  </div>
+                  <img src="{{picserver}}{{task.view}}" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+                  <div class="progressBarNumBox" ng-if="task.status != 2 && 0<task.moneyper && task.moneyper<=30">剩余:{{task.moneyper}}%</div>
+                </div>
+                <div class="indexlist_info">
+                  <div class="indexlist_title indexlist_title3 {{(checkReaded(task.id))&&'taskListColor'||''}}">
+                    <span class="newI2 tipsinfo2" ng-if="task.isnew == 1">新</span>
+                    <span ng-bind="task.name"></span>
+                  </div>
+                  <div class="indexlist_busname"><span class="bus_span" ng-bind="task.bname"></span></div>
+                  <div class="indexlist_lf">
+                    <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap" ng-bind="task.worknum"></i></div>
+                  </div>
+                  <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype==0">
+                    <span class="rjsy" >平均抢到:<span class="money clearfix"><i class="icon red_port_icon"></i><i class="moneyitem" ng-bind="task.avgincome | number:2"></i></span></span>
+                  </div>
+                  <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype==1">
+                    <span class="rjsy"  ng-if="task.coupontype==1">抢折扣:
+                      <span class="money zhekou clearfix">
+                        <i class="icon get_coupon_icon">
+                          <span >折</span>
+                        </i>
+                        <i class="moneyitem">{{task.discount | number:2}}折</i>
+                      </span>
+                    </span>
+                    <span class="rjsy" ng-if="task.coupontype==0">最高抢:
+                      <span class="money zhekou clearfix">
+                        <i class="icon get_coupon_icon">
+                          <span >代</span>
+                        </i>
+                        <i class="moneyitem">{{task.voucher}}元</i>
+                      </span>
+                    </span>
+                    <span class="rjsy" ng-if="task.coupontype==2">抢优惠:
+                      <span class="money zhekou clearfix">
+                        <i class="icon get_coupon_icon">
+                          <span >兑</span>
+                        </i>
+                        <i class="moneyitem">查看详情</i>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </ion-item>
+             <ion-item ng-if="task.isbanner==1" ng-click="goBannerDetail(task)">
+              <a class="item-content banneritem">
+             <div class="banner_active">
+               <img src="{{picserver}}{{task.pic}}"onerror="javascript:this.src='img/default_taskbanner.png';"/>
+             </div>
+              </a>
+            </ion-item>
+          </span>
+        </div>
+      </ion-list>
+    </div>
+
+    <div class="moreContentBtn hide">
+      <div class="wenzi" ng-click="gofastget()" >查看全部分享推广</div>
+    </div>
+
+  </ion-content>
+
+  <div class="indexNavBox fix-nav" ng-style="fixnavStyle">
+    <ion-scroll direction="x" scrollbar-x="false" scrollbar-y="false" class="nav-scroll-list"  on-scroll="indexSubnavScroll()" delegate-handle="navScroll_1" >
+      <ul class="indexlist-nav clearfix  index-nav" ng-style="homeMenuStyle">
+        <li ng-class="{active:(type==0)}" ng-click="clicknav(0,$event);"><a>推荐</a></li>
+        <li ng-class="{active:(type==($index+1))}"  ng-click="clicknav($index+1,$event,true);"  ng-repeat="sort in sortlist track by $index"><a
+          ng-bind="sort.name"></a></li>
+        <div class="borderBot" ng-style="borderIndexBotStyle"></div>
+      </ul>
+    </ion-scroll>
+    <div class="menuSlideMask"></div>
+  </div>
+
+  <!-- 点击返回顶部 -->
+  <div class="indexGetTop hide indexGetTop_home" ng-click="getTop()"><i class="icon icon-xt-backTop"></i></div>
+
+  <!--android 检查更新-->
+  <div class="popup-mask hide" style="display: {{updataversion}}"></div>
+  <div class="popup-self popupShow hide" style="display: {{updataversion}}">
+    <div class="head">
+      <img src="img/new-index-popup-head.png">
+      <div class="close-area" ng-click="cancleupdateversion()"></div>
+    </div>
+    <div class="body">
+      <div class="text">
+        报告！享推V{{newv.no}}已经做好准备，恭喜
+        您已获得首批检阅的机会！
+        <div class="tipss clearfix">
+          <div class="items fl" ng-bind-html="updatedesc">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <img src="img/new-popup-foot.png">
+      <div class="button-group">
+        <button class="marginright x grey2-bg" ng-click="cancleupdateversion()">稍后再说</button>
+        <button class="xt-red-bg" ng-click="updateversion()">立刻更新</button>
+      </div>
+    </div>
+  </div>
+<!--IOS 检查更新-->
+  <div style="background: rgba(0,0,0,.5);width: 100%;height: 100%;z-index: 1000;position: fixed;top:0px;display: {{iosupdata}}">
+    <div class="popup-area shensupopup cityPrompt ">
+      <div class="popup_text" style="font-size: 24px"><span style="font-weight: bold">全新版本的享推上线啦！快来升级体验吧！</span>
+        <br><span class="text-info"  ng-bind-html="updatedesc"></span>
+      </div>
+      <div class="bt_but_box">
+        <span class="button-cancel3" ng-click="cancleupdateversion()">残忍地拒绝</span>
+        <span class="btn_apply btnChangeCity" style="color: #ff3b30;" ng-click="iosupdataverion()">立即更新</span>
+      </div>
+    </div>
+  </div>
+
+  <!--更新进度条-->
+  <div class="mask" style="display: none"></div>
+  <div class="update_box hide">
+    <img src="./img/update_bg.png"/>
+    <div class="update_num"><span>35</span>%</div>
+    <div class="update_linebg">
+      <div class="update_line">
+        <img src="./img/update_load.gif"/>
+      </div>
+    </div>
+    <a class="update_close"></a>
+  </div>
+
+</ion-view>
+
+<style>
+  /*弹窗样式*/
+  .popup-container {
+    bottom: 0;
+    top: 0;
+  }
+
+  .popup-container .popup {
+    width: 539px;
+    font-family: "-apple-system", "microsoft yahei";
+    font-size: 25px;
+    border-radius: 20px;
+  }
+
+  .popup-container .popup-title {
+    font-family: "-apple-system", "microsoft yahei";
+    font-size: 27px;
+    padding: 35px;
+  }
+
+  .popup-container .popup-buttons {
+    padding: 0px;
+  }
+
+  .popup-container .popup-buttons .button {
+    font-family: "-apple-system", "microsoft yahei";
+    font-size: 25px;
+    color: #1c8df6;
+    background: none;
+  }
+
+  .popup-container .popup-buttons .button:first-child {
+    border-right: 2px solid #e6e9ed
+  }
+
+  .popup-container .popup-buttons .button.button-positive {
+    color: #007aff
+  }
+
+  .popup-container .popup-buttons .button.button-go {
+    color: #ff3b30
+  }
+
+  .popup-head {
+    border-bottom: 1px solid #e6e9ed
+  }
+
+  .button-go {
+    color: #ff3b30;
+  }
+</style>
+<script id="popupmask.html" type="text/ng-template">
+  <ion-modal-view style="background: rgba(0,0,0,.68)">
+    <div class="popup-area shensupopup cityPrompt ">
+      <div class="popup_text">系统定位到您在{{localcity}}，确认切换城市至{{choosecity}}吗？红包会受到影响哦~</div>
+      <div class="bt_but_box">
+        <span ng-click="closeModal()" class="button-cancel3">取消</span>
+        <span class="btn_apply btnChangeCity xt-red" ng-click="chooseCity(0)" style="color:#ff3b30" >切换</span>
+      </div>
+    </div>
+  </ion-modal-view>
+  </script>
+
+<script id="chooseCity.html" type="text/ng-template">
+  <ion-modal-view style="background: rgba(0,0,0,.68)">
+    <div class="clickMask"  ng-click="closechooseCModal()"></div>
+         <div class="cityChoosePopup">
+           <ul class="cityChooseList borderbottom clearfix">
+             <div class="cityTit">定位城市</div>
+             <li class="active over-ellipsis">
+               <i class="icon icon-xt2-dizhi2"></i>
+               <span class="" ng-bind="localcity"></span>
+             </li>
+           </ul>
+           <ul class="cityChooseList usedcity clearfix">
+             <div class="cityTit">常用城市</div>
+               <li class="over-ellipsis" ng-click="selectCommCity('全国')">
+                 <span class="">全国</span>
+               </li>
+
+             <li class="over-ellipsis" ng-repeat="city in commonCities track by city.id" ng-click="selectCommCity(city)">
+               <span class="" ng-bind="city.name"></span>
+             </li>
+           </ul>
+         </div>
+  </ion-modal-view>
+</script>
+
+
+
+
+<!--点击出现浮动框-->
+<script id="indexpopover.html" type="text/ng-template">
+  <div class="popover  msg_popview indexPopover">
+    <ion-content>
+      <ul class="msg_popover">
+        <li ng-click="goCoupon()">
+          <i class="icon ion-chatbubbles"></i>优惠券</li>
+        <li ng-click="goscan()">
+          <i class="icon icon-home-scan0"></i>扫一扫</li>
+      </ul>
+    </ion-content>
+    <div class="popover-arrow"></div>
+  </div>
+</script>
+

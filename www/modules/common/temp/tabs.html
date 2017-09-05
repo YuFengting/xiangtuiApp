@@ -1,0 +1,39 @@
+<ion-tabs class="tabs-icon-top tabs-color-active-red" ng-class="{'tabs-item-hide':hideTabs}">
+  <!-- 首页 -->
+  <ion-tab title="分享" icon-off="icon-tab-share" icon-on="icon-tab-share" href="#/tab/home">
+    <ion-nav-view name="tab-home"></ion-nav-view>
+  </ion-tab>
+
+  <!-- 商家 -->
+  <!--<ion-tab title="销售" icon-off="icon-tab-sale" icon-on="icon-tab-sale" href="#/tab/cloudsale">-->
+    <!--<ion-nav-view name="tab-cloudsale"></ion-nav-view>-->
+  <!--</ion-tab>-->
+  <!-- cpv推荐 -->
+  <ion-tab title="推荐" icon-off="icon-xtschool-zan1" icon-on="icon-xtschool-zan1" href="#/tab/cpvlist">
+  <ion-nav-view name="tab-cpvlist"></ion-nav-view>
+  </ion-tab>
+
+  <!-- 消息 -->
+  <ion-tab title="消息" icon-off="icon-xt3-huihua" icon-on="icon-xt3-huihua" href="#/tab/msg" badge="chatBadge" badge-style="tabs-assertive">
+    <ion-nav-view name="tab-msg">
+    </ion-nav-view>
+  </ion-tab>
+
+
+
+  <!-- 我的任务 -->
+  <!--<ion-tab title="我的任务" icon-off="icon-xt-icon-mytask2" icon-on="icon-xt-icon-mytask2" href="#/tab/mytask">
+    <ion-nav-view name="tab-mytask"></ion-nav-view>
+  </ion-tab>-->
+
+  <!-- 个人中心 -->
+  <ion-tab title="个人中心" icon-off="icon-center-new" icon-on="icon-center-new" href="#/tab/pcenter">
+    <ion-nav-view name="tab-pcenter"></ion-nav-view>
+  </ion-tab>
+</ion-tabs>
+
+<!--遮罩-->
+<div id="tab" class="mask-tab-novice hide"></div>
+<div id="subtab" class="mask-tab-novice hide"></div>
+<div id="updata" class="mask-tab-novice hide"></div>
+<div class="tab_loadmask"></div>

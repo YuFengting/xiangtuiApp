@@ -1,0 +1,65 @@
+<ion-view>
+  <ion-content class="coupond_content" style="padding-bottom: 90px"  delegate-handle="Scroll" on-scroll="topDynamic()" on-drag="scrollHide()" on-release="scrollShow()">
+    <div class="coupond_head">
+      <img src="{{picserver}}{{article.cppic}}" />
+      <div class="business_back coupond_back" ng-click="goback()">
+        <img src="./img/business_back.png"/>
+      </div>
+    </div>
+    <div class="cloudSaleMoney"><i class="font20">¥</i><i class="newPrice" ng-bind="article.gprice"></i><i class="font20 colorOrange">原价：</i><del class="colorOrange"><i class="font20">¥</i><i class="oldPrice" ng-bind="article.price"></i></del></div>
+    <div class="coupond_intro cloudSalePoint">
+      <dl class="clearfix">
+        <dt><span class="icon_label icon_hot" style="display: block">团</span></dt>
+        <dd><textarea placeholder="团购商品详情，这里是商品的特点及介绍最多两行，字数在30个汉字以内。" ng-blur="checkRlname()" id="rlname" ng-bind="article.name"></textarea></dd>
+      </dl>
+      <div class="coupond_shoptitle clearfix businessNameShopTitle">
+        <i class="icon shop icon-xt2-zhuzhi fl"></i>
+        <div class="fl shopname over-ellipsis" style="width:85%;" ng-bind="article.companyalias"></div>
+      </div>
+    </div>
+
+    <div class="cloudsalerInfor teamHeadSayMain">
+      <div class="cloudsellTitleCom"><span class="name">团长说</span></div>
+      <div class="teamHeadSayContent clearfix">
+        <div class="fl teamHeadImg">
+          <div class="headerImg" ng-click="headShow()"><i class="icon icon-xt3-add"></i></div>
+          <p class="joinNumber">已有<i class="addNum" ng-bind="article.num"></i>人参团</p>
+          <p class="eaditTeamSayTips">点击上传您的头像</p>
+        </div>
+        <div class="fl teamHeadSayInfor">
+          <div class="teamHeadTitle"><i class="icon icon-xt3-huihua"></i><span>团长说:</span></div>
+          <textarea placeholder="我发起了一个团购，有兴趣的请联系我！" ng-blur="checkRldisc()" id="rldisc" ng-bind="article.mrdisc"></textarea>
+          <p class="eaditTeamSayTips">点击修改团购宣传语</p>
+        </div>
+      </div>
+      <div class="businessGarantieImg"><img src="./img/businessGarantie.png" /></div>
+    </div>
+    <div class="cloudsalerInfor">
+      <div class="cloudsellTitleCom"><span class="name">商品介绍</span></div>
+      <div class="csProductDetailInfor" ng-bind-html="article.description">
+      </div>
+    </div>
+
+    <div class="noDuteExplain"><i>免责声明:</i>团购内容由商家自行发布，其真实性、准确性及合法性由经销商负责，享推不提供任何保证，亦不承担任何法律责任。</div>
+    <!--设置底部空白间隔-->
+    <div class="footerBottmHeight"></div>
+  </ion-content>
+
+
+  <!--汉堡包-->
+  <!--<div class="detail_hbg" ng-click="ruleShow()">
+        <img src="./img/coupond_hbg.png"/>
+    </div>-->
+
+  <!--开始任务-->
+  <button id="startbutton" class="startbtn" ng-click="updateGbuy($event);">提交审核</button>
+
+
+  <!--加载中-->
+  <!--<div class="loading_mask hide">  ui-sref="teamheadshare"    -->
+  <!--<div class="loading_icon">-->
+  <!--<img src="./img/loading.gif"/>-->
+  <!--</div>-->
+  <!--</div>-->
+
+</ion-view>

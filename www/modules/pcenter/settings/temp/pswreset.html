@@ -1,0 +1,19 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="go('setting')">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">密码设置</span>
+  </ion-header-bar>
+
+  <ion-content class="has-header xt-grey-bg" style="overflow-y: hidden;">
+    <ul class="passwordSettingList">
+      <li ui-sref="resetpassword">重置登录密码<i class="icon ion-ios-arrow-right"></i></li>
+      <li ui-sref="resetpaypsw"  ng-if="haspaypwd" ><span ng-bind="aaa"></span><i class="icon ion-ios-arrow-right"></i></li>
+      <li ui-sref="setpaypsw" ng-if="!haspaypwd"><span ng-bind="aaa"></span><i class="icon ion-ios-arrow-right"></i></li>
+    </ul>
+
+  </ion-content>
+
+</ion-view>

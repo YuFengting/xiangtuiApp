@@ -1,0 +1,77 @@
+﻿<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback();bchecked=true;achecked=false">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">添加手机联系人</span>
+  </ion-header-bar>
+  <ion-content class="has-header grey_content" delegate-handle="phonebSroll">
+
+    <!--通讯录-->
+    <div class="phonebookbox" >
+      <!--通讯录不为空-->
+      <!--个人-->
+      <!--无添加朋友-->
+      <div class="personnalbox" style="display: block">
+        <ion-list class="phoneb_list addfriend_list " ng-repeat="contactmap in contactlist track by $index">
+          <div class="phoneb_divider" id="{{contactmap.key}}" style="border-bottom: 1px solid #d8d8d8;" ng-cloak="">{{contactmap.key}}</div>
+
+          <ion-item class="clearfix" ng-repeat="contact in contactmap.value track by $index" style="padding: 16px;">
+            <div ng-if="contact.isExist==1" class="fl personal_headpic"  ng-click="go('shome',{'suserid':contact.userid})">
+              <img src="{{picserver}}{{contact.avate}}" onerror="javascript:this.parentNode.style.border='1px #d8d8d8 solid';this.src='img/default-list-square-2.png';"/>
+            </div>
+            <div ng-if="contact.isExist==0" class="fl personal_headpic"style="border:1px #d8d8d8 solid;"  >
+              <img src="./img/default-list-square-2.png" />
+            </div>
+            <div class="fl personal_name" ng-cloak>{{(contact.name)&&(contact.name)||(contact.mobile)}}</div>
+            <!--
+            <button class="phoneb_btn invite fr" ng-click="sendInviteMsg(contact,$event)" ng-if="contact.isExist==0&&contact.isinvited==0">邀请下载</button>
+            <button class="phoneb_btn added fr" ng-if="contact.isExist==0&&contact.isinvited==1">已邀请</button>
+            -->
+            <button class="phoneb_btn invite fr" ng-click="sendInviteMsg(contact,$event)" ng-if="contact.isExist==0">邀请下载</button>
+            <button class="phoneb_btn addfriend fr" ng-if="contact.isExist==1&&contact.isFriend==0" ng-click="gotoShome(contact.userid)">加为好友</button>
+            <button class="phoneb_btn added fr" ng-if="contact.isExist==1&&contact.isFriend==1">已添加</button>
+            <button class="phoneb_btn added fr" ng-if="contact.isExist==1&&contact.isFriend==2">本座</button>
+          </ion-item>
+
+        </ion-list>
+      </div>
+    </div>
+    <div class="nosearch" ng-if="nocontact" style="margin-top: 0px; padding-top: 180px">
+
+      <div class="nointenet">
+
+        <img src="img/nousercall.png" style="margin: 0px">
+        <div class="message-info">
+          <span>您的通讯录空空如也</span>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+
+
+
+  <!--字母排序-->
+  <ul class="phoneb_az" style="top:300px; margin-top: 0px;" on-drag="toNumber($event)" ng-if="contactlist.length>0">
+    <li on-tap="ctoNumber($event)"  ng-repeat="contactmap in contactlist track by $index" ng-cloak>{{contactmap.key}}</li>
+  </ul>
+
+  <!--发送邀请弹窗-->
+  <div class="hit-message light" style="width: 50%; line-height: 50px;left: 25%; display: {{inviteSuccess}};" >
+    邀请信息已成功<br/>发送至好友手机
+  </div>
+  <div class="hit-message light" style="width: 50%; line-height: 50px;left: 25%; display: {{inviteFail}};" >
+    今天已经邀请过该手机机主
+  </div>
+<!--  <style>
+    /*下方comfirm弹窗*/
+    .popup-head{border-bottom: 1px solid #d8d8d8;}
+    .popup-container .popup{width: 620px; border-radius: 10px;}
+    .popup-container{top: auto; bottom: 10px;font-size: 25px;}
+    .popup-container .popup-title{font-size: 25px; font-family: "-apple-system", "microsoft yahei";padding: 40px 0;}
+    .popup-buttons{padding: 0px;}
+    .popup-buttons .button{font-size: 25px; font-family: "-apple-system", "microsoft yahei";background: transparent;height: 75px; line-height: 75px; width: 50%;padding: 0px; margin: 0px;}
+    .popup-buttons .button:first-child{border-right: 1px solid #d8d8d8;}
+  </style>-->
+</ion-view>

@@ -1,0 +1,112 @@
+<ion-view>
+  <div class="cloudsale_header">
+    <div class="title">销售</div>
+    <button class="header-right bs-select-industry" ng-click="showIndustry()" style="text-shadow: 1px 1px 1px #999;">
+      行业<i ng-class="{'icon icon-xt2-down':true,'icon-xt-up':false}"></i>
+    </button>
+  </div>
+  <ion-content class="coupond_content has-footer2 bindex_content " style="top: 0px !important;" delegate-handle="bindexlist" cloudsale-content-scroll>
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>
+      <div style="width: 100%;height: auto;position: relative;">
+        <ion-slide-box class="bindex_focus"  delegate-handle="BindexImgList" does-continue="true"  auto-play="true" slide-interval="3000" show-pager="{{recbuserlist.length>1}}" style="overflow: hidden;">
+          <ion-slide ng-repeat="recb in recbuserlist track by $index" ng-click="cleargo('business',{'merchantid':recb.id})" style="overflow: hidden;">
+            <img src="{{picserver}}{{recb.recommendpath}}" onerror="javascript:this.src='img/default-list-square.png'" />
+          </ion-slide>
+        </ion-slide-box>
+      </div>
+
+    <!--任务列表-->
+    <ion-list class="taskindex-list bindex_list">
+      <!--任务导航栏-->
+      <div class="indexNavBox" style="border-top:0 none;">
+        <ion-scroll direction="x" scrollbar-x="false" scrollbar-y="false" class="nav-scroll-list" delegate-handle="navScroll_0" on-scroll="indexnavScroll0()">
+          <ul class="indexlist-nav clearfix static-nav homeMenuList" ng-style="homeMenuStyle" style="border-top:0 none;">
+            <li ng-repeat="sort in sortlist"   ng-class="{active:sort.id ==choosesort.id}" ng-click="clicknav(sort);"><a ng-bind="sort.name"></a></li>
+            <div class="borderBot" ng-style="borderIndexBotStyle"></div>
+          </ul>
+        </ion-scroll>
+        <div class="menuSlideMask"></div>
+      </div>
+      <div class="loading_list clearfix fl " ng-if="listloadding">
+        <div class="loading_icon1 loadding-animate fl"> <i class="ion-load-c"></i></div><div class="loading_wenzi fl">加载中...</div>
+      </div>
+
+      <!--cps帮忙卖任务列表-->
+      <div class="cloudSalerAdContent">
+        <span ng-repeat="list in totalbuserlist track by $index" style="{{(choosesort.sort==$index)&&('display:block')||('display:none')}}">
+        <ion-item  ng-click="goHelpselldetail(task.id,choosesort.value)" ng-repeat="task in list track by $index" >
+          <a class="item-content">
+            <div class="indexlist_pic">
+              <div>
+                <div ng-if="task.isshare == 1 || checkShare(task.id)" class="customerStatusBox2  alreadysubmit " >
+                  <span>销售中</span>
+                </div>
+              </div>
+              <img src="{{picserver}}{{task.view}}" onerror="javascript:this.src='img/default-list-square.png'"/>
+            </div>
+            <div class="indexlist_info">
+              <div class="indexlist_title indexlist_title2">
+                <span class="highI tipsinfo" ng-if="task.high == 1">高</span>
+                <span class="hotI tipsinfo" ng-if="task.hot == 1">火</span>
+                <span class="newI tipsinfo" ng-if="task.isntime == 1">新</span>
+                <span class="{{(checkReaded(task.id))&&'taskListColor'||''}}" ng-bind="task.name"></span>
+              </div>
+              <div class="indexlist_lf">
+                <div class="cpc_businessName"><i class="icon icon-xt2-sj"></i><i class="bnamewrap" ng-bind="task.bname"></i></div>
+              </div>
+              <div class="indexlist_rt">
+                <i class="icon icon-xt3-money"></i><span ng-bind="task.commission"></span>
+              </div>
+            </div>
+          </a>
+        </ion-item>
+      </span>
+      </div>
+    </ion-list>
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+            immediate-check="false"
+            ng-if="hasNextPage"
+            on-infinite="loadMore()"
+            distance="1%">
+    </ion-infinite-scroll>
+
+    <div class="list_nomore" ng-if="!hasNextPage && totalbuserlist[choosesort.sort].length>10">
+      <div class="wenzi">暂时只有这些销售任务啦！</div>
+    </div>
+    <!--没有搜索到-->
+    <div class="nosearch hide" style="display:{{nobuser}};">
+      <img src="img/nosearchcircle.png"/><br/>
+      没有相关任务<br/>
+    </div>
+    </ion-content>
+      <script id="industrygroup.html" type="text/ng-template">
+        <ion-modal-view>
+        <ion-view>
+          <div class="industryTitle clearfix" style="display: block;top: 0px;left: 0px;z-index: 100;width: 100%;position: fixed;padding: 0 10px;    box-shadow: 0px 4px 5px rgba(0,0,0,.08)">
+            <span class="fl">请选择您感兴趣的</span>
+            <div class="selectSureBtn fr" ng-click="chooseIndustry_su()">确定</div>
+          </div>
+          <ion-content class="selectIndusConetent" style="top: 72px;">
+          <div class="business-industry" style="display:block;position: relative;height: auto">
+            <div class="industrySlideBox"  style="border-top: 1px solid #d4d4d4"  >
+              <div ng-repeat="industries in industrylist">
+                <ul class="clearfix industyImgList">
+                  <li ng-repeat="industry in industries.industryList" style="border: none ;border-bottom: 1px solid #d4d4d4;border-right: 1px solid #d4d4d4"  ng-click="chooseCss(industry)">
+                    <div class="industryNameInfor">
+                      <img class="typeImgIcon" src="{{picserver}}{{industry.icon}}" />
+                      <p ng-bind="industry.name"></p>
+                    </div>
+                    <div ng-class="{'currentSelected':industry.secflg==1}" ></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+ </ion-content >
+ </ion-view>
+ </ion-modal-view>
+ </script>
+
+</ion-view>

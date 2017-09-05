@@ -1,0 +1,61 @@
+<ion-view>
+
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">客户详情</span>
+  </ion-header-bar>
+
+  <ion-content class="has-header xt-grey-bg customerContentBox">
+    <div class="customerDetailInfor">
+      <div class="detailInforList clearfix">
+        <ul>
+          <li><i class="icon icon-uniE9CB"></i><span class="name">任务名称：</span><span class="infor">{{leads.taskname}}</span></li>
+          <li><i class="icon icon-user"></i><span class="name">客户姓名：</span><span class="infor">{{leads.name}}</span></li>
+          <li><i class="icon icon-uniE977"></i><span class="name">联系电话：</span><span class="infor">{{leads.tel}}</span></li>
+          <li ng-repeat="leads in leads.fieldmap"><i class="icon icon-add" ></i><span class="name">{{leads.name}}：</span><span class="infor">{{leads.value}}</span></li>
+          <li style="{{(leads.memo)&&('display:block')||('display:none')}}"><i class="icon icon-xt-tx" ></i><span class="name">备注：</span><span class="infor">{{leads.memo}}</span></li>
+
+          <!-- 图片-->
+          <li ng-if="haspic"><i class="icon icon-pic-add"></i><span class="name">相关图片：</span>
+            <img src="{{picserver}}{{pic}}" ng-click="picgetbig(pic,$index)" ng-repeat="pic in leads.pics track by $index">
+          </li>
+
+        </ul>
+      </div>
+        <ul class="messageRecordBox">
+          <li ng-repeat="leadslog in leadsLogList">
+            <span class="processRecord" ng-if="leadslog.status==0">
+              信息记录
+              <i class="line processLine"></i>
+            </span>
+            <span class="processStepRound" ng-if="leadslog.status==1||leadslog.status==2">
+              <i class="line1 processLine"></i>
+              <i class="line2 processLine"></i>
+            </span>
+            <span class="processRecord" ng-if="leadslog.status==3">
+              结算
+              <i class="line3 processLine"></i>
+            </span>
+            <p class="recordInfor over-ellipsis">{{leadslog.statuscontent}}</p>
+            <p class="recordTime">{{leadslog.inittime}}</p>
+          </li>
+
+        </ul>
+    </div>
+
+
+  </ion-content>
+
+
+  <ion-slide-box ng-if="showpic" class="picSlide" active-slide="showimgIndex" does-continue="true">
+    <ion-slide ng-repeat="pic in leads.pics track by $index">
+      <div class="showPic" ng-click="shrinkPic()"><img src="{{picserver}}{{pic}}" class="big-pic" ></div>
+    </ion-slide>
+  </ion-slide-box>
+
+
+</ion-view>
+

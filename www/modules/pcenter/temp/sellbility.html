@@ -1,0 +1,49 @@
+<ion-view>
+
+
+   <ion-content class="trans">
+     <!--<ion-refresher pulling-text="下拉刷新..." on-refresh=""></ion-refresher>-->
+
+     <div class="center_header trans_head" style="height: auto;padding-left: 0px;padding-right: 0px;padding-bottom: 32px">
+       <div class="back-area" ng-click="goback()"><i class="icon ion-ios-arrow-left"></i></div>
+       <div class="headpic_area"><img src="{{picserver}}{{avate}}" onerror="javascript:this.src='img/default-avatar.png'"/></div>
+       <div class="headname_area"><span class="name" ng-bind="nick"></span><br><span class="level_trans" ng-bind="level"></span></div>
+       <div class="head_leval_area">
+
+         <div class="head_leval_grey"></div>
+         <!--<div class="head_leval_light" style="position: relative;top: -76px" ng-class="{'level1':cpslevel=='初级','level2':cpslevel=='中级','level3':cpslevel=='高级'}"></div>-->
+         <div class="levellightanrea" style="position: relative;top: -76px;">
+           <div class="lev1 po1"></div>
+           <div class="prowai">
+             <div class="levProgre po2"  style="width:{{cpsper1}}%"></div>
+           </div>
+           <div class="lev2 po3" ng-if="cpslevel=='中级'||cpslevel=='高级'"></div>
+           <div class="prowai">
+             <div class="levProgre po4"  ng-if="cpslevel=='中级'||cpslevel=='高级'"  style="width:{{cpsper2}}%"></div>
+           </div>
+           <div class="lev3 po5"  ng-if="cpslevel=='高级'"></div>
+         </div>
+       </div>
+       <div class="level_wenzi">
+         <span>销售力/V1初级</span>
+         <span>销售力/V2中级</span>
+         <span>销售力/V3高级</span>
+       </div>
+     </div>
+     <div class="trans_info">
+
+       <div class="linform border_bottom_dotted">
+         <div class="tittle xt-red">什么是销售力</div>
+         <div class="textinfo">销售力既销售商品产生的结算效果。销售的商品形成越多的成功结算，则销售力越强。</div>
+       </div>
+       <div class="linform border_bottom_dotted ">
+         <div class="tittle ">权益：</div>
+         <div class="textinfo">销售力等级较高的用户在申请成为云销售、提交客户信息审核、佣金发放等环节上拥有优先权。商家对云销售的选择倾向也由高级向中级、低级依次递减。</div>
+       </div>
+       <div class="linform ">
+         <div class="tittle ">规则：</div>
+         <div class="textinfo">销售力由初级晋升为中级，需要云销售用户至少完成3个以上销售活动，且由此获得的佣金收益不低于200元。销售力由中级晋升为高级，需要云销售用户至少完成10个以上销售活动，且由此获得的佣金收益不低于1000元。且要保证所提交的客户或线索信息成单率不低于20%。</div>
+       </div>
+     </div>
+  </ion-content>
+</ion-view>

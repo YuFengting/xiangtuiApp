@@ -1,0 +1,299 @@
+<ion-view>
+  <ion-content class="coupond_content" style="padding-bottom: 90px" delegate-handle="helpScrollHandle" help-sell-scroll ><!--on-swipe-up="hidebtns()"  on-swipe-down="showbtns()" -->
+
+    <div class="coupond_head">
+      <ion-slide-box class="cloudSalerBanner"  does-continue="true" auto-play="true" delegate-handle="cpspics" slide-interval="3000" show-pager="{{cpstask.pics.length >1}}">
+        <ion-slide ng-repeat="pic in cpstask.pics track by $index">
+          <img src="{{picserver}}{{pic}}"  />
+        </ion-slide>
+      </ion-slide-box>
+    </div>
+    <div class="coupond_intro cloudSalePoint" style="padding-left: 18px;">
+      <dl class="clearfix">
+       <!-- <dt style="margin-top: -1px"><span class="icon_label icon_xiao" style="font-weight: 300;position: relative;top: -2px;display: none">销</span></dt>-->
+        <dd ng-bind="cpstask.name" style="margin-left: 0px;"></dd>
+      </dl>
+    </div>
+
+    <!--商家信息-->
+    <div class="coupond_shop">
+      <div class="coupond_shoptitle clearfix"  ng-click="go('business',{'merchantid':cpstask.merchantid})">
+        <i class="icon shop icon-xt2-zhuzhi fl"></i>
+        <div class="fl shopname over-ellipsis" style="width: 75%" ng-bind="cpstask.companyalias" ></div>
+        <i class="icon ion-ios-arrow-right  fr greyfont"></i>
+      </div>
+    </div>
+
+    <div class="cloudsalerInfor">
+      <div class="cloudsellTitleCom clearfix" ng-if="cpstask.ngoods.length >0" ng-click="goproduct()"><span class="name fl">产品与服务</span><i class="icon ion-ios-arrow-right  fr greyfont"></i></div>
+      <div class="cloudsellTitleCom clearfix nextToggle"nextToggle><span class="name fl">销售佣金</span><span class="content fl" ng-bind="cpstask.commission" ></span><i class="icon ion-ios-arrow-down  fr greyfont"></i></div>
+      <div class="offersSellingPoint" style="display: none"  ng-bind-html="cpstask.commissiondesc"></div>
+      <div class="cloudsellTitleCom clearfix"><span class="name fl">结算周期</span><span class="content fl" ng-bind="cpstask.statementcycle"></span></div>
+      <div class="cloudsellTitleCom clearfix" ng-if="cpstask.describ[$index]!='' && cpstask.describ[$index]!=' '" ng-repeat="describ in cpstask.describ track by $index">
+        <span class="name fl"style="margin-top:7px;width:120px;"   ng-bind-html="cpstask.title[$index]"></span>
+        <span class="content fl" ng-click="describClick($event)"   ng-bind-html="cpstask.describ[$index]"></span>
+      </div>
+    </div>
+
+    <div class="cloudsalerInfor" ng-if="cpstask.salehelppic.length >0">
+      <div class="cloudsellTitleCom"><span class="name">教你卖</span></div>
+      <div class="teachYouSellBoxSilde">
+        <ion-slide-box class="teachImgSlideBox" does-continue="true" active-slide="index" auto-play="false" delegate-handle="salehelppic" slide-interval="3000" show-pager="false">
+          <ion-slide ng-repeat="pic in cpstask.salehelppic track by $index">
+            <div class="teachYouSellBox" ng-click="getImgSrc(index)">
+              <img src="{{picserver}}{{pic}}"/>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+        <div ng-class="{'swiper-button-next':true,'hide':true,'show':cpstask.salehelppic.length>1&&(index!=cpstask.salehelppic.length-1)}" ng-click="gonext(index)"><i class="icon ion-ios-arrow-right"></i></div>
+        <div ng-class="{'swiper-button-prev':true,'hide':true,'show':cpstask.salehelppic.length>1&&index>=1}" ng-click="goprev(index)"><i class="icon ion-ios-arrow-left"></i></div>
+      </div>
+    </div>
+
+    <!--销售支持-->
+    <div class="cloudsalerInfor" ng-if="cpstask.salesupportlist.length >0">
+      <div class="cloudsellTitleCom clearfix"><span class="name fl" ng-click="helpAlert()">销售支持</span><i class="icon icon-xt3-help icon_help" style="color: #999; vertical-align: middle;" ng-click="helpAlert()"></i></div>
+      <a  ng-repeat="exac in cpstask.salesupportlist track by $index">
+      <div class="cloudsale_support_list clearfix"  ng-if="$index <2" ng-click="goNextPage(exac)">
+        <div class="cloudsale_support_item clearfix">
+          <i  class="icon_label icon_tuan" ng-if="exac.type == 3">团</i>
+          <i  class="icon_label icon_wen" ng-if="exac.type == 0 || exac.type == 1 || exac.type == 4 || exac.type == 5 || exac.type == 6">文</i>
+          <i  class="icon_label icon_hui" ng-if="exac.type == 2">惠</i>
+          <div class="cloudsale_right fr">
+            <div class="couldsale_headpic fl">
+              <div ng-if="exac.isshare > 0 && exac.type != 3"><div class="customerStatusBox2 alreadysubmit" ><span>已分享</span></div></div>
+              <div ng-if="exac.type == 3" ng-class="{'customerStatusBox2':true,'nosubmit':exac.isshare==0,'settlemented':exac.isshare==2}">
+                <span ng-if="exac.isshare==0">审核中</span>
+                <span ng-if="exac.isshare==2">未通过</span>
+              </div>
+              <img src="{{picserver}}{{exac.shareview}}"  onerror="javascript:this.src='img/default-list-square.png'"/>
+            </div>
+            <div class="clouldsale_text fr">
+              <div class="cloudsale_title" ng-bind="exac.name"> </div>
+              <div class="cloudsale_shared">
+                <!--<i class="icon icon-uniE9BC"></i><span ng-bind="exac.sharenum"></span>人已分享-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <div class="cloudsale_support_list clearfix"  ng-if="$index >1 && showsupportflg" ng-click="goNextPage(exac)">
+          <div class="cloudsale_support_item clearfix">
+            <i  class="icon_label icon_tuan" ng-if="exac.type == 3">团</i>
+            <i  class="icon_label icon_wen" ng-if="exac.type == 0 || exac.type == 1 || exac.type == 4 || exac.type == 5 || exac.type == 6">文</i>
+            <i  class="icon_label icon_hui" ng-if="exac.type == 2">惠</i>
+            <div class="cloudsale_right fr">
+              <div class="couldsale_headpic fl">
+                <div ng-if="exac.isshare > 0 && exac.type != 3"><div class="customerStatusBox2 alreadysubmit" ><span>已分享</span></div></div>
+                <div ng-if="exac.type == 3" ng-class="{'customerStatusBox2':true,'nosubmit':exac.isshare==0,'settlemented':exac.isshare==2}">
+                  <span ng-if="exac.isshare==0">审核中</span>
+                  <span ng-if="exac.isshare==2">未通过</span>
+                </div>
+                <img src="{{picserver}}{{exac.shareview}}"  onerror="javascript:this.src='img/default-list-square.png'"/>
+              </div>
+              <div class="clouldsale_text fr">
+                <div class="cloudsale_title" ng-bind="exac.name"> </div>
+                <div class="cloudsale_shared">
+                  <!--<i class="icon icon-uniE9BC"></i><span ng-bind="exac.sharenum"></span>人已分享-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </a>
+      <div class="cloudsale_more" ng-if="cpstask.salesupportlist.length >2 &&!showsupportflg" ng-click="changeshowsupport()">查看其它<span ng-bind="cpstask.salesupportlist.length-2"></span>个销售支持<i class="icon ion-ios-arrow-down"></i> </div>
+    </div>
+
+    <!-- 该商家相关推荐 -->
+    <div class="goodsWarehouse" ng-if="recommandtask.mrecomms.length >0">
+      <div class="goodsTitle cloudSaleAdTitle"  ><span class="name">该商家相关推荐</span></div>
+      <div ng-class="cloudSalerAdContent">
+          <ion-item ng-repeat="mrecomm in recommandtask.mrecomms" ng-click="gotaskdetail(mrecomm)">
+            <a ng-if="mrecomm.showtype ==1" class="item-content" >
+              <div class="indexlist_pic">
+                <div ng-if="mrecomm.isshare == 1">
+                  <div ng-class="{'customerStatusBox2':true,'alreadysubmit':true,'settlemented':false}" >
+                    <span>销售中</span>
+                  </div>
+                </div>
+                <img src="{{picserver}}{{mrecomm.view}}" onerror="javascript:this.src='img/default-list-square.png'"/>
+              </div>
+              <div class="indexlist_info">
+                <div class="indexlist_title indexlist_title2">
+                  <!--<span class="icon_label icon_xiao" style="position: relative; top: -2px">销</span>-->
+                  <span ng-bind="mrecomm.name"></span>
+                </div>
+                <div class="indexlist_lf">
+                  <span class="gao" ng-if="mrecomm.high == 1">高</span>
+                  <span class="qiang" ng-if="mrecomm.rap == 1">抢</span>
+                  <span class="huo" ng-if="mrecomm.hot == 1">火</span>
+                  <span class="yi" ng-if="mrecomm.easy == 1">易</span>
+                  <span class="xin" ng-if="mrecomm.isntime == 1">新</span>
+                  <span class="xin" ng-if="mrecomm.isnew == 1">新</span>
+                </div>
+                <div class="indexlist_rt">
+                  <i class="icon icon-xt3-money"></i><span ng-bind="mrecomm.commission"></span>
+                </div>
+              </div>
+            </a>
+
+            <a ng-if="mrecomm.showtype ==0" class="item-content">
+              <div class="indexlist_pic">
+                <div ng-if="mrecomm.isshare == 1 || mrecomm.status == 2">
+                  <div ng-class="{'customerStatusBox2':true,'alreadysubmit':mrecomm.isshare==1,'settlemented':mrecomm.status==2}" >
+                    <span ng-if="mrecomm.status != 2 && mrecomm.isshare ==1">已分享</span>
+                  </div>
+                </div>
+                <img src="{{picserver}}{{mrecomm.view}}" onerror="javascript:this.src='img/default-list-square.png'"/>
+                <div class="progressBarNumBox" ng-if="0<mrecomm.moneyper && mrecomm.moneyper<=30">剩余:{{mrecomm.moneyper}}%</div>
+              </div>
+              <div class="indexlist_info">
+                <div class="indexlist_title indexlist_title2">
+                  <span class="newI tipsinfo" ng-if="mrecomm.isnew == 1">新</span>
+                  <span>{{mrecomm.name}}</span>
+                </div>
+                <div class="indexlist_lf">
+                  <!--<div class="cpc_businessName"><i class="icon icon-xt2-sj"></i><i class="bnamewrap">{{mrecomm.bname}}</i></div>-->
+                  <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">{{mrecomm.worknum}}</i></div>
+                </div>
+                <div class="indexlist_rt" style="right: 0px;">
+                  <span class="rjsy" ng-cloak>平均分享收益:<span class="money"><i class="icon ion-social-yen"></i><i>{{mrecomm.avgincome}}</i></span></span>
+                </div>
+              </div>
+            </a>
+          </ion-item>
+      </div>
+    </div>
+
+    <!-- 看了本活动的用户还看了
+    <div class="goodsWarehouse" ng-if="recommandtask.otherrecomms.length >0">
+      <div class="business_advtitle">
+        <div class="line"></div>
+        <div class="titleText">看了本活动的用户还看了</div>
+      </div>
+      <div ng-class="cloudSalerAdContent">
+        <ion-item ng-repeat="otherrecomm in recommandtask.otherrecomms" ng-click="gotaskdetail(otherrecomm)" >
+          <a ng-if="otherrecomm.showtype ==1" class="item-content">
+            <div class="indexlist_pic">
+              <div ng-if="otherrecomm.isshare == 1">
+                <div ng-class="{'customerStatusBox2':true,'alreadysubmit':true,'settlemented':false}" >
+                  <span>销售中</span>
+                </div>
+              </div>
+              <img src="{{picserver}}{{otherrecomm.view}}" onerror="javascript:this.src='img/default-list-square.png'"/>
+            </div>
+            <div class="indexlist_info">
+              <div class="indexlist_title indexlist_title2">
+                <span ng-bind="otherrecomm.name"></span>
+              </div>
+              <div class="indexlist_lf">
+                <span class="gao" ng-if="otherrecomm.high == 1">高</span>
+                <span class="qiang" ng-if="otherrecomm.rap == 1">抢</span>
+                <span class="huo" ng-if="otherrecomm.hot == 1">火</span>
+                <span class="yi" ng-if="otherrecomm.easy == 1">易</span>
+                <span class="xin" ng-if="otherrecomm.isntime == 1">新</span>
+                <span class="xin" ng-if="otherrecomm.isnew == 1">新</span>
+              </div>
+              <div class="indexlist_rt">
+                <i class="icon icon-xt3-money"></i><span ng-bind="otherrecomm.commission"></span>
+              </div>
+            </div>
+          </a>
+
+          <a ng-if="otherrecomm.showtype ==0" class="item-content">
+            <div class="indexlist_pic">
+              <div ng-if="mrecomm.isshare == 1 || otherrecomm.status == 2">
+                <div ng-class="{'customerStatusBox2':true,'alreadysubmit':otherrecomm.isshare==1,'settlemented':otherrecomm.status==2}" >
+                  <span ng-if="otherrecomm.status != 2 && otherrecomm.isshare ==1 ">已分享</span>
+                </div>
+              </div>
+              <img src="img/default.png" onerror="javascript:this.src='img/default-list-square.png'"/>
+              <div class="progressBarNumBox" ng-if="0<otherrecomm.moneyper && otherrecomm.moneyper<=30">剩余:{{otherrecomm.moneyper}}%</div>
+            </div>
+            <div class="indexlist_info">
+              <div class="indexlist_title indexlist_title2">
+                <span class="newI tipsinfo" ng-if="otherrecomm.isnew == 1">新</span>
+                <span>{{otherrecomm.name}}</span>
+              </div>
+              <div class="indexlist_lf">
+                <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">{{otherrecomm.worknum}}</i></div>
+              </div>
+              <div class="indexlist_rt" style="right: 0px;">
+                <span class="rjsy" ng-cloak>平均分享收益:<span class="money"><i class="icon ion-social-yen"></i><i>{{otherrecomm.avgincome}}</i></span></span>
+              </div>
+            </div>
+          </a>
+        </ion-item>
+      </div>
+    </div> -->
+    <div class="footerBottmHeight"></div>
+  </ion-content>
+
+  <!-- 申请云销售 申请审核中  新增客户信息-->
+  <button ng-click="applySaler()" ng-class="{'startbtn':true,'hide':true,'show':cpstask.status!=2 &&(cpstask.salersstatus=='2' ||cpstask.salersstatus=='3')}">申请云销售</button>
+  <button ng-class="{'startbtn':true,'hide':true,'show':cpstask.salersstatus=='0'&&cpstask.status!=2}" style="background-color: #bbbbbb" >申请审核中</button>
+  <button ng-click="addleads()" ng-class="{'startbtn':true,'hide':true,'show':cpstask.salersstatus=='1'&&cpstask.status!=2}" >新增客户信息</button>
+  <button ng-class="{'startbtn':true,'hide':true,'bgColorGrey':true,'show':cpstask.status=='2'}" >已结束</button>
+
+  <!-- 教你卖弹窗 -->
+  <div class="teachYouSellDialog hide">
+    <div class="backCloseBtn"><i class="icon ion-ios-arrow-left"></i></div>
+    <div class="teachImgBigBox"><img src="{{picserver}}{{bigpic}}" /></div>
+    <p class="imgDescribeBox" ng-bind="salehelpdesc"></p>
+  </div>
+
+  <!-- 返回按钮-->
+  <!--<div class="business_back coupond_back" ng-click="goback()">-->
+    <!--<img src="./img/business_back.png"/>-->
+  <!--</div>-->
+  <!--<div class="business_love" ng-click="storetask(isstore)">-->
+    <!--<i ng-class="{'icon':true,'icon-xt3-love':isstore == '0','icon-xt-shixin':isstore =='1'}" style="line-height: 52px;"></i>-->
+  <!--</div>-->
+  <!--<div class="business_share" ng-click="goToShare()">-->
+    <!--<i class="icon-share" style="line-height: 52px;font-size: 34px; vertical-align: middle; display: block"></i>-->
+  <!--</div>-->
+  <div class="helpSellHeader clearfix">
+    <div class="goBackIcon iconBox" ng-click="goback()">
+        <span ng-class="{'iconRoundBox':true}">
+          <i class="icon ion-ios-arrow-left" style="font-size:45px;text-align: center; line-height: 53px; left: -2px; position: relative;"></i>
+        </span>
+    </div>
+    <div class="rightShareColletion">
+      <div class="shareIcon iconBox" ng-click="storetask(isstore)">
+          <span ng-class="{'iconRoundBox':true}">
+            <i  ng-class="{'icon':true,'icon-xt3-love':isstore == '0','icon-xt-shixin':isstore =='1'}"></i>
+          </span>
+      </div>
+      <div class="collectionIcon iconBox" ng-click="goToShare()">
+         <span ng-class="{'iconRoundBox':true}">
+            <i class="icon icon-cps-share0" style="font-size:36px;"></i>
+          </span>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /*下方comfirm弹窗*/
+    /*.popup-container .popup{width: 520px; border-radius: 10px;}
+    .popup-container{font-size: 25px;top:0px;}
+    .popup-container .popup-title{font-size: 27px; font-family: "-apple-system", "microsoft yahei";padding: 20px; line-height: 45px; text-align: center; font-weight:200}
+    .popup-body{padding:35px;border-bottom: 1px solid #d8d8d8;}
+    .popup-buttons{padding: 0px;}
+    .popup-buttons .button{font-size: 25px; font-family: "-apple-system", "microsoft yahei";background: transparent;height: 75px; line-height: 75px; width: 50%;padding: 0px; margin: 0px;}
+    !*.popup-buttons .button:first-child{border-right: 1px solid #000;}*!
+    .button-cancel{ color: #1c8df6; font-size: 25px; line-height: 78px; border-right: 1px solid #d8d8d8;}
+    .button-go{ color: #ff3b30; font-size: 25px; line-height: 78px;}
+    .popup-container .popup-buttons .button:last-child{color: #ff3b30;}
+    .popup-sub-title{ font-family: "-apple-system","microsoft yahei"; font-size: 25px; color: #999; padding: 0 30px; line-height: 35px;}*/
+/*
+    .popup-container {bottom: 0; top: 0;}
+    .popup-container .popup {width: 450px; font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 20px;}
+    .popup-container .popup-title { font-family: "-apple-system", "microsoft yahei";font-size: 27px; padding: 35px;}
+    .popup-container .popup-buttons {padding: 0px; }
+    .popup-container .popup-buttons .button { font-family: "-apple-system", "microsoft yahei";font-size: 25px;color: #1c8df6; background: none; }
+    .popup-container .popup-buttons .button.button-default{color: #1c8df6;}
+    .popup-head {border-bottom: 1px solid #e6e9ed }*/
+  </style>
+</ion-view>

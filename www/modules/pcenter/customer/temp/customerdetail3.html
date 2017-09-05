@@ -1,0 +1,94 @@
+<ion-view>
+
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">客户详情</span>
+  </ion-header-bar>
+
+  <ion-content class="has-header xt-grey-bg customerContentBox">
+    <div class="customerDetailInfor">
+      <div class="detailInforList clearfix">
+        <ul>
+          <li><i class="icon icon-uniE9CB"></i><span class="name">任务名称：</span><span class="infor">{{leads.taskname}}</span></li>
+          <li><i class="icon icon-user"></i><span class="name">客户姓名：</span><span class="infor">{{leads.name}}</span></li>
+          <li><i class="icon icon-uniE977"></i><span class="name">联系电话：</span><span class="infor">{{leads.tel}}</span></li>
+          <li ng-repeat="leads in leads.fieldmap"><i class="icon icon-add" ></i><span class="name">{{leads.name}}：</span><span class="infor">{{leads.value}}</span></li>
+          <li style="{{(leads.memo)&&('display:block')||('display:none')}}"><i class="icon icon-xt-tx"></i><span class="name">备注：</span><span class="infor">{{leads.memo}}</span></li>
+
+
+          <!-- 图片-->
+          <li ng-if="haspic"><i class="icon icon-pic-add"></i><span class="name">相关图片：</span>
+            <img src="{{picserver}}{{pic}}" ng-click="picgetbig(pic,$index)" ng-repeat="pic in leads.pics track by $index">
+          </li>
+        </ul>
+      </div>
+      <ul class="messageRecordBox">
+        <li ng-repeat="leadslog in leadsLogList">
+            <span class="processRecord" ng-if="leadslog.status==0">
+              信息记录
+              <i class="line processLine"></i>
+            </span>
+            <span class="processStepRound" ng-if="leadslog.status==1||leadslog.status==2">
+              <i class="line1 processLine"></i>
+              <i class="line2 processLine"></i>
+            </span>
+            <span class="processRecord" ng-if="leadslog.status==3">
+              结算
+              <i class="line3 processLine"></i>
+            </span>
+          <p class="recordInfor over-ellipsis">{{leadslog.statuscontent}}</p>
+          <p class="recordTime">{{leadslog.inittime}}</p>
+        </li>
+
+      </ul>
+      <ul class="messageRecordBox applyMoneyBox">
+        <li ng-repeat="leadspay in leadsPayList">
+          <!--0 初始 1 待支付 2 已支付 3 待撤销  4s不同意撤销  5 s同意撤销  -1 撤销 -2拒绝-->
+          <span class="processRecord"  ng-if="leadspay.status==0">未处理</span>
+          <span class="processRecord"  ng-if="leadspay.status==1">佣金</span>
+          <span class="processRecord"  ng-if="leadspay.status==2">到账</span>
+          <span class="processRecord"  ng-if="leadspay.status==3">撤销</span>
+          <span class="processRecord"  ng-if="leadspay.status==4">佣金</span>
+          <span class="processRecord"  ng-if="leadspay.status==5">撤销</span>
+          <span class="processRecord"  ng-if="leadspay.status==-1">撤销</span>
+          <span class="processRecord"  ng-if="leadspay.status==-2">拒绝</span>
+          <p class="recordInfor"><i ng-bind="'￥'+leadspay.pay"></i>
+            <span ng-if="leadspay.status==0">佣金审核中</span>
+            <span ng-if="leadspay.status==1">{{leadspay.paytime}}天后到账</span>
+            <span ng-if="leadspay.status==2">已到帐</span>
+            <span ng-if="leadspay.status==3">撤销中</span>
+            <span ng-if="leadspay.status==4">拒绝撤销</span>
+            <span ng-if="leadspay.status==5">同意撤销</span>
+            <span ng-if="leadspay.status==-1">已撤销</span>
+            <span ng-if="leadspay.status==-2">已拒绝</span>
+          </p>
+          <div class="applySureCancelBtn" ng-if="leadspay.status==3"><span class="sureBtn" ng-click="responseCancel(leadspay.id,0)">同意</span><span class="cancelBtn" ng-click="responseCancel(leadspay.id,1)">拒绝</span></div>
+          <p class="recordTime">{{leadspay.inittime}}</p>
+        </li>
+
+        </li>
+
+      </ul>
+    </div>
+    <div class="commonBtn addNewCustomer" ng-click="showApplymoney()">申请佣金</div>
+
+  </ion-content>
+
+  <ion-slide-box ng-if="showpic" class="picSlide" active-slide="showimgIndex">
+    <ion-slide ng-repeat="pic in leads.pics track by $index">
+      <div class="showPic" ng-click="shrinkPic()"><img src="{{picserver}}{{pic}}" class="big-pic" ></div>
+    </ion-slide>
+  </ion-slide-box>
+
+</ion-view>
+<div class="applyMoneyDialog hide">
+  <div class="applyMoneyList" ng-style="applyMoneyListSty">
+    <input class="applyMoneyInput" placeholder="协议佣金" type="number" ng-model="formdata.pay">
+    <textarea class="popTextarea" placeholder="填写申请佣金理由" ng-model="formdata.desc" ></textarea>
+    <div class="TipsBox"  style="padding-top: 28px;padding-bottom: 52px; margin-top: 0px;">*请先跟商家协商确定好再提交</div>
+    <div class="commonBtn" style="margin-top: 0px;" ng-click="subApplymoney()">提交</div>
+  </div>
+</div>

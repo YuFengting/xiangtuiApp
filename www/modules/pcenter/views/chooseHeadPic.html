@@ -1,0 +1,16 @@
+<ion-view class="choseHeadPicBg">
+  <ion-header-bar align-title="middle" class="choseHeadpichead">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">个人头像</span>
+    <div class="icon_like detial_like cleafix" ng-click="headShow()"   style="vertical-align: middle;width: 20%;padding-right:0px;font-size: 36px;">
+      <i style="line-height: 80px; vertical-align: middle;height: 80px;float: right;display: block;padding-left: 12px;width:70px;padding-right: 18px;" class="icon icon-moreinfo"></i>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="headPicShowArea" >
+      <img src="{{user.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar.png';"/>
+    </div>
+  </ion-content>
+</ion-view>

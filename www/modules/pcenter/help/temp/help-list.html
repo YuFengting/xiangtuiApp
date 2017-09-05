@@ -1,0 +1,21 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">帮助列表</span>
+  </ion-header-bar>
+  <ion-content class="has-header xt-grey-bg">
+<ion-list class="help-list">
+  <ion-item class="item over-ellipsis" ng-click="goHelpDetail(help)" ng-repeat="help in helplists">
+    {{help.name}}
+  </ion-item>
+</ion-list>
+    <!--没有网络  -->
+    <!--<div class="nosearch" ng-if="nonenet">
+      <img src="./img/nowifi.png"/><br/>
+      您的网络好像不给力~请稍后再试
+    </div>-->
+  </ion-content>
+
+</ion-view>

@@ -1,0 +1,157 @@
+<ion-view>
+  <ion-header-bar align-title="middle" style="z-index: 301">
+    <div class="header_back" ng-click="goAccoutBack()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <div><span ng-click="showMask()" class="title">{{choosetype.name}}<span><i class="icon icon-xt2-down"></i></span></span></div>
+  </ion-header-bar>
+  <div class="account-sub subnav_list clearfix sublist_only show" style="top: 80px;">
+    <ul class="fl subnav_list_only" >
+      <li ng-class="{'active':(choosetype.id == type.id)}" ng-repeat=" type in typelist" ng-click="getLogs(type)">{{type.name}}</li>
+    </ul>
+  </div>
+
+  <ion-content class="has-header  account-list accountList" delegate-handle="Scroll">
+    <ion-list class="account-get-list account-list" ng-if="!nonelog" ng-repeat="log in loglist" ng-click="goTaskDetail(log)">
+      <div class="list-time-select" ng-if="log.first == 0">
+        今天
+      </div>
+      <div class="list-time-select" ng-if="log.first == 1">
+        昨天
+      </div>
+      <div class="list-time-select" ng-if="log.first == 2">
+        更早
+      </div>
+      <ion-item class="account-get-list-item clearfix">
+
+        <div class="fl time fl">
+          <span ng-bind="log.date"></span><br>
+          <span class="time2" ng-bind="log.time"></span>
+        </div>
+        <div class="pics fl" style="background: #dcdcdc">
+          <img src="{{picserver}}{{log.view}}" ng-if="choosetype.id == 0" onerror="javascript:this.src='img/default-avatar.png'"/>
+          <img src="{{picserver}}{{log.avate}}"  ng-if="choosetype.id == 1" onerror="javascript:this.src='img/default-avatar.png'"/>
+          <img src="img/activity.png" ng-if="choosetype.id == 2" onerror="javascript:this.src='img/default-avatar.png'"/>
+          <img src="img/withdraw.png" ng-if="choosetype.id == 3" onerror="javascript:this.src='img/default-avatar.png'"/>
+          <img src="img/phonePay.png"  ng-if="choosetype.id == 4" onerror="javascript:this.src='img/default-avatar.png'"/>
+          <img src="{{log.avate}}"  ng-if="choosetype.id == 5" onerror="javascript:this.src='img/default-avatar.png'"/>
+        </div>
+        <div class="detial fl">
+          <div class="money" ng-if="showadd&&choosetype.id != 1" >+{{log.money | number:2}}</div>
+          <div class="money" ng-if="!showadd&&choosetype.id != 1">-{{log.money | number:2}}</div>
+          <div class="money" ng-if="log.type==0&&choosetype.id == 1">+{{log.money | number:2}}</div>
+          <div class="money" ng-if="log.type==1&&choosetype.id == 1">-{{log.money | number:2}}</div>
+          <!--<div class="money" ng-if="!showadd && log.flg == 0">-{{log.money + 1 | number}}</div>-->
+          <div class="message over-ellipsis" ng-bind="log.desc">
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+    <!--<div class="no-more-area" ng-if="hasmore">
+      <div class="wenzi">没有更多记录了，往上看看吧~</div>
+    </div>-->
+    <div class="no-more-area2 moreTaskOrMerchant" ng-if="hasmore">
+      <div class="wenzi">没有更多啦，往上看看吧~</div>
+    </div>
+
+    <!-- 任务收入缺省页-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px" ui-sref="fastget" ng-click="gofastget()" ng-if="nonelog&&choosetype.name=='任务收入'">
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好心酸，您当前还没有获得收益，</span><br/>
+          <span >马上去<span style="color: #ff3b30">分享列表</span>开始赚取奖励吧！</span>
+        </div>
+      </div>
+    </div>
+
+    <!--邀请缺省页-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px" ng-if="nonelog&&choosetype.name=='收付款'">
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好心酸，您当前还没有收付款流水哦！</span><br/>
+          <!--<span >马上去<span style="color: #ff3b30">邀请好友</span>玩赚享推，更多奖励拿起来！</span>-->
+        </div>
+      </div>
+    </div>
+
+    <!-- 手机充值缺省页-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px" ng-if="nonelog&&choosetype.name=='充值'" >
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好心酸，您当前还没有手机充值流水哦！</span>
+        </div>
+      </div>
+    </div>
+
+    <!--活动缺省页-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px"  ng-if="nonelog&&choosetype.name=='活动'">
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好忧伤，你还没有参加享推的活动，</span><br/>
+          <span >马上参与其中的活动可以获得更多的活动奖励哦！</span>
+        </div>
+      </div>
+    </div>
+
+    <!--提现缺省页-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px" ui-sref="tab.pcenter" ng-if="nonelog&&choosetype.name=='提现'">
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好心酸哦！您的账户里的钱竟然还没有提现，</span><br/>
+          <span >赶紧点击<span style="color: #ff3b30">账户余额</span>进行提现吧！</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!--邀请好友缺省页面-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px" ui-sref="share" ng-if="nonelog&&choosetype.name=='邀请好友'">
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好心酸哦！您竟然还没有邀请过好友，</span><br/>
+          <span >赶紧点击<span style="color: #ff3b30">传送门</span>去邀请好友吧！</span>
+        </div>
+      </div>
+    </div>
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+            ng-if="hasNextPage"
+            on-infinite="loadMore()"
+            distance="1%"
+            immediate-check="false">
+    </ion-infinite-scroll>
+
+
+  </ion-content>
+  <!--lodding特效-->
+  <div class="mask-loadding-all" ng-if="showloading">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+      <!--</div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+  <div class="subnav_mask has-header account-sub-mask  show" ng-click="showMask()" ng-if="showmask" style="display: block"></div>
+  <div class="step6_mask step6_mask0 hide"></div>
+  <div class="step6_mask2 step6_mask0 hide">
+    <div class="step6_arrow">
+      <img src="img/step6_pic1.png"/>
+    </div>
+    <div class="step6_pic2">
+      <img src="img/step6_pic2.png"/>
+      <a ng-click="go('tab.index')" class="step6_gohome"></a>
+    </div>
+  </div>
+
+
+
+</ion-view>

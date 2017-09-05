@@ -1,0 +1,62 @@
+<ion-view>
+
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">微信提现</span>
+  </ion-header-bar>
+
+
+  <ion-content class="bg-grey has-header">
+    <div class="warning-message">
+
+      微信提现10元以下（含10元）无需审核；10元以上需审核。
+    </div>
+    <div class="find-form">
+
+      <div class="line border-bottom tx">
+
+        <span class="tip1">可提现金额（元）：</span>
+        <span class="tip2" ng-bind="'￥'+account.restmoney"></span>
+
+
+      </div>
+      <div class="line line2 tx">
+
+        <span class="tip1">提现至微信号：</span>
+        <span class="tip2" ng-bind="account.wxnick"></span>
+
+        <div class="tixian-area clearfix">
+
+          <div class=" fl tip4">￥</div>
+          <input class="fl"  type="number" style="line-height:36px;"  ng-model="acc.money" placeholder="建议输入整数提现金额">
+
+          <div class="fr tip3 hide" >建议输入整数提现金额</div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="queren-btn">
+      <!--信息输入完成后，opacity ：1 并且 可以点击-->
+      <div ng-click="goCashOut()" style=" opacity:1"   class="btn xt-btn-green-bg">
+        提交
+      </div>
+    </div>
+
+  </ion-content>
+
+  <div class="hit-message light wrong-show" ng-if="showsucc">
+    <i class="ion-ios-checkmark-outline font48"></i><br>
+
+    您的申请提交成功，<br/>
+    我们将在24h内审核完毕，<br/>
+    请耐心等待！
+  </div>
+
+
+</ion-view>

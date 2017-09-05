@@ -1,0 +1,151 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">销售支持</span>
+    <div class="customerHeader " ><i class="icon icon-cps-share" ng-click="goToShare()"></i></div>
+  </ion-header-bar>
+  <ion-content class="has-header coupond_content" style="padding-bottom: 90px"  delegate-handle="Scroll" on-scroll="topDynamic()" on-drag="scrollHide()" on-release="scrollShow()">
+    <div class="coupond_head">
+      <img src="{{picserver}}{{article.cppic}}" onerror="javascript:this.src='img/imgonerror.png'" />
+    </div>
+    <div class="cloudSaleMoney"><i class="font20">¥</i><i class="newPrice" ng-bind="article.gprice"></i><i class="font20 colorOrange">原价：</i><del class="colorOrange"><i class="font20">¥</i><i class="oldPrice" ng-bind="article.price"></i></del></div>
+    <div class="coupond_intro cloudSalePoint">
+      <dl class="clearfix">
+        <dt><span class="icon_label icon_tuan" style="display: block;position: relative;top: 2px;">团</span></dt>
+        <dd ng-bind="article.name"></dd>
+      </dl>
+      <div class="coupond_shoptitle clearfix businessNameShopTitle">
+        <i class="icon shop icon-xt2-zhuzhi fl"></i>
+        <div class="fl shopname over-ellipsis" style="width:85%;" ng-bind="article.companyalias"></div>
+      </div>
+    </div>
+
+    <div class="cloudsalerInfor">
+      <div class="cloudsellTitleCom"><span class="name">活动说明</span></div>
+      <p class="activeExplain" ng-bind="article.rule"></p>
+    </div>
+    <div class="cloudsalerInfor teamHeadSayMain">
+      <div class="cloudsellTitleCom"><span class="name">团长说</span></div>
+      <div class="teamHeadSayContent clearfix">
+          <div class="fl teamHeadImg">
+            <div class="headerImg" ng-if="article.head == ''"><img src="./img/teamHeadImg.png" /></div>
+            <div class="headerImg" ng-if="article.head != ''"><img src="{{picserver}}{{article.head}}" /></div>
+            <p class="joinNumber">已有<i class="addNum" ng-bind="article.num"></i>人参团</p>
+          </div>
+        <div class="fl teamHeadSayInfor">
+          <div class="teamHeadTitle"><i class="icon icon-xt3-huihua"></i><span>团长说:</span></div>
+          <p class="sayInforP" ng-bind="article.mrdisc"></p>
+        </div>
+      </div>
+      <div class="businessGarantieImg"><img src="./img/businessGarantie.png" /></div>
+    </div>
+    <div class="cloudsalerInfor">
+      <div class="cloudsellTitleCom"><span class="name">商品介绍</span></div>
+      <div class="csProductDetailInfor" ng-bind-html="article.description">
+      </div>
+    </div>
+    <div class="noDuteExplain"><i>免责声明:</i>团购内容由商家自行发布，其真实性、准确性及合法性由经销商负责，享推不提供任何保证，亦不承担任何法律责任。</div>
+    <!--设置底部空白间隔-->
+    <div class="footerBottmHeight"></div>
+  </ion-content>
+
+  <!--开始任务-->
+  <button id="startbutton" ng-class="{'startbtn':true,'bgColorGrey':article.status == 0}" ng-click="goTeamHeadOrShare(article)" >
+    <span ng-bind="statustext"></span>
+  </button>
+
+  <!--汉堡包-->
+  <div class="detail_hbg" ng-click="ruleShow()">
+    <!--<img src="./img/coupond_hbg.png"/>-->
+    <i class="icon ion-navicon-round"></i>
+  </div>
+
+  <!--任务规则弹窗-->
+  <div class="article_rule goodarticlerule">
+    <div class="rule_title clearfix">
+      <span class="fl"></span>
+      团购(支持)的使用方法
+      <span class="fr"></span>
+    </div>
+    <div class="little-tittle1">
+      商家支持的团购优惠活动，组团成功享受优惠。
+    </div>
+    <div class="rule_content goodarticlerule clearfix" style="margin-top: 20px">
+      <div class="left-pic-area fl">
+        <img src="img/groupbuyshow.png">
+      </div>
+      <div class="right-tip-area fr">
+        <div class="infomation11 infomation">
+         编辑好团购名称和团长说
+        </div>
+        <div class="infomation22 infomation">
+          将团购活动信息分享给朋友
+        </div>
+        <div class="infomation33 infomation">
+          朋友点击团购信息产生兴趣参团并填入个人信息
+        </div>
+        <div class="infomation44 infomation">
+          在客户管理之中将朋友的信息提交给商家
+        </div>
+        <div class="infomation55 infomation">
+          朋友在参团购买相关商品或服务后，我获得对应的佣金
+        </div>
+      </div>
+    </div>
+    <div class="rule_closebtn icon icon-xt-close" style="bottom: 35px"></div>
+  </div>
+
+  <!--分享弹窗-->
+  <div class="newguidemask " ng-if="ifopensharepopup"  ng-click="closesharepopup()"></div>
+  <div class="share_popup" ng-if="ifopensharepopup">
+    <div class="body">
+      <div class="title">
+        <i class="icon icon-tab-share"></i><span>立即分享至</span>
+      </div>
+      <div class="share_item">
+        <ul class="sharelist">
+          <li ng-click="newShare('weixin')">
+            <div class="shareicon">
+              <div class="iconitem weixin"></div>
+            </div>
+            <div class="share_name">微信</div>
+          </li>
+          <li ng-click="newShare('wxZone')">
+            <div class="shareicon">
+              <div class="iconitem friendcircle"></div>
+            </div>
+            <div class="share_name">朋友圈</div>
+          </li>
+          <li ng-click="newShare('qq')">
+            <div class="shareicon">
+              <div class="iconitem qq"></div>
+            </div>
+            <div class="share_name">QQ</div>
+          </li>
+          <li ng-click="newShare('qqZone')">
+            <div class="shareicon">
+              <div class="iconitem qqzone"></div>
+            </div>
+            <div class="share_name">QQ空间</div>
+          </li>
+          <li ng-click="newShare('sinaweibo')">
+            <div class="shareicon">
+              <div class="iconitem weibo"></div>
+            </div>
+            <div class="share_name">微博</div>
+          </li>
+          <li ng-click="newShare('copylink')">
+            <div class="shareicon">
+              <div class="iconitem browser"></div>
+            </div>
+            <div class="share_name">复制链接</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="buttomgroup" ng-click="closesharepopup()">取消</div>
+  </div>
+
+</ion-view>

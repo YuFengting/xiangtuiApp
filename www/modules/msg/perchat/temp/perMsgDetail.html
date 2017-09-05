@@ -1,0 +1,561 @@
+<ion-view class="chatpage">
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="go('tab.msg')">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" ng-bind="otherusername" style="width: 350px;" ng-click="goTop()"></span>
+  </ion-header-bar>
+  <ion-content class="has-header has-chatheader has-msgfooter  xt-grey-bg" ng-click="closefoot()" ng-style="hasmsgfootersty" delegate-handle="perchat" id="perchat">
+    <audio id="voiceAudio{{attr_id}}" src="mp3/test.mp3" style="height:0px;visibility: hidden;"></audio>
+    <ion-refresher pulling-text="下拉加载..." on-refresh="queryOld()"></ion-refresher>
+    <ion-list class="message-list">
+      <ion-item ng-class="{'user':userchat.position==1,'shareitem':userchat.contenttype==7||userchat.contenttype==8||userchat.contenttype==13||userchat.contenttype==14,'shoukuan':userchat.contenttype==9||userchat.contenttype==10}" ng-repeat="userchat in userchatlist track by $index" ng-if="userchat.sendstatus != 4">
+        <div class="inforDate" ng-if="userchat.contenttype != -999"><span ng-class="{'ng-binding':userchat.contenttype==7||userchat.contenttype==8||userchat.contenttype==13||userchat.contenttype==14}" ng-bind="(userchat.exactlytime | chatroomtimefilter) || userchat.inittime"></span></div>
+        <div ng-class="{'messagearea clearfix msg_namebox':true,'pic_messagearea':userchat.contenttype==1}">
+          <div ng-class="{'messageHead':true,'fl':userchat.position==0,'fr':userchat.position==1}" ng-click="openHome(userchat.usertype, userchat.senderid)" ng-if="userchat.contenttype>=0">
+            <img src="{{avateAnaName[userchat.senderid].avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+          </div>
+          <i ng-class="{'icon icon-xt2-arrow':true,'fl':userchat.position==0,'flipx fr':userchat.position==1}" ng-if="userchat.contenttype!=1&&userchat.contenttype!=7&&userchat.contenttype!=8&&userchat.contenttype!=13&&userchat.contenttype!=14&&userchat.contenttype>=0"></i>
+          <i ng-class="{'icon icon-xt2-arrow':true,'fl':userchat.position==0,'flipx fr':userchat.position==1}" style="color: white" ng-if="userchat.contenttype==7||userchat.contenttype==8||userchat.contenttype==13||userchat.contenttype==14&&userchat.contenttype>=0"></i>
+          <div ng-click="$event.stopPropagation()" ng-class="{'talk-message':true, 'talk-message-fl fl':userchat.position==0,'talk-message-fr fr':userchat.position==1,'pic_message':userchat.contenttype==1,'setposition':userchat.contenttype==5}" ng-if="userchat.contenttype!=7&&userchat.contenttype!=8&&userchat.contenttype!=13&&userchat.contenttype!=14&&userchat.contenttype>=0">
+            <div class="talker_name" ng-bind="avateAnaName[userchat.senderid].name"></div>
+            <!--<dir ng-if="userchat.contenttype=='0'" con-tent="{{userchat.content}}" on-hold="copycontent(userchat.content)"></dir>-->
+            <div class="chatContentBox" ng-if="userchat.contenttype=='0'" ng-bind-html="userchat.content | emojihtmlfilter" on-tap="showcontentinapp($event)" on-hold="copycontent(userchat.content)"></div>
+            <!--长图显示部分-->
+            <div class="msgImgBoxSty" ng-if="userchat.contenttype=='1' || userchat.contenttype=='5'">
+              <div style="width: auto;height: auto;max-height: 450px;overflow: hidden;border-radius: 14px;">
+                <img ng-if="userchat.contenttype=='1' && userchat.imgtype == '1'" class="chat_pic" ng-click="enlargePic(userchat)" src="{{userchat.content}}" onerror="javascript:this.src='img/default.png'"/>
+                <img ng-if="userchat.contenttype=='1' && userchat.imgtype != '1'" class="chat_pic" ng-click="enlargePic(userchat)" src="{{userchat.content}}" onerror="javascript:this.src='img/default.png'">
+              </div>
+              <img ng-if="userchat.contenttype=='5'" class="chat_pic" ng-click="enlargePic(userchat, 'external')" src="{{userchat.content}}" onerror="javascript:this.src='img/default.png'">
+            </div>
+            <div class="yuyinBox"  ng-click="playVoice(userchat)" ng-if="userchat.contenttype=='4'">
+              <img src="img/yuyin_fl.png" ng-if="userchat.position==0" id="{{userchat.id}}_left" class="voiceImgPlay_fl" ng-class="{'fl':userchat.position==0}" />
+              <img src="img/yuyin_fr.png" ng-if="userchat.position==1" id="{{userchat.id}}_right" class="voiceImgPlay_fr" ng-class="{'fr':userchat.position==1}" />
+              <span class="second second_{{userchat.audiolength}} fl"></span>
+              <span class="secondTime">{{userchat.audiolength}}"</span>
+              <span class="unreadMsg" id="{{userchat.id}}" ng-show="userchat.position!=1&&(userchat.isread===null || userchat.isread===1)"></span>
+            </div>
+            <div class="yongjinbox" ng-if="userchat.contenttype==9" ng-click="goPayLog(userchat.paylog.id)">
+              <div class="yongjin_body clearfix">
+                <div class="clearfix">
+                  <div class="fl head">
+                    <img src="img/shoukuan_head.png" ng-if="userchat.contenttype==9"/>
+                  </div>
+                  <div class="info fl">
+                    <div ng-if="userchat.contenttype==9&&userchat.position==0">付款</div>
+                    <div ng-if="userchat.contenttype==9&&userchat.position==1">收款</div>
+                    <div><span ng-bind="userchat.paylog.money | number:2"></span><span>元</span></div>
+                  </div>
+                </div>
+                <div class="desc over-ellipsis" ng-bind="'备注：'+userchat.paylog.remark" ng-if="userchat.paylog.remark.length>0"></div>
+              </div>
+              <div class="yongjin_btm clearfix">
+                <div class="fl state" ng-if="userchat.contenttype==9&&userchat.position==0">享推付款</div>
+                <div class="fl state" ng-if="userchat.contenttype==9&&userchat.position==1">享推收款</div>
+
+                <div class="fr func" ng-if="userchat.contenttype==9&&userchat.position==1">
+                  <img src="img/shoukuan_right.png"/>
+                  <span ng-if="userchat.paylog.status==0">等待对方付款</span>
+                  <span ng-if="userchat.paylog.status==1">已收款</span>
+                  <span ng-if="userchat.paylog.status==2">已拒绝</span>
+                  <span ng-if="userchat.paylog.status==4">收款失效</span>
+                </div>
+                <div class="fr func" ng-if="userchat.contenttype==9&&userchat.position==0">
+                  <img src="img/shoukuan_right.png"/>
+                  <span ng-if="userchat.paylog.status==0">待付款</span>
+                  <span ng-if="userchat.paylog.status==1">已付款</span>
+                  <span ng-if="userchat.paylog.status==2">已拒绝</span>
+                  <span ng-if="userchat.paylog.status==4">付款失效</span>
+                </div>
+              </div>
+            </div>
+            <div class="yongjinbox" ng-if="userchat.contenttype==10" ng-click="goPayLog(userchat.paylog.id)">
+              <div class="yongjin_body clearfix">
+                <div class="clearfix">
+                  <div class="fl head">
+                    <img src="img/fukkuan_head.png" ng-if="userchat.contenttype==10"/>
+                  </div>
+                  <div class="info fl">
+                    <div ng-if="userchat.contenttype==10&&userchat.position==1">付款</div>
+                    <div ng-if="userchat.contenttype==10&&userchat.position==0">收款</div>
+                    <div ng-bind="userchat.paylog.money+'元'"></div>
+                  </div>
+                </div>
+                <div class="desc over-ellipsis" ng-bind="'备注：'+userchat.paylog.remark" ng-if="userchat.paylog.remark.length>0"></div>
+              </div>
+              <div class="yongjin_btm clearfix">
+                <div class="fl state" ng-if="userchat.contenttype==10&&userchat.position==1">享推付款</div>
+                <div class="fl state" ng-if="userchat.contenttype==10&&userchat.position==0">享推收款</div>
+                <div class="fr func" ng-if="userchat.contenttype==10&&userchat.position==0">
+                  <img src="img/shoukuan_right.png"/>
+                  <span ng-if="userchat.paylog.status==0">待收款</span>
+                  <span ng-if="userchat.paylog.status==1">已收款</span>
+                  <span ng-if="userchat.paylog.status==2">已拒绝</span>
+                  <span ng-if="userchat.paylog.status==4">收款失效</span>
+                </div>
+                <div class="fr func" ng-if="userchat.contenttype==10&&userchat.position==1">
+                  <img src="img/shoukuan_right.png"/>
+                  <span ng-if="userchat.paylog.status==0">等待对方收款</span>
+                  <span ng-if="userchat.paylog.status==1">已付款</span>
+                  <span ng-if="userchat.paylog.status==2">已拒绝</span>
+                  <span ng-if="userchat.paylog.status==4">付款失效</span>
+                </div>
+              </div>
+            </div>
+            <div ng-if="userchat.position==1">
+              <div class="send_failed" ng-click="repeatSendMsg($index,userchat.contenttype)" ng-if="(userchat.sendstatus==2&&userchat.contenttype==0)||(userchat.sendstatus==2&&userchat.contenttype==1)||(userchat.sendstatus==2&&userchat.contenttype==5)">
+                <i class="ion ion-android-alert"></i>
+              </div>
+              <div class="send_failed send_loading" ng-if="userchat.sendstatus==1">
+                <i class="ion ion-load-c"></i>
+              </div>
+              <div class="send_failed send_loading" ng-if="userchat.sendstatus==3">
+                <i class="ion ion-load-c"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- 特殊类型消息，只用于提示用户已不是好友关系 -->
+          <div class="info2" style="height:100%;width: 100%;" ng-if="userchat.contenttype === -999">
+            <div class="info22" style="{width:300px}">
+             <span> 你还不是他（她）朋友，请先发送好友请求，对方同意之后才能聊天。
+               <span style="color:#007aff" ng-click="apply()">&nbsp;&nbsp;发送好友请求</span>
+             </span>
+            </div>
+          </div>
+
+          <div ng-click="$event.stopPropagation()" ng-class="{'talk-message':true, 'talk-message-fl fl':userchat.position==0,'talk-message-fr fr':userchat.position==1}" style="background-color: white" ng-if="userchat.contenttype==7||userchat.contenttype==8||userchat.contenttype==13||userchat.contenttype==14">
+            <div class="talker_name" ng-bind="userchat.name"></div>
+            <!--任务-->
+            <div class="clearfix shareMsg" ng-if="userchat.contenttype==7&&userchat.task != undefined" ng-click="gotoTaskDetail(userchat.task.taskid)">
+              <div class="sharedPic fl" >
+                <img src="{{picserver}}{{userchat.task.shareview}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+              </div>
+              <div class="sharedText fr" ng-bind="userchat.task.sharetitle" >
+              </div>
+            </div>
+            <div class="clearfix shareMsg" ng-if="userchat.contenttype==7&&userchat.task == undefined">
+              <div class="sharedPic fl" >
+                <img src="img/default-avatar-square.png">
+              </div>
+              <div class="sharedText fr">该推广已删除</div>
+            </div>
+            <!--销售支持（美文、H5、优惠券）-->
+            <div class="clearfix shareMsg" ng-if="userchat.contenttype==8&&userchat.narticle != undefined" ng-click="gotoSupDetail(userchat.narticle)">
+              <div class="sharedPic fl" >
+                <img src="{{picserver}}{{userchat.narticle.img}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+              </div>
+              <div class="sharedText fr" ng-bind="userchat.narticle.name" >
+              </div>
+            </div>
+            <div class="clearfix shareMsg" ng-if="userchat.contenttype==8&&userchat.narticle == undefined">
+              <div class="sharedPic fl" >
+                <img src="img/default-avatar-square.png">
+              </div>
+              <div class="sharedText fr">该活动已删除</div>
+            </div>
+            <!--销售支持（团购活动）-->
+            <div class="clearfix shareMsg" ng-if="userchat.contenttype==13&&userchat.ngbuyrl != undefined" ng-click="gotoTeamheadexamineDetail(userchat.ngbuyrl)">
+              <div class="sharedPic fl" >
+                <img src="{{picserver}}{{userchat.ngbuyrl.img}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+              </div>
+              <div class="sharedText fr" ng-bind="userchat.ngbuyrl.name" >
+              </div>
+            </div>
+            <div class="clearfix shareMsg" ng-if="userchat.contenttype==13&&userchat.ngbuyrl == undefined">
+              <div class="sharedPic fl" >
+                <img src="img/default-avatar-square.png">
+              </div>
+              <div class="sharedText fr">该活动已删除</div>
+            </div>
+            <!--商家-->
+            <div class="clearfix shareMsg" ng-if="userchat.contenttype==14" ng-click="gotoMerchantDetail(userchat.merchant.id)">
+              <div class="sharedPic fl" >
+                <img src="{{picserver}}{{userchat.merchant.img}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+              </div>
+              <div class="sharedText fr" ng-bind="userchat.merchant.name" >
+              </div>
+            </div>
+
+            <div class="shareFrom" ng-if="userchat.contenttype==7">推广</div>
+            <div class="shareFrom" ng-if="userchat.contenttype==8||userchat.contenttype==13">销售支持</div>
+            <div class="shareFrom" ng-if="userchat.contenttype==14">商家</div>
+            <div ng-if="userchat.position==1">
+              <div class="send_failed send_loading" ng-if="userchat.sendstatus==1">
+                <i class="ion ion-load-c"></i>
+              </div>
+              <div class="send_failed send_loading" ng-if="userchat.sendstatus==3">
+                <i class="ion ion-load-c"></i>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </ion-item>
+      <!-- 位置信息-->
+
+    </ion-list>
+  </ion-content>
+
+  <div class="message-foot" ng-style="msgfootersty" style="display: block !important;">
+    <div class="footInforBox clearfix"  ng-click="stopFun($event)" resize-foot-bar ioncontentname="{{contentBoxName}}">
+      <div class="iconBox fl">
+        <span id="voicePlayIcon{{attr_id}}" class="icon" ng-click="voiceBox()" ng-class="{'icon-voice-keyboard':!isInputShow,'icon-voice-play':isInputShow}"></span>
+      </div>
+      <button class="voiceTip voiceTipStart fl" on-touch="startVoice($event)" ng-style="{'display':voicePer}" on-release="endVoice()" on-drag="onDrag($event)" ng-show="!isInputShow">{{voiceText}}</button>
+      <!--<button class="voiceTip voiceTipEnd fl hide">松开结束</button>-->
+      <form ng-submit="sendMessage('0')">
+        <!--Android-->
+        <textarea msd-elastic id="inputBox{{attr_id}}" class="input fl" autocomplete="off" ng-change="sendFunc()" ng-model="message" ng-click="emojiHide()" ng-show="isInputShow" ng-focus="inputFocus"></textarea>
+        <!--IOS-->
+        <!--<input id="inputBox{{attr_id}}" class="input fl" placeholder="" ng-change="changeMeg()" ng-model="message" ng-click="emojiHide()" ng-show="isInputShow">-->
+      </form>
+      <!--<button class="voice fl">按住说话</button>-->
+      <!--class="hold"-->
+      <div class="iconBox fl">
+        <i class="icon icon-smile" ng-click="emojiBox()" ng-class="{'current':showEmoji}"></i>
+      </div>
+      <div class="sendBox fr">
+        <i class="icon icon-add" ng-click="functionBox()" style="margin-left: 3px;" ng-if="morebtn" ng-class="{'current':showAddfunc}"></i>
+        <input class="sendbtn"  ng-if="sendbtn" ng-click="sendMessage('0')"  value="发送"/>
+     </div>
+
+
+    </div>
+    <div class="addFunctionBox" ng-if="showAddfunc">
+      <div class="functionList" ng-click="getPicture()">
+        <div class="funImg fun_pic"><img src="img/chat_photo.png"/></div>
+        <p>照片</p>
+      </div>
+      <!--<div class="functionList" ng-click="openpolistModal()">-->
+      <!--<div class="funImg fun_shot"><img src="img/chat_gps.png"/></div>-->
+      <!--<p>定位</p>-->
+      <!--</div>-->
+      <div class="functionList" ng-click="getLocationperchat()">
+        <div class="funImg fun_shot"><img src="img/chat_gps.png"/></div>
+        <p>定位</p>
+      </div>
+    </div>
+    <div class="emojiBox" ng-if="showEmoji">
+      <ion-slide-box>
+        <ion-slide show-pager="true">
+          <div class="emojiList">
+            <img src="img/emoji/bishi.png" title="鄙视" ng-click="getAttr($event)">
+            <img src="img/emoji/bukaixin.png" title="不开心" ng-click="getAttr($event)">
+            <img src="img/emoji/feiwen.png" title="飞吻" ng-click="getAttr($event)">
+            <img src="img/emoji/fennu.png" title="愤怒" ng-click="getAttr($event)">
+            <img src="img/emoji/haixiu.png" title="害羞" ng-click="getAttr($event)">
+            <img src="img/emoji/jingkong.png" title="惊恐" ng-click="getAttr($event)">
+            <img src="img/emoji/kuqi.png" title="哭泣" ng-click="getAttr($event)">
+            <img src="img/emoji/lenghan.png" title="冷汗" ng-click="getAttr($event)">
+            <img src="img/emoji/shengbing.png" title="生病" ng-click="getAttr($event)">
+            <img src="img/emoji/shiran.png" title="释然" ng-click="getAttr($event)">
+            <img src="img/emoji/tiaopi.png" title="调皮" ng-click="getAttr($event)">
+            <img src="img/emoji/tongku.png" title="痛苦" ng-click="getAttr($event)">
+            <img src="img/emoji/touxiao.png" title="偷笑" ng-click="getAttr($event)">
+            <img src="img/emoji/weixiao.png" title="微笑" ng-click="getAttr($event)">
+            <img src="img/emoji/baobao.png" title="包包" ng-click="getAttr($event)">
+            <img src="img/emoji/baoyou.png" title="保佑" ng-click="getAttr($event)">
+            <img src="img/emoji/cuowu.png" title="错误" ng-click="getAttr($event)">
+            <img src="img/emoji/dabian.png" title="大便" ng-click="getAttr($event)">
+            <img src="img/emoji/dianhua.png" title="电话" ng-click="getAttr($event)">
+            <img src="img/emoji/fangzi.png" title="房子" ng-click="getAttr($event)">
+            <i class="icon ion-backspace-outline" ng-click="backspace()"
+              ></i>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="emojiList">
+            <img src="img/emoji/geili.png" title="给力" ng-click="getAttr($event)">
+            <img src="img/emoji/gongjiaoche.png" title="公交车" ng-click="getAttr($event)">
+            <img src="img/emoji/gou.png" title="狗" ng-click="getAttr($event)">
+            <img src="img/emoji/gui.png" title="鬼" ng-click="getAttr($event)">
+            <img src="img/emoji/guzhang.png" title="鼓掌" ng-click="getAttr($event)">
+            <img src="img/emoji/houzi.png" title="猴子" ng-click="getAttr($event)">
+            <img src="img/emoji/jiangbei.png" title="奖杯" ng-click="getAttr($event)">
+            <img src="img/emoji/kafei.png" title="咖啡" ng-click="getAttr($event)">
+            <img src="img/emoji/kouhong.png" title="口红" ng-click="getAttr($event)">
+            <img src="img/emoji/lingdang.png" title="铃铛" ng-click="getAttr($event)">
+            <img src="img/emoji/meigui.png" title="玫瑰" ng-click="getAttr($event)">
+            <img src="img/emoji/muji.png" title="母鸡" ng-click="getAttr($event)">
+            <img src="img/emoji/nansheng.png" title="男生" ng-click="getAttr($event)">
+            <img src="img/emoji/nvsheng.png" title="女生" ng-click="getAttr($event)">
+            <img src="img/emoji/ok.png" title="OK" ng-click="getAttr($event)">
+            <img src="img/emoji/pijiu.png" title="啤酒" ng-click="getAttr($event)">
+            <img src="img/emoji/qian.png" title="钱" ng-click="getAttr($event)">
+            <img src="img/emoji/qiche.png" title="汽车" ng-click="getAttr($event)">
+            <img src="img/emoji/quantou.png" title="拳头" ng-click="getAttr($event)">
+            <img src="img/emoji/ruo.png" title="弱" ng-click="getAttr($event)">
+            <i class="icon ion-backspace-outline" ng-click="backspace()"
+              ></i>
+          </div>
+        </ion-slide>
+        <ion-slide on-slide-changed="slideHasChanged(index)">
+          <div class="emojiList">
+            <img src="img/emoji/shengdanshu.png" title="圣诞树" ng-click="getAttr($event)">
+            <img src="img/emoji/shengli.png" title="胜利" ng-click="getAttr($event)">
+            <img src="img/emoji/shouji.png" title="手机" ng-click="getAttr($event)">
+            <img src="img/emoji/shouqiang.png" title="手枪" ng-click="getAttr($event)">
+            <img src="img/emoji/shuijiao.png" title="睡觉" ng-click="getAttr($event)">
+            <img src="img/emoji/xiangshang.png" title="向上" ng-click="getAttr($event)">
+            <img src="img/emoji/xiangxia.png" title="向下" ng-click="getAttr($event)">
+            <img src="img/emoji/xiangzuo.png" title="向左" ng-click="getAttr($event)">
+            <img src="img/emoji/xiangyou.png" title="向右" ng-click="getAttr($event)">
+            <img src="img/emoji/xiayu.png" title="下雨" ng-click="getAttr($event)">
+            <img src="img/emoji/yanjing.png" title="眼睛" ng-click="getAttr($event)">
+            <img src="img/emoji/yao.png" title="药" ng-click="getAttr($event)">
+            <img src="img/emoji/yiyuan.png" title="医院" ng-click="getAttr($event)">
+            <img src="img/emoji/yu.png" title="鱼" ng-click="getAttr($event)">
+            <img src="img/emoji/zan.png" title="赞" ng-click="getAttr($event)">
+            <img src="img/emoji/zhengque.png" title="正确" ng-click="getAttr($event)">
+            <img src="img/emoji/zhu.png" title="猪" ng-click="getAttr($event)">
+            <img src="img/emoji/shousi.png" title="寿司" ng-click="getAttr($event)">
+            <img src="img/emoji/gaogenxie.png" title="高跟鞋" ng-click="getAttr($event)">
+            <img src="img/emoji/erduo.png" title="耳朵" ng-click="getAttr($event)">
+            <i class="icon ion-backspace-outline" ng-click="backspace()"
+              ></i>
+          </div>
+        </ion-slide>
+      </ion-slide-box>
+    </div>
+  </div>
+  <!--
+
+    <div class="noApplyCloudsellPop" ng-if="fgtpwd">
+      <div class="applyCloudsellContent">
+        <div class="title">如您忘记密码，请直接联系客服<a href="#" style="color: #387ef5;" ng-click="showTel()">400-0505-811</a></div>
+        <div class="cancelBtn" ng-click="hidefgtPwd()">取消</div>
+      </div>
+    </div>
+  -->
+  <!-- 语音提示框1 -->
+  <div class="voiceTipPopup voiceTipPopup1 hide">
+    <i class="icon icon-voice-playing" style="margin-right:25px;"></i>
+    <div class="voicePlayingIcon"></div>
+    <div class="voiceTipsBox"><span>手指上滑，取消发送</span></div>
+  </div>
+
+  <!-- 语音提示框2 -->
+  <div class="voiceTipPopup voiceTipPopup2 hide">
+    <i class="icon icon-voice-cancel"></i>
+    <div class="voiceTipsBox"><span class="voiceTipsCancel">手指松开，取消发送</span></div>
+  </div>
+
+  <!-- 语音提示框-- 说话时间太短（说话时间超长） -->
+  <div class="voiceTipPopup voiceTipPopup3 hide">
+    <i class="icon icon-voice-tan"></i>
+    <div class="voiceTipsBox"><span>说话时间太短</span></div>
+  </div>
+  <!-- 语音提示框-- 说话时间太短（说话时间超长） -->
+  <div class="voiceTipPopup voiceTipPopup4 hide">
+    <i class="icon icon-voice-tan"></i>
+    <div class="voiceTipsBox"><span>说话时间超长</span></div>
+  </div>
+
+  <style>
+    /*弹窗样式*/
+    /*弹窗样式*/
+    .popup-container{ bottom: 0; top:0;}
+    .popup-container .popup{width: 539px;font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 20px;}
+    .popup-container .popup-title{font-family: "-apple-system", "microsoft yahei";font-size: 27px;padding: 35px;}
+    .popup-container .popup-buttons{padding: 0px;}
+    .popup-container .popup-buttons .button{font-family: "-apple-system", "microsoft yahei";font-size: 25px; color: #1c8df6; background: none;}
+    .popup-container .popup-buttons .button:first-child{border-right: 2px solid #e6e9ed}
+    .popup-container .popup-buttons .button.button-positive{color: #007aff}
+    .popup-container .popup-buttons .button.button-go{color: #ff3b30}
+    .popup-head{border-bottom: 1px solid #e6e9ed}
+    .button-go{color: #ff3b30;}
+    .platform-android .action-sheet-group,.platform-ios.action-sheet-group{margin-bottom: 0px; border-radius: 0px;}
+    .popup-body textarea{height: 120px; font-size: 25px;line-height: 30px; padding:18px;border: 1px solid #d9d9d9; border-radius: 5px;}
+  </style>
+
+  <div ng-if="chatLargeImgShow">
+
+    <div class="showPic" ng-if="showbase64" on-tap="shrinkPic()" on-hold="optionPic()">
+      <ion-scroll  direction="y" style="width: 100%; height: 100%">
+        <img src='{{imageurl}}' class="big-pic" >
+      </ion-scroll>
+    </div>
+    <div class="showPic" ng-if="showimg" on-tap="shrinkPic()" on-hold="optionPic()">
+      <ion-scroll direction="y" style="width: 100%; height: 100%">
+        <img src='{{imageurl}}' class="big-pic" >
+      </ion-scroll>
+    </div>
+    <div class="showPic" ng-if="showLocImg" on-tap="shrinkPic()" on-hold="optionPic()">
+      <ion-scroll  direction="y" style="width: 100%; height: 100%">
+        <img src='{{imageurl}}' class="big-pic" >
+      </ion-scroll>
+    </div>
+  </div>
+
+  <!--
+  <script id="getmoney.html" type="text/ng-template">
+    <ion-view>
+      <ion-header-bar align-title="middle" >
+        <div class="header_back" ng-click="closegetmoneytaskModal()">
+          <i class="icon ion-ios-arrow-left"></i>
+        </div>
+        <span class="title">收款</span>
+      </ion-header-bar>
+      <ion-content class="has-header  bgGray" >
+        <div class="toparea_head">
+          <div class="head_picarea">
+            <img src="{{avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+          </div>
+          <div class="tips">
+            <span>向{{otherusername}}收款</span>
+          </div>
+        </div>
+        <div class="inputareas">
+          <div class="inputarea clearfix">
+            <span class="fl">金额</span>
+            <input class="inputit fl" type="number" placeholder="免服务费" id="shoukuanInput{{attr_id}}" ng-model="pay.accmoney">
+          </div>
+          <div class="inputarea clearfix" style="border-top: 1px solid #e7e7e7">
+            <span class="fl">理由</span>
+            <input class="inputit fl" placeholder="选填" ng-model="pay.remark">
+          </div>
+        </div>
+        <div class="loginBtn" ng-click="commitMoney()">确认收款</div>
+      </ion-content>
+    </ion-view>
+  </script>
+  -->
+
+  <!--发送位置的位置信息列表-->
+  <script id="positionlist.html" type="text/ng-template">
+    <ion-view>
+      <ion-header-bar align-title="middle" >
+        <div class="header_back" ng-click="closepolistModal()" >
+          <i class="icon ion-ios-arrow-left"></i>
+        </div>
+        <span class="title">位置信息</span>
+        <div class="icon_like detial_like queren" ng-click="sendposition()" style="width: 20%;font-size: 25px" ng-style="{'opacity':sendopacity}"> 发送 </div>
+      </ion-header-bar>
+      <ion-content class="has-header " style="background: white" >
+        <ion-list class="positionlist">
+          <ion-item class="positionitem" ng-click="selectposition(addresslist)"  ng-repeat="addresslist in addresslist track by $index">
+            <div class="positionname" ng-bind="addresslist.addressname"></div>
+            <div class="positionaddress over-ellipsis" ng-bind="addresslist.address"></div>
+            <div class="ifCheck" ng-if="addresslist.checked">
+              <i class="icon icon-select-cur xt-red"></i>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-view>
+  </script>
+
+  <!--
+  <script id="paymoney.html" type="text/ng-template">
+    <ion-view>
+      <ion-header-bar align-title="middle" >
+        <div class="header_back" ng-click="closetaskModal()">
+          <i class="icon ion-ios-arrow-left"></i>
+        </div>
+        <span class="title">付款</span>
+      </ion-header-bar>
+      <ion-content class="has-header  bgGray" >
+        <div class="toparea_head">
+          <div class="head_picarea">
+            <img src="{{avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+          </div>
+          <div class="tips">
+            <span>向{{otherusername}}付款</span>
+          </div>
+        </div>
+        <div class="inputareas">
+          <div class="inputarea clearfix">
+            <span class="fl">金额</span>
+            <input class="inputit fl" type="number" placeholder="免服务费" ng-model="pay.paymoney">
+          </div>
+          <div class="inputarea clearfix" style="border-top: 1px solid #e7e7e7">
+            <span class="fl">理由</span>
+            <input class="inputit fl" placeholder="选填" ng-model="pay.payremark">
+          </div>
+        </div>
+        <div class="loginBtn" ng-click="showpaymask()">确认付款</div>
+      </ion-content>
+
+      <div class="mask" ng-if="paymaskshow" style="z-index: 301; top: 0;display: block" ng-click="hidepaymask()"></div>
+      支付密码
+      <div class="msg_s_popup paypassword" ng-show="payshoukuanPop" style="height: 415px;" ng-style="msgpopupsty">
+        <div class="title">
+          <span ng-click="hidepaymask()" style="font-size: 50px"><i class="ion-ios-close-empty"  style="margin-top: 10px"></i></span>请输入支付密码
+        </div>
+        <div class="body">
+          <div class="label">金额</div>
+          <div class="inputbox clearfix">
+            <span>￥</span>
+            <input type="number" class="moneyInput"  value={{pay.paymoney}} readonly="readonly"/>
+            <div class="pwd_hint">*第一次输入密码即为支付密码(6位数字)</div>
+            <div class="password clearfix">
+              <ul class="paypasgroup">
+                <li><i ng-if="pswinfo.length> 0" class="icon ion-record"></i> </li>
+                <li><i ng-if="pswinfo.length>1" class="icon ion-record"></i> </li>
+                <li><i ng-if="pswinfo.length>2" class="icon ion-record"></i> </li>
+                <li><i ng-if="pswinfo.length>3" class="icon ion-record"></i> </li>
+                <li><i ng-if="pswinfo.length>4" class="icon ion-record"></i> </li>
+                <li class="borderright"><i ng-if="pswinfo.length>5" class="icon ion-record"></i> </li>
+
+                <div class="guangbiao" style="transform:translateX({{pswinfo.length*60+'px'}})" ng-show="pswinfo.length<6"></div>
+              </ul>
+            </div>
+            <div class="forgetpwd"><span ng-click="forgetpswd()">忘记密码？</span></div>
+          </div>
+        </div>
+      </div>
+
+      正在支付-支付完成
+      <div class="loaddingitem" ng-if="showpayload">
+        <div class="loade">
+          <div class="loader-inner ball-spin-fade-loader" style="display: none;">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="loadEnd">
+            <i class="icon icon-select-cur"></i>
+          </div>
+        </div>
+        <div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="payload"><span>正在付款</span></div>
+        <div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="paysucc"><span>支付成功</span></div>
+      </div>
+
+
+      支付键盘
+      <div class="keyboard-self"  ng-show="payshoukuanPop">
+        <ul class="numlist">
+          <li ng-click="enterpsw(1)"><button>1</button></li>
+          <li ng-click="enterpsw(2)"><button>2</button></li>
+          <li ng-click="enterpsw(3)"><button>3</button></li>
+          <li ng-click="enterpsw(4)"><button>4</button></li>
+          <li ng-click="enterpsw(5)"><button>5</button></li>
+          <li ng-click="enterpsw(6)"><button>6</button></li>
+          <li ng-click="enterpsw(7)"><button>7</button></li>
+          <li ng-click="enterpsw(8)"><button>8</button></li>
+          <li ng-click="enterpsw(9)"><button>9</button></li>
+          <li class="bg-grey"></li>
+          <li ng-click="enterpsw(0)"><button>0</button></li>
+          <li class="bg-grey"  ng-click="enterpsw(11)">
+            <button><i class="icon icon-code-del"></i></button>
+          </li>
+        </ul>
+      </div>
+    </ion-view>
+  </script>
+  -->
+
+  <!-- 定位-->
+  <div class="talksetto">
+    <i class="icon icon-arrow-up"></i>
+    <span>21条新消息</span>
+  </div>
+</ion-view>

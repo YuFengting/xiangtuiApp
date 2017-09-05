@@ -1,0 +1,31 @@
+<ion-view>
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">提交至</span>
+  </ion-header-bar>
+  <ion-content class="has-header  bgGray" >
+    <div class="toptip " ng-if="!merchantlistandtasknone">
+      *请将客户信息提交至以下商家对应任务
+    </div>
+    <div class="businessListBox" ng-if="!merchantlistandtasknone">
+      <div class="cloudsellTitleCom"><span class="name "> <span>{{company}}</span></span></div>
+      <ul class="customerTaskListBox">
+       <li ng-repeat="task in merchantlistandtask.tasks track by $index"  ng-click="addcustomer(task)">
+        <img class="fl" src="{{picserver}}{{task.view}}" onerror="javascript:this.src='img/default-list-square.png'">
+        <p class="fl">{{task.name}}</p>
+      </li>
+      </ul>
+    </div>
+    <div class="nosearch"  ng-if="merchantlistandtasknone">
+      <div class="nointenet">
+        <img src="img/notask.png" style="margin: 0px">
+        <div class="message-info">
+          <span>该商家下暂无任务，如有疑问，</span><br>
+          <span>请联系商家或咨询客服</span>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

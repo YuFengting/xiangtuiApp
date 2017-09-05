@@ -1,0 +1,99 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back coupond_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">全部评价</span>
+  </ion-header-bar>
+  <ion-content class="has-header scroll-content coupond_content">
+    <div class="b-zongeva clearfix">
+      <div class="b-zongeva-left fl">
+        <div class="beva_num" ng-bind="buser.commentscore | number:1"></div>
+        <div class="beva_label">总体评价</div>
+        <!--<div class="beva_compare">高于周边商家<span ng-bind="buser.scoreper"></span></div>-->
+      </div>
+      <div class="fr beva_detail">
+       <div class="beva_line clearfix">
+         <div class="fl beva_starlabel">售前支持</div>
+         <div class="business_evaluate fr clearfix" style="position: inherit;width: 224px">
+          <ul class="fl" style="width: auto">
+            <li><span class="score{{buser.comment1*10}}"></span></li>
+          </ul>
+          <div class="fl evaluate_score"  style="margin-top:1px ">
+            <span ng-bind="buser.comment1 | number:1"></span>
+          </div>
+        </div>
+       </div>
+        <div class="beva_line clearfix">
+          <div class="fl beva_starlabel">结算速度</div>
+          <div class="business_evaluate fr clearfix" style="position: inherit; width: 224px" >
+            <ul class="fl" style="width: auto">
+              <li><span class="score{{buser.comment2*10}}"></span></li>
+            </ul>
+            <div class="fl evaluate_score" style="margin-top:1px ">
+              <span ng-bind="buser.comment2 | number:1"></span>
+            </div>
+          </div>
+        </div>
+        <div class="beva_line clearfix">
+          <div class="fl beva_starlabel">产品畅销</div>
+          <div class="business_evaluate fr clearfix" style="position: inherit;width: 224px">
+            <ul class="fl" style="width: auto">
+              <li><span class="score{{buser.comment3*10}}"></span></li>
+            </ul>
+            <div class="fl evaluate_score" style="margin-top:1px ">
+              <span ng-bind="buser.comment3 | number:1"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="b-evatitle">
+      他总共收到<span ng-bind="buser.leadscommentnum"></span>条评价
+    </div>
+    <!--任务列表-->
+    <ion-list class="evaluate_list">
+      <ion-item ng-repeat="busercomment in busercommentlist">
+        <div class="evaitem_headline clearfix">
+          <div class="fl eavitem_headpic">
+            <img src="{{picserver}}{{busercomment.avate}}"/>
+          </div>
+          <div class="fl evaitem_info">
+            <div class="name" ng-bind="busercomment.nick"></div>
+            <div class="starline clearfix">
+              <div class="beva_line fl">
+                <div class="business_evaluate fl clearfix">
+                  <ul class="fl">
+                    <li><span class="score{{busercomment.avgscore*10}}"></span></li>
+                  </ul>
+                  <div class="fl evaitem_time" ng-bind="busercomment.inittime">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="evaitem_content" ng-bind="busercomment.detail">
+        </div>
+      </ion-item>
+    </ion-list>
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+      immediate-check="false"
+      ng-if="hasNextPage"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+
+
+    <div class="list_nomore" ng-if="busercommentlist.length ==0">
+      <div class="wenzi">该商家还没有收到评论哦！</div>
+    </div>
+
+    <div class="list_nomore" ng-if="!hasNextPage  && busercommentlist.length >0 && PageNo > 2">
+      <div class="wenzi">暂时只有这些评价啦！</div>
+    </div>
+  </ion-content>
+
+</ion-view>

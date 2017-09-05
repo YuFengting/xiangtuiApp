@@ -1,0 +1,247 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">申请成为云销售</span>
+  </ion-header-bar>
+
+<!--  <div class="top-head" style="background: #ff3b30;color: white;position: fixed;z-index: 301;top: 0px;left: 0px">
+    <span class="title">  享推云销售服务协议</span>
+    <div class="right-button  top-right fr " ng-click="hideTK()">
+      <i class="ion-ios-close-empty font"></i>
+    </div>
+  </div>
+  <div class="fuwu " style="width: 100%;height: 100%;position: fixed;top: 80px;left: 0px;z-index: 301;background: white;overflow-y: scroll">
+    &lt;!&ndash;<div class="brule_title">享推云销售申请协议</div>&ndash;&gt;
+    <div class="brule_intro" style="margin-top: 30px">
+      <p>本协议由您与享推科技有限公司共同缔结，本协议具有合同效力。</p>
+      <p>本协议中协议双方合称协议方，享推科技有限公司在本协议中亦称为“享推”或“享推APP”。</p>
+    </div>
+    <div class="brule_content" style="padding-bottom: 200px">
+    <div class="brule_content_p" ng-class="{'active':!up1}" ng-click="clicklist(1)">
+      <div class="clearfix"><h5 class="fl">一、协议内容及生效</h5><i class="icon fr" ng-class="{'icon-xt2-down':up1,'icon-xt-up':!up1}"></i></div>
+      <div class="infomation">1、本协议内容包括协议正文及所有享推已经发布或将来可能发布的与“享推云销售申请”相关的规则。前述规则为本协议不可分割的组成部分，与协议正文具有同等法律效力。</div>
+      <div class="infomation">2、您应当在实际向享推平台上商家（以下简称“商家”）提供其相对应需求的服务之前认真阅读全部协议内容。如您对本协议有任何疑问，应向享推咨询。但无论您事实上是否在向商家提供其相对应需求的服务之前认真阅读了本协议内容，只要您在线点击签署了本协议，则本协议即对您产生约束，届时您不应以未阅读本协议的内容或者未获得享推对您问询的解答等理由，主张本协议无效，或要求撤销本协议。</div>
+      <div class="infomation">3、您承诺接受并遵守本协议的约定。如果您不同意本协议的约定，您应立即结束申请加入成为享推云销售的流程。</div>
+      <div class="infomation">4、享推有权根据需要不时地制订、修改本协议及/或与“享推云销售申请”相关的规则，并以网站公示或享推APP公示的方式进行公告，不再单独通知您。变更后的协议和规则一经在享推公布后，立即生效。如您不同意相关变更，应当立即停止在享推上进行活动。</div>
+    </div>
+      <div class="brule_content_p" ng-class="{'active':!up2}" ng-click="clicklist(2)">
+        <div class="clearfix"><h5 class="fl">二、定义</h5><i class="icon fr" ng-class="{'icon-xt2-down':up2,'icon-xt-up':!up2}"></i></div>
+      <div class="infomation">1、云销售申请：指您根据您的意愿以及享推上商家的相关需求和实际情况，在享推APP上向商家申请成为该商家的云销售的过程。相关申请需要经过商家允可才能通过，只有在商家允许您成为云销售之后才能拥有该商家的云销售资格。商家有权对您的申请认定为不通过。云销售根据其意愿可以在平台上进行分享与销售服务，且依据其相关服务质量可以从商家获得相关（或者相约定）的收益。</div>
+      <div class="infomation">2、云销售服务：指已经获得某商家云销售资格的享推APP用户向该商家提供服务的过程。云销售根据自愿原则，可以向商家提供分享与销售两类服务，根据商家对服务要求的明确规定，云销售在提供该两类服务满足商家需求后，即可与商家沟通协商并要求其进行收益的支付。在此过程中产生的分歧将以双方即时沟通协商为主解决，商家与云销售还可以通过约定进行相关服务的承诺与开展。如遇到确实无法解决的分歧，可以进行申诉调解。</div>
+      <div class="infomation">3、分享业务：指享推用户（不仅仅指云销售人群）为商家进行关于其发布的分享任务内容的传播的服务，包括按照商家该分享任务要求在微信、微博、QQ等APP或平台进行的传播推广的行为。享推用户在按照商家要求进行相关服务后，将有权获得相关收益。</div>
+      <div class="infomation">4、销售业务：指云销售人群为商家进行的关于销售线索获取、产品售卖等能够直接形成或有助于促成销售成功的服务，包括按照商家该销售任务通过各种方式提交潜客信息、鼓励潜客体验消费等进行的行为。云销售在按照商家要求进行相关服务后，将有权获得相关收益。</div>
+      <div class="infomation">5、申诉：指享推平台上的入驻商家与其云销售之间发生不可调和的矛盾之下，进行的纠纷解决机制。商家与云销售均可缘于其自身利益受损的原则向享推提出申诉。且此前商家与云销售之间所进行的即时沟通证明包括约定等各项内容都将成为平台进行申诉解决的依据。</div>
+    </div>
+      <div class="brule_content_p" ng-class="{'active':!up3}" ng-click="clicklist(3)">
+        <div class="clearfix"><h5 class="fl">三、云销售服务内容</h5><i class="icon fr" ng-class="{'icon-xt2-down':up3,'icon-xt-up':!up3}"></i></div>
+        <div class="infomation"> 在您向商家提服务过程中，您承诺遵守以下约定：</div>
+        <div class="infomation">1、您同意遵守本协议以及所有公示于享推App与“享推云销售申请”相关的规则。</div>
+        <div class="infomation">2、您明确目前接受微信支付或支付宝支付等相关支付方式作为您通过享推App实现收益提取的支付工具。</div>
+        <div class="infomation">3、您拥有合法的权利和资格向享推App上传有关服务信息，且前述行为未对任何第三方合法权益，包括但不限于第三方知识产权、财产权等构成侵害。如因您的行为导致享推App或其关联公司遭受任何第三方提起的索赔、诉讼或行政责任，您需承担全部责任。</div>
+        <div class="infomation">4、您在享推APP上，可以根据意愿向商家提供分享与销售两类服务，在按照商家要求完成的基础上，您有权获得相关收益。收益由商家的相关任务信息明确告知或您与商家协商确定。</div>
+        <div class="infomation">5、您应在向商家提供服务的过程中，尽可能提供真实可靠信息，否则商家可以认为您的服务不符合其标准或需求，由此造成的未有收益、收益低于预期等情况均由您自行负责。您有权对商家判定服务不符合要求等行为进行质疑，可以通过与商家沟通等方式解决。若实在无法与商家达成一致，可通过向享推APP申诉进行维权，需要您提供维权的相关材料（包括聊天对话记录、服务提交记录等内容）以证明您提供的服务未受到公正对待。</div>
+      </div>
+      <div class="brule_content_p" ng-class="{'active':!up4}" ng-click="clicklist(4)">
+        <div class="clearfix"><h5 class="fl">四、有限责任</h5><i class="icon fr" ng-class="{'icon-xt2-down':up4,'icon-xt-up':!up4}"></i></div>
+        <div class="infomation"> 您了解并同意，享推App及其关联公司并非司法机构，仅能以普通或非专业人员的知识水平标准对您提交的证据材料进行鉴别，享推App及其关联公司对交易纠纷的调解完全是基于您的委托，享推App及其关联公司无法保证服务与交易纠纷处理结果符合您的期望，也不对服务与交易纠纷调处结果及保证金、履约担保金赔付决定承担任何责任。您应保证您提交的证据材料的真实性、合法性，并承担您或商家提供的信息、数据不实的风险和责任。如您因此遭受损失，您同意向受益人索赔或者与对方协商解决。 </div>
+      </div>
+
+      <div class="brule_content_p" ng-class="{'active':!up5}" ng-click="clicklist(5)">
+        <div class="clearfix"><h5 class="fl">五、委托支付</h5><i class="icon fr" ng-class="{'icon-xt2-down':up5,'icon-xt-up':!up5}"></i></div>
+        <div class="infomation"> 1、本协议一旦生效，即表示您已充分理解并同意向享推App作出授权，您授权享推App对您账户中的余额进行相应操作，此授权在本协议有效期间以及本协议明确约定的期间均具有法律约束力并不可撤销。 </div>
+        <div class="infomation">2、根据本协议的约定，享推App有权作出以下行为：</div>
+        <div class="infomation">2.1账户余额的冻结、解冻；</div>
+        <div class="infomation">2.2根据您与商家的协商约定，在您对商家的相关需求进行服务后向您进行收益的转达，相关收益将到达您的享推APP个人账户；</div>
+        <div class="infomation">3、您同意享推APP依照您的授权进行操作的一切风险由您承担。享推APP将不对任何因授权行为之履行承担任何法律责任，您也不得在诉讼、仲裁或其他任何形式的争议解决中向享推APP主张权利，该等争议应由您与享推App自行协商或通过司法途径解决。</div>
+
+        </div>
+
+      <div class="brule_content_p" ng-class="{'active':!up6}" ng-click="clicklist(6)">
+        <div class="clearfix"><h5 class="fl">六、协议终止</h5><i class="icon fr" ng-class="{'icon-xt2-down':up6,'icon-xt-up':!up6}"></i></div>
+        <div class="infomation">1、出现以下情况时，本协议终止。本协议终止后，您将退出享推云销售申请协议，不能再使用相关保障标识，不再享受相关特权：</div>
+        <div class="infomation">1.1自然终止：如您在线签署的《享推云销售申请协议》因任何原因终止，则本协议将同时终止。</div>
+        <div class="infomation">1.2通知解除：享推App有权提前以书面通知的方式终止本协议。</div>
+        <div class="infomation">1.3享推App单方解除权：如您违反本协议中的任何承诺与保证或享推App的任何规则，享推App有权立即终止本协议，且按有关规则对您进行处罚。</div>
+        <div class="infomation">1.4本协议（含规则）变更时，您明示并通知享推App不愿接受新的云销售申请协议，则本协议自享推App收到您通知之日起自动终止。</div>
+        <div class="infomation">1.5本协议规定的其他协议终止条件发生或实现，导致本协议终止。</div>
+        <div class="infomation">2、无论本协议因何原因终止，在协议终止前的行为所导致的任何赔偿和责任，您必须完全且独立地承担责任。即使本协议终止，享推App及其关联公司仍有权根据本协议的规定处理。</div>
+        <div class="infomation">3、本协议第四条、第五条及第六条的效力不因本协议的终止而终止。</div>
+      </div>
+      <div class="brule_content_p" ng-class="{'active':!up7}" ng-click="clicklist(7)">
+        <div class="clearfix"><h5 class="fl">七、争议解决</h5><i class="icon fr" ng-class="{'icon-xt2-down':up7,'icon-xt-up':!up7}"></i></div>
+        <div class="infomation">本协议之解释与适用，以及与本协议有关的争议，均应依照中华人民共和国大陆地区法律予以处理。</div>
+      </div>
+      <div class="brule_content_p" ng-class="{'active':!up8}" ng-click="clicklist(8)">
+        <div class="clearfix"><h5 class="fl">八、其他</h5><i class="icon fr" ng-class="{'icon-xt2-down':up8,'icon-xt-up':!up8}"></i></div>
+        <div class="infomation">1、如本协议的任何条款被视作无效或无法执行，则上述条款可被分离，其余部份则仍具有法律效力。</div>
+        <div class="infomation">2、享推APP于您过失或违约时放弃本协议约定的权利的，不得视为享推App对您的其他或以后同类之过失或违约行为弃权。</div>
+        <div class="infomation"> 3、享推App基于本协议享有的权利以及获得的授权，均可以全部或部分转移、转让、许可、分授权、转授权给任何第三方。未经享推App事先书面同意，您不得将本协议项下的权利义务转让给任何第三方。</div>
+      </div>
+   </div>
+  </div>-->
+
+  <ion-content on-drag='touchcontent()'  class="find-pasword has-header applyhsr" class="loginHead">
+
+    <div class="apply_tips">*您正在申请成为云销售，如有疑问请咨询QQ群：549669806</div>
+    <div class="find-form" style="border-top: 1px solid #d8d8d8">
+      <div class="line border-bottom clearfix">
+        <input class="fl userinfoinput" placeholder="真实姓名" ng-model="auser.name" ng-change="changName()" ng-focus="shownameClear($index)" ng-blur="hidenameClear($index)"><!-- ng-blur="hideCloseName()" ng-focus="changName()"-->
+        <i class="icon-xt2-close fr close" ng-if="showname" ng-click="clearName()"></i>
+      </div>
+      <div class="line  border-bottom" >
+        <input style="background: #fff" type="tel" class="fl  userinfoinput" placeholder="联系电话" ng-model="user.tel" >
+        <!--<i class="icon-xt2-close fr close"ng-if="showtel" ng-click="clearTel()"></i>-->
+      </div>
+      <div class="line border-bottom sj" ng-repeat="sales in salesfield track by $index">
+        <input class="fl sjzd  userinfoinput"  placeholder={{sales}} ng-keyup="changeZd($index)" ng-focus="showClear($index)" ng-blur="hideClear($index)">
+        <i class="icon-xt2-close fr close" ng-click="cut($index)" ng-if="show[$index]"></i>
+      </div>
+      <!--<div class="line border-bottom">
+        <input class="fl" placeholder="商家需求字段">
+        <i class="icon-xt2-close fr close" ></i>
+      </div>
+      <div class="line ">
+        <input class="fl" placeholder="商家需求字段">
+        <i class="icon-xt2-close fr close"></i>
+      </div>-->
+    </div>
+    <textarea ng-class="{'textarea':true,'font25':detialflag }" placeholder="请填写您的申请理由（有销售经验，有现成客户、对该产品的熟悉度等）" ng-model="auser.detail" ng-change="changedetial()"></textarea>
+    <div class="tiaokuan">
+      <!-- 点击同意后，xt-icon-grey 变成 xt-red -->
+      <!--<i class="checkboxBtn icon-xt2-check xt-red" ng-click="ifagree()"></i>
+-->
+      <div class="tiaokuan fl" ng-click="changeAggree()" >
+        <i class="icon-xt2-check xt-red"  ng-if="showagree"></i>
+        <i class="icon-xt2-check xt-grey"  ng-if="!showagree"></i>
+        我已阅读并同意
+      </div>
+      <a class="tk" ng-click="openAgreement()">《享推云销售服务协议》</a>
+    </div>
+    <div class="queren-btn">
+      <!--信息输入完成后，opacity ：1 并且 可以点击-->
+      <div style=" opacity:1" class="btn xt-red-bg" ng-click="applySaler()">提交</div>
+    </div>
+  </ion-content>
+
+  <script id="agreement.html" type="text/ng-template">
+    <div class="modal">
+      <ion-header-bar align-title="middle">
+        <span class="title">享推云销售服务协议</span>
+        <div class="right-button  top-right fr " ng-click="closeAgreement()">
+          <i class="ion-ios-close-empty font"></i>
+        </div>
+      </ion-header-bar>
+      <ion-content>
+        <div class="fuwu " style="overflow-y: scroll; padding-top: 30px;">
+          <!--<div class="brule_title">享推云销售申请协议</div>-->
+          <div class="brule_intro">
+            <p>本协议由您与享推科技有限公司共同缔结，本协议具有合同效力。</p>
+            <p>本协议中协议双方合称协议方，享推科技有限公司在本协议中亦称为“享推”或“享推APP”。</p>
+          </div>
+          <div class="brule_content" style="padding-bottom: 50px">
+            <div class="brule_content_p" ng-class="{'active':!up1}" ng-click="clicklist(1)">
+              <div class="clearfix"><h5 class="fl">一、协议内容及生效</h5><i class="icon fr" ng-class="{'icon-xt2-down':up1,'icon-xt-up':!up1}"></i></div>
+              <div class="infomation">1、本协议内容包括协议正文及所有享推已经发布或将来可能发布的与“享推云销售申请”相关的规则。前述规则为本协议不可分割的组成部分，与协议正文具有同等法律效力。</div>
+              <div class="infomation">2、您应当在实际向享推平台上商家（以下简称“商家”）提供其相对应需求的服务之前认真阅读全部协议内容。如您对本协议有任何疑问，应向享推咨询。但无论您事实上是否在向商家提供其相对应需求的服务之前认真阅读了本协议内容，只要您在线点击签署了本协议，则本协议即对您产生约束，届时您不应以未阅读本协议的内容或者未获得享推对您问询的解答等理由，主张本协议无效，或要求撤销本协议。</div>
+              <div class="infomation">3、您承诺接受并遵守本协议的约定。如果您不同意本协议的约定，您应立即结束申请加入成为享推云销售的流程。</div>
+              <div class="infomation">4、享推有权根据需要不时地制订、修改本协议及/或与“享推云销售申请”相关的规则，并以网站公示或享推APP公示的方式进行公告，不再单独通知您。变更后的协议和规则一经在享推公布后，立即生效。如您不同意相关变更，应当立即停止在享推上进行活动。</div>
+            </div>
+            <div class="brule_content_p" ng-class="{'active':!up2}" ng-click="clicklist(2)">
+              <div class="clearfix"><h5 class="fl">二、定义</h5><i class="icon fr" ng-class="{'icon-xt2-down':up2,'icon-xt-up':!up2}"></i></div>
+              <div class="infomation">1、云销售申请：指您根据您的意愿以及享推上商家的相关需求和实际情况，在享推APP上向商家申请成为该商家的云销售的过程。相关申请需要经过商家允可才能通过，只有在商家允许您成为云销售之后才能拥有该商家的云销售资格。商家有权对您的申请认定为不通过。云销售根据其意愿可以在平台上进行分享与销售服务，且依据其相关服务质量可以从商家获得相关（或者相约定）的收益。</div>
+              <div class="infomation">2、云销售服务：指已经获得某商家云销售资格的享推APP用户向该商家提供服务的过程。云销售根据自愿原则，可以向商家提供分享与销售两类服务，根据商家对服务要求的明确规定，云销售在提供该两类服务满足商家需求后，即可与商家沟通协商并要求其进行收益的支付。在此过程中产生的分歧将以双方即时沟通协商为主解决，商家与云销售还可以通过约定进行相关服务的承诺与开展。如遇到确实无法解决的分歧，可以进行申诉调解。</div>
+              <div class="infomation">3、分享业务：指享推用户（不仅仅指云销售人群）为商家进行关于其发布的分享任务内容的传播的服务，包括按照商家该分享任务要求在微信、微博、QQ等APP或平台进行的传播推广的行为。享推用户在按照商家要求进行相关服务后，将有权获得相关收益。</div>
+              <div class="infomation">4、销售业务：指云销售人群为商家进行的关于销售线索获取、产品售卖等能够直接形成或有助于促成销售成功的服务，包括按照商家该销售任务通过各种方式提交潜客信息、鼓励潜客体验消费等进行的行为。云销售在按照商家要求进行相关服务后，将有权获得相关收益。</div>
+              <div class="infomation">5、申诉：指享推平台上的入驻商家与其云销售之间发生不可调和的矛盾之下，进行的纠纷解决机制。商家与云销售均可缘于其自身利益受损的原则向享推提出申诉。且此前商家与云销售之间所进行的即时沟通证明包括约定等各项内容都将成为平台进行申诉解决的依据。</div>
+            </div>
+            <div class="brule_content_p" ng-class="{'active':!up3}" ng-click="clicklist(3)">
+              <div class="clearfix"><h5 class="fl">三、云销售服务内容</h5><i class="icon fr" ng-class="{'icon-xt2-down':up3,'icon-xt-up':!up3}"></i></div>
+              <div class="infomation"> 在您向商家提服务过程中，您承诺遵守以下约定：</div>
+              <div class="infomation">1、您同意遵守本协议以及所有公示于享推App与“享推云销售申请”相关的规则。</div>
+              <div class="infomation">2、您明确目前接受微信支付或支付宝支付等相关支付方式作为您通过享推App实现收益提取的支付工具。</div>
+              <div class="infomation">3、您拥有合法的权利和资格向享推App上传有关服务信息，且前述行为未对任何第三方合法权益，包括但不限于第三方知识产权、财产权等构成侵害。如因您的行为导致享推App或其关联公司遭受任何第三方提起的索赔、诉讼或行政责任，您需承担全部责任。</div>
+              <div class="infomation">4、您在享推APP上，可以根据意愿向商家提供分享与销售两类服务，在按照商家要求完成的基础上，您有权获得相关收益。收益由商家的相关任务信息明确告知或您与商家协商确定。</div>
+              <div class="infomation">5、您应在向商家提供服务的过程中，尽可能提供真实可靠信息，否则商家可以认为您的服务不符合其标准或需求，由此造成的未有收益、收益低于预期等情况均由您自行负责。您有权对商家判定服务不符合要求等行为进行质疑，可以通过与商家沟通等方式解决。若实在无法与商家达成一致，可通过向享推APP申诉进行维权，需要您提供维权的相关材料（包括聊天对话记录、服务提交记录等内容）以证明您提供的服务未受到公正对待。</div>
+            </div>
+            <div class="brule_content_p" ng-class="{'active':!up4}" ng-click="clicklist(4)">
+              <div class="clearfix"><h5 class="fl">四、有限责任</h5><i class="icon fr" ng-class="{'icon-xt2-down':up4,'icon-xt-up':!up4}"></i></div>
+              <div class="infomation"> 您了解并同意，享推App及其关联公司并非司法机构，仅能以普通或非专业人员的知识水平标准对您提交的证据材料进行鉴别，享推App及其关联公司对交易纠纷的调解完全是基于您的委托，享推App及其关联公司无法保证服务与交易纠纷处理结果符合您的期望，也不对服务与交易纠纷调处结果及保证金、履约担保金赔付决定承担任何责任。您应保证您提交的证据材料的真实性、合法性，并承担您或商家提供的信息、数据不实的风险和责任。如您因此遭受损失，您同意向受益人索赔或者与对方协商解决。 </div>
+            </div>
+
+            <div class="brule_content_p" ng-class="{'active':!up5}" ng-click="clicklist(5)">
+              <div class="clearfix"><h5 class="fl">五、委托支付</h5><i class="icon fr" ng-class="{'icon-xt2-down':up5,'icon-xt-up':!up5}"></i></div>
+              <div class="infomation"> 1、本协议一旦生效，即表示您已充分理解并同意向享推App作出授权，您授权享推App对您账户中的余额进行相应操作，此授权在本协议有效期间以及本协议明确约定的期间均具有法律约束力并不可撤销。 </div>
+              <div class="infomation">2、根据本协议的约定，享推App有权作出以下行为：</div>
+              <div class="infomation">2.1账户余额的冻结、解冻；</div>
+              <div class="infomation">2.2根据您与商家的协商约定，在您对商家的相关需求进行服务后向您进行收益的转达，相关收益将到达您的享推APP个人账户；</div>
+              <div class="infomation">3、您同意享推APP依照您的授权进行操作的一切风险由您承担。享推APP将不对任何因授权行为之履行承担任何法律责任，您也不得在诉讼、仲裁或其他任何形式的争议解决中向享推APP主张权利，该等争议应由您与享推App自行协商或通过司法途径解决。</div>
+
+            </div>
+
+            <div class="brule_content_p" ng-class="{'active':!up6}" ng-click="clicklist(6)">
+              <div class="clearfix"><h5 class="fl">六、协议终止</h5><i class="icon fr" ng-class="{'icon-xt2-down':up6,'icon-xt-up':!up6}"></i></div>
+              <div class="infomation">1、出现以下情况时，本协议终止。本协议终止后，您将退出享推云销售申请协议，不能再使用相关保障标识，不再享受相关特权：</div>
+              <div class="infomation">1.1自然终止：如您在线签署的《享推云销售申请协议》因任何原因终止，则本协议将同时终止。</div>
+              <div class="infomation">1.2通知解除：享推App有权提前以书面通知的方式终止本协议。</div>
+              <div class="infomation">1.3享推App单方解除权：如您违反本协议中的任何承诺与保证或享推App的任何规则，享推App有权立即终止本协议，且按有关规则对您进行处罚。</div>
+              <div class="infomation">1.4本协议（含规则）变更时，您明示并通知享推App不愿接受新的云销售申请协议，则本协议自享推App收到您通知之日起自动终止。</div>
+              <div class="infomation">1.5本协议规定的其他协议终止条件发生或实现，导致本协议终止。</div>
+              <div class="infomation">2、无论本协议因何原因终止，在协议终止前的行为所导致的任何赔偿和责任，您必须完全且独立地承担责任。即使本协议终止，享推App及其关联公司仍有权根据本协议的规定处理。</div>
+              <div class="infomation">3、本协议第四条、第五条及第六条的效力不因本协议的终止而终止。</div>
+            </div>
+            <div class="brule_content_p" ng-class="{'active':!up7}" ng-click="clicklist(7)">
+              <div class="clearfix"><h5 class="fl">七、争议解决</h5><i class="icon fr" ng-class="{'icon-xt2-down':up7,'icon-xt-up':!up7}"></i></div>
+              <div class="infomation">本协议之解释与适用，以及与本协议有关的争议，均应依照中华人民共和国大陆地区法律予以处理。</div>
+            </div>
+            <div class="brule_content_p" ng-class="{'active':!up8}" ng-click="clicklist(8)">
+              <div class="clearfix"><h5 class="fl">八、其他</h5><i class="icon fr" ng-class="{'icon-xt2-down':up8,'icon-xt-up':!up8}"></i></div>
+              <div class="infomation">1、如本协议的任何条款被视作无效或无法执行，则上述条款可被分离，其余部份则仍具有法律效力。</div>
+              <div class="infomation">2、享推APP于您过失或违约时放弃本协议约定的权利的，不得视为享推App对您的其他或以后同类之过失或违约行为弃权。</div>
+              <div class="infomation"> 3、享推App基于本协议享有的权利以及获得的授权，均可以全部或部分转移、转让、许可、分授权、转授权给任何第三方。未经享推App事先书面同意，您不得将本协议项下的权利义务转让给任何第三方。</div>
+            </div>
+          </div>
+        </div>
+      </ion-content>
+    </div>
+  </script>
+
+  <!--提交成功-->
+  <div class="hit-message light wrong-show" id="succmsg" ng-if="false">
+    <i class="ion-ios-checkmark-outline font48 mid"></i><span class="tips_name mid">提交成功</span><br>
+    申请提交成功，我们将尽快告知您审核结果，请耐心等待。
+  </div>
+  <!-- 该商户的云销售身份数量已达上限，您可以联系商家进行沟通或者选择其他商户的任务！-->
+  <div class="hit-message light wrong-show hide"id="fialmsg">
+    <i class="ion-ios-checkmark-outline font48"></i><br>
+    抱歉，您申请的商家云销售数量已达上限，无法同意，请选择其它商家！
+  </div>
+
+  <div class="hit-message light wrong-show hide"id="samemsg">
+    <i class="ion-ios-checkmark-outline font48"></i><br>
+    <span ng-bind="applymsg"></span>
+  </div>
+
+  <!--<div class="quitBusinessMask hide" id="compdata">
+    <div class="quitpopInfor">
+      <div class="contentInfor">您的云销售申请已经提交成功，<br/>我们将尽快告知您审核结果，请耐心等待。<br/>Tips：完善个人基础信息可以显著提高通过率哦！</div>
+      <div class="quitSureCancel">
+        <span class="sureBtn" ng-click="nogotocomp()">取消</span><span class="cancelBtn" ng-click="gotocomp()">前去完善</span>
+      </div>
+    </div>
+  </div>-->
+
+  <!-- 云销售申请次数提示弹窗-->
+ <!-- <div class="popup-mask "></div>
+  <div class="popup-area shensupopup " >
+    <div class="popup_text">{{applyinfo}}</div>
+    <div class="bt_but_box">
+      <span ng-click="closePopup()" class="button-cancel3">取消</span>
+      <span class="btn_apply xt-red" ng-click="goapply()"  class="button-cancel3 ">确定</span>
+    </div>
+  </div>-->
+
+
+</ion-view>

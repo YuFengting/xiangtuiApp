@@ -1,0 +1,190 @@
+<ion-view style="background:#f4f4f4;">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">基础信息</span>
+  </ion-header-bar>
+  <ion-content class="has-header infoScrollBox"  delegate-handle="infoScroll">
+    <ion-list class="center_list account_list setting_list info_list">
+      <ion-item class="item-icon-right item-info-avatar" ng-click="gochooseheadpic()">
+        <a href="javascript:void(0)">
+          <i class="setting_icon  icon-xt2-xiaolian" style="line-height:130px;"></i>
+          <span class="item-label">我的头像</span>
+					<span class="info_avatar" ng-if="user.avate ==null ||  user.avate ==''">
+						<img src="img/default-avatar.png"/>
+					</span>
+          <span class="info_avatar" ng-if="user.avate != null && user.avate !=''">
+						<img src="{{user.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar.png';">
+					</span>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right" ng-click="go('resetnick',{'nick':user.nick})">
+        <a href="javascript:void(0)">
+          <i class="setting_icon icon-xt2-touxiang"></i>
+          <span class="item-label">昵称</span>
+          <span class="item-span unselect" id="nick" ng-bind="user.nick"></span>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+    </ion-list>
+    <ion-list class="center_list account_list setting_list info_list">
+      <ion-item class="item-icon-right" ng-click="sexShow()">
+        <a href="javascript:void(0)">
+          <i class="setting_icon icon-xt2-sex"></i>
+          <span class="item-label">性别</span>
+          <span class="item-span unselect" id="infoSex" ng-bind="user.sex | sexfilter"></span>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right info_age" id="age">
+        <a href="javascript:void(0)">
+          <i class="setting_icon icon-xt2-age"></i>
+          <span class="item-label">年龄</span>
+          <span class="item-span item-age" ng-class="{'unselect':ageSelect}"  ng-bind="user.age"></span>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right">
+        <a href="javascript:void(0)">
+          <i class="setting_icon ion-ios-location-outline" style="margin-left: 7px"></i>
+          <span class="item-label">城市</span>
+          <ul id="areaList" style="display:none">
+          </ul>
+          <!--<span class="item-span unselect" >请选择您的常用地址</span>-->
+          <!--<div class="select_hide"></div>-->
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right" ng-click="eduShow()">
+        <a href="javascript:void(0)">
+          <i class="setting_icon icon-xt2-xueli"></i>
+          <span class="item-label">学历</span>
+          <span class="item-span unselect" id="education" ng-bind="user.education" >请选择您的学历</span>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right" ng-click="marryShow()">
+        <a href="javascript:void(0)">
+          <i class="setting_icon icon-marriage"></i>
+          <span class="item-label">婚恋</span>
+          <span class="item-span unselect" id="infoMarry" ng-bind="user.marriagestatus | marriagefilter">请选择您的婚恋情况</span>
+          <div class="select_hide"></div>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+    </ion-list>
+    <ion-list class="center_list account_list setting_list info_list">
+      <ion-item class="item-icon-right">
+        <a ng-click="gotoIndustrytag()">
+          <i class="setting_icon icon-xt2-yifu"></i>
+          <span class="item-label">关注领域</span>
+          <span class="item-span unselect over-ellipsis" id="industry"></span>
+          <div class="select_hide"></div>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right">
+        <a ng-click="gotoPersonaltag()">
+          <i class="setting_icon icon-uniE9C6"></i>
+          <span class="item-label">个人标签</span>
+          <span class="item-span unselect over-ellipsis" id="personaltab"></span>
+          <div class="select_hide"></div>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right">
+        <a  ng-click="gotoSalesmethod()">
+          <i class="setting_icon icon-uniE9D1"></i>
+          <span class="item-label">营销技能</span><!--销售方法-->
+          <span class="item-span unselect over-ellipsis" id="salesmethod"></span>
+          <div class="select_hide"></div>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right" ng-click="incomeBox()" >
+        <a>
+          <i class="setting_icon icon-uniE9CD"></i>
+          <span class="item-label">月收入</span>
+          <span class="item-span unselect" id="income" ng-bind="user.income | incomefilter"></span>
+          <div class="select_hide"></div>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+    </ion-list>
+    <ion-list class="center_list account_list setting_list info_list">
+      <!--<ion-item class="item-icon-right info_email">
+        <a href="javascript:void(0)">
+          <i class="setting_icon icon-uniE9D3"></i>
+          <span class="item-label">学校</span>
+          &lt;!&ndash;<span class="item-span unselect" style="z-index:5;">请输入您的常用邮箱</span>&ndash;&gt;
+          <input type="text" class="inforEmailBox" id="school" placeholder="*非必填"/>
+          &lt;!&ndash;<i class="icon ion-ios-arrow-right"></i>&ndash;&gt;
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right info_email">
+        <a href="javascript:void(0)">
+          <i class="setting_icon icon-uniE9D7"></i>
+          <span class="item-label">专业</span>
+          &lt;!&ndash;<span class="item-span unselect" style="z-index:5;">请输入您的常用邮箱</span>&ndash;&gt;
+          <input type="text" class="inforEmailBox" id="profession" placeholder="*非必填"/>
+          &lt;!&ndash;<i class="icon ion-ios-arrow-right"></i>&ndash;&gt;
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right info_email">
+        <a href="javascript:void(0)">
+          <i class="setting_icon icon-uniE9C7"></i>
+          <span class="item-label">公司名称</span>
+          &lt;!&ndash;<span class="item-span unselect" style="z-index:5;">请输入您的常用邮箱</span>&ndash;&gt;
+          <input type="text" class="inforEmailBox" id="companyname" placeholder="*非必填"/>
+          &lt;!&ndash;<i class="icon ion-ios-arrow-right"></i>&ndash;&gt;
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right info_email">
+        <a href="javascript:void(0)">
+          <i class="setting_icon icon-uniE9D6"></i>
+          <span class="item-label">职位</span>
+          &lt;!&ndash;<span class="item-span unselect" style="z-index:5;">请输入您的常用邮箱</span>&ndash;&gt;
+          <input type="text" class="inforEmailBox" id="job" placeholder="*非必填"/>
+          &lt;!&ndash;<i class="icon ion-ios-arrow-right"></i>&ndash;&gt;
+        </a>
+      </ion-item>-->
+      <ion-item class="item-icon-right info_email" ng-click="goCompanyname()">
+        <a href="javascript:void(0)">
+          <i class="setting_icon icon-uniE9C7"></i>
+          <span class="item-label">公司名称</span>
+          <span class="item-span unselect" id="companyname" style="width:60%;" ng-bind="user.companyname"></span>
+          <!--<input type="text" class="inforEmailBox" id="companyname" placeholder="*非必填"/>-->
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right info_email" ng-click="goJobs()">
+        <a href="javascript:void(0)">
+          <i class="setting_icon icon-uniE9D6"></i>
+          <span class="item-label">职位</span>
+          <span class="item-span unselect" id="job" style="width:60%;" ng-bind="user.job"></span>
+          <!--<input type="text" class="inforEmailBox" id="job" placeholder="*非必填"/>-->
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+    </ion-list>
+
+
+    <!--<div class="infoTipsBox">*信息越完整，任务质量越高</div>-->
+    <!--设置底部空白间隔-->
+  </ion-content>
+  <!--lodding特效-->
+  <div class="mask-loadding-all" ng-if="showloading">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+      <!--</div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+</ion-view>
+
+

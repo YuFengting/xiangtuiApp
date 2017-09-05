@@ -1,0 +1,62 @@
+<ion-view style="background:#f4f4f4;">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">添加朋友</span>
+  </ion-header-bar>
+  <ion-content class="has-header addfriend">
+    <div class="workc_search clearfix" style="border-bottom: none;">
+      <i class="icon ion-ios-search fl" style="color: #c7c7c7;"></i>
+      <form>
+        <input type="search" readonly="readonly" placeholder="请输入关键字" ng-click="go('searchfriend')"/>
+      </form>
+    </div>
+    <ion-list class="addfriendlist">
+      <ion-item class="addfrienditem clearfix" ng-click="visitPhone()">
+        <span class="add_icon03 addiconbox">
+         <i class="icon-phonebook"></i>
+        </span>
+        <span>添加手机联系人</span>
+        <i class="icon ion-ios-arrow-right fr" style="color: #333;font-size: 30px"></i>
+      </ion-item>
+      <ion-item class="addfrienditem clearfix" ng-click="goShare()">
+        <span class="add_icon02 addiconbox">
+         <i class="icon-invite-friend"></i>
+        </span>
+        <span>发送邀请链接</span>
+        <i class="icon ion-ios-arrow-right fr" style="color: #333;font-size: 30px"></i>
+      </ion-item>
+      <ion-item class="addfrienditem clearfix" ng-click="goscan()">
+        <span class="add_icon02 addiconbox" style="background:#2aa246">
+         <i class="icon-msg-scan"></i>
+        </span>
+        <span>扫一扫</span>
+        <i class="icon ion-ios-arrow-right fr" style="color: #333;font-size: 30px"></i>
+      </ion-item>
+     <!-- <ion-item class="addfrienditem" ng-click="go('phonebookRefuse')">
+        <span class="add_icon03 addiconbox fl" style="padding-top: 4px;">
+         <i class="icon-txl2"></i>
+        </span>
+        <span>访问通讯录被拒绝</span>
+        <i class="icon ion-ios-arrow-right fr" style="color: #333;font-size: 30px"></i>
+      </ion-item>-->
+    </ion-list>
+
+  </ion-content>
+  <style>
+    /*下方comfirm弹窗*/
+    .popup-container .popup{width: 520px; border-radius: 10px;}
+    .popup-container{font-size: 25px;top:0px;}
+    .popup-container .popup-title{font-size: 27px; font-family: "-apple-system", "microsoft yahei";padding: 20px; line-height: 45px; text-align: center; font-weight: 700}
+    .popup-body{padding:35px;border-bottom: 1px solid #d8d8d8;}
+    .popup-buttons{padding: 0px;}
+    .popup-buttons .button{font-size: 25px; font-family: "-apple-system", "microsoft yahei";background: transparent;height: 75px; line-height: 75px; width: 50%;padding: 0px; margin: 0px;}
+    /*.popup-buttons .button:first-child{border-right: 1px solid #000;}*/
+    .button-cancel{ color: #1c8df6; font-size: 25px; line-height: 78px; border-right: 1px solid #d8d8d8;}
+    .button-go{ color: #ff3b30; font-size: 25px; line-height: 78px;}
+    .popup-container .popup-buttons .button:last-child{color: #ff3b30;}
+    .popup-sub-title{ font-family: "-apple-system","microsoft yahei"; font-size: 25px; color: #999; padding: 0 30px; line-height: 35px;}
+
+  </style>
+</ion-view>

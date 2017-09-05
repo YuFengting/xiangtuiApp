@@ -1,0 +1,162 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">优惠券详情</span>
+    <button class="header-right" ng-click="shareagain()">再次分享</button>
+  </ion-header-bar>
+    <ion-content class="has-header xt-grey-bg">
+
+      <div class="businessCouponInfor" ng-repeat="coupon in couponinfor.datalist track by $index"  ng-click="re.sureUseCoupon(coupon)">
+        <div class="couponInfor">
+          <div ng-class="{'couponContent':true,'disabledCouponSty':couponinfor.status>0||coupon.istimeout==1}"  ng-style="{'background':coupon.color}">
+            <div class="businessInfor">
+              <img src="{{coupon.logo | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+              <span class="businessSimpleName over-ellipsis">{{coupon.bname}}</span>
+            </div>
+            <div ng-if="coupon.catagory === 0">
+              <div class="couponMoney">
+                &yen;<span class="num">{{coupon.num}}</span>元
+              </div>
+              <div class="couponPriceTag">{{coupon.catagoryname}}</div>
+            </div>
+            <div ng-if="coupon.catagory === 2">
+              <div class="couponMoney">
+                <span class="duihuanGoods">{{coupon.num}}</span>
+              </div>
+              <div class="couponPriceTag">{{coupon.catagoryname}}</div>
+            </div>
+            <div ng-if="coupon.catagory === 1">
+              <div class="couponMoney">
+                <span class="num">{{coupon.num}}</span>折
+              </div>
+              <div class="couponPriceTag">{{coupon.catagoryname}}</div>
+            </div>
+            <div class="businessReceiveInfor clearfix">{{coupon.content}}</div>
+            <div class="bottomWaveIcon"></div>
+            <div class="couponUseType" ng-if="coupon.level == $index||coupon.istimeout == 1">
+              <div class="couponUseBorder">
+                <span ng-if="coupon.level == $index&&coupon.istimeout!=1">已使用</span>
+                <span ng-if="coupon.istimeout == 1">已过期</span>
+              </div>
+            </div>
+          </div>
+          <div class="couponOptionBox clearfix">
+            <div class="usefulDate fl lineH50">
+              <span ng-if="coupon.notimelimit==1">有效期：无限制</span>
+              <span ng-if="coupon.notimelimit!=1">有效期：{{coupon.starttime+"-"+coupon.endtime}}</span>
+            </div>
+            <div class="nowToReceive fr" ng-if="coupon.level == undefined&&coupon.istimeout != 1">立即使用</div>
+          </div>
+          <div class="couponBoxMask" ng-if="coupon.isNext === 1&&coupon.istimeout != 1">
+            <div class="unlockCouponBox">
+              <p>距解锁此优惠还差<span class="number">{{coupon.nextDiff}}</span>个人看</p>
+              <div class="unlockProgress">
+                <div class="progressBox" ng-style="{'width': (coupon.nextPer*3.9)+'px'}"></div>
+              </div>
+            </div>
+          </div>
+          <div class="couponBoxMask" ng-if="coupon.isLock === 1&&coupon.isNext != 1&&coupon.istimeout != 1">
+            <div class="unlockCouponBox">
+              <i class="icon icon-lock"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lookTaskButton" ng-click="goCouponDetail()">查看任务</div>
+    </ion-content>
+
+
+
+  <!-- 立即兑换支付页（后期可能要） -->
+  <!--<div class="mask show" ng-if="re.paymaskshow" ng-click="re.hidepaymask()" style="top:0px;z-index: 301;"></div>-->
+  <!--<div class="paymentPopover" ng-if="re.paymentshow">-->
+    <!--<div class="headerText">支付<i class="icon ion-android-close" ng-click="re.hidepaymask()"></i></div>-->
+    <!--<div class="paymentContent">-->
+      <!--<div class="rechargFlowNum">兑换优惠券</div>-->
+      <!--<div class="paymentMoney">￥10</div>-->
+      <!--<div class="surePayment" ng-click="re.confirmPayment()">确认支付</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+
+  <!--<script id="pay-popup3.html" type="text/ng-template">-->
+    <!--<div class="mask"  style="z-index: 301; top: 0;display: block" ng-click="closepaypopupModal()"></div>-->
+    <!--&lt;!&ndash;支付密码&ndash;&gt;-->
+    <!--<div class="msg_s_popup paypassword"  style="height: 340px;" ng-style="msgpopupsty">-->
+      <!--<div class="title">-->
+        <!--<span ng-click="closepaypopupModal()" style="font-size: 50px"><i class="ion-ios-close-empty" style="margin-top: 10px"></i></span>请输入支付密码-->
+      <!--</div>-->
+      <!--<div class="body">-->
+        <!--&lt;!&ndash;<div class="label">金额</div>&ndash;&gt;-->
+        <!--<div class="inputbox clearfix" style="border-bottom: none;">-->
+          <!--&lt;!&ndash;<span>￥</span>&ndash;&gt;-->
+          <!--<div class="pwd_hint">*第一次输入密码即为支付密码(6位数字)</div>-->
+          <!--<div class="password clearfix">&lt;!&ndash;-->
+              <!--<input type="number" maxlength="6" ng-model="pay.passward" id="per_moneyinput" ng-change="checkPayMoney()" />-->
+              <!--<div ng-repeat="pwd in paylist" ng-bind="pwd.title" class="paypwdround"></div>&ndash;&gt;-->
+            <!--<ul class="paypasgroup">-->
+              <!--<li><i ng-if="pswinfo.length>0" class="icon ion-record"></i> </li>-->
+              <!--<li><i ng-if="pswinfo.length>1" class="icon ion-record"></i> </li>-->
+              <!--<li><i ng-if="pswinfo.length>2" class="icon ion-record"></i> </li>-->
+              <!--<li><i ng-if="pswinfo.length>3" class="icon ion-record"></i> </li>-->
+              <!--<li><i ng-if="pswinfo.length>4" class="icon ion-record"></i> </li>-->
+              <!--<li class="borderright"><i ng-if="pswinfo.length>5" class="icon ion-record"></i> </li>-->
+
+              <!--<div class="guangbiao" style="transform:translateX({{pswinfo.length*60+'px'}})" ng-show="pswinfo.length<6"></div>-->
+
+            <!--</ul>-->
+          <!--</div>-->
+          <!--<div class="forgetpwd"><span ng-click="re.forgetpswd()">忘记密码？</span></div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--&lt;!&ndash;正在支付-支付完成&ndash;&gt;-->
+    <!--<div class="loaddingitem" ng-if="showpayload">-->
+      <!--<div class="loade">-->
+        <!--<div class="loader-inner ball-spin-fade-loader" style="display: none;">-->
+          <!--<div></div>-->
+          <!--<div></div>-->
+          <!--<div></div>-->
+          <!--<div></div>-->
+          <!--<div></div>-->
+          <!--<div></div>-->
+          <!--<div></div>-->
+          <!--<div></div>-->
+        <!--</div>-->
+        <!--<div class="loadEnd">-->
+          <!--<i class="icon icon-select-cur"></i>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="payload"><span>正在付款</span></div>-->
+      <!--<div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="paysucc"><span>支付成功</span></div>-->
+    <!--</div>-->
+
+
+    <!--&lt;!&ndash;支付键盘&ndash;&gt;-->
+    <!--<div class="keyboard-self" >-->
+      <!--<ul class="numlist">-->
+        <!--<li ng-click="enterpsw(1)"><button>1</button></li>-->
+        <!--<li ng-click="enterpsw(2)"><button>2</button></li>-->
+        <!--<li ng-click="enterpsw(3)"><button>3</button></li>-->
+        <!--<li ng-click="enterpsw(4)"><button>4</button></li>-->
+        <!--<li ng-click="enterpsw(5)"><button>5</button></li>-->
+        <!--<li ng-click="enterpsw(6)"><button>6</button></li>-->
+        <!--<li ng-click="enterpsw(7)"><button>7</button></li>-->
+        <!--<li ng-click="enterpsw(8)"><button>8</button></li>-->
+        <!--<li ng-click="enterpsw(9)"><button>9</button></li>-->
+        <!--<li class="bg-grey"></li>-->
+        <!--<li ng-click="enterpsw(0)"><button>0</button></li>-->
+        <!--<li class="bg-grey"  ng-click="enterpsw(11)">-->
+          <!--<button><i class="icon icon-code-del"></i></button>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+  <!--</script>-->
+
+
+
+</ion-view>

@@ -1,0 +1,93 @@
+<ion-view class="bg-grey">
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" ng-bind="exc_coupon.taskname"></span>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+    <ion-scroll direction="x" scrollbar-x="false" scrollbar-y="false" class="cpcCoupList-scroll"  delegate-handle="cpcCoupScroll">
+
+      <div class="businessCouponInfor cpccouponInfor clearfix" style="width: 2120px;">
+        <div class="couponInfor fl" ng-repeat="excc in exclist track by $index">
+          <div class="couponContent" ng-style="{'background':excc.color}">
+            <div class="businessInfor">
+              <img src="{{picserver}}{{exc_coupon.buserinfo.clogopath}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+              <span class="businessSimpleName over-ellipsis" ng-bind="exc_coupon.bname"></span>
+            </div>
+            <div ng-if="exc_coupon.coupon.catagory==0">
+              <div class="couponMoney">
+                &yen;<span class="num" ng-bind="excc.num"></span>元
+              </div>
+              <div class="couponPriceTag">代金券</div>
+            </div>
+            <div ng-if="exc_coupon.coupon.catagory==1">
+              <div class="couponMoney">
+                <span class="num" ng-bind="excc.num"></span>折
+              </div>
+              <div class="couponPriceTag">折扣券</div>
+            </div>
+            <div ng-if="exc_coupon.coupon.catagory==2">
+              <div class="couponMoney">
+                <span class="duihuanGoods" ng-bind="excc.num"></span>
+              </div>
+              <div class="couponPriceTag">兑换券</div>
+            </div>
+            <div class="businessReceiveInfor clearfix" ng-bind="excc.content"></div>
+            <div class="bottomWaveIcon"></div>
+          </div>
+          <div class="couponOptionBox clearfix">
+            <div class="usefulDate fl">
+              <span ng-if="exc_coupon.notimelimit==1">有效期：无限制</span>
+              <span ng-if="exc_coupon.notimelimit!=1">有效期：{{exc_coupon.starttime+"-"+exc_coupon.endtime}}</span>
+            </div>
+            <div class="couponHaveNum fr" ng-if="$index==0&&exc_coupon.isaccept==0">转发即得</div>
+            <div class="couponHaveNum fr" ng-if="$index!=0&&exc_coupon.isaccept==0">{{excc.rule}}人阅读即得</div>
+            <div class="couponHaveNum fr " ng-style="{'color':excc.color}"  ng-if="$index==0&&exc_coupon.isaccept==1" ng-click="goMyCoupon()">立即领取</div>
+            <div class="couponHaveNum fr " ng-style="{'color':excc.color}" ng-if="$index!=0&&exc_coupon.isaccept==1" ng-click="goMyCoupon()">{{excc.rule}}人阅读即得</div>
+          </div>
+        </div>
+      </div>
+    </ion-scroll>
+
+    <div class="cpvDetailInforBox">
+      <div class="cloudsellTitleCom"><span class="name">优惠券说明</span></div>
+      <div class="goodsIntroduce">
+        <div class="goodsInforText goodsInfoFonts" >
+          <p ng-bind-html="couponids"></p>
+          <p class="tellLine">电话：<span ng-bind="exc_coupon.buserinfo.tel"></span></p>
+          <p>地址：<span ng-bind="exc_coupon.address"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cpvDetailInforBox">
+      <div class="cloudsellTitleCom"><span class="name">商家说明</span></div>
+      <div class="goodsIntroduce">
+        <div class="goodsInforText goodsInfoFonts" >
+          <p ng-bind-html="merchantdis"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cpvDetailInforBox">
+      <div class="cloudsellTitleCom"><span class="name">分享文章，立抢优惠</span></div>
+      <div class="goodsIntroduce" ng-click="goTaskDetail()">
+        <div class="couponTask clearfix">
+          <div class="fl headPicArea">
+            <img src="{{picserver}}{{exc_coupon.shareview}}" />
+          </div>
+          <div class="fl taskInfo">
+            <div class="taskname hide2line" ng-bind="exc_coupon.sharetitle">胡萝卜能提高视力？我们对视力的研究更进一步研究更进一步</div>
+            <div class="getCouponBtn">立抢优惠</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="width: 100%;height: 50px;"></div>
+
+  </ion-content>
+
+
+</ion-view>

@@ -1,0 +1,97 @@
+<ion-view style="background: #f4f4f4;">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">{{groupinfo.name}}</span>
+  </ion-header-bar>
+  <ion-content class="has-header">
+   <div class="membergroups">
+     <ul class="headpicgroup clearfix">
+       <li class="headitem fl"  ng-repeat="groupmember in groupinfo.members " ng-click="openHome(groupmember.userid, groupmember.usertype)" >
+         <img src="{{groupmember.avate|avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+         <div class="over-ellipsis headname">{{groupmember.name}}</div>
+       </li>
+
+
+
+       <!-- 添加好友-->
+       <li class="headitem fl" ng-click="gotogadd()" ng-if="isSGroup">
+         <img src="img/addmember.png" onerror="javascript:this.src='img/default-avatar-square.png'">
+         <div class="over-ellipsis headname"></div>
+
+         <!--<div class='btns' ><i class="icon ion-ios-plus-empty"></i></div>-->
+       </li>
+       <!-- 删除好友，只有管理员可以-->
+       <li class="headitem fl" ng-click="gotogdel()" ng-if="isCreator">
+         <img src="img/delmember.png" onerror="javascript:this.src='img/default-avatar-square.png'">
+         <div class="over-ellipsis headname"></div>
+         <!--<div class='btns' ><i class="icon ion-ios-minus-empty"></i></div>-->
+       </li>
+     </ul>
+
+     <div class=" tipinfo">
+       <div class="clearfix tipitem" ng-click="gotogmemb()">
+         <span class="fl">全部成员({{groupinfo.members.length}})</span>
+         <i class="icon ion-ios-arrow-right fr"></i>
+       </div>
+     </div>
+   </div>
+
+    <div class="tipgroup" style="margin-top: 34px">
+      <div class=" tipinfo"  ng-click="gotogname()" ng-if="isCreator">
+        <div class="clearfix tipitem" style="border-top: none">
+          <span class="fl">群聊名称</span>
+          <i class="icon ion-ios-arrow-right fr"></i>
+          <span class="fr groupname over-ellipsis">{{groupinfo.name}}</span>
+        </div>
+      </div>
+      <div class=" tipinfo" ng-if="!isCreator">
+        <div class="clearfix tipitem" style="border-top: none">
+          <span class="fl">群聊名称</span>
+          <span class="fr groupname over-ellipsis">{{groupinfo.name}}</span>
+        </div>
+      </div>
+      <div class=" tipinfo">
+        <div class="clearfix tipitem" >
+          <span class="fl">消息免打扰</span>
+          <label class="toggle toggle-mess fr" style="position: relative;right: 0px"><input type="checkbox" ng-model="notify" ng-click="setGroupNotify(groupinfo.id, groupinfo.notify)"><div class="track"><div class="handle"></div></div></label>
+        </div>
+        </div>
+
+      <!--
+      <div class=" tipinfo">
+        <div class="clearfix tipitem" >
+          <span class="fl">添加到通讯录</span>
+          <label class="toggle toggle-mess fr addto" style="position: relative;right: 0px"><input type="checkbox"><div class="track"><div class="handle"></div></div></label>
+        </div>
+      </div>
+      -->
+    </div>
+
+    <div class="queren-btn"  ng-click="deletegroup()">
+      <div class="qrenbtn btn-wenzi">删除并退出</div>
+    </div>
+  </ion-content>
+  <!--发送邀请弹窗-->
+  <div class="hit-message light" style="width: 50%; line-height: 50px;left: 25%; display: {{deleteSuccess}};" >
+    删除群聊成功
+  </div>
+</ion-view>
+
+
+<style>
+  /*弹窗样式*/
+  .popup-container{ bottom: 0; top:0;}
+  .popup-container .popup{width: 539px;font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 20px;}
+  .popup-container .popup-title{font-family: "-apple-system", "microsoft yahei";font-size: 27px;padding: 35px;}
+  .popup-container .popup-buttons{padding: 0px;}
+  .popup-container .popup-buttons .button{font-family: "-apple-system", "microsoft yahei";font-size: 25px; color: #1c8df6; background: none;}
+  .popup-container .popup-buttons .button:first-child{border-right: 2px solid #e6e9ed}
+  .popup-container .popup-buttons .button.button-positive{color: #007aff}
+  .popup-container .popup-buttons .button.button-only{color: #007aff;width: 100%}
+  .popup-container .popup-buttons .button.button-go{color: #ff3b30}
+  .popup-head{border-bottom: 1px solid #e6e9ed}
+  .button-go{color: #ff3b30;}
+</style>
+

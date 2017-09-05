@@ -1,0 +1,163 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">我的收藏</span>
+  </ion-header-bar>
+  <ul class="subheader mycollectionSub">
+    <li ng-class="{'active':showctasklist}">
+      <a ng-click="ctackBox()"><span>分享</span></a>
+    </li>
+    <li ng-class="{'active':!showctasklist}">
+      <a ng-click="vtaskBox()"><span>推荐</span></a>
+    </li>
+  </ul>
+  <ion-content class="has-header xt-grey-bg  whiteSpaceNormal has-subheader">
+    <ion-refresher  pulling-text="下拉刷新..." on-refresh="getStorelist()" ></ion-refresher>
+    <div class="loading_list clearfix fl " ng-if="listloadding">
+      <div class="loading_icon1 loadding-animate fl"> <i class="ion-load-c"></i></div><div class="loading_wenzi fl">加载中...</div>
+    </div>
+    <ion-list class="taskindex-list collectionList">
+      <ion-item ng-click="goTaskDetail(task)" ng-repeat="task in ctasklist track by task.id">
+        <a ng-if="task.showtype =='0'">
+          <div class="indexlist_pic">
+            <div ng-if="task.status != 2 && task.isshare ==1 ">
+              <div ng-class="{'customerStatusBox2':true,'alreadysubmit':true}">
+                <span>已分享</span>
+              </div>
+            </div>
+            <div ng-if="task.status == 2">
+              <div ng-class="{'customerStatusBox2':true,'settlemented':true}">
+                <span>已结束</span>
+              </div>
+            </div>
+            <img src="{{picserver}}{{task.view}}" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+            <div ng-if="task.status != 2&&(0<task.moneyper && task.moneyper<=30)" class="progressBarNumBox">剩余:{{task.moneyper}}%</div>
+          </div>
+          <div class="indexlist_info">
+            <div class="indexlist_title indexlist_title3">
+              <span class="newI2 tipsinfo2" ng-if="task.isnew == 1">新</span>
+              <!--<span class="duiI2 tipsinfo2" ng-if="false">兑</span>-->
+              <span>{{task.name}}</span>
+            </div>
+            <div class="indexlist_busname"><span class="bus_span">{{task.bname}}</span></div>
+            <div class="indexlist_lf">
+              <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">{{task.worknum}}</i></div>
+            </div>
+            <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype !== 1">
+              <span class="rjsy" >平均抢到:<span class="money clearfix"><i class="icon red_port_icon"></i><i class="moneyitem">{{task.avgincome|number:2}}</i></span></span>
+            </div>
+            <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype === 1">
+              <span class="rjsy" >
+                {{["最高抢:","抢折扣:"][task.coupontype]}}
+                <span class="money zhekou clearfix">
+                  <i class="icon get_coupon_icon">
+                    <span ng-if="task.coupontype === 0">代</span>
+                    <span ng-if="task.coupontype === 1">折</span>
+                    <span ng-if="task.coupontype === 2">兑</span>
+                  </i>
+                  <i class="moneyitem" ng-if="task.coupontype === 0">{{task.voucher}}元</i>
+                  <i class="moneyitem" ng-if="task.coupontype === 1">{{task.discount}}折</i>
+                  <i class="moneyitem" ng-if="task.coupontype === 2">查看详情</i>
+                </span>
+              </span>
+            </div>
+          </div>
+        </a>
+        <ion-option-button class="button-assertive removeItem" ng-click="storeTask(task.id,task.type)">删除</ion-option-button>
+      </ion-item>
+    </ion-list>
+
+    <div class="list_nomore" ng-if="!hasNextPage  && ctasklist.length >0 && PageNo >= 1">
+      <div class="wenzi">暂时只收藏这些推广啦！</div>
+    </div>
+    <!--没有搜索到-->
+    <div class="nosearch" style="display:{{noctaskflag}}" ui-sref="tab.home">
+      <div class="nointenet">
+        <img src="img/nocollection.png" style="margin: 0px" >
+        <div class="message-info">
+          <span>还没有收藏推广，</span><br/>
+          <span >快去<span class="xt-red">分享</span>看看吧！</span>
+        </div>
+      </div>
+    </div>
+
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+      on-infinite="loadMore()"
+      ng-if="hasNextPage"
+      distance="1%"
+      immediate-check="false">
+    </ion-infinite-scroll>
+
+  </ion-content>
+  <div class="collTaskContent hide">
+    <ion-content class="has-header xt-grey-bg  whiteSpaceNormal has-subheader">
+      <ion-refresher  pulling-text="下拉刷新..." on-refresh="getStorelist()" ></ion-refresher>
+      <div class="loading_list clearfix fl " ng-if="listloadding">
+        <div class="loading_icon1 loadding-animate fl"> <i class="ion-load-c"></i></div><div class="loading_wenzi fl">加载中...</div>
+      </div>
+      <ion-list  class="cpvInforListsBox">
+        <ion-item  class="cpvColect" ng-click="goTaskDetail(task)" ng-repeat="task in vtasklist track by task.id">
+          <a  ng-if="task.showtype =='2'">
+            <div class="cpvInforBox">
+              <div class="overMask clearfix" ng-if="task.status == 2">
+                <span class="tranglepart"></span>
+                <span class="closeIconpart" >已下架</span>
+              </div>
+              <div class="customerStatusBox2 alreadysubmit cpvlistStatusStyle" ng-if="task.isshare == 1 && task.status != 2">
+                <span>已分享</span>
+              </div>
+              <img src="{{picserver}}{{task.pic}}" />
+              <div class="cpvUsersNum"><i class="icon icon-join-user"></i><span>{{task.worknum}}人</span></div>
+              <div class="cpvNewBox" ng-if="task.isnew == 1&& task.status != 2 && task.isshare != 1"><span>新</span></div>
+              <div class="cpvBusinessInfor">
+                <div class="cpvTitleBox">{{task.name}}</div>
+                <div class="businessInfor clearfix">
+                  <div class="businessName fl"><i class="icon icon-tab-home"></i><span>{{task.bname}}</span></div>
+                  <div class="businessSet fr"><span class="text">推荐扫码：立得</span><i class="goldImg"></i><span class="cpv_profitNum">{{task.vprice}}元</span></div>
+                </div>
+              </div>
+            </div>
+          </a>
+          <ion-option-button class="button-assertive removeItem" ng-click="storeTask(task.id,task.type)">删除</ion-option-button>
+        </ion-item>
+      </ion-list>
+
+      <div class="list_nomore" ng-if="!hasNextPage  && vtasklist.length >0 && PageNo >= 1">
+        <div class="wenzi">暂时只收藏这些推广啦！</div>
+      </div>
+
+      <!--没有搜索到-->
+      <div class="nosearch " style="display:{{novtaskflg}}" ui-sref="tab.cpvlist">
+        <div class="nointenet">
+          <img src="img/nocollection.png" style="margin: 0px" >
+          <div class="message-info">
+            <span>还没有收藏推广，</span><br/>
+            <span >快去<span class="xt-red">推荐</span>看看吧！</span>
+          </div>
+        </div>
+      </div>
+
+      <!--上拉刷新-->
+      <ion-infinite-scroll
+        on-infinite="loadMore()"
+        ng-if="hasNextPage"
+        distance="1%"
+        immediate-check="false">
+      </ion-infinite-scroll>
+
+    </ion-content>
+  </div>
+
+  <!--加载中-->
+  <div class="loading_mask hide">
+    <div class="loading_icon">
+      <img class="loading_pic" />
+    </div>
+  </div>
+
+</ion-view>
+
+

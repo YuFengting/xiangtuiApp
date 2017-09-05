@@ -1,0 +1,39 @@
+<ion-view>
+
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" style="width: 350px;">可推广的活动</span>
+  </ion-header-bar>
+
+  <ion-content class="has-header xt-grey-bg">
+    <ion-list>
+      <ion-item>
+        <a class="item-content">
+          <div class="indexlist_pic eventextendlistpic">
+            <div>
+              <div ng-class="{'customerStatusBox2':true,'alreadysubmit':true,'settlemented':false}" ng-if="false" >
+                <span class="hide">已结束</span>
+                <span>销售中</span>
+              </div>
+            </div>
+            <img src="img/delete/headtest.jpeg" onerror="javascript:this.src='img/default-list-square.png'"/>
+          </div>
+          <div class="indexlist_info eventextendlistname">
+            <div class="indexlist_title indexlist_title2">
+              <span class="icon_label icon_xiao" style="position: relative; top: -2px;display: inline-block">销</span>
+              <span>深度调查：川普永不变形的头发是花钱买来的吗？</span>
+            </div>
+            <div class="indexlist_rt" style="color: #333;font-size: 18px;right: 18px;">
+             <span>2016-06-06&nbsp;&nbsp;12:22</span>
+            </div>
+          </div>
+        </a>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+
+</ion-view>

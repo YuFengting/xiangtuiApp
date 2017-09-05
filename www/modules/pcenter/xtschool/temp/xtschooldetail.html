@@ -1,0 +1,139 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back"  ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">玩赚享推</span>
+  </ion-header-bar>
+  <ion-content class="has-header xtsDetailContent" style="background: #f8f8f8;" delegate-handle="xtshoolAQ" ng-click="closeMsgFoot()" ng-style="hasmsgfootersty" on-drag-up="onscroolHide()" on-drag-down="onscroolHide()" on-release="onscroolShow()">
+    <!--下拉刷新-->
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>
+    <div class="xtschoolDetailTitle">
+      <div class="comefrom"><span>来自</span><img src="{{question.avate | avatefilter}}" /><i class="name" ng-bind="question.name"></i><span>的问题</span></div>
+      <div class="title" ng-bind="question.content"></div>
+    </div>
+    <div class="xtschollFAQMain">
+      <div class="xtsFaqDetailList"  ng-repeat="answer in answerList" >
+        <div class="xtsFaqUserInfor clearfix" >
+          <div class="headerImgName fl" ng-if="answer.ptype==0" ng-click="goUser($event,answer.ptype,answer.userid)"><img class="fl" src="{{answer.avatar |avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png';"/><div class="answerDate fl"><p class="answerName" ng-bind="answer.nick"></p><p ng-bind="answer.inittime"></p></div></div>
+          <div class="headerImgName fl" ng-if="answer.ptype==1" ng-click="goUser($event,answer.ptype,answer.userid)"><img class="fl" src="{{answer.logo |avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png';"/><div class="answerDate fl"><p class="answerName" ng-bind="answer.bname"></p><p ng-bind="answer.inittime"></p></div></div>
+          <div class="headerImgName fl" ng-if="answer.ptype==2" ng-click="goUser($event,answer.ptype,answer.userid)"><img class="fl" src="{{answer.logo |avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png';"/><div class="answerDate fl"><p class="answerName" ng-bind="answer.name"><i class="icon icon-xts-certifi"></i></p><p ng-bind="answer.inittime"></p></div></div>
+          <div class="clickZanNum fr"><span ng-click="clickGood(answer,$event)"><i class="icon" ng-class="{'icon-xtschool-zan1':answer.zan==0,'icon-xtschool-zan2':answer.zan==1,'redIcon':answer.zan==1}"></i><span ng-bind="answer.zannum"></span></span><span class="clickReplyBtn" ng-click="publishAQ($event,answer,answer)">回复</span></div>
+        </div>
+        <div class="faqContent clearfix" ng-click="deleteThisAnswer($event,answer.ptype,answer.id,answer)" ng-if="answer.ptype<2" ><p ng-bind-html="answer.content | emojifilter"></p></div>
+        <div class="faqContent clearfix"  ng-click="deleteThisAnswer($event,answer.ptype,'',answer)"ng-if="answer.ptype==2" ng-bind-html="convertHtml(answer.content)"></div>
+        <div class="replay">
+          <div class="replyContentBox {{answer.id}}" ng-repeat="replay in answer.replies" ng-show="$index < 5"  ng-click="publishAQ($event,replay,answer)" >
+            <span ng-bind="replay.sendername" ng-click="goUser($event,replay.sendertype,replay.senderid)">大树</span>
+            回复 <span ng-bind="replay.receivername" ng-click="goUser($event,replay.receivertype,replay.receiverid)">宋哲</span>
+            ：<a   ng-bind-html="replay.content | emojifilter"></a>
+          </div>
+        </div>
+        <div class="showMoreAnswer {{answer.id}}" ng-show="answer.replies.length>5" ng-click="lookMoreAnswer($event)">查看更多</div>
+      </div>
+    </div>
+    <div style="height:90px;width:100%"></div>
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+      immediate-check="false"
+      ng-if="hasNextPage"
+      on-infinite="loadMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+  <div class="xtsPublishQA" ng-if="publishqa" ng-click="publishAQ($event)"><span>发表回答</span></div>
+  <div class="message-foot xtsFAQFoot" ng-style="footStyle"  ng-show="xtsfaqfoot">
+    <div class="footInforBox clearfix" ng-click="stopFun($event)" resize-foot-bar2 ioncontentname="{{contentBoxName}}">
+      <form ng-submit="addAnswer()">
+        <textarea msd-elastic id="inputBox2" placeholder="{{replyanswer.name}}" class="input fl"
+                  autocomplete="off"  ng-model="answercon.text" ng-click="emojiHide()"></textarea>
+      </form>
+      <div class="iconBox fl">
+        <i class="icon icon-smile" ng-click="emojiBox($event)" ng-class="{'current':isEmojiShow}"></i>
+      </div>
+      <div class="sendBox fr">
+        <button class="sendbtn"  ng-click="addAnswer()">发送</button>
+      </div>
+    </div>
+    <div class="emojiBox" ng-if="isEmojiShow">
+      <ion-slide-box>
+        <ion-slide show-pager="true">
+          <div class="emojiList">
+            <img src="img/emoji/bishi.png" title="鄙视" ng-click="getAttr($event)">
+            <img src="img/emoji/bukaixin.png" title="不开心" ng-click="getAttr($event)">
+            <img src="img/emoji/feiwen.png" title="飞吻" ng-click="getAttr($event)">
+            <img src="img/emoji/fennu.png" title="愤怒" ng-click="getAttr($event)">
+            <img src="img/emoji/haixiu.png" title="害羞" ng-click="getAttr($event)">
+            <img src="img/emoji/jingkong.png" title="惊恐" ng-click="getAttr($event)">
+            <img src="img/emoji/kuqi.png" title="哭泣" ng-click="getAttr($event)">
+            <img src="img/emoji/lenghan.png" title="冷汗" ng-click="getAttr($event)">
+            <img src="img/emoji/shengbing.png" title="生病" ng-click="getAttr($event)">
+            <img src="img/emoji/shiran.png" title="释然" ng-click="getAttr($event)">
+            <img src="img/emoji/tiaopi.png" title="调皮" ng-click="getAttr($event)">
+            <img src="img/emoji/tongku.png" title="痛苦" ng-click="getAttr($event)">
+            <img src="img/emoji/touxiao.png" title="偷笑" ng-click="getAttr($event)">
+            <img src="img/emoji/weixiao.png" title="微笑" ng-click="getAttr($event)">
+            <img src="img/emoji/baobao.png" title="包包" ng-click="getAttr($event)">
+            <img src="img/emoji/baoyou.png" title="保佑" ng-click="getAttr($event)">
+            <img src="img/emoji/cuowu.png" title="错误" ng-click="getAttr($event)">
+            <img src="img/emoji/dabian.png" title="大便" ng-click="getAttr($event)">
+            <img src="img/emoji/dianhua.png" title="电话" ng-click="getAttr($event)">
+            <img src="img/emoji/fangzi.png" title="房子" ng-click="getAttr($event)">
+            <i class="icon ion-backspace-outline" ng-click="backspace()"></i>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="emojiList">
+            <img src="img/emoji/geili.png" title="给力" ng-click="getAttr($event)">
+            <img src="img/emoji/gongjiaoche.png" title="公交车" ng-click="getAttr($event)">
+            <img src="img/emoji/gou.png" title="狗" ng-click="getAttr($event)">
+            <img src="img/emoji/gui.png" title="鬼" ng-click="getAttr($event)">
+            <img src="img/emoji/guzhang.png" title="鼓掌" ng-click="getAttr($event)">
+            <img src="img/emoji/houzi.png" title="猴子" ng-click="getAttr($event)">
+            <img src="img/emoji/jiangbei.png" title="奖杯" ng-click="getAttr($event)">
+            <img src="img/emoji/kafei.png" title="咖啡" ng-click="getAttr($event)">
+            <img src="img/emoji/kouhong.png" title="口红" ng-click="getAttr($event)">
+            <img src="img/emoji/lingdang.png" title="铃铛" ng-click="getAttr($event)">
+            <img src="img/emoji/meigui.png" title="玫瑰" ng-click="getAttr($event)">
+            <img src="img/emoji/muji.png" title="母鸡" ng-click="getAttr($event)">
+            <img src="img/emoji/nansheng.png" title="男生" ng-click="getAttr($event)">
+            <img src="img/emoji/nvsheng.png" title="女生" ng-click="getAttr($event)">
+            <img src="img/emoji/ok.png" title="OK" ng-click="getAttr($event)">
+            <img src="img/emoji/pijiu.png" title="啤酒" ng-click="getAttr($event)">
+            <img src="img/emoji/qian.png" title="钱" ng-click="getAttr($event)">
+            <img src="img/emoji/qiche.png" title="汽车" ng-click="getAttr($event)">
+            <img src="img/emoji/quantou.png" title="拳头" ng-click="getAttr($event)">
+            <img src="img/emoji/ruo.png" title="弱" ng-click="getAttr($event)">
+            <i class="icon ion-backspace-outline" ng-click="backspace()"></i>
+          </div>
+        </ion-slide>
+        <ion-slide on-slide-changed="slideHasChanged(index)">
+          <div class="emojiList">
+            <img src="img/emoji/shengdanshu.png" title="圣诞树" ng-click="getAttr($event)">
+            <img src="img/emoji/shengli.png" title="胜利" ng-click="getAttr($event)">
+            <img src="img/emoji/shouji.png" title="手机" ng-click="getAttr($event)">
+            <img src="img/emoji/shouqiang.png" title="手枪" ng-click="getAttr($event)">
+            <img src="img/emoji/shuijiao.png" title="睡觉" ng-click="getAttr($event)">
+            <img src="img/emoji/xiangshang.png" title="向上" ng-click="getAttr($event)">
+            <img src="img/emoji/xiangxia.png" title="向下" ng-click="getAttr($event)">
+            <img src="img/emoji/xiangzuo.png" title="向左" ng-click="getAttr($event)">
+            <img src="img/emoji/xiangyou.png" title="向右" ng-click="getAttr($event)">
+            <img src="img/emoji/xiayu.png" title="下雨" ng-click="getAttr($event)">
+            <img src="img/emoji/yanjing.png" title="眼睛" ng-click="getAttr($event)">
+            <img src="img/emoji/yao.png" title="药" ng-click="getAttr($event)">
+            <img src="img/emoji/yiyuan.png" title="医院" ng-click="getAttr($event)">
+            <img src="img/emoji/yu.png" title="鱼" ng-click="getAttr($event)">
+            <img src="img/emoji/zan.png" title="赞" ng-click="getAttr($event)">
+            <img src="img/emoji/zhengque.png" title="正确" ng-click="getAttr($event)">
+            <img src="img/emoji/zhu.png" title="猪" ng-click="getAttr($event)">
+            <img src="img/emoji/shousi.png" title="寿司" ng-click="getAttr($event)">
+            <img src="img/emoji/gaogenxie.png" title="高跟鞋" ng-click="getAttr($event)">
+            <img src="img/emoji/erduo.png" title="耳朵" ng-click="getAttr($event)">
+            <i class="icon ion-backspace-outline" ng-click="backspace()"></i>
+          </div>
+        </ion-slide>
+      </ion-slide-box>
+    </div>
+  </div>
+
+</ion-view>

@@ -1,0 +1,109 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback();bchecked=true;achecked=false">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">详细资料</span>
+    <i ng-if="userinfo.isFriend == 1" class="topTitleRightIcon icon-more" ng-click="toggleDelete(userinfo.id)"></i>
+  </ion-header-bar>
+  <ion-content class="coupond_content personalInforContent" delegate-handle="Scroll1" on-scroll="topDynamic1()">
+    <div class="shome_head clearfix">
+      <div class="shome_headpic fl">
+        <img src="{{userinfo.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar.png'" ng-click="showLargeHead()"/>
+        <div class="goodwillBox sHomeGoodwill" ng-class="{'goodwill_1':true,'goodwill_2':false,'goodwill_3':false,'goodwill_4':false,'goodwill_5':false,'goodwill_6':false}"></div>
+      </div>
+      <!--<div class="shome_headcnt fr">-->
+        <!--<div class="title"  ng-bind="userinfo.otherusername || userinfo.nick"></div>-->
+        <!--性别 0女  1男  2不详-->
+        <!--<div class="business_evaluate2 evaluate clearfix">-->
+          <!--<ul class="fl">-->
+            <!--<li><span style="width:{{userinfo.commentscore/5 *100}}%"></span></li>-->
+          <!--</ul>-->
+          <!--<div class="fl evaluate_score">-->
+            <!--<span>{{userinfo.commentscore}}</span>分-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<ul class="shome_ability clearfix">-->
+          <!--<li>传播力：<span>{{userinfo.cpclevel}}</span></li>-->
+          <!--<li>营销力：<span>{{userinfo.cpslevel}}</span></li>-->
+        <!--</ul>-->
+      <!--</div>-->
+        <div class="cloudsaleInfor fl">
+          <div class="name">{{userinfo.otherusername || userinfo.nick}}<i class="icon" ng-class="{male:userinfo.sex==1,'icon-msg-boy':userinfo.sex==1, female:userinfo.sex==0,'icon-msg-girl':userinfo.sex==0}"></i></div>
+          <div class="age" ng-if="userinfo.age!=null&&userinfo.age!=undefined&&userinfo.age!=''&&userinfo.age!=0">年龄：{{userinfo.age}}岁</div>
+          <div class="age" ng-if="userinfo.age==null||userinfo.age==undefined||userinfo.age==''||userinfo.age==0">年龄：保密</div>
+          <div class="nikename" ng-if="userinfo.city!=null&&userinfo.city!=undefined&&userinfo.city!=''">城市：{{userinfo.city}}</div>
+          <div class="nikename" ng-if="userinfo.city==null||userinfo.city==undefined||userinfo.city==''">城市：中国</div>
+        </div>
+    </div>
+    <!--设置备注：加为好友后才出现-->
+    <div class="setRemark clearfix" ng-if ="userinfo.isFriend ==1" ng-click="setremark()">
+      设置备注
+      <i class="icon ion-ios-arrow-right fr"></i>
+    </div>
+    <!--标签:没有直接隐藏-->
+    <div class="shome_state" ng-if="userinfo.per_tags .length>0">
+      <div class="shome_state_title">标签</div>
+      <div class="shomeLabels">
+        <ul class="clearfix">
+          <li ng-bind="tag.name" ng-repeat="tag in userinfo.per_tags"></li>
+        </ul>
+      </div>
+    </div>
+    <!--关注领域：没有直接隐藏-->
+    <div class="shome_state" ng-if="userinfo.ind_tags .length>0">
+      <div class="shome_state_title">关注领域</div>
+      <div class="shomeLabels">
+        <ul class="clearfix">
+          <li ng-bind="tag.name" ng-repeat="tag in userinfo.ind_tags"></li>
+        </ul>
+      </div>
+    </div>
+    <div ng-if="userinfo.isFriend == 0" class="simple_b">
+      <!--<button class="mybtn-full redbg" ng-click="deleteB()">发送消息</button>-->
+      <button class="mybtn-full redbg" ng-click="addFriend()">加为好友</button>
+    </div>
+    <div ng-if="userinfo.isFriend == 1" class="simple_b">
+      <!--<button class="mybtn-full redbg" ng-click="deleteB()">发送消息</button>-->
+      <button class="mybtn-full redbg" ng-click="sendMsg()">发送消息</button>
+    </div>
+    <div ng-if="userinfo.isFriend == 2" class="simple_b">
+      <!--<button class="mybtn-full redbg" ng-click="deleteB()">发送消息</button>-->
+      <button class="mybtn-full redbg" ng-click="updateIMApplyById(1)">同&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;意</button>
+      <button class="mybtn-full redbg" style="background: white; border: 1px solid #d9d9d9;color: #333" ng-click="updateIMApplyById(2)">拒&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;绝</button>
+    </div>
+
+
+
+  </ion-content>
+  <div class="showPic" ng-if="circleLargeImgShow && showimg" on-tap="shrinkPic()" on-hold="optionPic()">
+    <ion-scroll  direction="y" style="width: 100%; height: 100%">
+    <img src='{{picserver}}{{imageurl}}' class="big-pic" />
+      </ion-scroll>
+  </div>
+
+  <div ng-if="headLargeImgShow">
+    <div class="showPic" on-tap="hideLargeHead()">
+      <ion-scroll direction="y" style="width: 100%; height: 100%">
+        <img src='{{userinfo.avate | avatefilter}}' onerror="javascript:this.src='img/default-avatar.png'" ng-style="bigpicStyle" class="big-pic" >
+      </ion-scroll>
+    </div>
+  </div>
+
+  <style>
+    /*下方comfirm弹窗*/
+    .popup-head{border: none;padding: 15px 10px 0;}
+    .popup-container .popup{width: 539px; border-radius: 10px;}
+    .popup-body{ margin-bottom: 20px; overflow: hidden; padding: 10px 30px; border-bottom: 0px;}
+    .popup-container{top: 0px; bottom: 0px;font-size: 25px;}
+    .popup-container .popup-title{font-size: 25px; font-family: "-apple-system", "microsoft yahei";text-align: left;}
+    .popup-container .popup-title span{color: #aaa;}
+    .popup-buttons{padding: 0px;border-top: 1px solid #d8d8d8;}
+    .popup-buttons .button{font-size: 25px; font-family: "-apple-system", "microsoft yahei";background: transparent;height: 75px; line-height: 75px; width: 50%;padding: 0px; margin: 0px;}
+    .popup-buttons .button:first-child{border-right: 1px solid #d8d8d8;}
+    .popup-body input{padding: 20px; font-size: 25px;}
+    .popup-body textarea{height: 120px; font-size: 25px;line-height: 30px; padding:18px;border: 1px solid #d9d9d9; border-radius: 5px;}
+    .platform-android .action-sheet-group,.platform-ios.action-sheet-group{margin-bottom: 0px; border-radius: 0px;}
+  </style>
+</ion-view>
+

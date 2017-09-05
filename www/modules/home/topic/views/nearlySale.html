@@ -1,0 +1,83 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="vm.mygoback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">附近的优惠</span>
+  </ion-header-bar>
+
+  <ion-content class="has-header xt-grey-bg" delegate-handle="nearlysalecontent">
+    <!--下拉刷新-->
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="vm.refreshPage()"></ion-refresher>
+    <div class="daily-task-banner">
+      <img src="{{picserver}}{{topicimg}}" onerror="javascript:this.src='img/default-list-square.png'">
+    </div>
+    <div class="clearfix themeDistanceBox">
+      <span class="fl currentRange" ng-bind="'当前：'+vm.locationdescribe"></span>
+      <i class="icon icon-refresh fr" ng-click="vm.refreshLocation()"></i>
+    </div>
+    <ion-list class="taskindex-list" ng-repeat="tt in vm.tasks track by $index">
+      <distance  ng-transclude task-temp="{{tt.taskkey}}" str="vm.distancestr" index="{{$index}}"></distance>
+      <span ng-repeat="task in tt.tasklist track by task.id">
+        <ion-item ng-click="vm.goDetail(task,tt.taskkey)" >
+          <a class="item-content">
+            <div class="indexlist_pic">
+              <div ng-if="task.isshare==1&&task.status!= 2">
+                <div ng-class="{'customerStatusBox2':true,'alreadysubmit':true}">
+                  <span>已分享</span>
+                </div>
+              </div>
+              <div ng-if="task.status == 2" >
+                <div ng-class="{'customerStatusBox2':true,'settlemented':true}">
+                  <span>已结束</span>
+                </div>
+              </div>
+              <img src="{{picserver}}{{task.view}}" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+              <div ng-if="task.status != 2&&(0<task.moneyper && task.moneyper<=30)" class="progressBarNumBox">剩余:{{task.moneyper}}%</div>
+            </div>
+            <div class="indexlist_info">
+              <div class="indexlist_title indexlist_title3">
+                <span class="newI2 tipsinfo2" ng-if="task.isnew == 1">新</span>
+                <span>{{task.name}}</span>
+              </div>
+              <div class="indexlist_busname"><span class="bus_span">{{task.bname}}</span></div>
+              <div class="indexlist_lf">
+                <!--<div class="cpc_businessName"><i class="icon icon-xt2-sj"></i><i class="bnamewrap">{{task.bname}}</i></div>-->
+                <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">{{task.worknum}}</i></div>
+              </div>
+              <!--cpc红包-->
+              <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype==0">
+                <span class="rjsy">平均抢到:<span class="money clearfix"><i class="icon red_port_icon"></i><i class="moneyitem">{{task.avgincome | number:2}}</i></span></span>
+              </div>
+              <!--cpc优惠券-->
+              <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype==1">
+                <span class="rjsy" ng-if="task.coupontype==0">最高抢:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>代</span></i><i class="moneyitem">{{task.voucher}}元</i></span></span>
+                <span class="rjsy" ng-if="task.coupontype==1">抢折扣:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>折</span></i><i class="moneyitem">{{task.discount | number:2}}折</i></span></span>
+                <span class="rjsy" ng-if="task.coupontype==2">抢优惠:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>兑</span></i><i class="moneyitem">查看详情</i></span></span>
+              </div>
+            </div>
+          </a>
+        </ion-item>
+      </span>
+    </ion-list>
+
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+      ng-if="!vm.domore"
+      on-infinite="vm.loadMore()"
+      distance="10%"
+      immediate-check="false">
+    </ion-infinite-scroll>
+
+  </ion-content>
+  <div class="mask-loadding-all" ng-if="vm.showloading">
+    <div class="loader">
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div><div class="mask-loadding-all" ng-if="vm.showloading">
+    <div class="loader">
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+</ion-view>

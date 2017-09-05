@@ -1,0 +1,29 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back"  ng-click="gobacktohome()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" >提问</span>
+    <div class="headRightEdit" ng-class="{'questionSubmitdisabled':true}" ng-if="xtschool.question.length==0">提交</div>
+    <div class="headRightEdit" ng-click="commitask()"  ng-if="xtschool.question.length!=0">提交</div>
+  </ion-header-bar>
+  <ion-content class="has-header xt-grey-bg">
+    <div class="xtschoolQuestionBox">
+      <div class="advice_textarea">
+        <textarea placeholder="请输入..." ng-model="xtschool.question"></textarea>
+        <!--<div class="advice_num">200</div>-->
+      </div>
+      <div class="advice_hint">请输入问题并以问号结尾，最多输入80个字</div>
+    </div>
+
+    <div class="wrong-messagebtm" style="margin-top: 30px;">
+      <span>温馨提示：</span><br>
+      <div class="clearfix">
+        <span class="fl num">1、</span><span class="fl tip"> 提问越精准，越容易让相关专业人士看到你的问题哦</span>
+        <span class="fl num">2、</span>   <span class="fl tip">另外提问后请耐心等待回答，不要重复提问</span>
+        <span class="fl num">3、</span>  <span class="fl tip">避免提问过长，描述核心问题，不要笼统也更容易得到满意的回答</span>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

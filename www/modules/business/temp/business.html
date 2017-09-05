@@ -1,0 +1,334 @@
+<ion-view>
+  <div class="business_header">
+    <div class="header_back coupond_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left" style="font-size:45px;"></i>
+    </div>
+    <span ng-bind="buser.company"></span>
+    <div class="bhead_love"></div>
+  </div>
+  <ion-content class="coupond_content" delegate-handle="Scroll1"  help-sell-scroll2><!--on-swipe-up="hidebtns()" on-swipe-down="showbtns()"
+               on-scroll="topDynamic1()" -->
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doClearRefresh()"></ion-refresher>
+    <div class="coupond_head business_head">
+      <ion-slide-box class="business_focus2" delegate-handle="publicityphoto" does-continue="true" auto-play="true"
+                     slide-interval="3000" show-pager="{{business_showpager}}" style="overflow: hidden;">
+        <ion-slide ng-repeat="photo in buser.publicityphoto track by $index" style="overflow: hidden;">
+          <img src="{{picserver}}{{photo}}" onerror="javascript:this.src='img/default-avatar.png'"/>
+        </ion-slide>
+      </ion-slide-box>
+    </div>
+
+    <div class="topInfoGroup">
+
+      <div class="business_title clearfix business_title_line">
+        <div class="fl business_title_left" ng-click="go('businessdetail',{buserinfo:buser})">
+          <div class="business_title_name over-ellipsis" ng-bind="buser.companyalias"></div>
+          <div class="business_outLine clearfix">
+            <img src="img/business/meituan.png" />
+            <img src="img/business/dazhong.png" />
+            <img src="img/business/jindong.png" />
+            <img src="img/business/taobao.png" />
+            <img src="img/business/tianmao.png" />
+            <img src="img/business/guanfang.png" />
+          </div>
+        </div>
+        <div class="fr business_title_right">
+
+          <div class="icon-tel fr telPosi">
+            <i class="icon icon-xt3-customer-phone" class="border:none" ng-click="pickPhone()"></i>
+          </div>
+          <div class="fr" style="height: 40px;width: auto;border-right: 1px solid #d8d8d8;margin-top: 20px"></div>
+
+        </div>
+
+      </div>
+
+      <div class="businessEvaluateBox evaluatePadding">
+        <div class="business_evaluate2 clearfix">
+          <ul class="fl">
+            <li><span class="score{{buser.commentscore*10}}"></span></li>
+          </ul>
+          <div class="getScoreBox fl" ng-if="buser.commentscore != 0"><span
+            ng-bind="buser.commentscore | number:1"></span>分
+          </div>
+          <!-- 还未收到评价 -->
+          <div class="fl evaluate_noget" ng-if="buser.commentscore == 0">
+            <span class="noscore" style="line-height: 32px;">暂无评分</span>
+          </div>
+        </div>
+      </div>
+      <div class="business_address_info">
+        <span><i class="icon icon-address"></i></span><span>江苏省常州市新北区创意产业园A栋18-2（万达广场室内步行街
+十八层1808-2号）</span>
+      </div>
+
+      <div class="businessContactInfor">
+        <div class="businessPower">
+          <i
+            ng-class="{'icon':true,'icon-xt3-yxssq':true,'red':buser.certification == 1 ,'gray':buser.certification == 0}"></i>
+          <p>认证商家</p>
+        </div>
+        <div class="businessPower">
+          <i ng-class="{'icon':true,'icon-xt3-protect':true,'red':buser.hasmoney == 1,'gray':buser.hasmoney == 0}"></i>
+          <p>保障金</p>
+        </div>
+        <div class="businessPower">
+          <flashing buser-fast="{{buser.fast}}"/>
+        </div>
+        <div class="businessPower">
+          <i
+            ng-class="{'icon':true,'icon-xt3-bz':true,'red':buser.platformguarantee == 1,'gray':buser.platformguarantee == 0}"></i>
+          <p>平台担保</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 抢红包-->
+    <div class="goodsWarehouse">
+      <div class="goodsTitle cloudSaleAdTitle"><span><span class="name">分享文章抢红包</span></span></div>
+      <!--任务列表抢红包-->
+      <div class="cloudSalerAdContent">
+        <ion-item >
+          <a class="item-content">
+            <div class="indexlist_pic">
+              <div>
+                <div ng-class="{'customerStatusBox2':true,'alreadysubmit':true}">
+                  <span >已分享</span>
+                </div>
+              </div>
+              <div ng-if="false" >
+                <div ng-class="{'customerStatusBox2':true,'settlemented':true}">
+                  <span >已结束</span>
+                </div>
+              </div>
+              <img src="../../../img/defaultcover/01.jpg" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+              <div class="progressBarNumBox">剩余:22%</div>
+            </div>
+            <div class="indexlist_info">
+              <div class="indexlist_title indexlist_title3">
+                <span class="newI2 tipsinfo2" >新</span>
+                <span>胡萝卜能提高视力？我们对视力的认知还不够</span>
+              </div>
+              <div class="indexlist_busname"><span class="bus_span">享推科技科技科技</span></div>
+              <div class="indexlist_lf">
+                <!--<div class="cpc_businessName"><i class="icon icon-xt2-sj"></i><i class="bnamewrap">{{task.bname}}</i></div>-->
+                <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">22222</i></div>
+              </div>
+              <div class="indexlist_rt" style="right: 0px;">
+                <span class="rjsy" >平均抢到:<span class="money clearfix"><i class="icon red_port_icon"></i><i class="moneyitem">3.36</i></span></span>
+              </div>
+            </div>
+          </a>
+        </ion-item>
+        <ion-item >
+          <a class="item-content">
+            <div class="indexlist_pic">
+              <div>
+                <div ng-class="{'customerStatusBox2':true,'alreadysubmit':true}">
+                  <span >已分享</span>
+                </div>
+              </div>
+              <div ng-if="false" >
+                <div ng-class="{'customerStatusBox2':true,'settlemented':true}">
+                  <span >已结束</span>
+                </div>
+              </div>
+              <img src="../../../img/defaultcover/01.jpg" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+              <div class="progressBarNumBox">剩余:22%</div>
+            </div>
+            <div class="indexlist_info">
+              <div class="indexlist_title indexlist_title3">
+                <span class="newI2 tipsinfo2" >新</span>
+                <span>胡萝卜能提高视力？我们对视力的认知还不够</span>
+              </div>
+              <div class="indexlist_busname"><span class="bus_span">享推科技科技科技</span></div>
+              <div class="indexlist_lf">
+                <!--<div class="cpc_businessName"><i class="icon icon-xt2-sj"></i><i class="bnamewrap">{{task.bname}}</i></div>-->
+                <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">22222</i></div>
+              </div>
+              <div class="indexlist_rt" style="right: 0px;">
+                <span class="rjsy" >平均抢到:<span class="money clearfix"><i class="icon red_port_icon"></i><i class="moneyitem">3.36</i></span></span>
+              </div>
+            </div>
+          </a>
+        </ion-item>
+
+      </div>
+
+      <div class="cloudsale_more"  ng-click="changeshowsupport(1)">查看其它<span
+        >20</span>个红包<i class="icon ion-ios-arrow-down"></i></div>
+    </div>
+
+
+    <!-- cpv -->
+    <div class="goodsWarehouse">
+      <div class="goodsTitle cloudSaleAdTitle"><span><span class="name">推荐客户抢红包</span></span></div>
+      <!--任务列表抢红包-->
+      <div class="cloudSalerAdContent">
+        <div class="cpvInforListsBox">
+          <div class="cpvInforBox" ui-sref="cpvdetail">
+            <img src="img/cpv/CPV-default.png" />
+            <div class="cpvUsersNum"><i class="icon icon-join-user"></i><span>1323人</span></div>
+            <div class="cpvNewBox"><span>新</span></div>
+            <div class="cpvBusinessInfor">
+              <div class="cpvTitleBox">我爱我家 为你打造爱的领域</div>
+              <div class="businessInfor clearfix">
+                <div class="businessName fl"><i class="icon icon-tab-home"></i><span>大地家装工作室</span></div>
+                <div class="businessSet fr"><span class="text">每单收益：</span><i class="goldImg"></i><span class="profitNum">200元</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="cpvInforBox" ui-sref="cpvdetail">
+            <img src="img/cpv/CPV-default.png" />
+            <div class="cpvUsersNum"><i class="icon icon-join-user"></i><span>1323人</span></div>
+            <div class="cpvNewBox"><span>新</span></div>
+            <div class="cpvBusinessInfor">
+              <div class="cpvTitleBox">我爱我家 为你打造爱的领域</div>
+              <div class="businessInfor clearfix">
+                <div class="businessName fl"><i class="icon icon-tab-home"></i><span>大地家装工作室</span></div>
+                <div class="businessSet fr"><span class="text">每单收益：</span><i class="goldImg"></i><span class="profitNum">200元</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- 素材-->
+    <div class="goodsWarehouse">
+      <div class="goodsTitle cloudSaleAdTitle"><span><span class="name">可用于推广的素材</span></span></div>
+      <!--任务列表抢红包-->
+      <div class="cloudSalerAdContent">
+        <ul class="materialList">
+          <li class="materiaItem clearfix">
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_word.png">
+            </div>
+            <div class="rightpart fr">
+              <div class="materiaTitle">享推新手入门推荐必看赚钱秘籍.docx</div>
+              <div class="timeGroup"><span>2016-05-16</span><span>08:22</span></div>
+            </div>
+          </li>
+          <li class="materiaItem clearfix">
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_xlsx.png">
+            </div>
+            <div class="rightpart fr">
+              <div class="materiaTitle">素材链接分享统计表申请360云盘下载进入12345送2000张免扣图素材.xlsx</div>
+              <div class="timeGroup"><span>2016-05-16</span><span>08:22</span></div>
+            </div>
+          </li>
+          <li class="materiaItem clearfix">
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_mp3.png">
+            </div>
+            <div class="rightpart fr">
+              <div class="materiaTitle">享推新手入门推荐必看赚钱秘籍.docx</div>
+              <div class="timeGroup"><span>2016-05-16</span><span>08:22</span></div>
+            </div>
+          </li>
+          <li class="materiaItem clearfix">
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_pic.png">
+            </div>
+            <div class="rightpart fr">
+              <div class="materiaTitle">达人手册.jpg</div>
+              <div class="timeGroup"><span>2016-05-16</span><span>08:22</span></div>
+            </div>
+          </li>
+          <li class="materiaItem clearfix">
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_txt.png">
+            </div>
+            <div class="rightpart fr">
+              <div class="materiaTitle">达人手册.txt</div>
+              <div class="timeGroup"><span>2016-05-16</span><span>08:22</span></div>
+            </div>
+          </li>
+          <li class="materiaItem clearfix">
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_pdf.png">
+            </div>
+            <div class="rightpart fr">
+              <div class="materiaTitle">达人成长手册—最全的微信运营架构思维导图.pdf</div>
+              <div class="timeGroup"><span>2016-05-16</span><span>08:22</span></div>
+            </div>
+          </li>
+          <li class="materiaItem clearfix" >
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_zip.png">
+            </div>
+            <div class="rightpart fr">
+              <div class="materiaTitle">品牌管理项目指导—新媒体运营推广大策略.zip</div>
+              <div class="timeGroup"><span>2016-05-16</span><span>08:22</span></div>
+            </div>
+          </li>
+          <li class="materiaItem clearfix">
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_xmind.png">
+            </div>
+            <div class="rightpart fr">
+              <div class="materiaTitle">商家入驻必读文件.xmind</div>
+              <div class="timeGroup"><span>2016-05-16</span><span>08:22</span></div>
+            </div>
+          </li>
+          <li class="materiaItem clearfix">
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_ppt.png">
+            </div>
+            <div class="rightpart fr">
+              <div class="materiaTitle">渠道策划书.pptx</div>
+              <div class="timeGroup"><span>2016-05-16</span><span>08:22</span></div>
+            </div>
+          </li>
+          <li class="materiaItem  clearfix">
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_mp4.png">
+            </div>
+            <div class="rightpart fr">
+              <div class="materiaTitle">渠道策划书.mp4</div>
+              <div class="timeGroup"><span>2016-05-16</span><span>08:22</span></div>
+            </div>
+          </li>
+          <li class="materiaItem clearfix">
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_mp3.png">
+            </div>
+            <div class="rightpart fr">
+              <div class="materiaTitle">金牌销售客户答疑.mp3</div>
+              <div class="timeGroup"><span>2016-05-16</span><span>08:22</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="zixunBtbArea">
+      <div class="zixunBtn">咨询我吧</div>
+    </div>
+
+  </ion-content>
+
+  <div class="helpSellHeader helpSellHeader2 clearfix">
+    <div class="goBackIcon iconBox" ng-click="goback()">
+        <span class="iconRoundBox2 iconRoundBox">
+          <i class="icon ion-ios-arrow-left" style="font-size:45px;text-align: center; line-height: 53px; left: -2px;  position: relative;"></i>        </span>
+    </div>
+    <div class="rightShareColletion">
+      <div class="shareIcon iconBox">
+          <span class="iconRoundBox2 iconRoundBox business_focusBtn">
+            <i  class="icon ion-plus" style="font-size:26px;display: inline-block" ></i>
+            关注
+          </span>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</ion-view>
+

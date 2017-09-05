@@ -1,0 +1,224 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">{{detail.taskname}}</span>
+    <i class="topTitleRightIcon"
+       ng-class="{'icon-collection-shi':detail.isstoret === 1,'icon-collection-kong':detail.isstoret !== 1}"
+       ng-click="toggleCollect()"></i></div>
+
+  </ion-header-bar>
+  <ion-content class="has-header contentbg">
+    <div class="cpvActiveDetailHeader">
+      <div class="title">{{detail.taskname}}</div>
+      <div class="specialCouponInfor"
+           ng-class="{'specialCouponInfor':[0,1,2].indexOf(detail.article.catagory) == -1,'businessCouponInfor':[3,4,5,6].indexOf(detail.article.catagory) == -1}">
+        <div class="couponInfor ">
+          <div class="couponContent {{cssClass}}">
+            <div class="businessInfor">
+              <img src="{{detail.logo | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+              <span class="businessSimpleName">{{detail.alias || detail.company}}</span>
+            </div>
+
+            <!-- 代金券 -->
+            <div ng-if="[0,3,5].indexOf(detail.article.catagory) != -1">
+
+              <div class="couponMoney" ng-if="detail.article.couponprice.length < 5">
+                <span ng-if="detail.article.catagory == 3">减免</span> &yen;<span class="num">{{detail.article.couponprice}}</span>元
+                <span ng-if="detail.article.catagory == 3">
+                  <span style="margin-left: 10px;">前{{detail.article.specialcouponnum}}位减免</span> &yen;<span
+                  class="num2">{{detail.article.specialcouponprice}}</span>元
+                </span>
+              </div>
+
+              <div class="couponMoney couponMoneyMax" ng-if="detail.article.couponprice.length >= 5">
+                <div class="discountBox">
+                  <span ng-if="detail.article.catagory == 3">减免</span> &yen;<span class="num">{{detail.article.couponprice}}</span>元
+                </div>
+                <div class="discountBox" ng-if="detail.article.catagory == 3">
+                  <span>前{{detail.article.specialcouponnum}}位减免</span> &yen;<span class="num2">{{detail.article.specialcouponprice}}</span>元
+                </div>
+              </div>
+
+            </div>
+
+            <!-- 折扣券 -->
+            <div ng-if="[1,2,4,6].indexOf(detail.article.catagory) != -1">
+
+              <div class="couponMoney">
+                <span ng-if="detail.article.catagory != 2" class="num">{{detail.article.couponprice}}</span>折
+                <span ng-if="detail.article.catagory == 2" class="num">{{detail.article.couponprice}}</span>
+                <span ng-if="detail.article.catagory == 4">
+                  <span style="margin-left: 10px;">前{{detail.article.specialcouponnum}}位</span> <span class="num2">{{detail.article.specialcouponprice}}</span>折
+                </span>
+                <!--<span class="num" ng-if="detail.article.catagory == 2">{{detail.article.couponprice}}</span>-->
+                <!--<div ng-if="detail.article.catagory != 2">-->
+                <!--<span class="num">{{detail.article.couponprice}}</span>折-->
+                <!--</div>-->
+                <!--<span ng-if="detail.article.catagory == 4">-->
+                <!--<span style="margin-left: 10px;">前{{detail.article.specialcouponnum}}位</span> <span class="num2">{{detail.article.specialcouponprice}}</span>折-->
+                <!--</span>-->
+              </div>
+
+            </div>
+
+            <div class="couponPriceTag">{{detail.article.catagoryname}}</div>
+            <div class="businessReceiveInfor clearfix"
+                 ng-class="{'businessReceiveInforMax':[3,4,5,6].indexOf(detail.article.catagory) == -1}">
+              {{detail.article.name}}
+            </div>
+            <div class="bottomWaveIcon" ng-if="[3,4,5,6].indexOf(detail.article.catagory) == -1"></div>
+          </div>
+          <div class="couponOptionBox clearfix">
+            <div class="usefulDate fl"><span>有效期至：{{detail.article.endtime}}</span></div>
+            <div class="couponHaveNum fr">剩余 {{detail.article.restnum}} 张</div>
+          </div>
+        </div>
+        <div style="height: 20px;width:100%;" ng-if="[3,4,5,6].indexOf(detail.article.catagory) == -1"></div>
+        <div class="clearfix" ng-click="getCPVCoupon()" ng-if="hasShareCode"><span class="myReeceiveBtn fr"
+                                                                                   ng-class="{'disabled': canGetCoupon}"
+                                                                                   ng-bind="couponstr"></span></div>
+      </div>
+    </div>
+    <div class="cpvDetailInforBox">
+      <div class="cloudsellTitleCom borderBotNone"><span class="name">推荐扫码：立得</span><span style="width:410px"
+                                                                                          class="content">{{detail.vtaskinfo.price}}元</span>
+      </div>
+    </div>
+
+    <div class="cpvDetailInforBox">
+      <div class="cloudsellTitleCom"><span class="name">推荐说明</span></div>
+      <div class="promoteIntro">
+        <dl class="setDlListStyCom" ng-repeat="intro in detail.recommandintro track by $index">
+          {{intro}}
+        </dl>
+      </div>
+    </div>
+
+    <div class="cpvDetailInforBox">
+      <div class="cloudsellTitleCom"><span class="name">商品说明</span></div>
+      <div class="goodsIntroduce">
+        <img ng-repeat="cpvimg in detail.vtaskinfo.productimg track by $index" src="{{cpvimg | avatefilter}}"
+             ng-click="picgetbig($index)"/>
+        <div class="goodsInforText">
+          <p ng-repeat="spsm in detail.vtaskinfo.productintro track by $index">{{spsm}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="cpvDetailInforBox">
+      <div class="cloudsellTitleCom"><span class="name">用券须知</span></div>
+      <div class="couponContentP">
+        <p ng-repeat="yqxz in detail.vtaskinfo.needtoknow track by $index">{{yqxz}}</p>
+      </div>
+    </div>
+    <div class="cpvDetailInforBox">
+      <div class="cloudsellTitleCom"><span class="name">商家信息</span></div>
+      <div class="couponContentP">
+        <p>电话：{{detail.vtaskinfo.hotline}}</p>
+        <p>地址：{{detail.vtaskinfo.buserinfo}}</p>
+      </div>
+    </div>
+    <div style="height: 93px;width: 100%;"></div>
+  </ion-content>
+
+  <script id="cpvRulesBox.html" type="text/ng-template">
+    <div class="modal hbgModal">
+      <ion-content class="cpvModalContent">
+        <div class="hbgBox cpvRulesContent">
+          <div class="firstTitle">推荐说明</div>
+          <div class="secondTitle">推荐扫码：立得<span>{{detail.vtaskinfo.price}}</span>元</div>
+          <div class="shareStepBox">
+            <ion-scroll direction="y" style="height:100%;">
+              <div class="friendGet"><span>让朋友抢</span></div>
+              <img src="./img/cpv/shareImg.png"/>
+              <p>点击“让朋友抢”，</p>
+              <p>将平台专属优惠券分享给需要的朋友</p>
+              <img class="cpvarrow" src="./img/cpv/cpvarrow.png"/><br/>
+              <img src="./img/cpv/cpvrule1.png"/>
+              <p>限量优惠券是个好东西，好友独享，不要浪费哟~</p>
+              <img class="cpvarrow" src="./img/cpv/cpvarrow.png"/><br/>
+              <img src="./img/cpv/cpvrule2.png"/>
+              <p>好友凭券到店，轻松“扫码”消费</p>
+              <img class="cpvarrow" src="./img/cpv/cpvarrow.png"/><br/>
+              <img src="./img/cpv/cpvrule3.png"/>
+              <p>商家自动发放大红包给你，快去我的账户收钱吧！</p>
+              <div style="height:50px;width:100%;"></div>
+            </ion-scroll>
+          </div>
+          <div class="hbgClose" ng-click="closeHambgModal()">
+            <img src="img/home/hbg-close.png"/>
+          </div>
+        </div>
+      </ion-content>
+    </div>
+  </script>
+
+  <div class="hamburgerBtn" ng-click="openHambgModal()" ng-if="showcpvhbgBtn">
+    <img src="./img/home/hamburgerIcon.png"/>
+  </div>
+
+  <div class="spvDetailFooter">
+    <span class="adviceMeBox" ng-click="gochat()"><i class="icon icon-tab-msg"></i><i>咨询我吧</i></span>
+    <span class="businessIcon" ng-click="gobusiness()"><i class="icon icon-tab-home"></i><i>商家</i></span>
+    <span ng-class="{'cpvDetailShareBtn':true, 'disabled':detail.status!=1}" ng-click="share()">让别人抢<i
+      class="icon icon-cpv-share"></i></span>
+  </div>
+
+  <ion-slide-box ng-if="showcpvpic" class="picSlide" active-slide="showimgIndex" delegate-handle="cpvpichandle">
+    <ion-slide ng-repeat="cpvimg in detail.vtaskinfo.productimg track by $index">
+      <div class="showPic" ng-click="shrinkPic()"><img src="{{cpvimg | avatefilter}}" class="big-pic"></div>
+    </ion-slide>
+  </ion-slide-box>
+
+  <!--分享弹窗-->
+  <div class="newguidemask " ng-if="ifopensharepopup" ng-click="cancelShare()"></div>
+  <div class="share_popup" ng-if="ifopensharepopup">
+    <div class="body">
+      <div class="title">
+        <i class="icon icon-tab-share"></i><span>立即分享至</span>
+      </div>
+      <div class="share_item">
+        <ul class="sharelist">
+          <li ng-click="androidShare('weixin')">
+            <div class="shareicon">
+              <div class="iconitem weixin"></div>
+            </div>
+            <div class="share_name">微信</div>
+          </li>
+          <li ng-click="androidShare('wxZone')">
+            <div class="shareicon">
+              <div class="iconitem friendcircle"></div>
+            </div>
+            <div class="share_name">朋友圈</div>
+          </li>
+          <li ng-click="androidShare('qq')">
+            <div class="shareicon">
+              <div class="iconitem qq"></div>
+            </div>
+            <div class="share_name">QQ</div>
+          </li>
+          <li ng-click="androidShare('qqZone')">
+            <div class="shareicon">
+              <div class="iconitem qqzone"></div>
+            </div>
+            <div class="share_name">QQ空间</div>
+          </li>
+          <li ng-click="androidShare('sinaweibo')">
+            <div class="shareicon">
+              <div class="iconitem weibo"></div>
+            </div>
+            <div class="share_name">微博</div>
+          </li>
+          <li ng-click="androidShare('copylink')">
+            <div class="shareicon">
+              <div class="iconitem browser"></div>
+            </div>
+            <div class="share_name">复制链接</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="buttomgroup" ng-click="cancelShare()">取消</div>
+  </div>
+</ion-view>

@@ -1,0 +1,53 @@
+<ion-view class="bg-grey">
+  <ion-header-bar align-title="middle" style="z-index: 301">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <div><span class="title">个人账户</span></div>
+  </ion-header-bar>
+  <ion-content class="has-header">
+<ul class="perAccountList clearfix">
+<li>
+  <div class="iconline "><i class="icon bg1 icon-acc-hismoney"></i></div>
+  <div class="tipline">历史总收入</div>
+  <div class="moneyline"><i class="icon icon-account-rmb"></i><span ng-bind="account.amoney |number:2"></span></div>
+</li>
+  <li>
+    <div class="iconline"><i class="icon bg2 icon-acc-withdraw"></i></div>
+    <div class="tipline">累计成功提现</div>
+    <div class="moneyline"><i class="icon icon-account-rmb"></i><span ng-bind="account.examoney0 |number:2"></span></div>
+  </li>
+  <li>
+    <div class="iconline"><i class="icon bg3 icon-account-rmb"></i></div>
+    <div class="tipline">交易申请中</div>
+    <div class="moneyline"><i class="icon icon-account-rmb"></i><span ng-bind="account.examoney |number:2"></span></div>
+  </li>
+  <li ng-click="bindAlipay()">
+    <div class="iconline"><i class="icon bg4 icon-acc-bindzfb"></i></div>
+    <div class="tipline">绑定支付宝</div>
+    <div class="bindline" ng-if="account.isset==0"><span>绑定</span></div>
+    <div class="bindline" ng-if="account.isset!=0"><span>换绑</span></div>
+  </li>
+</ul>
+    <div class="tipword">
+    <div class="line clearfix">温馨提示：</div>
+      <div class="line clearfix">
+        <div class="numtip">1、</div>
+        <div class="infotip">新手引导获得的奖励需再赚5元才可提现；</div>
+      </div>
+      <div class="line clearfix">
+        <div class="numtip">2、</div>
+        <div class="infotip">您赚取的佣金可随时进行提现；</div>
+      </div>
+      <div class="line clearfix">
+        <div class="numtip">3、</div>
+        <div class="infotip">用微信提现则无需手续费。</div>
+      </div>
+      <div class="line clearfix">
+        <div class="numtip">4、</div>
+        <div class="infotip">用支付宝提现，金额少于50元，需支付1元的手续费（支付宝收取手续费）；</div>
+      </div>
+    </div>
+
+  </ion-content>
+  </ion-view>

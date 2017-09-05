@@ -1,0 +1,80 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" ng-bind="sysmsgtypename"></span>
+  </ion-header-bar>
+  <ion-content class="has-header has-chatheader systemchat xt-grey-bg" delegate-handle="sysmessagechat" >
+    <ion-refresher pulling-text="下拉加载..." on-refresh="queryOld()"></ion-refresher>
+    <ion-list class="message-list">
+      <ion-item ng-repeat="sysMsgdetail in sysmsgdetaillist track by $index">
+        <div class="inforDate"><span ng-bind="sysMsgdetail.inittime"></span></div>
+        <div class="messagearea clearfix ">
+          <div class="messageHead fl">
+            <img src="img/msg_setting.png" ng-if="sysMsgdetail.type==5"/>
+            <img src="img/msg_tuisong.png" ng-if="sysMsgdetail.type==1"/>
+            <img src="img/msg_cloudsale.png" ng-if="sysMsgdetail.type==2"/>
+            <img src="img/msg_money.png" ng-if="sysMsgdetail.type==3"/>
+            <img src="img/msg_withdraw.png" ng-if="sysMsgdetail.type==4"/>
+            <img src="img/msg_client.png" ng-if="sysMsgdetail.type==6"/>
+            <img src="img/msg_groupBuy.png" ng-if="sysMsgdetail.type==7"/>
+          </div>
+          <i class="icon icon-xt2-arrow fl"></i>
+          <div class="talk-message talk-message-fl fl" ng-if="sysMsgdetail.content">
+            <div>
+              <dir id="dir" style="-webkit-margin-after: 0px;-webkit-margin-before: 0px;-webkit-padding-start: 0px;" content="sysMsgdetail.content"></dir>
+            </div>
+          </div>
+          <div class="talk-message talk-message-fl fl" ng-if="sysMsgdetail.inviteInfo">
+            <span>因为您在 {{sysMsgdetail.inviteInfo.taskname}} 活动中有良好宣传效果，{{sysMsgdetail.inviteInfo.bname}} 邀请您成为其云销售。
+              <br/>
+              <span ng-if="sysMsgdetail.inviteInfo.status == 0">
+              ------------------------------<a href="#" style="text-decoration:none" ng-click="dealBInvite($index,1)">接受</a>/<a href="#" style="text-decoration:none" ng-click="dealBInvite($index,2)">拒绝</a>
+              </span>
+              <span ng-if="sysMsgdetail.inviteInfo.status == 1">------------------------------已同意</span>
+              <span ng-if="sysMsgdetail.inviteInfo.status == 2">------------------------------已拒绝</span>
+            </span>
+          </div>
+        </div>
+      </ion-item>
+      <!--<ion-item class="cloudinvite">-->
+        <!--<div class="messagearea clearfix msg_namebox">-->
+          <!--&lt;!&ndash;如果是用户消息，fl-&#45;&#45;》 fr&ndash;&gt;-->
+          <!--<div class="messageHead fl">-->
+            <!--<img src="img/default.png">-->
+          <!--</div>-->
+          <!--&lt;!&ndash;如果是用户消息，fl-&#45;&#45;》 fr  并且加入水平翻转的样式flipx  &ndash;&gt;-->
+          <!--<i class="icon icon-xt2-arrow fl"></i>-->
+          <!--&lt;!&ndash;如果是用户消息，fl-&#45;&#45;》 fr&ndash;&gt;-->
+          <!--<div class="talk-message talk-message-fl fl">-->
+            <!--<div class="talker_name"></div>-->
+            <!--<div class="yongjinbox" ng-click="go('accountdetail')">-->
+              <!--<div class="yongjin_body clearfix">-->
+                <!--<div class="clearfix">-->
+                  <!--<div class="fl head">-->
+                    <!--<img src="img/cloudinvite_pic.png"/>-->
+                  <!--</div>-->
+                  <!--<div class="info fl">-->
+                    <!--<div>平安保险</div>-->
+                    <!--<div>诚邀您的加入</div>-->
+                  <!--</div>-->
+                <!--</div>-->
+                <!--<div class="desc over-ellipsis">因为您在“网上投保立减15%的塑料袋积分”</div>-->
+              <!--</div>-->
+              <!--<div class="yongjin_btm clearfix">-->
+                <!--<div class="fl state">合作</div>-->
+                <!--<div class="fr func">-->
+                  <!--<img src="img/icon_cloudinvite.png"/>-->
+                  <!--<span>云销售邀请</span>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<div class="send_failed" ng-click="showConfirm()"><i class="ion ion-android-alert"></i></div>&ndash;&gt;-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</ion-item>-->
+    </ion-list>
+  </ion-content>
+</ion-view>

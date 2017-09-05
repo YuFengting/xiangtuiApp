@@ -1,0 +1,510 @@
+.wrong-text{width: 100%;height: auto;color: #999;font-size: 20px;text-align: left;padding: 18px;line-height: 38px;margin-top: 30px;text-align: justify}
+.shareRule{position: relative}
+.shareRule .shareTipinfo{position: relative;width: 100%;height: auto;font-size: 26px;color:#eee7f7;line-height: 40px;text-align: justify;padding: 50px;padding-bottom: 80px; }
+.eventDetial{display: block;margin-left: 40px;}
+.sharefooter{background-image: url(../../img/pcenter/inviteFb2.jpg);background-size: 100% 100%;background-position: 0 0;background-repeat: no-repeat;}
+
+
+/*重置登陆密码忘记密码框*/
+.forget-tip{ font-size: 22px; line-height: 40px; color: #1c8df6; padding-left: 18px;}
+
+/*个人账户*/
+.account-header{top: 368px;}
+.topheader{top: 80px;position: fixed;z-index: 1000}
+.perAccountList{width: 100%;height: auto;border-left: 1px solid #d4d4d4;background:white}
+.perAccountList li{width: 50%;border-bottom: 1px solid #d4d4d4;border-right: 1px solid #d4d4d4;float: left;text-align: center;height:240px;position: relative;padding-top: 30px; }
+.perAccountList li .iconline{width: 100%;height:100px; }
+.perAccountList li .iconline .icon{display: block;height: 100px;width: 100px;border-radius: 50%;margin: 0 auto;line-height: 100px;color: white;position: relative;left: 50%;margin-left: -50px;font-size: 60px;}
+.perAccountList li .tipline{width: 100%;text-align: center;font-size:20px;color: #999; line-height: 48px;}
+.perAccountList li .moneyline{width: 100%;text-align: center;color: #333;font-size:30px; line-height: 40px;}
+.perAccountList li .moneyline .icon{font-size:20px; }
+.perAccountList li .iconline .bg1{background: #f89350}
+.perAccountList li .iconline .bg2{background: #83e25d}
+.perAccountList li .iconline .bg3{background: #f86fa9}
+.perAccountList li .iconline .bg4{background: #50c7f8}
+.perAccountList li .bindline{width: 100%;line-height: 30px;}
+.perAccountList li .bindline span{background: #ff3b30;border-radius: 30px;padding: 0 10px;color: white;font-size: 20px;}
+
+
+.tipword{width: 100%;height: auto;padding: 47px 18px 0;font-size: 20px;color: #999;text-align: left;line-height: 34px}
+.tipword .line{width: 100%;text-align: left}
+.tipword .line .numtip{width:40px;float: left }
+.tipword .line .infotip{width: 564px;text-align: justify;height: auto;float: left}
+
+
+/*账单筛选按钮*/
+.selectBtn{position: absolute;right: 18px; line-height: 80px; height: 80px; z-index: 1;}
+.selectBtn .icon{display: block; float: right; color: #999; line-height: 82px; font-size: 25px; width: 20px;}
+.selectBtn span{display: block;float: right;line-height: 80px;font-size: 25px;padding-right: 10px;color: #999;}
+
+
+/*年龄信息弹窗*/
+.mbsc-mobiscroll .mbsc-fr-w{color: #666 !important;}
+
+/*3.4.1销售身份*/
+.businessRelationship{position: absolute;right:16px;top:0px;width:43px;height:86px;padding:10px 10px 18px;color:#fff;font-size:22px;line-height: 25px;white-space:normal;}
+.businessRelationship.cooperation{background-color:#ff3b30;}
+.businessRelationship.examine{background-color:#419afb;}
+.businessRelationship .botArrow{position: absolute;bottom: -1px;left:0px;width:0px;height:0px;line-height: 0px;border-bottom:18px solid #fff;border-left:22px solid transparent;border-right:22px solid transparent; }
+.identity-business-list .businessInfor p:nth-child(1){width:408px;}
+.editBusinessRelative{position: absolute;padding: 0 18px;background: transparent;border: none;line-height: 80px;color: #fff;font-size: 25px;right: 0px;bottom: 0px;}
+
+.identity-business-list{padding:18px 0 0;}
+.identity-business-list .item{border:0 none;margin-bottom:18px;background-color:transparent;}
+.identity-business-list .item-content{height:134px;background-color:#ffffff;border-radius:10px;overflow:hidden;border:1px solid #d9d9d9;padding:0px;margin:0 18px;}
+.identity-business-list .item-delete .button.icon{margin: 0 6px;padding: 0 12px;}
+.identity-business-list .item-delete .button.icon:hover{opacity: 1;}
+.identity-business-list .list-left-editing .item-left-editable .item-content{-webkit-transform: translate3d(70px,0,0);transform: translate3d(70px,0,0);}
+.identity-business-list .button-icon.icon:before{font-size:42px;}
+
+/*邀请好友*/
+.inviteUserBox{width: 100%;background: #fff;}
+.inviteUserBox img{display: block;width:100%;height:712px;}
+.inviteUserBox .inviteMoreUserBtn{background: url(../../img/pcenter/inviteBtn.png) no-repeat;width:488px;height:139px;text-align: center;line-height: 139px;color:#fff;font-size:29px;margin:20px auto;}
+.inviteUserBox .inviteSuccessBtn{font-size:20px;color:#7d7d7d;text-align: center;padding-bottom: 42px;}
+.inviteUserBox .inviteSuccessBtn .inviteNumberBox{height:60px;padding: 0 20px;line-height: 58px;border-radius: 30px;border:1px solid #d9d9d9;display: inline-block;}
+.inviteUserBox .inviteSuccessBtn .inviteNumberBox *{display: inline-block;vertical-align: middle;}
+.inviteUserBox .inviteSuccessBtn .inviteNumberBox img{margin-right:10px;display: inline-block;width:21px;height:21px;}
+.inviteUserBox .inviteSuccessBtn .inviteNumberBox .pepoleNum{color:#ff3b30;margin:0 5px;}
+.inviteUserBox .inviteSuccessBtn .inviteNumberBox .icon{font-size: 30px;vertical-align: middle;margin-left: 8px;}
+.inviteActiveRules{padding:60px 62px;width:100%;}
+.inviteActiveRules .rulesTitle{background: #e5e5e5;height:3px;width:100%;position: relative;}
+.inviteActiveRules .rulesTitle span{position: absolute;padding:0 22px;left:50%;top:50%;transform: translate(-50%,-50%);-webkit-transform: translate(-50%,-50%);font-size:27px;color:#ff4d49;background: #fafafa;text-align: center;}
+.inviteActiveRules .rulesText{font-size:22px;color:#808080;margin-top:40px;margin-bottom: 0px;}
+.inviteActiveRules .rulesText .redRound{float:left;background: #ff3b30;width:6px;height:6px;border-radius: 50%;margin:12px 20px 0 6px;}
+.inviteActiveRules .rulesText dd{margin-left:32px;line-height: 35px;}
+.inviteUserNumBox{width:601px;margin:78px auto 0;position: relative;z-index: 999;}
+.inviteUserNumBox .invitePopupHeader{width:100%;height:328px;background: url(../../img/pcenter/invitepop.png) no-repeat;text-align: center;color:#fff;padding-top:135px;}
+.inviteUserNumBox .invitePopupHeader .inviterName{font-size:25px;}
+.inviteUserNumBox .invitePopupHeader .inviteNumReward{font-size:31px;font-weight: bold;line-height: 40px;margin-top: 15px;}
+.inviteUserNumBox .invitePopupHeader .inviteNumReward .number{font-size:31px;color:#fff100;margin:0 30px;}
+.inviteUserNumBox .inviteInforBox{width:100%;background: #fff;height:450px;border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;padding:0px 55px 0 60px;overflow:hidden;}
+.inviteUserNumBox .inviteInforBox .noinvterBox .nothingImg{width:193px;height:215px;margin:90px auto 40px;display: block;}
+.inviteUserNumBox .inviteInforBox .noinvterBox p{font-size:21px;color:#7d7d7d;line-height: 40px;text-align: center;margin-bottom: 0px;}
+.inviteUserNumBox .closePopBtn{width:48px;height:80px;background: url(../../img/pcenter/inviteClose.png) no-repeat;position: absolute;right:35px;top:-41px;}
+.inviteUserNumBox .inviteInforBox .inviteInforList{overflow-y: auto;height:100%;padding-top:15px;}
+.inviteUserNumBox .inviteInforBox .inviteInforList .inforList.titleBox{font-size:26px;font-weight: bold;}
+.inviteUserNumBox .inviteInforBox .inviteInforList .inforList{font-size:24px;display: flex;display: -webkit-flex;color:#000;border-bottom:1px solid #e5e5e5;height:88px;line-height: 88px;padding-right: 20px;}
+.inviteUserNumBox .inviteInforBox .inviteInforList .inforList span.greyColor{color:#b5b5b5;}
+.inviteUserNumBox .inviteInforBox .inviteInforList .inforList span:nth-child(1){flex:1.5;-webkit-flex:1.5;text-align: left;padding-left:15px;}
+.inviteUserNumBox .inviteInforBox .inviteInforList .inforList span:nth-child(2){flex:1;-webkit-flex:1;text-align: center;}
+.inviteUserNumBox .inviteInforBox .inviteInforList .inforList span:nth-child(3){flex:1;-webkit-flex:1;text-align: center;}
+
+/*享推学院*/
+.xtschoolDetailTitle{padding:25px 30px;border-bottom:1px solid #d9d9d9;background: #fff;}
+.xtschoolDetailTitle .comefrom{font-size:22px;color:#999999;margin-bottom:10px;}
+.xtschoolDetailTitle .comefrom *{display: inline-block;vertical-align: middle;}
+.xtschoolDetailTitle .comefrom img{width:38px;height: 38px;border-radius: 50%;overflow: hidden;margin:0 5px;}
+.xtschoolDetailTitle .comefrom .name{color:#fe4e44;}
+.xtschoolDetailTitle .title{font-size:31px;color:#333333;line-height: 45px;}
+.xtschollFAQMain{border-bottom: 1px solid #d9d9d9;background: #fff;}
+.xtsFaqDetailList{padding:30px  25px 35px 0;border-bottom:1px solid #d9d9d9;margin-left:25px;}
+.xtsFaqDetailList:last-child{border-bottom: 0 none;}
+.xtsFaqDetailList .xtsFaqUserInfor{line-height: 55px;}
+/*.xtsFaqDetailList .xtsFaqUserInfor .headerImgName *{display: inline-block;vertical-align: middle;}*/
+.xtsFaqDetailList .xtsFaqUserInfor .headerImgName img{width:55px;height:55px;border-radius: 50%;overflow: hidden;}
+.xtsFaqDetailList .xtsFaqUserInfor .headerImgName .answerDate{line-height: 30px;}
+.xtsFaqDetailList .xtsFaqUserInfor .headerImgName .answerDate p{margin:0 0 0 15px;}
+.xtsFaqDetailList .xtsFaqUserInfor .headerImgName{width:70%;}
+.xtsFaqDetailList .xtsFaqUserInfor .headerImgName .answerDate{width: 80%;}
+.xtsFaqDetailList .xtsFaqUserInfor .headerImgName .answerDate p.answerName{color:#2b87f0;font-size:25.6px;width: 100%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.xtsFaqDetailList .xtsFaqUserInfor .headerImgName .answerDate p:last-child{font-size:20px;color:#999999;}
+/*.xtsFaqDetailList .xtsFaqUserInfor .headerImgName .answerDate p span{color:#2b87f0;font-size:25.6px;}*/
+.xtsFaqDetailList .xtsFaqUserInfor .headerImgName .icon{color:#ffb501;font-size:28px;margin-left: 10px;}
+.xtsFaqDetailList .xtsFaqUserInfor .clickZanNum{font-size:20px;color:#999999;}
+.xtsFaqDetailList .xtsFaqUserInfor .clickZanNum *{display: inline-block;vertical-align: middle;}
+.xtsFaqDetailList .xtsFaqUserInfor .clickZanNum .icon{font-size:30px;margin-right:10px;}
+.xtsFaqDetailList .xtsFaqUserInfor .clickZanNum .redIcon{color:#fe4e44;}
+.xtsFaqDetailList .xtsFaqUserInfor .clickZanNum .clickReplyBtn{color:#2b87f0;margin-left: 50px;}
+.xtsFaqDetailList .faqContent{margin-top:10px;color:#333333;font-size:27px;line-height: 45px;text-align: justify;}
+.xtsFaqDetailList .faqContent p{color:#333333;font-size:27px;margin-bottom: 0px;line-height: 45px;text-align: justify;}
+.xtsFaqDetailList .faqContent img{max-width:100%;height:auto;display: block;margin:10px 0;width:auto;}
+.xtsFaqDetailList .faqContent img.smile{width: 38px;height: auto;display: inline-block;margin: 0 2px;}
+.xtsFaqDetailList .faqInforBot{font-size:20px;color:#999999;margin-top:20px;}
+.xtsFaqDetailList .faqInforBot .deleteBtn{margin-left: 40px;}
+.xtsPublishQA{padding:15px 0;position:fixed;bottom:0px;width: 100%;background: #e1e1e1;}
+.xtsPublishQA span{width:508px;height:60px;border:1px solid #d4d4d4;line-height: 58px;text-align: center;display:block;margin:0 auto;font-size:20px;color:#999999;background: #fff;}
+.xtsFAQFoot .footInforBox {background: #ebeff5;}
+.xtsFAQFoot .footInforBox .input{width:470px;}
+.replyContentBox{color:#000000;font-size:27px;line-height: 45px;margin-top: 10px;}
+.replyContentBox span{color:#2b87f0;}
+.replyContentBox a{color:#333333;}
+.replyContentBox .delIcon{padding:10px;font-size:25px;display: inline-block;vertical-align: middle;color:#999;}
+.showMoreAnswer{text-align: center;color:#999;margin: 10px auto; font-size: 22px;padding: 10px;line-height: 30px;}
+
+/*享推学院*/
+
+
+/*首页*/
+.headbar{position: fixed;z-index: 1;background: white;top: 80px;left: 0px;width: 100%;height: 70px;}
+.div-top18{width: 100%;height: 18px;background: #f4f4f4}
+.headbtnlist{width: 100%;    border-bottom: 2px solid #f4f4f4;}
+.headbtnlist li{float: left;height: 70px;padding:20px 0;font-size: 22px;color: #333;}
+.headbtnlist li.W26{width:26% }
+.headbtnlist li.W26 .askIcon{color:#fe443a;}
+.headbtnlist li.W26 .tiparea span.title{color:#fe443a;}
+.headbtnlist li.W32{width:32% }
+.headbtnlist li.W42{width:42% }
+.headbtnlist li .tiparea{width: 100%;text-align: center;height: 30px;line-height: 30px;}
+.borderR{border-right: 1px solid #d8d8d8}
+.topIcon{display: inline-block;width: 25px;height: 25px;font-size: 24px;}
+.askIcon{background-position: 0 0; top: 2px; position: relative; color: #999}
+.headbtnlist li .tiparea span.title{height: 25px;display: inline-block;font-weight: 400;color:#707070}
+.relatemeIcon{background-position: -25px 0; top: 2px; position: relative; color: #999}
+.tipnum{display: inline-block;width:auto;height: 25px;background: #fe443a;color: #fff;font-size: 17px;text-align: center;border-radius: 25px;top: -3px; position: relative;line-height: 25px;min-width: 25px; padding: 0 4px;}
+.li3po{position: relative; top: 0px;}
+.askArea{width: 100%;height: auto;padding: 20px 0px;background: white;padding-bottom: 0px;}
+.askList{width: 100%;height: auto;padding-left: 18px;}
+.askList li{width: 100%;padding: 20px 18px; height: auto;padding-left: 0px;border-bottom: 1px solid #d9d9d9}
+.askList li:last-child{border: none}
+.askList li .leftPart{width: 14%;float: left}
+.askList li .leftPart .readNum{width: 100%;height: auto;color:#707070;font-size: 20px; line-height: 38px;text-align: center;padding-right: 0px;}
+.askList li .rightPart{width: 86%;float: left}
+.titlePart{width: 100%;line-height: 38px;color: #333;font-size:24px;text-align: justify; }
+.titleIcon{width: 60px;height: 30px; position: relative;border-radius: 6px;font-size: 20px;line-height: 20px;display: inline-block;padding: 2px 6px;top: 0px;text-align: center;}
+.titleIcon.setTop{border: 2px solid #66ba34; color: #66ba34 }
+.titleIcon.setOfficial{border: 2px solid #00b7ee;color: #00b7ee }
+.headPicPart{width: 100%;height:70px; }
+.headPicPart img{width:46px;height: 46px;border-radius: 50%; position: relative; top: 10px;margin-right: 10px; border: 1px solid #ccc;}
+.headPicPart .anotherHead{width: 46px;height: 46px;display: inline-block;border-radius: 46px;background: #eeeeee;border: 1px solid #999;line-height: 46px;text-align: center;font-weight: 600;color: #333;font-size: 20px;    position: relative; top: -2px;}
+
+.xtOfiical{position: relative; margin-top: -25px;}
+.xtOfiical.toggle .track{height: 40px; width: 70px;}
+.xtOfiical.toggle .handle{width: 36px;height: 36px;}
+.gotoBusBtn{width:86px;height: 86px;border-radius: 100%;position: fixed;bottom: 40px;right:40px; background:linear-gradient(0deg, #ff5e3a, #ff2a68);color: white ;font-size: 20px;padding-top: 17px;box-shadow: 0px 5px 33px rgba(255,94,58,.6);}
+.gotoBusBtn span{line-height: 26px;font-weight: 600;margin-left: 12px;}
+.gotoBusBtn  .icon{ position: absolute; font-size: 40px; top: 22px; right: 10px; display: block;}
+
+.centerNav{ height: 135px; background: #fff; padding: 40px 0; border-bottom: 1px solid #d8d8d8;}
+.centerNav li{ float: left; width: 33.33%; text-align: center; font-size: 20px; color: #666; height: 58px; border-left: 1px solid #eee;}
+.centerNav li:first-child{ border-left: 0px;}
+.centerNav img{width: auto;}
+.centerNav .centerText{ position: relative; top: 6px;}
+.centerNav .centerIcon{ position: relative; top:-5px;}
+.centerNav .centerBadge{ min-width: 30px; height: 30px; border: 3px solid #ff3b30; color: #ff3b30; text-align: center; position: absolute; border-radius: 30px; line-height: 24px; font-size:18px; font-weight: 700; padding: 0 5px;top: -5px;left: 52%; background: #fff;}
+.centerNav i{font-size: 40px;}
+
+/*享推学院与我相关*/
+.xtsrelatemecontent .relateZan{color: #999;margin-bottom: 15px;}
+.xtsrelatemecontent .relateName{margin-bottom: 18px;}
+.xtsrelatemecontent .relateDel{margin-bottom: 15px;}
+.xtsrelatemecontent .relateText{margin-bottom: 15px;}
+
+/*享推学院提问*/
+.xtschoolQuestionBox{padding:28px 16px;}
+.questionSubmitdisabled{opacity: 0.6;filter:alpha(opacity=60);}
+.xtschoolQuestionBox .advice_hint{color:#999;}
+
+.xtschoolcontent::-webkit-scrollbar{width:0px;}
+.xtschoolslide{height: 100%;}
+.xtschoolcontent{top: 0px !important;}
+
+.xtsDetailContent{overflow-y: scroll !important;}
+
+/*hot标签*/
+.centerHot{position: absolute;top: 8px; right: 50px;}
+.centerHot img{width: auto;}
+
+
+/*选择个人头像页面*/
+.choseHeadpichead.bar-header.bar{background: #000000;}
+.choseHeadPicBg{background: #000;}
+.headPicShowArea{width: 100%;height: auto;position: relative;top: 180px;}
+
+.recList li{margin-bottom: 18px;height: 152px;background: white;border-top: 1px solid #d4d4d4;border-bottom: 1px solid #d4d4d4;padding: 14px;}
+.recList li .line{width: 100%;height: auto;}
+.recList li .line .leftPart{width:auto;height: 30px;line-height: 30px;color:#666;font-size: 26px;  }
+.recList li .line .leftPart .icon{display: inline-block;width: 30px;height: 30px;line-height: 30px;position: relative;top: 2px;}
+.recList li .line .leftPart .usertel{color: #007aff; white-space: nowrap;overflow: hidden; text-overflow: ellipsis; width: auto; height: 30px; line-height: 30px; position: relative; top:6px;width: auto;max-width: 180px;display: inline-block}
+.platform-ios .recList li .line .leftPart .usertel{top:0px;}
+.recList li .line .rightPart{width:auto;height: 42px;line-height:42px;color:#ccc;font-size: 20px;  }
+.recList li .line .rightPart span{margin-left: 10px}
+.recList li .line .bus{width:100%;height: 30px;line-height: 30px;color: #999;font-size: 22px;margin-top: 10px}
+.recList li .line .bus .icon{font-size: 26px;position: relative;top: 3px;}
+.recList li .line .task .icon{font-size: 26px;position: relative;top: -4px;}
+.recList li .line .task{width: 100%;height: 30px;line-height: 30px;color: #999;font-size: 22px;margin-top: 10px}
+.recList li .line .task .taskname{width:420px;display: inline-block; }
+.recList li .line .task{position: relative}
+.recList li .line .task .stateinfo{position: absolute;height: 30px;line-height: 30px;color: #999999;font-size: 22px;right: 0px;bottom: 0px;}
+
+
+/*意见反馈*/
+.advive_content .scroll{ height: 100%;}
+.adviceTel{position: absolute;font-size: 20px; text-align: center; bottom: 30px; width: 100%; color: #999;}
+.adviceTel span{ color: #1184fd; font-size: 27px;}
+.opacity0{opacity: 0;}
+
+/*我的关注*/
+.focusItem{ height: 102px; }
+.focusPic{ width: 70px; height: 70px; float: left;}
+.focusPic img{ width:100%; height: 100%;}
+.focusText{ font-size: 25px; margin-left: 18px; width: 534px; border-bottom: 1px solid #eee; line-height: 68px; float: right; padding-right: 18px;padding-bottom: 15px;}
+.focusList .focusItem:last-child .focusText{ border-bottom: 0px;}
+.focusList{ border-bottom: 1px solid #eee; background: #fff;}
+.focusList .item-content{ padding: 16px 0 16px 18px;}
+.focusList .button.button-assertive {padding: 0 32px; font-size: 25px; background-color: #ff9000;}
+.focusList.list{border: 0px;}
+.focusList .focusItem.item{border: 0px;}
+
+/*我的账户*/
+.purseMoney{ position: absolute; font-size:23px; color: #f7501d; right: 18px; bottom: 30px; }
+.purseMoney span{ font-size: 30px;}
+.purseMoney.purseimg{padding: 20px; right: 0px; bottom: 0px;}
+.purseframes{animation:purseshake 1s infinite;}
+/*我的红包新手引导*/
+.guidelead1 {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 400;
+}
+.guidelead2 {
+  width: auto;
+  position: fixed;
+  top: 408px;
+  left: 216px;
+  margin-top: -280px;
+  /* z-index: 400; */
+}
+.purseExam{position: absolute; width: auto;height: auto;right: 110px;z-index: 1000; top: 16px;}
+/*账户流水*/
+
+.guidelead02 {
+  width: auto;
+  position: fixed;
+  top: 700px;
+  left: 80px;
+  text-align: center;
+  margin-top: -280px;
+  /* z-index: 400; */
+}
+/**/
+.giudeCenter01 {
+  width: auto;
+  height: 100%;
+  position: fixed;
+  top: -433px;
+  left: 0px;
+  z-index: 400;
+  background-size: 100% auto;
+}
+
+@keyframes purseshake
+{
+  0% {-webkit-transform: translate(0,0px);}
+  10% {-webkit-transform: translate(0,-4px);}
+  20% {-webkit-transform: translate(0,0px);}
+  30% {-webkit-transform:translate(0,-4px);}
+  40% {-webkit-transform:translate(0,0px);}
+  100% {-webkit-transform:translate(0,0px);}
+}
+@-moz-keyframes purseshake /* Firefox */
+{
+  0% {-webkit-transform: translate(0,0px);}
+  10% {-webkit-transform: translate(0,-4px);}
+  20% {-webkit-transform: translate(0,0px);}
+  30% {-webkit-transform:translate(0,-4px);}
+  40% {-webkit-transform:translate(0,0px);}
+  100% {-webkit-transform:translate(0,0px);}
+}
+
+@-webkit-keyframes purseshake /* Safari 和 Chrome */
+{
+  0% {-webkit-transform: translate(0,0px);}
+  10% {-webkit-transform: translate(0,-4px);}
+  20% {-webkit-transform: translate(0,0px);}
+  30% {-webkit-transform:translate(0,-4px);}
+  40% {-webkit-transform:translate(0,0px);}
+  100% {-webkit-transform:translate(0,0px);}
+}
+
+@-o-keyframes purseshake /* Opera */
+{
+  0% {-webkit-transform: translate(0,0px);}
+  10% {-webkit-transform: translate(0,-4px);}
+  20% {-webkit-transform: translate(0,0px);}
+  30% {-webkit-transform:translate(0,-4px);}
+  40% {-webkit-transform:translate(0,0px);}
+  100% {-webkit-transform:translate(0,0px);}
+}
+
+.puesehide{animation:pursesfade .5s ease-in forwards;}
+
+@keyframes pursesfade
+{
+  from {opacity: 1; }
+  to {opacity: 0;transform:scale(3)}
+}
+@-webkit-keyframes pursesfade
+{
+  from {opacity: 1; }
+  to {opacity: 0;-webkit-transform:scale(3)}
+}
+@-o-keyframes pursesfade
+{
+  from {opacity: 1; }
+  to {opacity: 0;-o-transform:scale(3)}
+}
+@-ms-keyframes pursesfade
+{
+  from {opacity: 1; }
+  to {opacity: 0;-ms-transform:scale(3)}
+}
+@-moz-keyframes pursesfade
+{
+  from {opacity: 1; }
+  to {opacity: 0;-moz-transform:scale(3)}
+}
+
+.moneyfadein{animation:moneyFadein .5s ease-in;}
+@keyframes moneyFadein
+{
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@-webkit-keyframes pursesfade
+{
+  from {opacity: 0; }
+  to {opacity: 1;}
+}
+
+.account_head_money .addProfitBox{color: #fff;position: absolute;top: 1px;right:60px;font-size:32px;/*-webkit-transition: all 0.3s ease;*/opacity: 0;}
+.addProgifAnimate{animation:adduserMoney 1s linear;-webkit-animation:adduserMoney 1s linear;}
+@keyframes adduserMoney {
+  0%{
+    opacity: 1;
+    right:60px;
+  }
+  100%{
+    opacity: 0;
+    right:200px;
+  }
+}
+@-webkit-keyframes adduserMoney {
+  0%{
+    opacity: 1;
+    right:60px;
+  }
+  100%{
+    opacity: 0;
+    right:200px;
+  }
+}
+
+/*我的红包*/
+.purseModal .scroll{height: 100%;}
+.purseModal.modal{background: rgba(0,0,0,.68);}
+.purseGif{ position: fixed; top: 50%; margin-top:-263px;}
+.purseflyup{animation:pursegoup .2s ease-in forwards;}
+.pursesmall{animation:pursesmall .2s ease-in forwards;}
+.mypurselist .item{padding: 40px 22px; margin-bottom: 16px; border-radius: 30px;}
+.mypurselist .list{ padding: 20px 16px;}
+.purseName{font-size:27px; color: #ff3b30; margin-top: 10px;}
+.purseName span{color: #333; max-width:7em;display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom;}
+.mypurselist .indexlist_busname{ font-size: 20px; color: #999; line-height: 24px;  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;  width: 80%;}
+.mypurselist .indexlist_pic{ width: 94px; margin-right: 8px; height: 100px;}
+.mypurselist .indexlist_pic img{ width: 94px; height: 94px; border-radius: 100%;min-height: 100%;}
+.mypurselist .purseMoney.purseimg{bottom: auto; top: 24px; }
+.mypurselist .purseMoney{ font-size: 24px;bottom: 82px;}
+.mypurselist .purseMoney span{ font-size: 32px;}
+@keyframes pursegoup
+{
+  from {opacity: 1;translate(0,0);}
+  to {transform: translate(0,-640px); }
+}
+@-webkit-keyframes pursegoup
+{
+  from {opacity: 1;translate(0,0);}
+  to {-webkit-transform: translate(0,-640px); }
+}
+@keyframes pursesmall
+{
+  from {transform: scale(1)}
+  to {transform: scale(0.5) }
+}
+@-webkit-keyframes pursesmall
+{
+  from {transform: scale(1)}
+  to {transform: scale(0.5) }
+}
+
+.moneyfadein{animation:moneyFadein .5s ease-in;}
+.purseModal .congratulationContent{ background: url("../../img/pcenter/pursepop.png");}
+.purseModal .congratulationContent .titleHeader{ font-weight: 700;}
+.purseModal .congratulationContent .monyNum{ font-weight: 700;}
+.purseModal .congratulationContent .monyNum span{ font-weight: 200;}
+button.incomeBtn{ width: 320px; height: 68px; line-height: 68px; background: #f87b8e; color: #fff; font-size:25px; font-weight: 700; text-indent: 10px; border-radius: 6px; }
+
+.pursepopLarge{animation:pueseuplarge .5s ease-in;}
+@keyframes pueseuplarge
+{
+  from {transform:scale(0,0);}
+  80%{transform:scale(.9,.9);}
+  90%{transform:scale(.8,.8);}
+  to {transform:scale(1,1);}
+}
+@-webkit-keyframes pueseuplarge
+{
+  from {transform:scale(0,0);}
+  80%{transform:scale(.9,.9);}
+  90%{transform:scale(.8,.8);}
+  to {transform:scale(1,1);}
+}
+.purseAdd{ position: absolute; color: #ff3b30; right: 220px; bottom: 80px; font-size: 22px; animation: purseaddnum 1s ease-in forwards; -webkit-animation: purseaddnum 1s ease-in forwards;}
+@keyframes purseaddnum {
+  from{ right: 220px; opacity: 1;}
+  to{ right: 120px; opacity: 0;}
+}
+
+
+/*我的收藏*/
+.cpvInforListsBox .item-content{ padding: 16px;}
+.cpvInforListsBox .button.button-assertive {padding: 0 32px; font-size: 25px; background-color: #ff9000;}
+.overMask{right: 0px;width: 130px;position: absolute; text-align: right;height: 40px;line-height: 40px;float: left;}
+.overMask span{display: inline-block;float: left;}
+.overMask span.tranglepart{display: inline-block;width: 30px;height: 40px;border-width: 20px; border-color: #959595 #959595 transparent transparent;border-style: solid dashed dotted; float: left; line-height: 40px;}
+.overMask span.closeIconpart{display: inline-block; background: #959595; height: 40px; width: 91px; text-align: center; text-shadow: none; font-size: 24px; color: #fff; position: relative; top: -40px;left: 39px;}
+.cpvColect .item-options{ padding: 18px 0px; background: white; padding-bottom: 33px;}
+
+/*我的优惠券*/
+.couponListSlide{height:100%;}
+.couponListSlide .slider-pager{display: none;}
+.couponBoxMask{width:100%;height:100%;position: absolute;z-index: 100;background: rgba(0,0,0,0.5);left:0px;top:0px;}
+.couponBoxMask .unlockCouponBox{position: absolute;left: 0px;right: 0px;top: 203px;color: #fff;text-align: center;width: 100%;height: 80px;}
+.couponBoxMask .unlockCouponBox .icon{font-size:60px;}
+.couponBoxMask .unlockCouponBox p{font-size:25px;}
+.couponBoxMask .unlockCouponBox p .number{margin:0 10px;}
+.couponBoxMask .unlockCouponBox .unlockProgress{width:390px;height:26px;margin:0 auto;border-radius: 13px;background: #fff;box-shadow: inset 3px 0 7px #000;position: relative;}
+.couponBoxMask .unlockCouponBox .unlockProgress .progressBox{width:80%;height:100%;border-top-left-radius: 13px;border-bottom-left-radius: 13px;
+  background: -webkit-linear-gradient(#82cd46,  #a4eb34,#82cd46); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#82cd46,  #a4eb34,#82cd46); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#82cd46,  #a4eb34,#82cd46); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#82cd46,  #a4eb34,#82cd46); /* 标准的语法 */}
+.lookTaskButton{margin:45px 18px;background: #ff3b30;height:75px;line-height: 75px;text-align: center;color:#fff;font-size:25px;border-radius: 8px;}
+
+.codeInforBox span.taskNameOver{display: inline-block; max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; height: 40px; line-height: 50px; margin: 0 0 0 20px;}/*我的推荐*/
+.myRecommendMain{border-bottom:1px solid #d4d4d4;padding-left: 17px;background: #fff;}
+.myRecommendMain .recommendList{border-bottom: 2px solid #d4d4d4;width: 100%;position: relative;padding: 15px 60px 15px 0;color:#999999;}
+.myRecommendMain .recommendList:last-child{border-bottom: 0 none;}
+.myRecommendMain .recommendList .businessTaskName{font-size:22px;line-height:50px;}
+.myRecommendMain .recommendList .businessTaskName *{display: inline-block;vertical-align: middle;}
+.myRecommendMain .recommendList .businessTaskName .icon{font-size: 25px;margin-right: 10px;}
+.myRecommendMain .recommendList .businessTaskName span{width:80%;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.myRecommendMain .recommendList .recommendCouponInfor{line-height: 50px;}
+.myRecommendMain .recommendList .recommendCouponInfor .businessName{font-size:22px;}
+.myRecommendMain .recommendList .recommendCouponInfor .businessName span{width:155px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.myRecommendMain .recommendList .recommendCouponInfor .businessName *{display: inline-block;vertical-align: middle;}
+.myRecommendMain .recommendList .recommendCouponInfor .businessName .icon{font-size: 25px;margin-right: 10px;}
+.myRecommendMain .recommendList .recommendCouponInfor .couponReceiveInfor{font-size:25.5px;color:#666666;}
+.myRecommendMain .recommendList .recommendCouponInfor .couponReceiveInfor .red{margin-right: 10px;}
+.myRecommendMain .recommendList .goRecList{position: absolute;right: 17px;font-size: 30px;line-height: 134px;top: 0px;}
+
+
+/*二维码页面信息*/
+.busInfo{width: 100%; padding: 20px 50px; font-size: 22px; color: white; line-height: 30px;padding-top: 40px;}
+.telinfo{ display: block; width: 100%;}
+.addressInfo.addTit{display: inline-block;width: 70px; float: left;}
+.addressInfo.addMsg{display: inline-block; width: 470px;float: right;}

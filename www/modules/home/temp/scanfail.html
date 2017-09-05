@@ -1,0 +1,21 @@
+<ion-view style="background: #333333">
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">扫一扫</span>
+  </ion-header-bar>
+  <ion-content class="has-header bg-grey">
+    <div>
+      <div class="consumeResultBox centerIconImg_consume" ng-class="{'failImg':true,'successImg':false}"></div>
+      <div class="relativeTipsBox">
+        <!--<p ng-class="{'tipsText':true,'failTips':false,'successTips':true}">消费成功！</p>-->
+        <p ng-class="{'tipsText':true,'failTips':true,'successTips':false}">扫码失败，请重试！</p>
+        <!--<p ng-class="{'tipsText_sub':true,'failTips_sub':false,'successTips_sub':true}">{{countdown}} 秒之后自动跳回优惠券验证首页</p>-->
+        <p ng-class="{'tipsText_sub':true,'failTips_sub':true,'successTips_sub':false}">{{countdown}}  秒之后自动返回</p>
+      </div>
+    </div>
+
+  </ion-content>
+
+</ion-view>

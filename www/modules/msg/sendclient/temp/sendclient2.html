@@ -1,0 +1,77 @@
+<ion-view>
+
+
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">我的客户</span>
+    <div class="customerHeader"><i class="icon icon-newfriend"  ng-click="goSendClient1()"></i></div>
+  </ion-header-bar>
+  <!--IOS-->
+  <!--		<ion-refresher style="height:20px;" pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>-->
+
+  <div class="loading_list clearfix fl " ng-if="listloadding">
+    <div class="loading_icon1 loadding-animate fl"><i class="ion-load-c"></i></div>
+    <div class="loading_wenzi fl">加载中...</div>
+  </div>
+
+
+
+  <ion-content class="has-header xt-grey-bg">
+    <!--下拉刷新-->
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>
+    <ul class="customerManagementBox" style="padding-top: 16px">
+      <li ng-click="sendCustomerPopup(leads,'6')"  ng-repeat="leads in chatleadslist track by $index" >
+        <div class="customerManagementInfor">
+          <div class="customerHeaderImg">
+            <img src="{{picserver}}{{avate}}" onerror="javascript:this.src='img/default-avatar-square.png';" style="width: 100%;height: 100%"  />
+          </div>
+          <div class="customerInforBox"><i class="icon icon-xt3-customer-user"></i><span class="setLabelStyle" ng-bind="leads.name"></span><i class="icon icon-xt3-customer-phone"></i><span ng-bind="leads.tel"></span></div>
+          <div class="moneyCompanyBox over-ellipsis"><i class="icon icon-uniE9D5"></i><span class="setLabelStyle" ng-bind="'￥'+leads.pay"></span><i class="icon icon-xt2-sj"></i><span ng-bind="company"></span></div>
+          <!--          <div class="customerStatusBox nosubmit" ng-if="leads.status ==0">未提交</div>
+                    <div class="customerStatusBox alreadysubmit" ng-if="leads.status ==1">已提交</div>
+                    <div class="customerStatusBox alreadysubmit" ng-if="leads.status ==2">已处理</div>
+                    <div class="customerStatusBox settlemented" ng-if="leads.status ==3">已结束</div>-->
+        </div>
+        <div class="clearfix customerRemarksBox" ng-if="leads.memo.length>0" >
+          <i class="icon icon-xt-tx fl"></i>
+          <p class="fr"  ng-bind="leads.memo"></p>
+        </div>
+      </li>
+    </ul>
+
+    <div class="nosearch" ng-if="noneclient" ui-sref="tab.cloudsale">
+      <div class="nointenet">
+        <img src="img/nocost.png" style="margin: 0px">
+        <div class="message-info">
+          <span>暂无相关客户</span>
+        </div>
+      </div>
+    </div>
+
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+      ng-if="hasNextPageLoad"
+      on-infinite="loadMore()"
+      distance="1%"
+      immediate-check="false">
+    </ion-infinite-scroll>
+
+  </ion-content>
+
+</ion-view>
+
+<style>
+  /*弹窗样式*/
+  .popup-container{ bottom: 0; top:0;}
+  .popup-container .popup{width: 539px;font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 20px;}
+  .popup-container .popup-title{font-family: "-apple-system", "microsoft yahei";font-size: 27px;padding: 35px;}
+  .popup-container .popup-buttons{padding: 0px;}
+  .popup-container .popup-buttons .button{font-family: "-apple-system", "microsoft yahei";font-size: 25px; color: #1c8df6; background: none;}
+  .popup-container .popup-buttons .button:first-child{border-right: 2px solid #e6e9ed}
+  .popup-container .popup-buttons .button.button-positive{color: #007aff}
+  .popup-container .popup-buttons .button.button-go{color: #ff3b30}
+  .popup-head{border-bottom: 1px solid #e6e9ed}
+  .button-go{color: #ff3b30;}
+</style>

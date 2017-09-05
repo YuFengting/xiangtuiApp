@@ -1,0 +1,179 @@
+<ion-view>
+  <div class="msg_head clearfix">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <ul class="msg_head_center clearfix">
+      <li ng-click="changeCouponTab('0')"  ng-class="{'active':couponTab == 0}"><span>优惠券</span></li>
+      <li ng-click="changeCouponTab('1')" ng-class="{'active':couponTab == 1}"><span>限量券</span></li>
+    </ul>
+  </div>
+  <ion-slide-box class="couponListSlide" active-slide="couponTab">
+    <ion-slide>
+      <ion-content class="has-header xt-grey-bg myCouponList1" delegate-handle="cpccouponlistcontent">
+        <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh1()"></ion-refresher>
+          <div class="businessCouponInfor marginB30" ng-repeat="coupon in couponList1 track by $index" ng-click="go('salecoupon',{workid:coupon.id})">
+            <div class="couponInfor">
+              <div class="couponContent"  ng-style="{'background':coupon.color}">
+                <div class="businessInfor">
+                  <img src="{{coupon.logo | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+                  <span class="businessSimpleName over-ellipsis">{{coupon.bname}}</span>
+                </div>
+                <!-- 代金券 -->
+                <div ng-if="coupon.catagory === 0">
+                  <div class="couponMoney">
+                  <!--<span class="oldMoney">原优惠:  &yen;<del>500</del>元</span>-->
+                  &yen;<span class="num">{{coupon.curnum}}</span>元
+                  </div>
+                </div>
+                <!-- 折扣券 -->
+                <div ng-if="coupon.catagory === 1">
+                  <div class="couponMoney">
+                  <!--<span class="oldMoney">原折扣:  <del>9.5</del>折</span>-->
+                  <span class="num">{{coupon.curnum}}</span>折
+                  </div>
+                </div>
+                <!-- 兑换券 -->
+                <div ng-if="coupon.catagory === 2">
+                  <div class="couponMoney">
+                    <!--<span class="oldMoney">原折扣:  <del>9.5</del>折</span>-->
+                    <span class="duihuanGoods">{{coupon.curnum}}</span>
+                  </div>
+                </div>
+                <div class="couponPriceTag">{{coupon.catagoryname}}</div>
+                <div class="businessReceiveInfor clearfix">{{coupon.curcontent}}</div>
+                <div class="bottomWaveIcon"></div>
+                <div class="couponUseType" ng-if="coupon.status==1||coupon.istimeout==1">
+                  <div class="couponUseBorder">
+                    <span ng-if="coupon.status == 1&&coupon.istimeout!=1">已使用</span>
+                    <span ng-if="coupon.istimeout==1">已过期</span>
+                  </div>
+                </div>
+              </div>
+              <div class="couponOptionBox clearfix">
+              <div class="couponHaveNum fr" ng-if="coupon.nextcontent === undefined">已达最高优惠</div>
+              <div class="nextDiscount fr" ng-if="coupon.nextcontent != undefined">下一优惠
+                <span ng-class="{'blueColor':true,'blueColor2':detail.article.color=='blueColor2','blueColor3':detail.article.color=='blueColor3','redColor':detail.article.color=='redColor','redColor2':detail.article.color=='redColor2','redColor3':detail.article.color=='redColor3','yellowColor':detail.article.color=='yellowColor','yellowColor2':detail.article.color=='yellowColor2','orangeColor':detail.article.color=='orangeColor'}">
+                  {{coupon.nextnum}}
+                  <span ng-if="coupon.catagory === 0">元</span>
+                  <span ng-if="coupon.catagory === 1">折</span>
+                </span>
+                <i class="icon ion-ios-arrow-right"></i>
+              </div>
+              </div>
+            </div>
+            <div class="couponMoreBotImg"></div>
+          </div>
+        <div style="width:100%;height:30px;"></div>
+
+        <!--优惠券券缺省页-->
+        <div class="nosearch " style="margin-top: 150px;" ng-if="couponList1.length==0">
+          <div class="nointenet">
+            <img src="img/nocouponxianliang.png" style="margin: 0px" >
+            <div class="message-info">
+              <span>您还没有任何优惠券</span>
+            </div>
+          </div>
+        </div>
+        <ion-infinite-scroll
+                immediate-check="false"
+                ng-if="hasNextPage1"
+                on-infinite="loadmore1()"
+                distance="1%">
+        </ion-infinite-scroll>
+      </ion-content>
+    </ion-slide>
+    <ion-slide>
+      <ion-content class="has-header myGoldCardList xt-grey-bg" delegate-handle="cpvcouponlistcontent">
+        <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh2()"></ion-refresher>
+          <div class="specialCouponInfor" ng-class="{'overGreyStyle': coupon.expire==1||coupon.status==1}" ng-repeat="coupon in couponList2 track by $index" ng-click="goCouponcode(coupon)">
+            <div class="couponInfor">
+              <div class="couponContent">
+                <div class="businessInfor">
+                  <img src="{{coupon.buserinfo.logo | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+                  <span class="businessSimpleName over-ellipsis">{{coupon.buserinfo.bname}}</span>
+                </div>
+
+                <div ng-if="coupon.catagory==2">
+                  <div class="couponMoney" >
+                    <span class="duihuanGoods">{{coupon.couponprice}}</span>
+                  </div>
+                  <div class="couponPriceTag">{{coupon.catagoryname || "兑换券"}}</div>
+                </div>
+
+                <!-- 代金券 -->
+                <div ng-if="[0,3,5].indexOf(coupon.catagory) != -1">
+                  <div class="couponMoney" ng-if="(''+coupon.couponprice).length < 5">
+                    <!--<span class="oldMoney">原优惠:  &yen;<del>500</del>元</span>-->
+                    <span ng-if="coupon.catagory == 3">减免</span> &yen;<span class="num">{{coupon.couponprice}}</span>元
+                    <span ng-if="coupon.catagory == 3">
+                    <span style="margin-left: 10px;">前{{coupon.specialcouponnum}}位减免</span>
+                      &yen;<span class="num2">{{coupon.specialcouponprice}}</span>元
+                    </span>
+                  </div>
+                  <div class="couponMoney couponMoneyMax" ng-if="(''+coupon.couponprice).length >= 5">
+                    <div class="discountBox">
+                      <span ng-if="coupon.catagory == 3">减免</span> &yen;<span class="num">{{coupon.couponprice}}</span>元
+                    </div>
+                    <div class="discountBox" ng-if="coupon.coupon.catagory == 3">
+                      <span>前{{coupon.specialcouponnum}}位减免</span> &yen;<span class="num2">{{coupon.specialcouponprice}}</span>元
+                    </div>
+                  </div>
+                  <div class="couponPriceTag">{{coupon.catagoryname || "代金券"}}</div>
+                </div>
+
+                <!-- 折扣券 -->
+                <div ng-if="[1,4,6].indexOf(coupon.catagory) != -1">
+                  <div class="couponMoney">
+                    <!--<span class="oldMoney">原折扣:  <del>9.5</del>折</span>-->
+                    <span class="num">{{coupon.couponprice}}</span>折
+                    <span ng-if="coupon.catagory == 4">
+                      <span style="margin-left: 10px;">前{{coupon.specialcouponnum}}位</span> <span class="num2">{{coupon.specialcouponprice}}</span>折
+                    </span>
+                  </div>
+                  <div class="couponPriceTag">{{coupon.catagoryname || "折扣券"}}</div>
+                </div>
+
+
+                <div class="businessReceiveInfor clearfix">{{coupon.name}}</div>
+              </div>
+              <div class="couponOptionBox clearfix">
+                <div class="usefulDate fl" ng-if="coupon.endtime!=undefined"><span>有效期至：{{coupon.endtime}}</span></div>
+                <!--<div class="couponHaveNum fr">剩余 {{detail.article.restnum || 0}} 张</div>-->
+                <div class="couponHaveNum fr">
+                  <span class="couponUsefulType"  ng-if="coupon.status==0&&coupon.expire==0">
+                    立即使用
+                  </span>
+                  <span class="couponUsefulType" ng-if="coupon.status==1&&coupon.expire==0">
+                    已使用
+                  </span>
+                  <span class="couponUsefulType" ng-if="coupon.expire==1">
+                    已过期
+                  </span>
+                </div><!--已使用，已过期 -->
+              </div>
+            </div>
+          </div>
+        <div style="width:100%;height:30px;"></div>
+
+        <!--限量券缺省页-->
+        <div class="nosearch " style="margin-top: 150px;" ng-if="couponList2.length==0">
+          <div class="nointenet">
+            <img src="img/nocouponxianliang.png" style="margin: 0px" >
+            <div class="message-info">
+              <span>您还没有任何限量券</span>
+            </div>
+          </div>
+        </div>
+
+        <ion-infinite-scroll
+                immediate-check="false"
+                ng-if="hasNextPage2"
+                on-infinite="loadmore2()"
+                distance="1%">
+        </ion-infinite-scroll>
+      </ion-content>
+    </ion-slide>
+  </ion-slide-box>
+
+</ion-view>

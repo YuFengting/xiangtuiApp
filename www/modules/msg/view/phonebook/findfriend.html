@@ -1,0 +1,66 @@
+<ion-view class="xt-grey-bg">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <div class="header_search clearfix">
+      <span class="icon icon-xt-search search_icon"></span>
+      <form  ng-submit="goSearchList()">
+        <input id="searchFouse" type="search" ng-model="search.key" ng-change="showclose()" placeholder="请输入关键词" ng-keyup="myKeyup($event)" />
+      </form>
+      <span class="icon icon-xt2-close search_close" ng-if="haskey" ng-click="searchClear()"></span>
+    </div>
+    <div class="header_searchbtn" ng-click="goSearchList()">搜索</div>
+  </ion-header-bar>
+  <ion-content class="has-header xt-grey-bg" on-touch="closekeyboardcopy()">
+    <!--<div class="find-head">
+ <span class="find-icon-box"><i class="ion-ios-search"></i></span>
+      <span style="margin-right: 16px">搜一搜</span>
+      <span class="xt-red"><b>李莫愁</b></span>
+    </div>
+    <div  class="find-title">搜索结果</div>-->
+    <div class="find_nofriend" ng-if="searchnocontact">
+      该用户不存在
+    </div>
+    <div class="find_list" ng-if="searchcontactsuser" ng-repeat="contactuser in searchcontacts.susers track by $index">
+      <div class="find_title" ng-if="$index==0">相关好友</div>
+      <div class="find-item clearfix" ng-click="go('shome', {suserid:suser.userid})" ng-repeat="suser in contactuser.array track by suser.userid">
+        <div class="head-pic fl">
+          <img src="{{picserver}}{{suser.avate}}" onerror="javascript:this.src='img/default-avatar-square.png'"/>
+        </div>
+        <!--<div class="name fl">  <span class="xt-red">李莫愁</span></div>-->
+        <div class="name fl" ng-bind-html="suser.name"></div>
+      </div>
+    </div>
+    <div class="find_list marginTop16" ng-if="searchcontactbuser" ng-repeat="contactbser in searchcontacts.busers track by $index">
+      <div class="find_title" ng-if="$index==0">相关商家</div>
+      <div class="find-item clearfix" ng-repeat="buser in contactbser.array" ng-click="goBusiness(buser.userid)">
+        <div class="head-pic fl">
+          <img src="{{picserver}}{{buser.avate}}" onerror="javascript:this.src='img/default-avatar-square.png'"/>
+        </div>
+        <div class="name fl" ng-bind-html="buser.name"></div>
+      </div>
+    </div>
+    <div class="find_list marginTop16 find_group" ng-if="searchcontactqun">
+      <div class="find_title">群聊</div>
+      <div ng-repeat="qun in searchcontacts.qun track by $index" ng-click="go('msggroup',{'imgroupid':qun.groupid})"
+           ng-class="{'find-item clearfix group':true,'group1':qun.avate.length == 1,'group2':qun.avate.length == 2,'group3':qun.avate.length == 3,'group4':qun.avate.length == 4,
+           'group5':qun.avate.length == 5,'group6':qun.avate.length == 6,'group7':qun.avate.length == 7,'group8':qun.avate.length == 8,'group9':qun.avate.length >= 9}">
+        <div class="head-pic fl">
+          <ul class="clearfix">
+            <li ng-repeat="img in qun.avate track by $index">
+              <img src="{{picserver}}{{img}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+            </li>
+          </ul>
+        </div>
+        <div class="groupinfo fl" ng-if="qun.involve != '' && qun.involve != undefined">
+          <div class="groupname" ng-bind-html="qun.groupname"></div>
+          <!--<div class="groupmem">包含：<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span></div>-->
+          <div class="groupmem" ng-bind-html="qun.involve"></div>
+        </div>
+          <div class="name fl" ng-if="qun.involve == '' || qun.involve == undefined" ng-bind-html="qun.groupname"></div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,62 @@
+<ion-view style="background:#f4f4f4;">
+	<ion-header-bar align-title="middle">
+		<div class="header_back" ng-click="goback()">
+			<i class="icon ion-ios-arrow-left"></i>
+		</div>
+		<span class="title">设置</span>
+	</ion-header-bar>
+	<ion-content class="has-header" style="overflow-y: hidden;height: 100%">
+		<ion-list class="center_list account_list setting_list">
+			<ion-item class="item-icon-right" ng-click="go('pswreset')">
+			<a>
+					<i class="setting_icon icon-xt2-password"></i>
+				<span class="item-label">修改密码</span>
+				<i class="icon ion-ios-arrow-right"></i>
+      </a>
+			</ion-item>
+			<!--<ion-item class="item-icon-right" ui-sref="changetel1">-->
+				<!--<i class="setting_icon icon-xt2-phone"></i>-->
+				<!--<span class="item-label">更换绑定手机</span>-->
+				<!--<span class="item-span" ng-bind="user.tel | telfilter"></span>-->
+				<!--<i class="icon ion-ios-arrow-right"></i>-->
+			<!--</ion-item>-->
+			<!--<ion-item class="item-icon-right item-toggle" ng-click="xgpush()">
+				<a href="javascript:void(0)">
+					<i class="setting_icon icon-xt2-liaotian"></i>
+					<span class="item-label">消息提醒</span>
+					<label class="toggle toggle-assertive"><input type="checkbox" ng-model="xgpushflg"><div class="track"><div class="handle"></div></div></label>
+				</a>
+			</ion-item>-->
+      <ion-item class="item-icon-right" ui-sref="help">
+        <i class="setting_icon icon-xt3-help"></i>
+        <span class="item-label">帮助中心</span>
+        <i class="icon ion-ios-arrow-right"></i>
+      </ion-item>
+<!--      <ion-item class="item-icon-right" ui-sref="advice">
+        <i class="setting_icon icon-xt-tx"></i>
+        <span class="item-label">意见与反馈</span>
+        <i class="icon ion-ios-arrow-right"></i>
+      </ion-item>-->
+      <!--<ion-item class="item-icon-right" ui-sref="">-->
+        <!--<i class="setting_icon icon-xt2-xiazai"></i>-->
+        <!--<span class="item-label">检查更新 (安卓)</span>-->
+        <!--<span class="item-span">v2.0.1</span>-->
+        <!--<i class="icon ion-ios-arrow-right"></i>-->
+      <!--</ion-item>-->
+      <ion-item class="item-icon-right" ui-sref="about">
+        <i class="setting_icon icon-aboutus"></i>
+        <span class="item-label">关于我们</span>
+        <i class="icon ion-ios-arrow-right"></i>
+      </ion-item>
+		<ion-item class="item-icon-right" ng-if="isios" ng-click="goPraise()">
+			<a href="javascript:void(0)">
+			<i class="setting_icon icon-xt2-goodping"></i>
+			<span class="item-label">给个好评</span>
+			<i class="icon ion-ios-arrow-right"></i>
+			</a>
+		</ion-item>
+		</ion-list>
+
+		<button class="mybtn-full redbg account_btn" ng-click="outlogin()">退出登录</button>
+	</ion-content>
+</ion-view>

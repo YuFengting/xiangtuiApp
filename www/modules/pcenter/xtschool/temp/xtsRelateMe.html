@@ -1,0 +1,76 @@
+<ion-view  ng-click="hidezan()">
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">与我相关</span>
+  <!--  <div class="workc_funcbtn" ng-click="delrelateme()" style="font-size: 26px;" ng-if="aboutmelist.length > 0">清空</div>&lt;!&ndash;与我相关清除按钮 3.3&ndash;&gt;
+    <div class="workc_funcbtn" style="font-size: 26px;opacity: 0.5;" ng-if="aboutmelist.length == 0">清空</div>-->
+  </ion-header-bar>
+
+  <ion-content class="has-header xtsrelatemecontent" style="overflow-y: auto;">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="getList()"></ion-refresher>
+    <ion-list class="relatemeList" ng-repeat="list in relatemelist">
+
+      <ion-item ng-click="goXtSchoolQuestionDetail(list.qid,list.qstatus)">
+        <div class="ralateHead" ng-if="list.logo!='official'"><img src="{{list.logo | avatefilter}}" onerror="javascript:this.parentNode.style.border='1px #d8d8d8 solid';this.src='img/default-avatar-square.png';"/></div>
+        <div class="ralateHead" ng-if="list.logo=='official'"><img src="img/msg_mishu.png" /></div>
+        <div class="ralateCnt">
+          <div class="relateName" ng-bind="list.name">大米大米</div>
+          <div class="relateDel" ng-if="list.isdel==1">该评论已删除</div>
+          <div ng-if="list.type==0&&list.isdel==0&&list.logo!='official'" ><p class="relateText hide2line" ng-bind-html="list.acontent | emojihtmlfilter"></p></div>
+          <div ng-if="list.type==0&&list.isdel==0&&list.logo=='official'" class="relateText relatePic clearfix hide2line" ng-bind-html="convertHtml(list.acontent)"></div>
+          <div class="relateZan"><i class="icon icon-xtschool-zan1" ng-if="list.type==1&&list.isdel==0"></i></div>
+          <div class="relateTime" ng-bind="list.date">8月30日 21:38</div>
+        </div>
+        <div class="relateDetail detialhide4line">
+
+          <!--<img src="img/default-avatar-square.png" ng-if=""/>-->
+          {{list.qcontent}}
+        </div>
+      </ion-item>
+      <!--<ion-item>
+        <div class="ralateHead"><img src="img/default-avatar-square.png"/></div>
+        <div class="ralateCnt">
+          <div class="relateName">大米大米</div>
+          <div class="relateText">最满意的是车子的外形，当时选安装之后算上价格发现有点入圈了，车子的性价比没有想象中的高。</div>
+          <div class="relateTime">8月30日 21:38</div>
+        </div>
+        <div class="relateDetail">
+          <img src="img/default-avatar-square.png" ng-if=""/>
+          调查：开一个收费账号全程披露公司内部项目
+        </div>
+      </ion-item>
+
+      <ion-item>
+        <div class="ralateHead"><img src="img/default-avatar-square.png"/></div>
+        <div class="ralateCnt">
+          <div class="relateName">大米大米</div>
+          <div class="relateZan"><i class="icon icon-xt-good"></i></div>
+          <div class="relateTime">8月30日 21:38</div>
+        </div>
+        <div class="relateDetail">
+          <img src="img/default-avatar-square.png" ng-if=""/>
+          调查：开一个收费账号全程披露公司内部项目
+        </div>
+      </ion-item>-->
+    </ion-list>
+
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+      immediate-check="false"
+      ng-if="hasNextPage"
+      on-infinite="getmorerelate()"
+      distance="1%">
+    </ion-infinite-scroll>
+
+    <!--缺省页面 -->
+    <div class="nointenet" style="height: 100%;background: #f4f4f4;position: absolute" ng-if="hasnorelate">
+      <img src="img/noevent.png" >
+      <div class="message-info">
+        <span>暂无状态</span>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

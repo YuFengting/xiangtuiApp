@@ -1,0 +1,61 @@
+<!--<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" >享推能为我做什么？</span>
+  </ion-header-bar>
+
+  <ion-content class="has-header  help-detial">
+      <div class="helpDetailInforBox">
+        <h3 class="title">享推能为我做什么？</h3>
+        <div class="helpTextBox">
+          <p class="secondTitle">1. 推广广告赚钱：</p>
+          <p class="contentBox">帮助平台商家推广他们的活动、广告，系统会根据您的朋友的深度阅读，计算您应得的收益。该类收益严格要求他人的阅读行为出于自然，通过互点等作弊行为产生的收益享推平台有权限认为其作弊。</p>
+          <p class="secondTitle">2. 云销售赚佣金：</p>
+          <p class="contentBox">申请成为商家的云销售，完成商家的品牌、产品的传播和营销，并最终促成交易的达成。平台会根据您完成的交易步骤，结算佣金。</p>
+          <p class="secondTitle">3. 申请团长拉人参团赚佣金：</p>
+          <p class="contentBox">在商家团购任务中，申请成为该活动的团长；对外推广你的团购活动，参团人数达到商家指定数额后，达成团购交易。交易结束后，平台根据规则结算佣金。</p>
+        </div>
+      </div>
+      <div class="help-foot">
+        <div class="title clearfix">
+          <div class="heng fl"></div>
+          <div class="items fl">以上信息对您是否有帮助</div>
+          <div class="heng fr"></div>
+        </div>
+        <div class="buttons clearfix">
+          <div class="btn fl">
+            <i class="icon icon-xt2-good textRed"></i><span class="value">已解决</span>
+          </div>
+          <div class="btn fr clearfix">
+            <i class="icon icon-xt2-good "></i><span class="value">没解决</span>
+          </div>
+        </div>
+      </div>
+  </ion-content>
+
+</ion-view>-->
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">帮助详情</span>
+  </ion-header-bar>
+
+  <ion-content class="has-header xt-grey-bg help-detial">
+    <div class='scroll-wrapper'>
+      <iframe id="help_iframe" ng-src="{{targetUrl}}" style="min-height:100%;width: 100%;"></iframe>
+    </div>
+    <!--<div class="loader loadanimation">-->
+      <!--<div class="loader-inner ball-pulse">-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <div class="loader loadanimation"><ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner></div>
+  </ion-content>
+
+</ion-view>

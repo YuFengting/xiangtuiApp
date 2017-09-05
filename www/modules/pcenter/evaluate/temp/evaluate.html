@@ -1,0 +1,76 @@
+<ion-view style="background:#f4f4f4;">
+	<ion-header-bar align-title="middle">
+		<div class="header_back" ng-click="goback()">
+			<i class="icon ion-ios-arrow-left"></i>
+		</div>
+		<span class="title">收到的评价</span>
+	</ion-header-bar>
+	<ion-content class="has-header xt-grey-bg">
+      <ion-refresher  pulling-text="下拉刷新..." on-refresh="doRefresh()" ></ion-refresher>
+        <div ng-if="nothing">
+    <div class="evaluate_star clearfix">
+      <div class="label fl">综合评价</div>
+      <ul class="star fl">
+        <li><span style="width: {{usertip.commentscore*20}}%"></span></li>
+      </ul>
+      <div class="num"><span ng-bind="usertip.commentscore | number:1"></span>分</div>
+    </div>
+    <ul class="evaluate_label clearfix">
+      <li ng-class="{'blue':$index%6 ==0,'pink':$index%6 ==1,'green':$index%6 ==2,'orange':$index%6 ==3,'darkblue':$index%6 ==4,'purple':$index%6 ==5}" ng-repeat="tip in usertip.tips track by $index">
+        <span ng-bind="tip.tipname"></span>
+        <span ng-bind="tip.tipnum"></span>
+      </li>
+    </ul>
+    <div class="evaluate_list clearfix" ng-repeat="com in busercomment track by $index">
+
+      <div class="evaluate_item clearfix">
+        <div class="evaluate_itemstar clearfix">
+          <ul class="fl">
+            <li><span style="width: {{com.avgscore*20}}%"></span></li>
+          </ul>
+          <span class="fl num" ng-bind="com.avgscore | number:1"></span><span>分</span>
+        </div>
+          <ul class="evaluate_item_label clearfix">
+              <li ng-class="{'blue':$index ==0,'pink':$index ==1}" ng-repeat="tip in com.tips track by $index">
+                  <span ng-bind="tip.tipname"></span>
+              </li>
+          </ul>
+          <div  class="clearfix">
+            <div class="evaluate_cnt fl">
+              <div class="evaluate_text fl">
+                <div class="evaluate_title" ng-bind="com.companyalias">常州数赢云网络科技有限公司</div>
+                              </div>
+              <div class="evaluate_date fr" ng-bind="com.inittime">2016-06-16</div>
+           </div>
+          </div>
+      </div>
+    </div>
+        </div>
+      <div class="infoTipsBox" ng-if="!hasNextPage  && busercomment.length>0">暂时只有这些评价啦</div>
+<!--        <div class="nosearch " style="display:{{noeval}};" >
+            <img src="./img/nosearch.png"/><br/>
+            还未收到任何评价哦~
+        </div>-->
+
+
+      <!--上拉刷新-->
+      <ion-infinite-scroll
+              on-infinite="loadMore()"
+              ng-if="hasNextPage"
+              distance="1%"
+              immediate-check="false">
+      </ion-infinite-scroll>
+	</ion-content>
+
+  <!--缺省页面 -->
+  <div class="nointenet" style="position: fixed;top: 80px;left: 0px;display:{{noeval}};">
+
+    <img src="img/mynoealuate.png" >
+    <div class="message-info" style="padding: 0 70px">
+      <span>当前还没有完成任何销售活动，完成销售活动后，即可获得商家对您的评价。
+</span>
+    </div>
+  </div>
+
+
+</ion-view>

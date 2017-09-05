@@ -1,0 +1,21 @@
+<ion-view style="background:#f4f4f4;">
+	<ion-header-bar align-title="middle">
+		<div class="header_back" ng-click="goback()">
+			<i class="icon ion-ios-arrow-left"></i>
+		</div>
+		<span class="title">意见与反馈</span>
+	</ion-header-bar>
+	<ion-content class="has-header advive_content">
+		<div class="advice_textarea">
+			<textarea placeholder="请输入您的宝贵意见"  ng-model="sug.sugval" ></textarea>
+			<!--<div class="advice_num">200</div>-->
+		</div>
+
+		<div class="advice_hint">我们将充分听取您的宝贵意见，一经采纳，我们将给予现金红包奖励。
+感谢您对于我们工作的长期支持！</div>
+		<button class="mybtn-full redbg account_btn" style="width:100%;"  ng-click="subsuggest()">提交</button>
+
+	</ion-content>
+  <!--<div class="adviceTel hide-on-keyboard-open">客服电话：<span>400-0505-811</span></div>-->
+  <div class="adviceTel" ng-class="{'opacity0':!isTelShow}" hide-on-keyboard-open>客服电话：<span><a href="tel:400-0505-811">400-0505-811</a></span></div>
+</ion-view>

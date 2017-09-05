@@ -1,0 +1,182 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goBackPage()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">圣诞苹果大作战</span>
+    <div class="headRightEdit" ng-click="activeRulesFun()">规则</div>
+  </ion-header-bar>
+
+  <ion-content class="has-header" delegate-handle="xtui_active_content" on-drag-down="scrollContent()"
+               on-drag-up="scrollContent()">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>
+    <div class="active_festival_content">
+      <div class="active_festival_contentMain merryMain">
+        <div class="appleNumBox">
+          <img class="appleImg" src="img/active/big_apple.png"/><span class="linkX">x</span><span
+          class="numberBox" ng-bind="myapple"></span>
+        </div>
+        <div class="active_rules" ng-click="activeRulesFun()">规则</div>
+        <div class="active_reward_box" style="clear:both;">
+          <div class="rewardBox rewardBox1" id="machine1">
+            <div class="reward reward0"></div>
+            <div class="reward reward1"></div>
+            <div class="reward reward2"></div>
+            <div class="reward reward3"></div>
+            <div class="reward reward4"></div>
+            <div class="reward reward5"></div>
+            <div class="reward reward6"></div>
+            <div class="reward reward7"></div>
+            <div class="reward reward8"></div>
+            <div class="reward reward9"></div>
+            <div class="reward reward10"></div>
+          </div>
+          <div class="rewardBox rewardBox2" id="machine2">
+            <div class="reward reward0"></div>
+            <div class="reward reward1"></div>
+            <div class="reward reward2"></div>
+            <div class="reward reward3"></div>
+            <div class="reward reward4"></div>
+            <div class="reward reward5"></div>
+            <div class="reward reward6"></div>
+            <div class="reward reward7"></div>
+            <div class="reward reward8"></div>
+            <div class="reward reward9"></div>
+            <div class="reward reward10"></div>
+          </div>
+          <div class="rewardBox rewardBox3" id="machine3">
+            <div class="reward reward0"></div>
+            <div class="reward reward1"></div>
+            <div class="reward reward2"></div>
+            <div class="reward reward3"></div>
+            <div class="reward reward4"></div>
+            <div class="reward reward5"></div>
+            <div class="reward reward6"></div>
+            <div class="reward reward7"></div>
+            <div class="reward reward8"></div>
+            <div class="reward reward9"></div>
+            <div class="reward reward10"></div>
+          </div>
+          <div class="rewardBox rewardBox4" id="machine4">
+            <div class="reward reward0"></div>
+            <div class="reward reward1"></div>
+            <div class="reward reward2"></div>
+            <div class="reward reward3"></div>
+            <div class="reward reward4"></div>
+            <div class="reward reward5"></div>
+            <div class="reward reward6"></div>
+            <div class="reward reward7"></div>
+            <div class="reward reward8"></div>
+            <div class="reward reward9"></div>
+            <div class="reward reward10"></div>
+          </div>
+        </div>
+        <a class="rewardBtn" ng-click="showmoney()"></a>
+        <div class="yuanBox"></div>
+        <div class="active_winning_name">
+          <div class="nameList">
+            <!--<p ng-repeat="log in logList track by $index">恭喜{{log.phone}}抽中了<span class="money">{{log.money}}元</span>-->
+            <p ng-repeat="log in logList track by $index" ng-bind-html="log.content"></p>
+          </div>
+        </div>
+      </div>
+      <div class="active_taskList">
+        <div class="active_taskInfor">
+          <div class="activeTaskListTitle"></div>
+          <div class="getMoneyRaiders" ng-click="getMoneyWaysFun()"><img
+            src="img/active/getmoneyicon.png"/><span>赚钱攻略</span></div>
+
+          <div ng-repeat="task in taskList track by $index" ng-class="{'getOver':task.status==2,'taskListBox':true}" ng-click="goDetail(task)">
+            <div class="taskHeadImg"><img src="{{picserver}}{{task.view}}" onerror="javascript:this.src='img/default-list-square.png'"/></div>
+            <div class="taskDetailInforBox">
+              <p ng-bind="task.name"></p>
+              <div class="profitInfor clearfix">
+                <div
+                  ng-class="{'appleNum':true,'fl':true,'quickshare':task.reward ==-1,'alreadyGetApple':task.reward ==1,'alreadyReward':task.reward == 2,'noGetApple':task.reward ==0}">
+                  <div ng-if="task.reward == 0"><span>未获得</span><img src="img/active/apple_grey.png"/></div>
+                  <div ng-if="task.reward == 1"><span>已获得</span><img src="img/active/apple_yellow.png"/></div>
+                  <div ng-if="task.reward == 2"><span>已抽奖</span><img src="img/active/getReward.png"/></div>
+                  <div ng-if="task.reward == -1"><span ng-click="goDetail(task.id)">立即分享</span></div>
+                </div>
+                <div class="myprofit fr" ng-if="task.reward != -1">我的收益:<span>&yen;{{task.income}}</span></div>
+                <div ng-class="{'taskHasEnded':task.status==2}"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="acitve_footer_text">本活动最终解释权归享推所有</div>
+      <!--</div>-->
+    </div>
+  </ion-content>
+  <!--下滑箭头 -->
+  <div class="getBotArrow" ng-if="getBotArrow" ng-click="getContentScroll()"></div>
+
+  <div class="active_mask" ng-if="activeMask" ng-click="activeMaskFun(0)"></div>
+  <!--活动规则弹窗-->
+  <div class="active_festival_popup active_merry_popup1" ng-class="animation" ng-if="activeRules">
+    <div class="popupTitle merryChristmas">活动规则</div>
+    <div class="popupContent">
+      <p class="title">活动时间：</p>
+      <p>2016年12月24日-2017年1月2日</p>
+      <p class="title">活动规则：</p>
+      <dl>
+        <dt>1.</dt>
+        <dd>分享“圣诞大作战”列表中任务，收益达到1元，即可获得金苹果</dd>
+      </dl>
+      <dl>
+        <dt>2.</dt>
+        <dd>每个任务只可获得1个金苹果</dd>
+      </dl>
+      <dl>
+        <dt>3.</dt>
+        <dd>每个苹果可获得一次抽奖机会（100%中奖）</dd>
+      </dl>
+      <dl>
+        <dt>4.</dt>
+        <dd>本活动解释权归享推所有</dd>
+      </dl>
+    </div>
+    <div class="active_popupFooter" ng-click="activeMaskFun(0)"><span class="merryChristmas">我知道了</span></div>
+  </div>
+  <!--赚钱攻略弹窗-->
+  <div class="active_festival_popup active_merry_popup1 active_merry_popup2" ng-class="animation" ng-if="getMoneyWays">
+    <div class="popupTitle merryChristmas">赚钱攻略</div>
+    <div class="popupContent">
+      <dl>
+        <dt>1.</dt>
+        <dd>多渠道任务分享给好友(QQ、微博、微信均可)，也可以选择活跃的QQ群、微信群进行分享，收益更高</dd>
+      </dl>
+      <dl>
+        <dt>2.</dt>
+        <dd>任务到期前，可在不同时间段进行多次分享。黄金时间(早08:00-10:00；午11:30-13:00；晚20:00-22:00）</dd>
+      </dl>
+      <dl>
+        <dt>3.</dt>
+        <dd>可选择朋友圈热门话题任务（如美食、生活等）进行分享</dd>
+      </dl>
+      <dl>
+        <dt>4.</dt>
+        <dd>分享任务时加上适当评论、优质推荐语，收益更高哦</dd>
+      </dl>
+    </div>
+    <div class="active_popupFooter" ng-click="activeMaskFun(0)"><span class="merryChristmas">我知道了</span></div>
+  </div>
+  <!--抽到奖品弹窗-->
+  <div class="getrewardPopup" ng-class="animation_money" ng-if="getReward">
+    <div class="rewardInfor"><span>{{appleMoney}}</span>元</div>
+    <div class="rewardText">
+      <p>恭喜您抽中了{{appleMoney}}元，已放入您的账户</p>
+    </div>
+    <div class="active_popupFooter" ng-click="activeMaskFun(2)"><span class="merryChristmas">太棒了</span></div>
+  </div>
+  <!--未抽到奖品弹窗-->
+  <div class="nogetrewardPopup" ng-class="animation_money" ng-if="nogetReward">
+    <div class="rewardText">
+      <p>您还没有苹果呢，赶紧分享吧！</p>
+      <p>任务收益达1元就能领取咯~</p>
+    </div>
+    <div class="active_popupFooter" ng-click="activeMaskFun(1)"><span class="merryChristmas">去赚苹果</span></div>
+  </div>
+
+</ion-view>

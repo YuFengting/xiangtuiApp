@@ -1,0 +1,56 @@
+<ion-view>
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">添加客户信息</span>
+  </ion-header-bar>
+  <ion-content class="has-header xt-grey-bg" style="overflow: hidden;">
+    <ul class="addCustomerBox">
+      <li><input type="text" class="customerInput fl" placeholder="客户姓名" ng-model="formdata.name" ng-change="formChange()" ng-focus="myfocus($event)" ng-blur="myblur($event)" /><i class="icon-xt2-close fr close hide" ng-click="resetInp($event)"></i></li>
+      <li><input class="customerInput fl" placeholder="联系方式" ng-model="formdata.tel" type="tel" ng-change="formChange()"  ng-focus="myfocus($event)" ng-blur="myblur($event)" /><i class="icon-xt2-close fr close hide" ng-click="resetInp($event)"></i></li>
+      <li ng-repeat="var in leads.fieldmap" ><input type="text" class="customerInput field fl" ng-change="formChange()" placeholder="{{var.name}}"ng-model="aaa" value="{{var.value}}" ng-focus="myfocus($event)" ng-blur="myblur($event)" /><i class="icon-xt2-close fr close hide" ng-click="resetInp($event)"></i></li>
+    </ul>
+    <div class="customerRemarkInfor">
+      <textarea placeholder="备注信息（非必填）" ng-class="{'font25':iosfont }" ng-model="formdata.memo"></textarea>
+    </div>
+
+
+
+    <div class="addpicgrop clearfix" style="padding-top: 0px">
+      <div class="picarea clearfix picareaitem" ng-repeat="pic in addpiclist track by $index">
+        <div class="picitem  additem"  >
+          <img src="{{picserver}}{{pic}}">
+        </div>
+        <div class="close-icon" ng-click="deletepic(pic)">
+          <i class="ion-ios-close-empty"></i>
+        </div>
+      </div>
+
+
+      <!--最后一个放添加图片的按钮，图片添加3个后隐藏，不到3个显示-->
+      <div class="picarea"  ng-click="addpicfun()" ng-if="maxpic">
+        <div class="picitem light-bg additem" >
+          <i class="ion-ios-plus-empty add-icon"></i>
+          <!-- 上传图片的进度条，在controller里修改jdtpercent的值记得加%-->
+          <!--<div class="add-jdt" style="width: 50%"></div>-->
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="commonBtn" ng-click="subcustomer()">提交</div>
+  </ion-content>
+  <!--lodding特效-->
+  <div class="mask-loadding-all" ng-if="showloading">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+      <!--</div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+</ion-view>

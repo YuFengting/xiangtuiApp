@@ -1,0 +1,15 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">系统信息</span>
+  </ion-header-bar>
+  <ion-content class="has-header bg-grey">
+      <div class="systemDetailInforBox">
+        <div class="articalTitle" ng-bind="systeminfor.title"></div>
+        <img src="{{picserver}}{{systeminfor.pic}}" ng-if="systeminfor.pic!=''">
+        <p class="content" ng-bind="systeminfor.content"></p>
+      </div>
+  </ion-content>
+</ion-view>

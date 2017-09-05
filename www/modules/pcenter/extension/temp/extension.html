@@ -1,0 +1,175 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">我的分享</span>
+  </ion-header-bar>
+  <ul class="subheader mycollectionSub" style="height: 70px;border-bottom: 1px solid #d8d8d8">
+    <li ng-class="{'active':active_show_cpc}" ng-click="changeBox(1)">
+      <a><span>分享</span></a>
+    </li>
+    <li ng-class="{'active':active_show_cps}" ng-click="changeBox(0)">
+      <a><span>销售支持</span></a>
+    </li>
+
+  </ul>
+  <ion-content class="has-subheader bg-grey exacListContentBox" delegate-handle="dataHandler">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="refreshList()"></ion-refresher>
+    <ion-list ng-if="type == 1">
+      <ion-item ng-repeat="cpctask in cpcdatalist track by $index" ng-click="goDetail(cpctask.id)">
+        <a class="item-content">
+          <div class="indexlist_pic">
+            <div ng-if="cpctask.status == 2" >
+              <div ng-class="{'customerStatusBox2':true,'settlemented':true}" style="z-index:10;">
+                <span >已结束</span>
+              </div>
+            </div>
+            <img ng-src="{{picserver}}{{cpctask.view}}"
+                 onerror="javascript:this.src='img/default-avatar-square.png';"/>
+            <div class="progressBarNumBox" ng-if="cpctask.status!=2 && 0 < cpctask.moneyper && cpctask.moneyper <= 30">
+              剩余:{{cpctask.moneyper}}%
+            </div>
+          </div>
+          <div class="indexlist_info">
+            <div class="indexlist_title indexlist_title2">
+              <span class="newI tipsinfo" ng-if="cpctask.isnew == 1">新</span>
+              <span>{{cpctask.name}}</span>
+            </div>
+            <div class="indexlist_lf">
+              <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user"
+                                                                       style="margin-top:-3px;"></i><i
+                class="bnamewrap">{{cpctask.worknum}}</i>
+              </div>
+            </div>
+          </div>
+        </a>
+      </ion-item>
+    </ion-list>
+    <ion-list ng-if="type == 0">
+      <ion-item class="extensionListItem" ng-click="goGoodarticle(act)" ng-repeat="act in cpsdatalist track by $index">
+        <div class="indexlist_pic">
+          <div ng-if="act.type == 3">
+            <div ng-class="{'customerStatusBox2':true,'nosubmit':act.status==0,'settlemented':act.status==2}">
+              <span ng-if="act.status==0">审核中</span>
+              <span ng-if="act.status==2">未通过</span>
+            </div>
+          </div>
+          <img src="{{picserver}}{{act.shareview}}"/>
+        </div>
+        <div class="indexlist_info">
+          <div class="indexlist_title indexlist_title2">
+  <span
+    ng-class="{'icon_label':true,'icon_wen':act.type==0||act.type==1||act.type==5||act.type==4||act.type==6,'icon_hui':act.type==2,'icon_tuan':act.type==3}"
+    ng-if="act.type==0 || act.type==1 || act.type==5 || act.type==4 || act.type==6">文</span>
+  <span
+    ng-class="{'icon_label':true,'icon_wen':act.type==0||act.type==1,'icon_hui':act.type==2,'icon_tuan':act.type==3}"
+    ng-if="act.type==2">惠</span>
+  <span
+    ng-class="{'icon_label':true,'icon_wen':act.type==0||act.type==1,'icon_hui':act.type==2,'icon_tuan':act.type==3}"
+    ng-if="act.type==3">团</span>
+            <span ng-bind="act.title"></span>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <div ng-if="type ==1 ">
+      <div class="list_nomore" ng-if="cpcdomore && cpcdatalist.length > 0 && CpcPageNo > 1">
+        <div class="wenzi">暂时只有这些推广啦！</div>
+      </div>
+      <div class="nosearch1 " style="display:{{cpcshowflg}};">
+        <div class="nointenet1">
+          <img src="img/noygg.png">
+          <div class="message-info">
+            <span>每天接取分享推广能更快提高</span><br><span>自己的传播力哦，快去<span class="xt-red"
+                                                                ng-click="goCpcShowList()">分享页</span>逛逛吧！</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="type == 0">
+      <div class="list_nomore" ng-if="cpsdomore && cpsdatalist.length > 0 && CpsPageNo >= 1">
+        <div class="wenzi">暂时只有这些活动啦！</div>
+      </div>
+
+      <div class="nosearch1" style="display:{{cpsshowflg}};">
+        <div class="nointenet1">
+          <img src="img/nosupport.png">
+          <div class="message-info">
+            <span>销售支持能帮助您更好的完成</span><br><span>云销售推广，</span>快去<span class="xt-red" ng-click="goCpsShowList()">销售</span>页面看看吧！</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ion-infinite-scroll
+      immediate-check="false"
+      ng-if="!domore"
+      on-infinite="loadPageDataMore()"
+      distance="1%">
+    </ion-infinite-scroll>
+  </ion-content>
+  <!--<ion-content class="has-subheader bg-grey" ng-class="{'hide':hide_con_cps}">-->
+  <!--<ion-refresher pulling-text="下拉刷新..." on-refresh="loadPageDataList()"></ion-refresher>-->
+
+  <!--<ion-item class="extensionListItem" ng-click="goGoodarticle(act)" ng-repeat="act in cpsdatalist track by $index">-->
+  <!--<div class="indexlist_pic">-->
+  <!--<div ng-if="act.type == 3">-->
+  <!--<div ng-class="{'customerStatusBox2':true,'nosubmit':act.status==0,'settlemented':act.status==2}">-->
+  <!--<span ng-if="act.status==0">审核中</span>-->
+  <!--<span ng-if="act.status==2">未通过</span>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<img src="{{picserver}}{{act.shareview}}"/>-->
+  <!--</div>-->
+  <!--<div class="indexlist_info">-->
+  <!--<div class="indexlist_title indexlist_title2">-->
+  <!--<span-->
+  <!--ng-class="{'icon_label':true,'icon_wen':act.type==0||act.type==1||act.type==5||act.type==4||act.type==6,'icon_hui':act.type==2,'icon_tuan':act.type==3}"-->
+  <!--ng-if="act.type==0 || act.type==1 || act.type==5 || act.type==4 || act.type==6">文</span>-->
+  <!--<span-->
+  <!--ng-class="{'icon_label':true,'icon_wen':act.type==0||act.type==1,'icon_hui':act.type==2,'icon_tuan':act.type==3}"-->
+  <!--ng-if="act.type==2">惠</span>-->
+  <!--<span-->
+  <!--ng-class="{'icon_label':true,'icon_wen':act.type==0||act.type==1,'icon_hui':act.type==2,'icon_tuan':act.type==3}"-->
+  <!--ng-if="act.type==3">团</span>-->
+  <!--<span ng-bind="act.title"></span>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</ion-item>-->
+
+
+  <!--<div class="list_nomore" ng-if="cpsdomore && cpsdatalist.length > 0 && CpsPageNo >= 1">-->
+  <!--<div class="wenzi">暂时只有这些活动啦！</div>-->
+  <!--</div>-->
+
+  <!--<div class="nosearch1" style="display:{{cpsshowflg}};">-->
+  <!--<div class="nointenet1">-->
+  <!--<img src="img/nosupport.png">-->
+  <!--<div class="message-info">-->
+  <!--<span>销售支持能帮助您更好的完成</span><br><span>云销售任务，</span>快去<span class="xt-red" ng-click="goCpsShowList()">销售</span>页面看看吧！</span>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+
+
+  <!--<ion-infinite-scroll-->
+  <!--immediate-check="false"-->
+  <!--ng-if="!cpsdomore"-->
+  <!--on-infinite="loadCpsMore()"-->
+  <!--distance="1%">-->
+  <!--</ion-infinite-scroll>-->
+  <!--</ion-content>-->
+  <!--<div class="mask-loadding-all" ng-if="showloading">-->
+  <!--<div class="loader">-->
+  <!--<div class="loader-inner ball-pulse">-->
+  <!--<div></div>-->
+  <!--<div></div>-->
+  <!--<div></div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+
+</ion-view>

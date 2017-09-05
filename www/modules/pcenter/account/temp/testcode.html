@@ -1,0 +1,40 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">填写验证码</span>
+  </ion-header-bar>
+
+  <ion-content class="find-pasword has-header">
+    <div class="find-form" style="margin-top: 18px;">
+      <div class="line clearfix">
+        <input type="tel" id="alipay_smscode" class="fl" placeholder="请输入手机验证码" style="width: 540px" ng-model="alipay.smscode" ng-change="checkCode()" ng-blur="hideCodecl()" ng-focus="showCodecl()">
+        <i class="icon-xt2-close fr close" ng-if="showcodecl" ng-click="clearSmsCode()">
+        </i>
+      </div>
+    </div>
+
+    <div class="yuyin-wenzi" style="margin-top: 15px;">
+      没有收到验证码短信？<span class="xt-wenzi-grey" ng-if="showYy">获取中...</span>
+      <span class="xt-red" ng-if="!showYy" ng-click="sendcode2('1','voice')">点击获取</span>语音验证码！
+    </div>
+
+    <div class="queren-btn" style="margin-top: 25px;">
+      <button ng-disabled="false" class="btn xt-red-bg" ng-click="checkcode()" >确定</button>
+    </div>
+  </ion-content>
+  <!-- 验证码弹窗 -->
+  <div class="vertifyCodeDailog" ng-if="checkpicshow" >
+    <div class="contentBox">
+      <div class="codeInputImg clearfix">
+        <input class="codeInput fl" type="text" ng-focus='textinputfocus()' ng-blur='textinputblur()' placeholder="请输入图片验证码" ng-model="user.fscode"/>
+        <img src="" id="alipayurl" class="codeImg fl">
+        <i class="icon-xt2-refresh xt-red fl" ng-click="fscodeRefresh()"> </i>
+      </div>
+      <div class="commonBtn" ng-click="sendcode('1','voice')">确定</div>
+    </div>
+  </div>
+  <div class="vertifyCodeMask" ng-if="checkpicshow" ng-click="hideTC()"></div>
+
+</ion-view>

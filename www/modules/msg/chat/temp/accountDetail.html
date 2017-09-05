@@ -1,0 +1,121 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">账单详情</span>
+  </ion-header-bar>
+  <ion-content class="has-header bg-grey">
+    <div class="accountd_headbg"></div>
+    <div class="accountd_headbox">
+      <div class="headpic">
+        <img src="{{picserver}}{{nleadpay.logo}}" onerror="javascript:this.src='img/default-avatar.png'">
+      </div>
+      <div class="name" ng-bind="nleadpay.alias"></div>
+      <div class="money" ng-if="nleadpay.nleadpaypay>0"><b>+<span ng-bind="nleadpay.nleadpaypay | number:2"></span></b>元</div>
+      <div class="state wait" ng-if="nleadpay.nleadpaystatus==0">商家确认中</div>
+      <div class="state wait" ng-if="nleadpay.nleadpaystatus==1">{{nleadpay.nleadpaytime}}天后到账</div>
+      <div class="state check" ng-if="nleadpay.nleadpaystatus==2">已到账</div>
+      <div class="state wait" ng-if="nleadpay.nleadpaystatus==3">撤销中</div>
+      <div class="state redfont" ng-if="nleadpay.nleadpaystatus==4">拒绝撤销</div>
+      <div class="state check" ng-if="nleadpay.nleadpaystatus==5">同意撤销</div>
+      <div class="state check" ng-if="nleadpay.nleadpaystatus==-1">已撤销</div>
+      <div class="state redfont" ng-if="nleadpay.nleadpaystatus==-2">已拒绝</div>
+
+
+      <!--<div class="state check">等待对方审核中</div>
+      <div class="state check">对方已付款</div>
+      <div class="state redfont">对方已拒绝</div>-->
+    </div>
+    <div class="item-divider"></div>
+    <!--账单详情-->
+    <div class="accountd_list1">
+      <div class="accountd_list">
+        <div class="accountd_item clearfix">
+          <div class="accountd_label fl">客户姓名：</div>
+          <div class="accountd_text fl" ng-bind="nleadpay.name"></div>
+        </div>
+        <div class="accountd_item clearfix">
+          <div class="accountd_label fl">联系电话：</div>
+          <div class="accountd_text fl" ng-bind="nleadpay.tel"></div>
+        </div>
+        <div class="accountd_item clearfix"  ng-repeat="leads in nleadpay.fieldmap">
+          <div class="accountd_label fl">{{leads.name}}：</div>
+          <div class="accountd_text fl">{{leads.value}}</div>
+        </div>
+        <div class="accountd_item clearfix" ng-if="nleadpay.memo.length>0">
+          <div class="accountd_label fl">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：</div>
+          <div class="accountd_text fl" ng-bind="nleadpay.memo"></div>
+        </div>
+        <!-- 图片-->
+
+        <div class="accountd_item clearfix" ng-if="haspic">
+          <div class="accountd_label fl">相关图片：</div>
+          <div class="accountd_text fl ">
+            <img src="{{picserver}}{{pic}}" style="width: 110px;height: 110px;border-radius: 10px;margin-right: 18px;" ng-click="picgetbig($index)" ng-repeat="pic in nleadpay.pics track by $index">
+          </div>
+        </div>
+<!--        <li>
+          <i class="icon icon-pic-add"></i><span class="name">相关图片：</span>
+          <img src="{{picserver}}{{pic}}" ng-click="picgetbig(pic)" ng-repeat="pic in nleadpay.pics track by $index">
+        </li>-->
+      </div>
+      <div class="accountd_title" ng-if="leadsPayList.length>0">历史记录</div>
+      <div class="accountd_list historylist" ng-if="leadsPayList.length>0">
+        <div class="accountd_item clearfix" ng-repeat="leadspaybean in leadsPayList">
+          <div class="money fl">￥<span ng-bind="leadspaybean.pay"></span></div>
+          <div class="state fl" ng-if="leadspaybean.status==0">商家确认中</div>
+          <div class="state fl" ng-if="leadspaybean.status==1">{{leadspaybean.paytime}}天后到账</div>
+          <div class="state fl" ng-if="leadspaybean.status==2">已到账</div>
+          <div class="state fl" ng-if="leadspaybean.status==3">撤销中</div>
+          <div class="state fl" ng-if="leadspaybean.status==4">拒绝撤销</div>
+          <div class="state fl" ng-if="leadspaybean.status==5">同意撤销</div>
+          <div class="state fl" ng-if="leadspaybean.status==-1">已撤销</div>
+          <div class="state fl" ng-if="leadspaybean.status==-2">已拒绝</div>
+          <div class="applySureCancelBtn businessInforAccount" ng-if="leadspaybean.status==3"><span class="sureBtn" ng-click="responseCancel(leadspaybean.id,0)">同意</span><span class="cancelBtn" ng-click="responseCancel(leadspaybean.id,1)">拒绝</span></div>
+          <div class="time fl" ng-bind="leadspaybean.updatime"></div>
+        </div>
+      </div>
+      <div ng-class="{'accound_btn':true,'unable':nleadpay.status==1||nleadpay.status==3,'able':nleadpay.status==2}">
+        <button class="redbg button-full mybtn-full" ng-click="shoukuanyongjin()">申请佣金</button>
+      </div>
+    </div>
+  </ion-content>
+  <ion-slide-box  ng-if="showpic" class="picSlide" active-slide="showimgIndex" delegate-handle="chatpichandle">
+    <ion-slide ng-repeat="pic in nleadpay.pics track by $index">
+      <div class="showPic" ng-click="shrinkPic()"><img src="{{picserver}}{{pic}}" class="big-pic" ></div>
+    </ion-slide>
+  </ion-slide-box>
+</ion-view>
+
+<script id="getbusmoney3.html" type="text/ng-template">
+  <ion-view>
+    <ion-header-bar align-title="middle" >
+      <div class="header_back" ng-click="closegetbusmoneytaskModal()">
+        <i class="icon ion-ios-arrow-left"></i>
+      </div>
+      <span class="title">申请佣金</span>
+    </ion-header-bar>
+    <ion-content class="has-header  bgGray" >
+      <div class="toparea_head">
+        <div class="head_picarea">
+          <img src="{{picserver}}{{avate}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+        </div>
+        <div class="tips">
+          <span>向{{nleadpay.alias}}申请佣金</span>
+        </div>
+      </div>
+      <div class="inputareas">
+        <div class="inputarea clearfix">
+          <span class="fl">金额</span>
+          <input class="inputit fl" type="number" placeholder="免服务费" id="shoukuanInputaccount" ng-model="formdata1.pay"/>
+        </div>
+        <div class="inputarea clearfix" style="border-top: 1px solid #e7e7e7">
+          <span class="fl">理由</span>
+          <input class="inputit fl" type="text" placeholder="选填" ng-model="formdata1.desc"/>
+        </div>
+      </div>
+      <div class="loginBtn" ng-click="subchatyongjing()">确认申请佣金</div>
+    </ion-content>
+  </ion-view>
+</script>

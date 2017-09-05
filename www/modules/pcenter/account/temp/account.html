@@ -1,0 +1,218 @@
+<ion-view style="background:#f4f4f4;">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+
+    <span class="title">我的账户</span>
+  </ion-header-bar>
+  <div class="account_head has-header topheader">
+    <div class="account_headbg">
+      <div class="account_head_label">可提现金额(元)：</div>
+      <div class="account_head_money" ng-click="go('peraccount')">
+        ￥&nbsp;<span ng-bind="account.restmoney|number:2"></span>
+        <div class="addProfitBox"><em class="profitNum">5</em></div>
+        <!--<div class="addProfitBox addProgifAnimate"><em class="profitNum">5</em></div>-->
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+      <!--<div class="account_list_link" ng-click="go('accountList')">账户流水</div>-->
+    </div>
+  </div>
+  <ion-content class="account-header" >
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="myacc()"></ion-refresher>
+    <div class="selectBtn"  ng-click="changeAccList()">
+      <i class="icon ion-chevron-right"></i><span>筛选</span>
+    </div>
+
+    <ion-list class="account-get-list account-list" ng-if="!nonelog" ng-repeat="log in loglist" >
+
+      <div class="list-time-select clearfix" ng-if="log.first == 0">
+        <span style="display: block;float: left">今天</span>
+      </div>
+      <div class="list-time-select" ng-if="log.first == 1"  >
+        <span style="display: block;float: left">昨天</span>
+      </div>
+      <div class="list-time-select" ng-if="log.first == 2" >
+        <span style="display: block;float: left">更早</span>
+      </div>
+
+      <ion-item class="account-get-list-item clearfix" ng-click="goTaskDetail(log)" ng-class="{'overflowShow':log.log.type == 1}">
+        <div class="fl time fl">
+          <span ng-bind="log.date"></span><br>
+          <span class="time2" ng-bind="log.time"></span>
+        </div>
+        <div class="pics fl" style="background: #dcdcdc">
+          <img src="img/newguide/guideExample.png" ng-if="log.log.type == 1" onerror="javascript:this.src='img/default-avatar.png'"/>
+          <img src="{{picserver}}{{log.logo}}" ng-if="log.log.type == 6||log.log.type == 2||log.log.type == 11||log.log.type == 13||log.log.type == 14||log.log.type == -5||log.log.type == 5" onerror="javascript:this.src='img/default-avatar.png'"/>
+          <img src="img/activity.png" ng-if="log.log.type == 4||log.log.type == 3||log.log.type == 71" onerror="javascript:this.src='img/default-avatar.png'"/>
+          <img src="img/withdraw-zhi.png" ng-if="log.log.type == -99||log.log.type == 92||log.log.type == 91" onerror="javascript:this.src='img/default-avatar.png'"/>
+          <img src="img/withdraw-wei.png" ng-if="log.log.type == -97||log.log.type == 93||log.log.type == 90" onerror="javascript:this.src='img/default-avatar.png'"/>
+          <img src="img/phonePay.png"  ng-if="log.log.type == -95||log.log.type == 95||log.log.type == -94||log.log.type == 94" onerror="javascript:this.src='img/default-avatar.png'"/>
+        </div>
+        <div class="detial fl">
+          <!--任务收益-->
+          <div ng-if="log.log.type == 11||log.log.type == 13||log.log.type == 14">
+              <div class="money project over-ellipsis" >{{log.desc}}</div>
+              <div class="message over-ellipsis acccountBusiness">{{log.bname}}</div>
+              <!--红包拆开-->
+              <!--<div class="purseMoney"  ng-if="log.redstatus==2" ng-class="{'moneyfadein':log.redstatus==2}">￥<span>{{log.money}}</span></div>-->
+              <!--红包未拆-->
+              <!--<div class="purseMoney purseimg"  ng-if="log.redstatus==1"  ng-class="{'purseframes':log.redstatus==1,'puesehide':log.redstatus!=1}" ng-click="purseClick(log)"><img src="img/pcenter/accountPurse.png"/></div>-->
+              <!-- 卡券 -->
+              <!--<div class="purseMoney purseimg"  ng-if="log.redstatus==1"><img src="./img/pcenter/accountCoupon.png"/></div>-->
+              <!--有红包-->
+              <div class="purseMoney" ng-if="log.redstatus==1" >￥<span>{{log.money-log.redmoney| number:2}}</span></div>
+              <!--无红包-->
+              <div class="purseMoney" ng-if="log.redstatus==0">￥<span>{{log.money | number:2}}</span></div>
+          </div>
+          <!--其他收益-->
+          <div ng-if="log.log.type != 11&&log.log.type != 13&&log.log.type != 14">
+            <div class="money" ng-if="log.log.type<0" >-{{log.money | number:2}}</div>
+            <div class="money" ng-if="log.log.type>0">+{{log.money | number:2}}</div>
+            <div class="message over-ellipsis" ng-bind="log.desc"></div>
+            <div class="accountExample" ng-if="log.log.type == 1">
+              <img src="img/newguide/example.png"/>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+
+    <!--数据结束-->
+    <div class="no-more-area2 moreTaskOrMerchant" ng-if="hasmore">
+      <div class="wenzi">没有更多啦，往上看看吧~</div>
+    </div>
+
+    <!-- 全部流水缺省页-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px;min-height: 600px;"  ng-if="nonelog&&choosetype.name=='全部'">
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好心酸，您当前还没有任何流水记录!</span><br/>
+        </div>
+      </div>
+    </div>
+
+    <!-- 任务收入缺省页-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px;min-height: 600px;" ui-sref="fastget" ng-click="gofastget()" ng-if="nonelog&&choosetype.name=='任务收入'">
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好心酸，您当前还没有抢到红包，</span><br/>
+          <span >马上去<span style="color: #ff3b30">分享列表</span>开始赚取奖励吧！</span>
+        </div>
+      </div>
+    </div>
+
+    <!--邀请缺省页-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px;min-height: 600px;" ng-if="nonelog&&choosetype.name=='收付款'">
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好心酸，您当前还没有收付款流水哦！</span><br/>
+        </div>
+      </div>
+    </div>
+
+    <!-- 手机充值缺省页-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px;min-height: 600px;" ng-if="nonelog&&choosetype.name=='充值'" >
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好心酸，您当前还没有手机充值流水哦！</span>
+        </div>
+      </div>
+    </div>
+
+    <!--活动缺省页-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px;min-height: 600px;"  ng-if="nonelog&&choosetype.name=='活动奖励'">
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好忧伤，你还没有参加享推的活动，</span><br/>
+          <span >马上参与其中的活动可以获得更多的活动奖励哦！</span>
+        </div>
+      </div>
+    </div>
+
+    <!--提现缺省页-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px;min-height: 600px;" ui-sref="tab.pcenter" ng-if="nonelog&&choosetype.name=='提现'">
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好心酸哦！您的账户里的钱竟然还没有提现，</span><br/>
+          <span >赶紧点击<span style="color: #ff3b30">账户余额</span>进行提现吧！</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!--邀请好友缺省页面-->
+    <div class="nosearch" style="line-height:40px;margin-top: 0px;min-height: 600px;" ui-sref="share" ng-if="nonelog&&choosetype.name=='邀请好友'">
+      <div class="nointenet">
+        <img src="img/noaccountlist.png"  style="margin-left: 0px" >
+        <div class="message-info">
+          <span>好心酸哦！您竟然还没有邀请过好友，</span><br/>
+          <span >赶紧点击<span style="color: #ff3b30">传送门</span>去邀请好友吧！</span>
+        </div>
+      </div>
+    </div>
+
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+      ng-if="hasNextPage"
+      on-infinite="loadMore()"
+      distance="1%"
+      immediate-check="false">
+    </ion-infinite-scroll>
+    <!--<div class="wrong-text">-->
+    <!--提现说明：<br>-->
+    <!--1、新手引导获得的奖励需再赚5元才可提现；<br>-->
+    <!--2、您赚取的佣金可随时进行提现；<br>-->
+    <!--3、用支付宝提现，金额少于50元，需支付1元的手续费（支付宝收取手续费）；<br>-->
+    <!--4、用微信提现则无需手续费。<br>-->
+    <!--</div>-->
+  </ion-content>
+  <!--lodding特效-->
+  <div class="mask-loadding-all" ng-if="showloading">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">-->
+      <!--<div></div>-->
+      <!--<div></div>-->
+      <!--<div></div>-->
+      <!--</div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+  <!--语音验证弹窗  点击提现后，如果是首次提现出现-->
+  <div class="mask " style="display: {{isfirststyle}}"></div>
+  <div class="account-popup " ng-if="first">
+    <div class="title clearfix">
+      <i class="icon icon-xt2-tel"></i>首次提现时需语音验证<i class="fr icon ion-ios-close-empty close-icon2"
+                                                    ng-click="closePopup()"></i>
+    </div>
+    <div class="popupbody">
+      <!--<button id="code" class="btn1 button" ng-click="sendcode('1','voice')">-->
+      <!--<span ng-bind-html="timetxt"></span>-->
+      <!--</button>-->
+      <div class="btn1 button" ng-if="showBut" ng-click="sendcode('1','voice')">
+        <span ng-bind-html="timetxt"></span>
+      </div>
+      <div class="btn4 button" ng-if="!showBut">
+        <span ng-bind-html="timetxt"></span>
+      </div>
+      <input type="tel" placeholder="请输入语音验证码" ng-model="user.code">
+      <div class="tips wrong" ng-bind="message"></div>
+      <button class="btn2 button" ng-click="checkcode()">提交验证</button>
+    </div>
+  </div>
+  <div class="wrong-hit wrong-show" style="height: 100px" ng-if="showsucc">
+    <i class="icon ion-ios-checkmark-outline"></i>验证成功
+  </div>
+
+  <!--新手引导6-->
+  <div class="guide06" ng-if="step7" ng-click="closeNewHandStepSix()"></div>
+  <div class="guide06-2" ng-if="false" ng-click="closeNewHandStepSix()"></div>
+  <div class="guide06"  ng-click="closeNewHandStepSix()" style="display: none"></div>
+  <div class="guide06-2"  ng-click="closeNewHandStepSix()" style="display: none"></div>
+</ion-view>

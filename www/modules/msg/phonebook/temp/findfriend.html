@@ -1,0 +1,183 @@
+<ion-view class="xt-grey-bg">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <div class="header_search clearfix">
+      <span class="icon icon-xt-search search_icon"></span>
+      <form  ng-submit="goSearchList(search.key)">
+        <input id="searchFouse" type="search" ng-model="search.key" ng-change="showclose()" placeholder="请输入关键词" ng-keyup="myKeyup($event)"/>
+      </form>
+      <span class="icon icon-xt2-close search_close" ng-click="searchClear()"></span>
+    </div>
+    <div class="header_searchbtn" ng-click="goSearchList(search.key)">搜索</div>
+  </ion-header-bar>
+  <ion-content class="has-header xt-grey-bg">
+    <!--<div class="find-head">
+ <span class="find-icon-box"><i class="ion-ios-search"></i></span>
+      <span style="margin-right: 16px">搜一搜</span>
+      <span class="xt-red"><b>李莫愁</b></span>
+    </div>
+    <div  class="find-title">搜索结果</div>-->
+    <div class="find_nofriend">
+      该用户不存在
+    </div>
+    <div class="find_list">
+      <div class="find_title">相关好友</div>
+      <div class="find-item clearfix" ng-click="go('personal')">
+        <div class="head-pic fl">
+          <img src="img/default.png">
+        </div>
+        <div class="name fl">  <span class="xt-red">李莫愁</span></div>
+      </div>
+      <div class="find-item clearfix" ng-click="go('personal')">
+        <div class="head-pic fl">
+          <img src="img/default.png">
+        </div>
+        <div class="name fl">  <span class="xt-red">李莫愁</span></div>
+      </div>
+      <div class="find-item clearfix">
+        <div class="head-pic fl">
+          <img src="img/default.png">
+        </div>
+        <div class="name fl">  安<span class="xt-red">莫愁</span></div>
+      </div>
+    </div>
+    <div class="find_list marginTop16">
+      <div class="find_title">相关商家</div>
+      <div class="find-item clearfix">
+        <div class="head-pic fl">
+          <img src="img/default.png">
+        </div>
+        <div class="name fl"> 扬子江 <span class="xt-red">莫愁</span>团公司</div>
+      </div>
+      <div class="find-item clearfix">
+        <div class="head-pic fl">
+          <img src="img/default.png">
+        </div>
+        <div class="name fl">  神州数码控股<span class="xt-red">莫愁</span>公司</div>
+      </div>
+    </div>
+    <div class="find_list marginTop16 find_group">
+      <div class="find_title">群聊</div>
+      <div class="find-item clearfix group group1">
+        <div class="head-pic fl">
+          <ul class="clearfix">
+            <li><img src="img/bg_jh.jpg"></li>
+          </ul>
+        </div>
+        <div class="groupinfo fl">
+          <div class="groupname">销售精英群销售精英群销售精英群销售精英群销售精英群销售精英群</div>
+          <div class="groupmem">包含：<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span></div>
+        </div>
+      </div>
+      <div class="find-item clearfix group group2">
+        <div class="head-pic fl">
+          <ul class="clearfix">
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+          </ul>
+        </div>
+        <div class="groupinfo fl">
+          <div class="groupname">销售精英群销售精英群销售精英群销售精英群销售精英群销售精英群</div>
+          <div class="groupmem">包含：<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span></div>
+        </div>
+      </div>
+      <div class="find-item clearfix group group3">
+        <div class="head-pic fl">
+          <ul class="clearfix">
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+          </ul>
+        </div>
+        <div class="groupinfo fl">
+          <div class="groupname">销售精英群销售精英群销售精英群销售精英群销售精英群销售精英群</div>
+          <div class="groupmem">包含：<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span>、<span>李<i>莫愁</i></span></div>
+        </div>
+      </div>
+      <div class="find-item clearfix group group4">
+        <div class="head-pic fl">
+          <ul class="clearfix">
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+          </ul>
+        </div>
+        <div class="name fl">销售精英群2</div>
+      </div>
+      <div class="find-item clearfix group group5">
+        <div class="head-pic fl">
+          <ul class="clearfix">
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+          </ul>
+        </div>
+        <div class="name fl">销售精英群2</div>
+      </div>
+      <div class="find-item clearfix group group6">
+        <div class="head-pic fl">
+          <ul class="clearfix">
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+          </ul>
+        </div>
+        <div class="name fl">销售精英群2</div>
+      </div>
+      <div class="find-item clearfix group group7">
+        <div class="head-pic fl">
+          <ul class="clearfix">
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+          </ul>
+        </div>
+        <div class="name fl">销售精英群2</div>
+      </div>
+      <div class="find-item clearfix group group8">
+        <div class="head-pic fl">
+          <ul class="clearfix">
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+          </ul>
+        </div>
+        <div class="name fl">销售精英群2</div>
+      </div>
+      <div class="find-item clearfix group group9">
+        <div class="head-pic fl">
+          <ul class="clearfix">
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+            <li><img src="img/bg_jh.jpg"></li>
+          </ul>
+        </div>
+        <div class="name fl">销售精英群2</div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

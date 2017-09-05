@@ -1,0 +1,34 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">添加手机联系人</span>
+  </ion-header-bar>
+
+  <ion-content class="has-header has-subheader" style="overflow-y: hidden;">
+    <div class="phonebook" >
+      <img src="./img/phonebook.png">
+      <p>您的手机通讯录中没有相应联系人</p>
+      <p>或者享推没有权限访问您的通讯录</p>
+      <p class="tips">小提示：</br>
+        您需要进入系统“设置”-“隐私”-“通讯录”中<br/>打开享推的开关
+      </p>
+    </div>
+  </ion-content>
+  <style>
+    /*下方comfirm弹窗*/
+    /*.popup-head{ display:none;}*/
+    .popup-container .popup{width: 539px; border-radius: 10px;}
+    .popup-container{font-size: 25px;}
+    .popup-container .popup-title{font-size: 25px; font-family: "-apple-system", "microsoft yahei";padding: 20px; line-height: 45px; text-align: center;}
+    .popup-body{padding:35px;border-bottom: 1px solid #d8d8d8;}
+    .popup-buttons{padding: 0px;}
+    .popup-buttons .button{font-size: 25px; font-family: "-apple-system", "microsoft yahei";background: transparent;height: 75px; line-height: 75px; width: 50%;padding: 0px; margin: 0px;}
+    /*.popup-buttons .button:first-child{border-right: 1px solid #000;}*/
+    .button-cancel{ color: #1c8df6; font-size: 25px; line-height: 78px; border-right: 1px solid #d8d8d8;}
+    .button-go{ color: #ff3b30; font-size: 25px; line-height: 78px;}
+    .popup-container .popup-buttons .button:last-child{color: #ff3b30;}
+
+  </style>
+</ion-view>

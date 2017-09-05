@@ -1,0 +1,63 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="showPopup()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">申诉</span>
+  </ion-header-bar>
+
+  <ion-content class="find-pasword has-header">
+
+    <div class="item-divider"></div>
+        <div class="find-form" style="padding-right: 21px">
+            <textarea  placeholder="请填写您的申诉理由" ng-model="comment.detail"></textarea>
+
+        </div>
+        <div class="message-add">
+          *上传证据，最多可上传三张截图。
+        </div>
+        <div class="addpicgrop clearfix">
+          <div class="picarea clearfix picareaitem"  ng-repeat="pic in piclist">
+            <div class="picitem  additem" >
+              <img src="{{picserver}}{{pic}}">
+            </div>
+            <div class="close-icon" ng-click="deletepic(pic)">
+              <i class="ion-ios-close-empty"></i>
+            </div>
+          </div>
+
+          <!--最后一个放添加图片的按钮，图片添加3个后隐藏，不到3个显示-->
+          <div class="picarea" id="picadd" ng-click="addpicshow()">
+            <div class="picitem light-bg additem" >
+              <i class="ion-ios-plus-empty add-icon"></i>
+              <!-- 上传图片的进度条，在controller里修改jdtpercent的值记得加%-->
+              <!--<div class="add-jdt" ng-style="{'width':jdtpercent}">-->
+              </div>
+            </div>
+          </div>
+    </div>
+    <div class="queren-btn">
+      <!--信息输入完成后，opacity ：1 并且 可以点击-->
+      <button  class="btn xt-red-bg" ng-click="complaint()">
+        提交
+      </button>
+    </div>
+
+  </ion-content>
+
+  <div class="hit-message light wrong-show hide">
+    <i class="ion-ios-checkmark-outline font48"></i><br>
+    申诉已成功提交，稍后我们可能会电话您以询问更多的细节，结果将会以系统消息的形式通知到您，请耐心等待！
+  </div>
+  <!--判断是否申请云销售弹窗-->
+  <div class="popup-mask hide "></div>
+  <div class="popup-area shensupopup hide" >
+    <div class="popup_text">申诉尚未完成，您确定离开？</div>
+    <div class="bt_but_box">
+      <span ng-click="closePopup()" class="button-cancel3">取消</span>
+      <span class="btn_apply xt-red" ng-click="goadduserinfo()" style="color: #ff3b30"   class="button-cancel3 ">确定</span>
+    </div>
+  </div>
+
+</ion-view>

@@ -1,0 +1,24 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">设置备注</span>
+  </ion-header-bar>
+
+  <ion-content class="find-pasword has-header" style="overflow-y: hidden;">
+    <div class="find-form">
+      <div class="line clearfix">
+        <input class="fl" ng-model="ruser.remark" ng-change="checkOtherNick()"  placeholder="请输入备注"/>
+        <i class="icon-xt2-close fr close" ng-if="showclear" ng-click="clearOtherNick()">
+        </i>
+      </div>
+    </div>
+    <div class="queren-btn">
+      <button id="setnick" disabled class="btn xt-red-bg"  ng-click="changeOtherNick()">
+        保存
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,110 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">销售支持</span>
+    <div class="customerHeader"><i class="icon icon-cps-share" ng-click="gotoshare()"></i></div>
+
+  </ion-header-bar>
+
+  <ion-content class="coupond_content has-header">
+    <div class='scroll-wrapper'>
+      <iframe id="cou_iframe"   ng-src="{{articleurl}}" style="min-height: 100%;width: 100%;"></iframe>
+    </div>
+    <div class="loader loadanimation"><ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner></div>
+  </ion-content>
+
+  <!--汉堡包-->
+  <div class="detail_hbg" ng-click="ruleShow()">
+    <!--<img src="./img/coupond_hbg.png"/>-->
+    <i class="icon ion-navicon-round"></i>
+  </div>
+
+  <!--任务规则弹窗-->
+  <div class="article_rule goodarticlerule">
+    <div class="rule_title clearfix">
+      <span class="fl"></span>
+      优惠券(支持)的使用方法
+      <span class="fr"></span>
+    </div>
+    <div class="little-tittle1">
+     商家支持的优惠活动，好友使用优惠券享受优惠
+    </div>
+    <div class="rule_content goodarticlerule clearfix">
+      <div class="left-pic-area fl">
+         <img src="img/couponshow.png">
+      </div>
+      <div class="right-tip-area fr">
+         <div class="infomation1 infomation">
+           将优惠券分享给朋友
+         </div>
+        <div class="infomation2 infomation">
+          朋友填写信息后即成功领取
+        </div>
+        <div class="infomation3 infomation">
+          在客户管理中将朋友的信息提交给商家
+        </div>
+        <div class="infomation4 infomation">
+          朋友使用优惠券后，我获得对应的佣金
+        </div>
+      </div>
+    </div>
+    <div class="rule_closebtn icon icon-xt-close"></div>
+  </div>
+
+  <button id="showsharecoupon" class="startbtn" ng-click="shareSDK()" >分享</button>
+
+  <!--分享弹窗-->
+  <div class="newguidemask " ng-if="ifopensharepopup"  ng-click="closesharepopup()"></div>
+  <div class="share_popup" ng-if="ifopensharepopup">
+    <div class="body">
+      <div class="title">
+        <i class="icon icon-tab-share"></i><span>立即分享至</span>
+      </div>
+      <div class="share_item">
+        <ul class="sharelist">
+          <li ng-click="newShare('weixin')">
+            <div class="shareicon">
+              <div class="iconitem weixin"></div>
+            </div>
+            <div class="share_name">微信</div>
+          </li>
+          <li ng-click="newShare('wxZone')">
+            <div class="shareicon">
+              <div class="iconitem friendcircle"></div>
+            </div>
+            <div class="share_name">朋友圈</div>
+          </li>
+          <li ng-click="newShare('qq')">
+            <div class="shareicon">
+              <div class="iconitem qq"></div>
+            </div>
+            <div class="share_name">QQ</div>
+          </li>
+          <li ng-click="newShare('qqZone')">
+            <div class="shareicon">
+              <div class="iconitem qqzone"></div>
+            </div>
+            <div class="share_name">QQ空间</div>
+          </li>
+          <li ng-click="newShare('sinaweibo')">
+            <div class="shareicon">
+              <div class="iconitem weibo"></div>
+            </div>
+            <div class="share_name">微博</div>
+          </li>
+          <li ng-click="newShare('copylink')">
+            <div class="shareicon">
+              <div class="iconitem browser"></div>
+            </div>
+            <div class="share_name">复制链接</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="buttomgroup" ng-click="closesharepopup()">取消</div>
+  </div>
+
+</ion-view>

@@ -1,0 +1,108 @@
+<ion-view>
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">邀请好友</span>
+  </ion-header-bar>
+  <ion-content class="has-header " style="background: #fafafa;">
+   <div class="inviteUserBox">
+      <img src="img/pcenter/inviteImg.jpg" />
+     <div class="inviteMoreUserBtn" ng-click="showshare()" >邀请好友来赚钱</div>
+     <div class="inviteSuccessBtn" ng-click="opendshareeewardpop()">
+       <span class="inviteNumberBox"><img src="img/pcenter/inviteZan.png" /><span>已成功推荐</span><i class="pepoleNum"><span ng-bind="inviteUsers.length"></span></i><span>人，累计获得奖励</span><i class="pepoleNum"><span ng-bind="inviteMoneys"></span></i><span>元！</span><i class="icon ion-ios-arrow-right"></i></span>
+     </div>
+   </div>
+    <div class="inviteActiveRules">
+        <div class="rulesTitle"><span>活动规则</span></div>
+        <dl class="rulesText clearfix"><dt class="redRound"></dt><dd>邀请区域：仅限常州地区。</dd></dl>
+        <dl class="rulesText clearfix"><dt class="redRound"></dt><dd>活动说明：点击“邀请好友”，分享邀请链接，好友注册并完成新手任务，双方各得5元奖励。</dd></dl>
+        <dl class="rulesText clearfix"><dt class="redRound"></dt><dd>活动最终解释权归享推平台所有。</dd></dl>
+    </div>
+  </ion-content>
+<!-- 邀请人数弹窗 -->
+  <div class="inviteUserNumBox" ng-if="opendShareRewardPop">
+      <div class="closePopBtn" ng-click="closesharerewardpop()"></div>
+      <div class="invitePopupHeader">
+        <div class="inviterName" ng-bind="user.nick"></div>
+        <div class="inviteNumReward">已经邀请<i class="number"><span ng-bind="inviteUsers.length"></span></i>位好友</div>
+        <div class="inviteNumReward">累计获得奖励<i class="number"><span ng-bind="inviteMoneys"></span></i>元</div>
+      </div>
+      <div class="inviteInforBox">
+          <div class="noinvterBox"  ng-if="!inviteUsers || inviteUsers.length ==0" >
+            <img class="nothingImg" src="img/pcenter/nothingPig.png"/>
+            <p>暂时没有邀请到好友哇</p>
+            <p>请继续加油</p>
+          </div>
+
+          <div class="inviteInforList" >
+
+            <div class="inforList titleBox"><span>手机号</span><span>新手任务</span><span>5元奖励</span></div>
+            <div class="inforList" ng-repeat="iuser in inviteUsers">
+
+              <span ng-bind="iuser.tel"></span>
+
+              <span ng-if="iuser.rstatus==2">已完成</span><span ng-if="iuser.rstatus!=2" class="greyColor">未完成</span>
+
+              <span ng-if="iuser.status ==2">已发放</span><span ng-if="iuser.status ==4||iuser.status ==3" class="greyColor">无效邀请</span><span ng-if="iuser.status ==0||iuser.status ==1" class="greyColor">未发放</span>
+            </div>
+
+          </div>
+      </div>
+  </div>
+  <div class="newguidemask " ng-if="opendShareRewardPop"  ng-click="closesharerewardpop()"></div>
+  <!--分享弹窗-->
+  <div class="newguidemask " ng-if="ifopensharepopup"  ng-click="closesharepopup()"></div>
+  <div class="share_popup" ng-if="ifopensharepopup">
+    <div class="body">
+      <div class="title">
+        <i class="icon icon-tab-share"></i><span>立即分享至</span>
+      </div>
+      <div class="share_item">
+        <ul class="sharelist">
+          <li ng-click="newShare('weixin')">
+            <div class="shareicon">
+              <div class="iconitem weixin"></div>
+            </div>
+            <div class="share_name">微信</div>
+          </li>
+          <li ng-click="newShare('wxZone')">
+            <div class="shareicon">
+              <div class="iconitem friendcircle"></div>
+            </div>
+            <div class="share_name">朋友圈</div>
+          </li>
+          <li ng-click="newShare('qq')">
+            <div class="shareicon">
+              <div class="iconitem qq"></div>
+            </div>
+            <div class="share_name">QQ</div>
+          </li>
+          <li ng-click="newShare('qqZone')">
+            <div class="shareicon">
+              <div class="iconitem qqzone"></div>
+            </div>
+            <div class="share_name">QQ空间</div>
+          </li>
+          <li ng-click="newShare('sinaweibo')">
+            <div class="shareicon">
+              <div class="iconitem weibo"></div>
+            </div>
+            <div class="share_name">微博</div>
+          </li>
+          <li ng-click="newShare('copylink')">
+            <div class="shareicon">
+              <div class="iconitem browser"></div>
+            </div>
+            <div class="share_name">复制链接</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="buttomgroup" ng-click="closesharepopup()">取消</div>
+  </div>
+
+</ion-view>
+<style>
+  .scroll{height: 100%}
+ </style>

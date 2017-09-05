@@ -1,0 +1,187 @@
+<ion-view class="xt-grey-bg">
+
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back addinfo-back" ng-click="gobackfunction()" >
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">提交客户信息</span>
+
+
+    <!-- 点击状态是无效的卡片时才出现-->
+    <div class="task-rule" style="text-align: right" ng-if="showcomplain" ng-click="goComplain()">
+      申诉
+    </div>
+  </ion-header-bar>
+
+  <!--评价弹窗-->
+  <div class="mask-pingjia" ng-class="{'hide':ifhidemask}"></div>
+
+  <div class="pinjia-popup"  ng-class="{'hide':ifhidemask}">
+
+    <div class="title clearfix">发表评价<div class="close-btn " ng-click="closeConment()"><i class="ion-ios-close-empty"></i></div></div>
+    <div class="body">
+      <div class="your-price">
+        <div class="score1 clearfix hdxs" on-touch="HDstartchange()" on-drag="HDstartchange()" on-release="ZHscore()">
+          <span class="fl">活动形式：</span>
+
+          <div class="starbom fl clearfix">
+            <i ng-class="{'xt-yellow-star':xdif1}" class="icon-xt-star fl "></i>
+            <i  ng-class="{'xt-yellow-star':xdif2}" class="icon-xt-star fl"></i>
+            <i  ng-class="{'xt-yellow-star':xdif3}" class="icon-xt-star fl"></i>
+            <i  ng-class="{'xt-yellow-star':xdif4}" class="icon-xt-star fl"></i>
+            <i ng-class="{'xt-yellow-star':xdif5}" class="icon-xt-star fl"></i>
+          </div>
+          <div class="startop fl">
+            <i  ng-class="{'xt-yellow-star':xdif05}" class="icon-xt-starhalf fl" ></i>
+            <i  ng-class="{'xt-yellow-star':xdif15}" class="icon-xt-starhalf fl" ></i>
+            <i  ng-class="{'xt-yellow-star':xdif25}" class="icon-xt-starhalf fl" ></i>
+            <i   ng-class="{'xt-yellow-star':xdif35}" class="icon-xt-starhalf fl" ></i>
+            <i   ng-class="{'xt-yellow-star':xdif45}" class="icon-xt-starhalf fl" ></i>
+          </div>
+        </div>
+        <div class="score1 clearfix" on-touch="SQstartchange()" on-drag="SQstartchange()"  on-release="ZHscore()">
+          <span class="fl">售前支持：</span>
+          <div class="starbom fl clearfix">
+            <i ng-class="{'xt-yellow-star':sqif1}" class="icon-xt-star fl "></i>
+            <i  ng-class="{'xt-yellow-star':sqif2}" class="icon-xt-star fl"></i>
+            <i  ng-class="{'xt-yellow-star':sqif3}" class="icon-xt-star fl"></i>
+            <i  ng-class="{'xt-yellow-star':sqif4}" class="icon-xt-star fl"></i>
+            <i ng-class="{'xt-yellow-star':sqif5}" class="icon-xt-star fl"></i>
+          </div>
+          <div class="startop fl">
+            <i  ng-class="{'xt-yellow-star':sqif05}" class="icon-xt-starhalf fl" ></i>
+            <i  ng-class="{'xt-yellow-star':sqif15}" class="icon-xt-starhalf fl" ></i>
+            <i  ng-class="{'xt-yellow-star':sqif25}" class="icon-xt-starhalf fl" ></i>
+            <i   ng-class="{'xt-yellow-star':sqif35}" class="icon-xt-starhalf fl" ></i>
+            <i   ng-class="{'xt-yellow-star':sqif45}" class="icon-xt-starhalf fl" ></i>
+          </div>
+        </div>
+        <div class="score1 clearfix" on-touch="SHstartchange()" on-drag="SHstartchange()"  on-release="ZHscore()">
+          <span class="fl">审核速度：</span>
+          <div class="starbom fl clearfix">
+            <i ng-class="{'xt-yellow-star':shif1}" class="icon-xt-star fl "></i>
+            <i  ng-class="{'xt-yellow-star':shif2}" class="icon-xt-star fl"></i>
+            <i  ng-class="{'xt-yellow-star':shif3}" class="icon-xt-star fl"></i>
+            <i  ng-class="{'xt-yellow-star':shif4}" class="icon-xt-star fl"></i>
+            <i ng-class="{'xt-yellow-star':shif5}" class="icon-xt-star fl"></i>
+          </div>
+          <div class="startop fl">
+            <i  ng-class="{'xt-yellow-star':shif05}" class="icon-xt-starhalf fl" ></i>
+            <i  ng-class="{'xt-yellow-star':shif15}" class="icon-xt-starhalf fl" ></i>
+            <i  ng-class="{'xt-yellow-star':shif25}" class="icon-xt-starhalf fl" ></i>
+            <i   ng-class="{'xt-yellow-star':shif35}" class="icon-xt-starhalf fl" ></i>
+            <i   ng-class="{'xt-yellow-star':shif45}" class="icon-xt-starhalf fl" ></i>
+          </div>
+        </div>
+      </div>
+      <div class="all-price clearfix">
+        <div class="score1">
+          <span class="fl">综合评分：</span>
+          <div class="starbom fl clearfix">
+            <i ng-class="{'xt-yellow-star':zhif1}" class="icon-xt-star fl "></i>
+            <i  ng-class="{'xt-yellow-star':zhif2}" class="icon-xt-star fl"></i>
+            <i  ng-class="{'xt-yellow-star':zhif3}" class="icon-xt-star fl"></i>
+            <i  ng-class="{'xt-yellow-star':zhif4}" class="icon-xt-star fl"></i>
+            <i ng-class="{'xt-yellow-star':zhif5}" class="icon-xt-star fl"></i>
+          </div>
+          <div class="startop fl">
+            <i  ng-class="{'xt-yellow-star':zhif05}" class="icon-xt-starhalf fl" ></i>
+            <i  ng-class="{'xt-yellow-star':zhif15}" class="icon-xt-starhalf fl" ></i>
+            <i  ng-class="{'xt-yellow-star':zhif25}" class="icon-xt-starhalf fl" ></i>
+            <i   ng-class="{'xt-yellow-star':zhif35}" class="icon-xt-starhalf fl" ></i>
+            <i   ng-class="{'xt-yellow-star':zhif45}" class="icon-xt-starhalf fl" ></i>
+          </div>
+        </div>
+        <div class="infomation">
+          <textarea ng-focus="margintopchange()" ng-blur="margintopchange2()"  class="commentarea" placeholder="请写下您对商家的评语，不得少于15字。" ng-model="comment.detail"></textarea>
+          <!--<div style="width: 100%;text-align: right;font-size: 22px;color: #999;line-height: 40px">0/200</div>-->
+        </div>
+
+      </div>
+    </div>
+    <div class="foot">
+      <button class="subbtn" ng-click="leadsComment()">提交</button>
+    </div>
+
+  </div>
+
+  <ul class="subheader light-bg  adduserinfosub clearfix" >
+    <li>客户姓名</li>
+    <li>更新时间</li>
+    <li ng-click="choseshow()" ng-class="{'active':ifshow}">状态选择<i class="icon icon-xt2-down" style="line-height: 70px;" ></i></li>
+  </ul>
+  <ul class="choseinfo3 " >
+    <li ng-class="{'active':choosetype.name == sl.name}" ng-click="getLeadsList(sl)" ng-repeat="sl in selectList">{{sl.name}}</li>
+  </ul>
+  <ion-content class="adduser-info has-header " style="top: 150px">
+<!--客户信息列表-->
+    <div class="user-info-list">
+
+      <!--客户信息内容，循环-->
+     <div class="userinfo-item clearfix "   ng-repeat="lead in leadsList" id="{{lead.tel}}" ng-click="showUserInfo(lead)">
+         <div class="info fl" ng-class="{'borderLeft01':(lead.status == '1'),'borderLeft02':(lead.status == '0'),'borderLeft03':(lead.status == '2')}">
+           <div class="line1 clearfix">
+              <div class="fl username" ng-bind="lead.name"></div>
+             <div class="fl updatetime" ng-bind="lead.inittime"></div>
+             <div class="state fl">
+               <span style="color:#ff3b30" ng-if="lead.status == '0'">商家对接中</span>
+               <span style="color:#66ba34" ng-if="lead.status == '1'">有效</span>
+               <span style="color:#999" ng-if="lead.status == '2'">无效</span>
+             </div>
+           </div>
+
+           <div class="hide-info">
+             <div class="divider" style="height: 8px"></div>
+             <div class="user-info-line2 clearfix" ng-if="lead.tel != ''">
+                 <span class="grey-ccc fl">联系电话：</span>
+                 <div class="black-333 fl" style="width: 300px;text-align: center" ng-bind="lead.tel"></div>
+               <i class="icon-uniE977 xt-0ys-green fr" style="font-size: 35px;line-height: 80px" ng-click="userTelShow(lead.tel)"></i>
+             </div>
+             <div class="user-info-line2 clearfix" ng-if="lead.inittime != ''">
+               <span class="grey-ccc fl">提交时间：</span>
+               <div class="black-333 fl" style="width: 300px;text-align: center"ng-bind="lead.inittime"></div>
+             </div>
+             <div class="user-info-line2 clearfix " ng-if="lead.sprice != ''&& lead.status == '1' ">
+               <span class="grey-ccc fl">佣&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;金：</span>
+               <div class="black-333 fl" style="width: 300px;text-align: center" ng-bind="lead.sprice"></div>
+             </div>
+             <div class="user-info-line2 clearfix " ng-if="lead.audittime != ''">
+               <span class="grey-ccc fl">审核日期：</span>
+               <div class="black-333 fl" style="width: 300px;text-align: center" ng-bind="lead.audittime"></div>
+             </div>
+             <div class="user-info-line3 user-info-line2 clearfix " ng-if="lead.reason.length > 0">
+               <span class="grey-ccc fl">无效理由：</span>
+               <div class="black-333 fl reason" ng-bind="lead.reason"></div>
+             </div>
+             <button class="qrenbtn" ng-if="lead.status != '0'" ng-click="closeConment(lead)">评价</button>
+           </div>
+         </div>
+     </div>
+    </div>
+
+
+<!--如果没有客户信息显示-->
+    <div class="no-usermessage" ng-if="shownoneuser">
+      尚无客户信息<br>
+      请点击“新增客户”进行添加
+    </div>
+
+  </ion-content>
+  <!--如果没有客户信息显示-->
+  <div class="pigs-pic"ng-if="shownoneuser">
+    <img src="img/no-userinfo.png">
+  </div>
+  <div class=" queren-btn adduser-infobtn">
+    <button class="btn xt-red-bg" ng-click="goAddUser()">
+      +新增客户
+    </button>
+  </div>
+  <!--加载中-->
+  <div class="loading_mask hide">
+    <div class="loading_icon">
+      <img src="./img/loading.gif"/>
+    </div>
+  </div>
+<div class="mask_add hide" ></div>
+</ion-view>

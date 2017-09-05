@@ -1,0 +1,30 @@
+.guangbiao{position: absolute;width: 54px;height: 50px;border-left: 2px solid #ccc;left: 6px;top: 5px;animation:guangbiaoAnimate 1s infinite; }
+@keyframes guangbiaoAnimate {0%{opacity: 1}50%{opacity: 0}100%{opacity: 1}}
+.msg_s_popup .body .inputbox .password .paypasgroup{position: relative;overflow: hidden}
+
+
+/*工作圈头部*/
+
+.coverBox img{width:100%;height:auto;position:absolute;bottom:0px;}
+.covarImg{width:100%;height:auto !important;position:absolute;bottom:0px;}
+
+
+/*弹窗样式，公共*/
+/*弹窗样式*/
+.popup-container{ bottom: 0; top:0;}
+.popup-container .popup{width: 539px;font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 20px;}
+.popup-container .popup-title{font-family: "-apple-system", "microsoft yahei";font-size: 27px;padding: 35px;}
+.popup-container .popup-buttons{padding: 0px;}
+.popup-container .popup-buttons .button{font-family: "-apple-system", "microsoft yahei";font-size: 25px; color: #1c8df6; background: none;}
+.popup-container .popup-buttons .button:first-child{border-right: 2px solid #e6e9ed}
+.popup-container .popup-buttons .button.button-positive{color: #007aff}
+.popup-container .popup-buttons .button.button-go{color: #ff3b30}
+
+/*s详情页调整*/
+.cloudsaleInfor{margin-left:25px;line-height:45px;}
+.cloudsaleInfor .name{font-size:29px;color:#333333;}
+.cloudsaleInfor .name .icon{margin-left:16px;}
+.cloudsaleInfor .name .icon.female{color:#f56f84;}
+.cloudsaleInfor .name .icon.male{color:#6fcbf5;}
+.cloudsaleInfor .age{font-size:22px;color:#666666;}
+.cloudsaleInfor .nikename{font-size:22px;color:#666666;}

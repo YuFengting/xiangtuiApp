@@ -1,0 +1,18 @@
+<ion-view>
+  <ion-header-bar align-title="middle" ng-show="httpchat">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" ng-bind="name"></span>
+  </ion-header-bar>
+  <!--返回按钮设置-->
+  <div class="business_back" ng-click="goback()"   ng-show="!httpchat">
+    <img src="./img/business_back.png"/>
+  </div>
+
+  <ion-content class="coupond_content iframeContent has-header" ng-style="{'top':topitem}">
+    <div class='scroll-wrapper'>
+      <iframe  id="iframeBox"  src="{{iframeurl}}" style="min-height: 100%;width: 100%;"></iframe>
+    </div>
+  </ion-content>
+</ion-view>

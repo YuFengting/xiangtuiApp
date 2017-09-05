@@ -1,0 +1,42 @@
+<ion-view>
+	<ion-header-bar align-title="middle">
+		<div class="header_back" ng-click="goback()">
+			<i class="icon ion-ios-arrow-left"></i>
+		</div>
+		<span class="title">绑定微信</span>
+	</ion-header-bar>
+	<ion-content class="has-header" style="overflow-y: hidden;">
+    <div class="saferz_hint" style="padding: 15px 35px;">一个微信号只能绑定一个享推帐号。   如需帮助，请联系客服。（电话：4000505811）</div>
+		<div class="wxbind_content clearfix">
+			<div class="fl wxbind01_left">
+				<ul>
+					<li><img src="./img/wx_bindstep01.png"/></li>
+					<li><img src="./img/wx_bindstep02.png"/></li>
+					<li><img src="./img/wx_bindstep03.png"/></li>
+					<li><img src="./img/wx_bindstep04.png"/></li>
+				</ul>
+			</div>
+			<div class="fr wxbind01_right">
+				<ul>
+					<li style="margin-top: -10px;margin-bottom: 70px">
+						<div class="wxbind_title">收听微信公众号</div>
+						<div class="wxbind_text" style="line-height: 22px">打开微信，搜索“享推科技”<br><span>（微信ID:xiangtui2）</span></div>
+					</li>
+					<li>
+						<div class="wxbind_title">绑定享推</div>
+						<div class="wxbind_text">进入公众号，点击“绑定享推”按钮</div>
+					</li>
+					<li>
+						<div class="wxbind_title">绑定手机号</div>
+						<div class="wxbind_text">绑定享推账号，即注册手机号</div>
+					</li>
+					<li>
+						<div class="wxbind_title">完成绑定</div>
+						<div class="wxbind_text">完成账户绑定，即可微信提现</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+    <button style="width: 420px" class="mybtn-full redbg account_btn" ng-click="goweixin()">前往微信</button>
+	</ion-content>
+</ion-view>

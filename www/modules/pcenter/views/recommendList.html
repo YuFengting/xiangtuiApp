@@ -1,0 +1,78 @@
+<ion-view class="bg-grey">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">推荐详情</span>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="loadrecommendlist()"></ion-refresher>
+    <div class="div-top18"></div>
+    <ul class="recList">
+      <li ng-repeat="recommend in recommendlist">
+        <div class="line clearfix">
+          <div class="leftPart fl">
+            <i class="icon icon-user"></i>
+            <a href="tel:{{recommend.otherstel}}"><span class="usertel" ng-if="recommend.name==null" ng-bind="recommend.otherstel"></span></a>
+            <a href="tel:{{recommend.otherstel}}"><span class="usertel" ng-if="recommend.name!=null" ng-bind="recommend.name"></span></a>
+            <span>抢了你的优惠券</span>
+          </div>
+          <div class="rightPart fr">
+            <span class="date" ng-bind="recommend.gettime"></span>
+            <!--<span class="time">14:00</span>-->
+          </div>
+        </div>
+        <div class="line">
+          <div class="bus over-ellipsis">
+            <i class="icon icon-xt2-sj"></i>
+            <span class="bus_name" ng-bind="recommend.bname"></span>
+          </div>
+        </div>
+        <div class="line">
+          <div class="task">
+            <i class="icon icon-xts-rectask"></i>
+            <span class="taskname over-ellipsis" ng-bind="recommend.taskname"></span>
+            <div class="stateinfo" ng-if="recommend.status==0">未使用</div>
+            <div class="stateinfo" ng-if="recommend.status==1">已使用</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="lookTaskButton" ng-if="recommendflag==1" ng-click="applymorecoupon(recommendworkid)">申请更多优惠券</div>
+
+    <!--缺省页-->
+    <div class="nosearch"  ng-if="hasnorecommend" ui-sref="tab.cpvlist">
+      <div class="nointenet">
+        <img src="img/pcenter/none-recommend.png" style="margin: 0px; width: auto" >
+        <div class="message-info">
+          <span>您还没有任何分享，快去看看<span style="color: #ff3b30">推荐</span>吧~</span>
+        </div>
+      </div>
+    </div>
+
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+      on-infinite="loadmorerecommendlist()"
+      ng-if="hasNextPage"
+      distance="1%"
+      immediate-check="false">
+    </ion-infinite-scroll>
+
+    <div class="no-more-area2 moreTaskOrMerchant" ng-if="hasnomore">
+      <div class="wenzi">没有更多啦，往上看看吧~</div>
+    </div>
+
+
+  </ion-content>
+  <!--lodding特效-->
+  <div class="mask-loadding-all" ng-if="listloadding">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+</ion-view>

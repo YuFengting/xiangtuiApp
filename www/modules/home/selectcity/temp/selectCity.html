@@ -1,0 +1,73 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="backToHome('')">
+      <i class="icon ion-android-close"></i>
+    </div>
+    <span class="title">选择城市</span>
+  </ion-header-bar>
+  <ion-content class="has-header" delegate-handle="cityscroll" on-touch="closekeyboardcopy()">
+    <!--下拉刷新-->
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>
+    <div class="city_search clearfix">
+      <i class="icon icon-xt-search"></i>
+      <form  ng-submit="goSearchList(search.key)">
+        <input id="subinp" type="search" autocomplete="off" ng-change="checkInp()"  ng-model="search.key" placeholder="请输入城市名称或首字母查询"/>
+      </form>
+
+
+    </div>
+    <div class="city_nothing" ng-if="nocity">很抱歉。未找到相关位置，可尝试修改后重试</div>
+    <div class="city_listbox clearfix" >
+      <div class="city_list fl" >
+        <div class="city_gps xt-grey-bg clearfix" style=" padding-top: 10px;" ng-if="isSearching==0">
+
+          <div class="city_label clearfix"><span class="fl">定位城市</span></div>
+          <ul class="clearfix" ng-click="backToHome(localcity)">
+            <li><i class="icon icon-xt2-dizhi2" ></i><span ng-bind="localcity"></span></li>
+          </ul>
+        </div>
+      <!--  <div class="city_gps city_hot xt-grey-bg clearfix" ng-if="isSearching==0">
+          <div class="city_label clearfix"><span class="fl">热门城市</span></div>
+          <ul class="clearfix">
+            <li ng-repeat="city in hotCities track by city.id" ng-click="backToHome(city)"><span ng-cloak>{{city.name}}</span></li>
+          </ul>
+        </div>-->
+        <div class="city_gps city_hot xt-grey-bg clearfix" ng-if="isSearching==0">
+          <div class="city_label clearfix"><span class="fl">常用城市</span></div>
+          <ul class="clearfix">
+            <li ng-repeat="city in commonCities track by city.id" ng-click="backToHome(city)"><span ng-cloak>{{city.name}}</span></li>
+          </ul>
+        </div>
+        <div class="city_sort" ng-repeat="cities in allCities track by $index" ng-if="isSearching==0">
+          <div class="city_sortlable xt-grey-bg" ng-bind="cities.key " id="{{cities.key}}" ></div>
+          <ul class="city_sortcity">
+            <li ng-repeat="city in cities.value track by city.id" ng-bind="city.name" ng-click="backToHome(city)"></li>
+          </ul>
+        </div>
+        <div class="city_sort"  ng-if="isSearching==1">
+          <ul class="city_sortcity" >
+            <li ng-repeat="city in searchCities track by city.id" ng-bind="city.name" ng-click="backToHome(city)"></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <!--ng-click="gotoLetter(cities.key)"-->
+  </ion-content>
+  <ul class="city_guide" ng-if="isSearching==0" on-drag="toNumber($event)">
+    <li>#</li>
+    <li ng-repeat="cities in allCities track by $index" ng-bind="cities.key " ng-click="ctoNumber($event)" ></li>
+  </ul>
+</ion-view>
+
+<script id="popupmask1.html" type="text/ng-template">
+  <ion-modal-view style="background: rgba(0,0,0,.68)">
+    <div class="popup-area shensupopup cityPrompt ">
+      <div class="popup_text" ng-cloak>系统定位到您在{{localcity}}，确认切换城市至{{choosecity}}吗？红包会受到影响哦~</div>
+      <div class="bt_but_box">
+        <span ng-click="closeModal(1)" class="button-cancel3">取消</span>
+        <span class="btn_apply btnChangeCity xt-red" ng-click="chooseCity(0)" style="color:#ff3b30" >切换</span>
+      </div>
+    </div>
+  </ion-modal-view>
+</script>

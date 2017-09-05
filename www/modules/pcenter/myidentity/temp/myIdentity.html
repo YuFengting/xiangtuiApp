@@ -1,0 +1,59 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back"  ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">销售身份</span>
+    <div class="editBusinessRelative" style="display:{{showedit}}" ng-click="dataShowDelete()">{{editText}}</div>
+  </ion-header-bar>
+
+
+  <!--已有身份-->
+  <ion-content class="has-header xt-grey-bg">
+    <!--<ion-refresher pulling-text="下拉刷新..." on-refresh="getSalerslist()"></ion-refresher>-->
+        <!--<ul class="identity-business-list"  ng-if="noneidentity">-->
+          <!--<li ng-repeat="saler in salerslist track by $index"  ng-click="goMerchantDeatil(saler)" >-->
+              <!--<div class="businessInfor">-->
+                  <!--<p class="over-ellipsis" ng-bind="saler.companyalias"></p>-->
+                  <!--<div class="idContactInfor" ng-if="saler.dealmoney > 0" ><span style="border-right: 1px solid #d4d4d4"><i class="icon icon-xt3-money"></i><i ng-bind="saler.dealmoney | moneyfixed"></i>元</span><span><i class="icon icon-uniE9D4"></i><i ng-bind="saler.dealnums"></i>人</span></div>-->
+                  <!--<div class="idContactInfor" ng-if="saler.dealmoney == 0"><span>尚无客户信息</span></div>-->
+                  <!--<div class="businessLogo">-->
+                      <!--<img src="{{picserver}}{{saler.clogopath}}" onerror="javascript:this.src='img/default-avatar.png';"/>-->
+                  <!--</div>-->
+              <!--</div>-->
+          <!--</li>-->
+        <!--</ul>-->
+    <div class="identity-business-list"  ng-if="noneidentity">
+      <ion-list show-delete="showDelete">
+        <ion-item  ng-repeat="saler in salerslist track by $index"  ng-click="goMerchantDeatil(saler)">
+          <ion-delete-button class="ion-minus-circled" ng-click="onItemDelete(saler,$index)"></ion-delete-button>
+          <div class="businessInfor">
+            <p class="over-ellipsis" ng-bind="saler.companyalias"></p>
+            <div class="idContactInfor" ng-if="saler.dealmoney > 0" ><span style="border-right: 1px solid #d4d4d4"><i class="icon icon-xt3-money"></i><i ng-bind="saler.dealmoney"></i>元</span><span><i class="icon icon-uniE9D4"></i><i ng-bind="saler.dealnums"></i>人</span></div>
+            <div class="idContactInfor" ng-if="saler.dealmoney == 0"><span>尚无客户信息</span></div>
+            <div class="businessLogo">
+              <img src="{{picserver}}{{saler.clogopath}}" onerror="javascript:this.src='img/default-avatar.png';"/>
+            </div>
+            <!--<div class="businessRelationship" ng-class="{'cooperation':true,'examine':false}">合作<i class="botArrow"></i></div>--> <!-- 审核 -->
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+      <div class=" xt-grey-bg" style="height: 100%"  ng-if="!noneidentity" >
+        <!--  <div class="noIdentityBox no-position" style="margin-top:300px" >
+              <img src="./img/nosearch.png"/><br/>
+              <p>还没有销售身份？去挑选心仪的商家</p>
+              <p>申请成为云销售吧！<a ui-sref="tab.bindex">前往商家>></a></p>
+          </div>-->
+        <div class="nointenet">
+
+          <img src="img/noidentity.png" >
+          <div class="message-info">
+            <span>暂无云销售身份</span><br/>
+            <span >申请成为云销售吧！<a ui-sref="tab.cloudsale" style="color: #1c8df6">前往销售列表>></a></span>
+          </div>
+        </div>
+      </div>
+  </ion-content>
+
+</ion-view>

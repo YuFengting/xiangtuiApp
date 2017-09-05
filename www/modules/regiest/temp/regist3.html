@@ -1,0 +1,30 @@
+<ion-view>
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">注册</span>
+  </ion-header-bar>
+  <ion-content class="has-header loginIconContent bgGray">
+    <div class="registerProcessList">
+      <span>1.输入手机号</span><i>></i>
+      <span>2.输入验证码</span><i>></i>
+      <span class="current">3.设置密码</span><i>></i>
+    </div>
+    <!-- 在‘messageCode中计入 ’-->
+    <div class="messageCode loginForm clearfix">
+      <input style="width: 460px" class="fl"  type="text" placeholder="请输入您的密码(长度在6-22个字符之间)" ng-model="user.pwd" ng-if="showPwdMask" ng-focus="showpwdClear()" ng-blur="hidepwdClear()"   ng-change="pwdChange()"/>
+      <input style="width: 460px" class="fl"  type="password" placeholder="请输入您的密码(长度在6-22个字符之间)" ng-model="user.pwd" ng-if="!showPwdMask" ng-focus="showpwdClear()" ng-blur="hidepwdClear()"   ng-change="pwdChange()"/>
+      <i class="icon-xt2-close fl close" ng-if="showpwdclear" ng-click="cleanpwd()"></i>
+      <label class="toggle toggle-assertive">
+        <input type="checkbox" ng-click="showpsw()">
+        <div class="track"><div class="handle"></div></div></label></div>
+        <!--<div class="messageCode loginForm clearfix ">
+          <input class="fl" type="text" placeholder="请输入邀请码（非必填)"  ng-model="user.code" ng-change="inviteChange()" ng-focus="showcodeClear()" ng-blur="hidecodeClear()"/>
+          <i class="icon-xt2-close fr close" ng-if="showinvateclear" ng-click="cleaninvite()"></i>
+        </div>-->
+    <p>{{name}}</p>
+    <div class="loginBtn" ng-click="regist()">注册</div>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,225 @@
+<ion-view>
+  <ion-content class="coupond_content" delegate-handle="Scroll1" help-sell-scroll-func>
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="getBusiness()"></ion-refresher>
+    <div class="coupond_head business_head">
+      <ion-slide-box class="business_focus2" delegate-handle="publicityphoto" does-continue="true" auto-play="true"
+                     slide-interval="3000" show-pager="true" style="overflow: hidden;">
+        <ion-slide style="overflow: hidden;" ng-repeat="photo in buserinfo.publicityphoto track by $index">
+          <img src="{{picserver}}{{photo}}" onerror="javascript:this.src='img/default-avatar.png'"/>
+        </ion-slide>
+      </ion-slide-box>
+      <div class="head_out_Icon" ng-if="buserinfo.thirdpart!=undefined">
+
+        <div class="business_outLine clearfix">
+      <span>
+        <i class="icon icon-bus-mt meituan active" ng-if="buserinfo.thirdpart.mt!=undefined" ng-click="openWapUrl(buserinfo.thirdpart.mt.url)"></i>
+        <i class="icon icon-bus-dzdp dazhong active"  ng-if="buserinfo.thirdpart.dz!=undefined"  ng-click="openWapUrl(buserinfo.thirdpart.dz.url)"></i>
+        <i class="icon icon-bus-jd jindong active" ng-if="buserinfo.thirdpart.jd!=undefined"ng-click="openWapUrl(buserinfo.thirdpart.jd.url)"></i>
+        <i class="icon icon-bus-tb taobao active" ng-if="buserinfo.thirdpart.tb!=undefined"  ng-click="openWapUrl(buserinfo.thirdpart.tb.url)"></i>
+        <i class="icon icon-bus-tm tianmao active" ng-if=" buserinfo.thirdpart.tm!=undefined"  ng-click="openWapUrl(buserinfo.thirdpart.tm.url)"></i>
+        <i class="icon icon-bus-gf guanfang active" ng-if="buserinfo.thirdpart.gw!=undefined"   ng-click="openWapUrl(buserinfo.thirdpart.gw.url)"></i>
+      </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="topInfoGroup">
+      <div class="chatWithBusBtn" ng-click="consultBusiness()">
+        <i class="icon icon-tab-msg"></i>
+      </div>
+      <div class="business_title clearfix business_title_line">
+        <div class="fl business_title_left">
+          <div class="business_title_name over-ellipsis" ng-click="goBusinessIntroduction()"
+               ng-bind="buserinfo.companyalias">
+          </div>
+        </div>
+        <div class="fr business_title_right">
+          <div class="focusNum" ng-show="buserinfo.isconcern==1">
+            <span ng-bind="buserinfo.concernnum"></span>人已关注
+          </div>
+          <div class=" fr" ng-show="buserinfo.isconcern==0">
+            <div class="foucuseBtn1" ng-click="concernBusiness('con')">
+              <i class="icon ion-plus"></i>
+              <span >关注</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="business_address_info">
+        <span><i class="icon icon-address"></i></span><span ng-bind="buserinfo.address"></span>
+      </div>
+
+    </div>
+
+    <div class="businessContactInfor">
+      <ul class="businessInforList clearfix">
+        <li>
+          <i class="icon icon-busidenty-businfo" ng-class="{'active':buserinfo.certification==1}"></i>
+          <span>已认证商家</span>
+        </li>
+        <li>
+          <i class="icon icon-businfo-savechash" ng-class="{'active':buserinfo.hasmoney==1}"></i>
+          <span>保障金</span>
+        </li>
+        <li>
+          <i class="icon" ng-class="{'icon-businfo-speed0':buserinfo.fast==0,'icon-businfo-speed1':buserinfo.fast==1,'icon-businfo-speed2':buserinfo.fast==2,'icon-businfo-speed3':buserinfo.fast==3,'active':buserinfo.fast!=0}"></i>
+          <span>处理速度</span>
+        </li>
+        <li>
+          <i class="icon icon-businfo-platform"  ng-class="{'active':buserinfo.platformguarantee==1}"></i>
+          <span>平台担保</span>
+        </li>
+      </ul>
+    </div>
+
+    <!--cpc任务-->
+    <div class="goodsWarehouse" ng-if="cpc_tasklist.length>0">
+      <div class="goodsTitle cloudSaleAdTitle"><span><span class="name">分享文章抢福利</span></span></div>
+      <div class="cloudSalerAdContent borderBottom">
+        <ion-item ng-click="goCpcDetail(task)" ng-repeat="task in cpc_tasklist track by $index" ng-show="$index < cpc_tasklistshowlength">
+          <a class="item-content">
+            <div class="indexlist_pic">
+              <div ng-if="task.isshare == 1 && task.status != 2">
+                <div ng-class="{'customerStatusBox2':true,'alreadysubmit':true}">
+                  <span>已分享</span>
+                </div>
+              </div>
+              <div ng-if="task.status == 2">
+                <div ng-class="{'customerStatusBox2':true,'settlemented':true}">
+                  <span>已结束</span>
+                </div>
+              </div>
+              <img src="{{picserver}}{{task.view}}"
+                   onerror="javascript:this.src='img/default-avatar-square.png';"/>
+              <div class="progressBarNumBox" ng-if="task.status != 2 0<task.moneyper && task.moneyper<=30">剩余:{{task.moneyper}}%</div>
+            </div>
+            <div class="indexlist_info">
+              <div class="indexlist_title indexlist_title3 {{(checkReaded(task.id))&&'taskListColor'||''}}">
+                <span class="newI2 tipsinfo2" ng-if="task.isnew == 1">新</span>
+                <span ng-bind="task.name"></span>
+              </div>
+              <div class="indexlist_busname"><span class="bus_span" ng-bind="task.bname"></span></div>
+              <div class="indexlist_lf">
+                <div class="cpc_businessName" style="font-size:24px;">
+                  <i class="icon icon-join-user" style="margin-top:-3px;"></i>
+                  <i class="bnamewrap" ng-bind="task.worknum"></i>
+                </div>
+              </div>
+              <!--cpc红包-->
+              <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype==0">
+                <span class="rjsy">平均抢到:<span class="money clearfix"><i class="icon red_port_icon"></i><i class="moneyitem">{{task.avgincome | number:2}}</i></span></span>
+              </div>
+              <!--cpc优惠券-->
+              <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype==1">
+                <span class="rjsy" ng-if="task.coupontype==0">最高抢:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>代</span></i><i class="moneyitem">{{task.voucher}}元</i></span></span>
+                <span class="rjsy" ng-if="task.coupontype==1">抢折扣:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>折</span></i><i class="moneyitem">{{task.discount | number:2}}折</i></span></span>
+                <span class="rjsy" ng-if="task.coupontype==2">抢优惠:<span class="money zhekou clearfix"><i class="icon get_coupon_icon"><span>兑</span></i><i class="moneyitem">查看详情</i></span></span>
+              </div>
+            </div>
+          </a>
+        </ion-item>
+      </div>
+      <div class="cloudsale_more" ng-if="showcpc_tasklist" ng-click="getMoreCpcTaskList()">
+        查看其它<span ng-bind="cpc_tasklist.length-2"></span>个分享
+        <i class="icon ion-ios-arrow-down"></i>
+      </div>
+    </div>
+
+    <!--cpv任务-->
+    <div class="goodsWarehouse" ng-if="cpv_tasklist.length>0">
+      <div class="goodsTitle cloudSaleAdTitle"><span><span class="name">推荐客户抢红包</span></span></div>
+      <div class="cloudSalerAdContent borderBottom">
+        <div class="cpvInforListsBox" style="padding-bottom: 0px;">
+          <div class="cpvInforBox" ng-click="goCpvDetail(task)" ng-repeat="task in cpv_tasklist track by $index"  ng-show="$index < cpv_tasklistshowlength">
+            <img src="{{picserver}}{{task.pic}}" onerror="javascript:this.src='img/default-avatar-square.png'"/>
+            <div class="cpvUsersNum"><i class="icon icon-join-user"></i><span ng-bind="task.worknum+'人'"></span></div>
+            <div class="cpvNewBox" ng-if="task.isnew == 1&&task.isshare != 1"><span>新</span></div>
+            <div class="customerStatusBox2 alreadysubmit cpvlistStatusStyle" ng-if="task.isshare == 1">
+              <span>已分享</span>
+            </div>
+            <div class="cpvBusinessInfor">
+              <div class="cpvTitleBox" ng-bind="task.name"></div>
+              <div class="businessInfor clearfix">
+                <div class="businessName fl"><i class="icon icon-tab-home"></i><span ng-bind="task.bname"></span></div>
+                <div class="businessSet fr"><span class="text">推荐扫码：立得</span><i class="goldImg"></i><span
+                  class="cpv_profitNum" ng-bind="task.vprice+'元'"></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cloudsale_more" ng-if="showcpv_tasklist" ng-click="getMoreCpvTaskList()">
+        查看其它<span ng-bind="cpv_tasklist.length-2"></span>个推荐
+        <i class="icon ion-ios-arrow-down"></i>
+      </div>
+    </div>
+
+    <!-- 素材-->
+    <div class="goodsWarehouse" ng-if="materiallist.length>0">
+      <div class="goodsTitle cloudSaleAdTitle"><span><span class="name">更多介绍</span></span></div>
+      <!--任务列表抢红包-->
+      <div class="cloudSalerAdContent borderBottom">
+        <ul class="materialList">
+          <li class="materiaItem clearfix" ng-repeat="material in materiallist track by $index" ng-show="$index < materiallistshowlength">
+            <div class="downloadIcon" ng-click="openMaterial(material,$index)">
+              <img src="img/cpv/downloadIcon.png" ng-if="material.isdowload!=1&&dowloading!=1" />
+              <img src="img/cpv/downloadGif.gif" ng-if="material.dowloading==1" />
+              <div class="watchBtn" ng-if="material.isdowload==1">查看</div>
+            </div>
+            <div class="leftPart fl">
+              <img src="img/cpv/circlefile_word.png" ng-if="material.type==2">
+              <img src="img/cpv/circlefile_xlsx.png" ng-if="material.type==3">
+              <img src="img/cpv/circlefile_pic.png" ng-if="material.type==4||material.type==5">
+              <img src="img/cpv/circlefile_txt.png" ng-if="material.type==0">
+              <img src="img/cpv/circlefile_pdf.png" ng-if="material.type==6">
+              <img src="img/cpv/circlefile_ppt.png" ng-if="material.type==1">
+              <!--<img src="img/cpv/circlefile_zip.png">-->
+              <!--<img src="img/cpv/circlefile_xmind.png">-->
+              <!--<img src="img/cpv/circlefile_mp3.png">-->
+              <!--<img src="img/cpv/circlefile_mp4.png">-->
+            </div>
+            <div class="rightpart fl">
+              <div class="materiaTitle" ng-bind="material.name"></div>
+              <div class="timeGroup"><span ng-bind="material.inittime"></span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="cloudsale_more"  ng-if="show_materiallist" ng-click="getMoreMaterialList()">
+        查看其它<span ng-bind="materiallist.length-2"></span>个素材
+        <i class="icon ion-ios-arrow-down"></i>
+      </div>
+    </div>
+    <div class="zixunBtbArea" ng-click="consultBusiness()">
+      <div class="zixunBtn">咨询我吧</div>
+    </div>
+
+  </ion-content>
+  <div class="helpSellHeader helpSellHeader2 clearfix">
+    <div class="goBackIcon iconBox" ng-click="goBackView()">
+        <span class="iconRoundBox2 iconRoundBox">
+          <i class="icon ion-ios-arrow-left"
+             style="font-size:45px;text-align: center; line-height: 53px; left: -2px;  position: relative;"></i>
+        </span>
+    </div>
+    <div class="rightShareColletion">
+      <div class="shareIcon iconBox">
+        <div  class="focusebtn" ng-click="openTel()">
+          <span class="iconRoundBox2 iconRoundBox business_focusBtn w50">
+            <i class="icon icon-xt3-customer-phone" style="font-size:26px;display: inline-block"></i>
+          </span>
+        </div>
+
+        <div class="askebtn hide" ng-click="consultBusiness()">
+          <span class="iconRoundBox2 iconRoundBox askbusbtn">
+          咨询我吧
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="showPic" ng-if="showpic" ng-click="hidePic()">
+      <img src='{{picserver}}{{imageurl}}' class="big-pic" style="opacity: 0;">
+  </div>
+</ion-view>
+

@@ -1,0 +1,52 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">我的推荐</span>
+  </ion-header-bar>
+  <ion-content class="has-header xt-grey-bg">
+      <ion-refresher pulling-text="下拉刷新..." on-refresh="loadmyrecommendlist()"></ion-refresher>
+      <div class="myRecommendMain">
+        <div class="recommendList" ng-repeat="myrecommend in myrecommendlist" ng-click="goreclist(myrecommend)">
+            <div class="businessTaskName"><i class="icon icon-xts-rectask"></i><span ng-bind="myrecommend.taskname"></span></div>
+            <div class="recommendCouponInfor clearfix">
+              <div class="businessName fl"><i class="icon icon-tab-home"></i><span ng-bind="myrecommend.bname"></span></div>
+              <div class="couponReceiveInfor fr"><span class="red">{{myrecommend.takenumber}}人</span><span>抢了你的优惠券</span></div>
+            </div>
+            <div class="goRecList"><i class="icon ion-ios-arrow-right"></i></div>
+        </div>
+ </div>
+      <!--缺省页-->
+      <div class="nosearch"  ng-if="hasnoremycommend" ui-sref="tab.cpvlist">
+          <div class="nointenet">
+              <img src="img/pcenter/none-recommend.png" style="margin: 0px; width: auto" >
+              <div class="message-info">
+                  <span>您还没有任何分享，快去看看<span style="color: #ff3b30">推荐</span>吧~</span>
+              </div>
+          </div>
+      </div>
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+            on-infinite="loadmoremyrecommendlist()"
+            ng-if="hasNextPage"
+            distance="1%"
+            immediate-check="false">
+    </ion-infinite-scroll>
+
+    <div class="no-more-area2 moreTaskOrMerchant" ng-if="hasnocommendmore">
+      <div class="wenzi">没有更多啦，往上看看吧~</div>
+    </div>
+  </ion-content>
+  <!--lodding特效-->
+  <div class="mask-loadding-all" ng-if="listloadding">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+</ion-view>

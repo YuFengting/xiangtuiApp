@@ -1,0 +1,68 @@
+<ion-view>
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">添加客户信息</span>
+  </ion-header-bar>
+  <ion-content class="has-header xt-grey-bg" style="overflow: hidden;">
+    <ul class="addCustomerBox">
+      <li><input type="text" class="customerInput fl" placeholder="客户姓名" ng-model="formdata.name"  ng-focus="myfocus($event)" ng-blur="myblur($event)" ng-change="formChange()"/><i class="icon-xt2-close fr close hide" ng-click="resetInp($event)"></i></li>
+      <li><input class="customerInput fl" placeholder="联系方式" ng-model="formdata.tel" type="tel" ng-focus="myfocus($event)" ng-blur="myblur($event)" ng-change="formChange()" /><i class="icon-xt2-close fr close hide" ng-click="resetInp($event)"></i></li>
+      <li ng-repeat="var in task.field"  ><input type="text" class="customerInput field fl" placeholder="{{var}}" ng-focus="myfocus($event)" ng-blur="myblur($event)" ng-model="aaa" ng-change="formChange()" /><i class="icon-xt2-close fr close hide" ng-click="resetInp($event)"></i></li>
+    </ul>
+    <div class="customerRemarkInfor">
+      <textarea placeholder="备注信息（非必填）" ng-class="{'font25':iosfont }" ng-model="formdata.memo" ng-change="formChange()" ></textarea>
+    </div>
+
+
+
+    <div class="message-add">
+      上传相关图片：最多3张截图，单张小于2M
+    </div>
+    <div class="addpicgrop clearfix" style="padding-top: 0px">
+      <div class="picarea clearfix picareaitem" ng-repeat="pic in addpiclist track by $index">
+        <div class="picitem  additem"  >
+          <img src="{{picserver}}{{pic}}">
+        </div>
+        <div class="close-icon" ng-click="deletepic(pic)">
+          <i class="ion-ios-close-empty"></i>
+        </div>
+      </div>
+
+
+      <!--最后一个放添加图片的按钮，图片添加3个后隐藏，不到3个显示-->
+      <div class="picarea"  ng-click="addpicfun()" ng-if="maxpic">
+        <div class="picitem light-bg additem" >
+          <i class="ion-ios-plus-empty add-icon"></i>
+          <!-- 上传图片的进度条，在controller里修改jdtpercent的值记得加%-->
+      <!--    <div class="add-jdt" style="width: 50%"></div>-->
+        </div>
+      </div>
+    </div>
+
+
+    <div class="commonBtn" ng-click="subcustomer()">提交</div>
+  </ion-content>
+  <!--lodding特效-->
+  <div class="mask-loadding-all" ng-if="showloading">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+      <!--</div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+</ion-view>
+<script id="addCutomerSuccess.html" type="text/ng-template">
+  <ion-modal-view style="background: rgba(0,0,0,.68)">
+    <div class="popup-area shensupopup cityPrompt ">
+      <div class="popup_text">恭喜您提交客户成功！！！<br/>请到客户管理里去查看</div>
+      <div class="bt_but_box" >
+        <span style="width: 100%;color: #ff3b30" ng-click="closeModal()" class="button-calm">确定</span>
+      </div>
+    </div>
+  </ion-modal-view>
+</script>

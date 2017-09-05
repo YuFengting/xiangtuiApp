@@ -1,0 +1,186 @@
+<ion-view style="background:#f4f4f4;">
+  <ion-content>
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="loadPage()"></ion-refresher>
+    <!--<div class="refresh_d"></div>-->
+    <div class="center_header">
+      <!--<ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>-->
+      <div class="headImgNameBox clearfix">
+        <div class="center_avatar fl" ng-click="goinfo()"  ng-if="user.avate ==null ||  user.avate ==''">
+          <img src="img/default-avatar.png" />
+        </div>
+        <div class="center_avatar fl" ng-click="goinfo()"  ng-if="user.avate != null && user.avate !=''">
+          <img src="{{user.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar.png';">
+        </div>
+        <p class="accountUserName fl" ng-bind="user.nick"></p>
+        <div class="ifsetinfo" ng-if="user.infofillflag==0"></div>
+      </div>
+
+      <div class="center_head clearfix">
+
+       <!-- <div class="fr codeSetIconBox" ng-click="gosetting()">
+          <i class="icon icon-xt2-shezhi2"></i>
+        </div>-->
+        <div class="fr codeSetIconBox" ng-click="goMycode()">
+          <i class="icon icon-center-code"></i>
+        </div>
+      </div>
+      <div class="center_money_label">当前账号金额(元)</div>
+      <div class="center_money clearfix" ng-click="go('account')">
+        <div class="center_num">
+          ￥&nbsp;
+					<span id="accountNum" class="center_moneynum" center-user-money user-money="user.money" >
+					</span>
+            <div class="addProfitBox"><em class="profitNum"></em></div>
+        </div>
+        <i class="icon ion-ios-arrow-right"></i>
+      </div>
+      <div class="withdrawalsBtn" ng-click="withdraw()">提现</div>
+
+    </div>
+    <!--<div class="identityCollection">
+      <div class="identityBox"  ng-click="go('transmission',{'cpclevel':user.cpclevel,'nick':user.nick,'avate':user.avate,'cpcper':user.cpcper})">
+        <p ng-bind="user.cpclevel"></p>
+        <p class="classType">传播力</p>
+      </div>
+      <div class="collectionBox" ng-click="go('sellbility',{'cpslevel':user.cpslevel,'nick':user.nick,'avate':user.avate,'cpsper':user.cpsper})" >
+        <p ng-bind="user.cpslevel"></p>
+        <p class="classType">销售力</p>
+      </div>
+      <div class="myTaskBox" ng-click="go('myidentity')">
+        <p ng-bind="user.salersnum+'个'"></p>
+        <p class="classType">销售身份</p>
+      </div>
+    </div>-->
+    <ul class="centerNav clearfix">
+      <li ng-click="go('mypurse')">
+        <div class="centerIcon">
+          <i class="icon-redpocket"></i>
+          <span class="centerBadge" ng-if="hasRedpacket">{{user.redpacketnum}}</span>
+        </div>
+        <div class="centerText">我的红包</div>
+      </li>
+      <li ng-click="go('couponlist')">
+        <div class="centerIcon">
+          <i class="icon-center-yhq"></i>
+          <!--<span class="centerBadge" ng-if="hasCoupon">{{user.couponnum}}</span>-->
+        </div>
+        <div class="centerText">我的优惠券</div>
+      </li>
+      <li ng-click="go('myrecommend')">
+        <div class="centerIcon">
+          <i class="icon-zan"></i>
+          <span class="centerBadge" ng-if="hasRecommend">{{user.recommendnum}}</span>
+        </div>
+        <div class="centerText">我的推荐</div>
+      </li>
+    </ul>
+    <ion-list class="center_list">
+      <ion-item class="item-icon-right" ng-click="goMyfocus()">
+        <a class="item-content">
+          <span class="center_customer iconbox fl">
+					  <i class="icon-myfocus"></i>
+				  </span>
+          <span class="item-label fl receivedClassStar">我关注的商家</span>
+        <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right" ng-click="goMyCollection()">
+        <a class="item-content">
+          <span class="center_collection iconbox fl">
+            <i class="icon-collection-kong" ></i>
+          </span>
+          <span class="item-label fl">我的收藏</span>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right" ng-click="go('advice')">
+        <a class="item-content">
+          <span class="center_myactive iconbox fl">
+            <i class="icon-advice"  style="margin-top: 1px"></i>
+          </span>
+          <span class="item-label fl">意见与反馈</span>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+      <ion-item class="item-icon-right"  ng-click="gosetting()">
+        <a class="item-content">
+          <span class="center_getstar iconbox fl">
+            <i class="icon-center-setting"  style="margin-top: 1px"></i>
+          </span>
+          <span class="item-label fl receivedClassStar">设置<i class="msgTip" ng-if="user.commentnum > 0"></i></span>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>
+
+      <div style="width: 100%;  height: 18px; border-bottom: 1px solid #d8d8d8;"></div>
+      <!--<ion-item class="item-icon-right" ng-click="">
+        <a class="item-content"><span class="center_customer iconbox fl">
+					<i class="icon-xtschool"></i>
+				</span>
+          <span class="item-label fl receivedClassStar">成为商家<i class="msgTip" ng-if="user.leadsnum > 0"></i></span>
+          <i class="icon ion-ios-arrow-right"></i></a>
+      </ion-item>
+      <ion-item class="item-icon-right" ng-click="">
+        <a class="item-content">
+				<span class="center_myactive iconbox fl">
+					<i class="icon-uni930"  style="margin-top: 1px"></i>
+				</span>
+          <span class="item-label fl">邀请好友</span>
+          <i class="icon ion-ios-arrow-right"></i>
+        </a>
+      </ion-item>-->
+      <ion-item class="item-icon-right" ng-click="skipto(banner)" ng-repeat="banner in bannerlist">
+        <a class="item-content">
+          <span class="iconbox fl">
+            <i style="left: 0px;top: 0px"><img src="{{picserver}}{{banner.pic}}" style="width: 44px;height: 44px;border-radius: 100%"  /></i>
+          </span>
+          <span class="item-label fl" ng-class="{'receivedClassStar':banner.name == '享推学院'}">
+            <i ng-bind="banner.name"></i>
+            <i class="msgTip" ng-if="banner.name == '享推学院' && withmenum>0"></i>
+          </span>
+          <i class="icon ion-ios-arrow-right"></i>
+          <div ng-if="banner.icon.length!=0">
+            <span class="centerHot fr" ng-repeat="iconimg in banner.icon">
+              <img src="{{picserver}}{{iconimg}}"/>
+            </span>
+          </div>
+          </a>
+      </ion-item>
+      <div style="width: 100%;  height: 18px;"></div>
+    </ion-list>
+  </ion-content>
+
+  <style>
+    /*下方comfirm弹窗*/
+    .popup-head{border-bottom: 1px solid #d8d8d8;}
+    .popup-container .popup{width: 539px; border-radius: 10px;}
+    .popup-container{font-size: 25px;}
+    .popup-container .popup-title{font-size: 25px; font-family: "-apple-system", "microsoft yahei";padding: 50px 0;}
+    .popup-buttons{padding: 0px;}
+    .popup-buttons .button{font-size: 25px; font-family: "-apple-system", "microsoft yahei";background: transparent;height: 75px; line-height: 75px; width: 50%;padding: 0px; margin: 0px;}
+    .popup-buttons .button:first-child{border-right: 1px solid #d8d8d8;}
+    .redmore{width: 100%;height:55px;text-align: right;line-height: 55px;color: #1c8df6;font-size: 20px }
+    .redmore i{margin-left: 6px}
+    .workc_comment .hideone{display: none  }
+
+    .platform-android .action-sheet-group,.platform-ios.action-sheet-group{margin-bottom: 0px; border-radius: 0px;}
+    .action-sheet-wrapper{margin-bottom: 10px; border-radius: 10px; width: 620px;}
+    .platform-android .action-sheet-group,.platform-ios .action-sheet-group{margin-left: 0px; margin-right: 0px;}
+    .platform-android .action-sheet .button.destructive ,.platform-ios .action-sheet .button.destructive {color: #ff3b30; border-bottom: 1px solid #d8d8d8;}
+
+    .action-sheet-group.action-sheet-cancel{ margin-bottom: 0px;}
+    .action-sheet-options{margin-bottom: 0px;}
+    .action-sheet-group{border-radius: 0px;}
+    .action-sheet{border-radius: 10px; margin-bottom: 10px;}
+    .action-sheet-group .button:first-child:last-child{border-width: 1px}
+
+    /*弹窗样式*/
+    .popup-container{ bottom: 0; top:0;}
+    .popup-container .popup{width: 539px;font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 10px;}
+    .popup-container .popup-title{font-family: "-apple-system", "microsoft yahei";font-size: 27px;padding: 35px;}
+    .popup-container .popup-buttons{padding: 0px;}
+    .popup-container .popup-buttons .button{font-family: "-apple-system", "microsoft yahei";font-size: 25px;  background: none;}
+    .popup-container .popup-buttons .button:first-child{border-right: 2px solid #e6e9ed}
+    .popup-head{border-bottom: 1px solid #e6e9ed}
+  </style>
+</ion-view>

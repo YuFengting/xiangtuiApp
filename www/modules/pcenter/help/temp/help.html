@@ -1,0 +1,28 @@
+<ion-view>
+
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">帮助中心</span>
+  </ion-header-bar>
+
+  <ion-content class="has-header xt-grey-bg"  delegate-handle="helpScroll">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="gethelptype()"></ion-refresher>
+    <ion-list class="center_list helpBoxList">
+      <ion-item class="item-icon-right" ng-repeat="type in helptypes track by $index">
+        <a class="item-content getProblemListShow ">
+          <span class="help_hot iconbox fl">
+					<img src="{{picserver}}{{type.typelogo}}" class="fl" style="width: 44px;height: 44px;border-radius: 100%">
+          </span>
+          <span class="item-label fl receivedClassStar" ng-bind="type.typename"></span>
+          <i class="icon  icon-xt2-down"></i>
+        </a>
+        <ul class="problemListBox hide">
+          <li ng-click="go('helpdetail',{helpid:help.id})" ng-repeat="help in type.datalist track by $index">{{help.name}}</li>
+        </ul>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

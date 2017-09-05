@@ -1,0 +1,91 @@
+<ion-view>
+  <ion-content class="coupond_content" style="padding-bottom: 90px"  delegate-handle="Scroll" on-scroll="topDynamic()" on-drag="scrollHide()" on-release="scrollShow()">
+    <div class="coupond_head">
+      <img src="./img/delete/businessImg.png" />
+      <div class="business_back coupond_back" ng-click="goback()">
+        <img src="./img/business_back.png"/>
+      </div>
+    </div>
+    <div class="cloudSaleMoney"><i class="font20">¥</i><i class="newPrice">356000</i><i class="font20 colorOrange">原价：</i><del class="colorOrange"><i class="font20">¥</i><i class="oldPrice">390000</i></del></div>
+    <div class="coupond_intro cloudSalePoint">
+      <dl class="clearfix">
+        <dt><span class="icon_label icon_hot">团</span></dt>
+        <dd>团长活动文字内容，文字不限制，建议最多两行，字数在30个汉字以内。</dd>
+      </dl>
+      <div class="coupond_shoptitle clearfix businessNameShopTitle">
+        <i class="icon shop icon-xt2-zhuzhi fl"></i>
+        <div class="fl shopname over-ellipsis" style="width:85%;" >常州宝尊汽车销售服务有限公司</div>
+      </div>
+    </div>
+
+    <div class="cloudsalerInfor teamHeadSayMain">
+      <div class="cloudsellTitleCom"><span class="name">团长说</span></div>
+      <div class="teamHeadSayContent clearfix">
+        <div class="fl teamHeadImg">
+          <div class="headerImg"><img src="./img/teamHeadImg.png" /></div>
+          <p class="joinNumber">已有<i class="addNum">35</i>人参团</p>
+        </div>
+        <div class="fl teamHeadSayInfor">
+          <div class="teamHeadTitle"><i class="icon icon-xt3-huihua"></i><span>团长说:</span></div>
+          <p class="sayInforP">我是宝马汽车团购的团长，有很优惠的价格，有兴趣请与我联系！<br/>欲购从速！！！<br/>这里只允许说5行！</p>
+        </div>
+      </div>
+      <div class="businessGarantieImg"><img src="./img/businessGarantie.png" /></div>
+    </div>
+    <div class="cloudsalerInfor">
+      <div class="cloudsellTitleCom"><span class="name">商品介绍</span></div>
+      <div class="csProductDetailInfor">
+        <h3 class="titleH3">宝马750i 百年庆典版优惠团购</h3>
+        <h4 class="titleH4">日前，宝马正式发布了宝马7系百年庆典版（Celebration Edition）的官图，该车是为庆祝宝马公司成立100周年而推出，新车基于宝马750Li进行打造，计划将在日本限量推出70辆。</h4>
+        <img src="./img/delete/productImg1.png" />
+        <h4 class="title2H4">新车采用了Merino高亮棕色真皮包裹的内饰，车顶则采用了同色的Alcantara材质。另外，该车在中控台使用了黑色钢琴漆表面的实木装饰。</h4>
+        <img src="./img/delete/productImg2.png" />
+        <h4 class="title2H4">还配备了拥有16个扬声器的Bowers＆Wilkins环绕音响系统、LED车内氛围灯、专属车门踏板、第四代iDrive系统、6种颜色的天窗以及自动空调等。</h4>
+        <img src="./img/delete/productImg3.png" />
+        <h4 class="title2H4">本店内宝马7系现车销售，颜色可选，感兴趣的朋友可以到店咨询购买。</h4>
+      </div>
+    </div>
+    <!-- 团长活动分享  -->
+    <!--<div class="cloudsalerInfor">-->
+    <!--<div class="cloudsellTitleCom"><span class="name">您可以联系团长咨询或者留下您的信息来获得优惠！</span></div>-->
+    <!--<ul class="activeSubmitContactWay">-->
+    <!--<li><label>姓　　名：</label><input class="contactInfor" type="text" placeholder="请输入您的姓名" /></li>-->
+    <!--<li><label>手　　机：</label><input class="contactInfor" type="text" placeholder="请输入您的常用手机号" /></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+
+    <!--<div class="noDuteExplain"><i>免责声明:</i>团购内容由经销商自行发布，其真实性、准确性及合法性由经销商负责，享推不提供任何保证，亦不承担任何法律责任。</div>-->
+    <div class="commonBtn">分享</div>
+    <div class="commonBtn cancelActiveBtn">撤销</div>
+    <div class="commonBtn" ui-sref="teamheadexamine">修改</div>
+    <!--设置底部空白间隔-->
+    <div class="footerBottmHeight"></div>
+
+  </ion-content>
+  <!-- 撤销弹窗 -->
+  <div class="quitBusinessMask hide">
+    <div class="quitpopInfor">
+      <div class="contentInfor">撤销后需要重新申请，是否确认？</div>
+      <div class="quitSureCancel">
+        <span class="sureBtn">确定</span><span class="cancelBtn">取消</span>
+      </div>
+    </div>
+  </div>
+
+  <!--汉堡包-->
+  <!--<div class="detail_hbg" ng-click="ruleShow()">
+        <img src="./img/coupond_hbg.png"/>
+    </div>-->
+
+  <!--开始任务-->
+  <!--<button id="startbutton" class="startbtn" ui-sref="teamheadexamine">申请团长</button>-->
+
+
+  <!--加载中-->
+  <!--<div class="loading_mask hide">-->
+  <!--<div class="loading_icon">-->
+  <!--<img src="./img/loading.gif"/>-->
+  <!--</div>-->
+  <!--</div>-->
+
+</ion-view>

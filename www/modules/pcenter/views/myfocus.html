@@ -1,0 +1,53 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">关注的商家</span>
+  </ion-header-bar>
+  <ion-content class="has-header xt-grey-bg">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="loadfocuslist()"></ion-refresher>
+    <ion-list class="focusList" >
+      <ion-item class="focusItem clearfix"  ng-repeat="focus in focuslist"  ng-click="goskip(focus)" ng-if="focus.isshow">
+        <div class="focusPic">
+          <img src="{{focus.buserlogo | avatefilter}}" onerror="javascript:this.src='img/default-avatar.png';">
+        </div>
+        <div class="focusText over-ellipsis" ng-bind="focus.busername">平安保险</div>
+        <ion-option-button class="button-assertive removeItem" ng-click="msgDelete(focus,$index)">删除</ion-option-button>
+      </ion-item>
+    </ion-list>
+    <!--缺省页-->
+    <div class="nosearch"  ng-if="hasnofocus">
+      <div class="nointenet">
+        <img src="img/pcenter/none-focus.png" style="margin: 0px; width: auto" >
+        <div class="message-info">
+          <span>您还没有关注任何商家</span>
+        </div>
+      </div>
+    </div>
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+      on-infinite="loadmorefocuslist()"
+      ng-if="hasNextPage"
+      distance="1%"
+      immediate-check="false">
+    </ion-infinite-scroll>
+
+    <div class="no-more-area2 moreTaskOrMerchant" ng-if="hasnomore">
+      <div class="wenzi">没有更多啦，往上看看吧~</div>
+    </div>
+
+
+  </ion-content>
+  <!--lodding特效-->
+  <div class="mask-loadding-all" ng-if="listloadding">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+</ion-view>

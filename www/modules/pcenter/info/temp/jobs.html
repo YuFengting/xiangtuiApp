@@ -1,0 +1,24 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">职位</span>
+  </ion-header-bar>
+
+  <ion-content class="find-pasword has-header" style="overflow-y: hidden;" ng-click="closekeyboard()">
+    <div class="find-form" ng-click="$event.stopPropagation();">
+      <div class="line clearfix">
+        <input class="fl" ng-model="ruser.rjob" ng-change="checkJob()" placeholder="请填写职位"/>
+        <i class="icon-xt2-close fr close" ng-if="showclear" ng-click="clearJob()">
+        </i>
+      </div>
+    </div>
+    <div class="queren-btn">
+      <button id="setjob" disabled class="btn xt-red-bg"  ng-click="changeJob()">
+        保存
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

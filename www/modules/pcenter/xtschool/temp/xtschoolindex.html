@@ -1,0 +1,132 @@
+<ion-view class="bg-grey">
+  <ion-header-bar align-title="middle">
+    <div class="header_back"  ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" ng-bind="title"></span>
+  </ion-header-bar>
+
+  <div class="headbar has-header">
+    <ul class="headbtnlist clearfix">
+      <li class="W26"><div class="tiparea borderR" ng-click="goQuestion()">
+        <span class="askIcon topIcon">
+          <i class="icon icon-xts-ask"></i>
+        </span>
+        <span class="title">提问</span>
+      </div></li>
+      <li class="W32"><div class="tiparea borderR" ng-click="goXtsRelateMe()">
+        <span class="relatemeIcon topIcon">
+          <i class="icon icon-xts-rm"></i>
+        </span>
+        <span class="title">与我相关</span>
+        <span class="tipnum" ng-bind="withmenum" ng-if="withmenum>0"></span>
+      </div></li>
+      <li class="W42 changeOfficialArea">
+        <div class="tiparea">
+          <span class="title li3po">仅看享推官方</span>
+          <label class="fr toggle toggle-assertive xtOfiical" style="right: 20px"><input class="xtsCheckBox" type="checkbox" ng-click="select()">
+            <div class="track"><div class="handle"></div></div>
+          </label>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <ion-slide-box class="xtschoolslide" ng-style="{'padding-bottom':150+stateH01+'px','top':70+'px'}" does-continue="false" show-pager="false" delegate-handle="xtschoolSlide">
+
+    <ion-slide>
+
+      <ion-content class="xtschoolcontent" delegate-handle="XtSchollIndexScroll" style="top:0px;">
+        <ion-refresher pulling-text="下拉刷新..." on-refresh="getXTSchoolIndexInfo()"></ion-refresher>
+        <div class="div-top18"></div>
+        <div class="askArea">
+          <ul class="askList">
+            <li class="clearfix" ng-click="goXtSchoolQuestionDetail(que,$index)" ng-repeat="que in XtInfoList[0] track by $index">
+              <div class="leftPart">
+                <div class="readNum">
+                  <span ng-bind="que.readnum"></span><br>
+                  <span>阅读</span>
+                </div>
+              </div>
+              <div class="rightPart">
+                <div class="titlePart">
+                  <span class="titleIcon setTop" ng-if="que.sort!=99">置顶</span>
+                  <span class="titleIcon setOfficial" ng-if="que.ptype==2 && que.sort==99">官方</span>
+                  <span class="{{(checkReaded(que.id))&&'taskListColor'||''}}" ng-bind="que.content"></span>
+                </div>
+                <div class="headPicPart">
+                  <img src="{{avate | avatefilter}}" ng-repeat="avate in que.answerlist track by $index" ng-if="$index < 6" onerror="javascript:this.src='img/default-avatar.png';">
+                  <span class="anotherHead" ng-bind="que.commentnum" ng-if="que.answerlist.length>6 && que.commentnum<100"></span>
+                  <span class="anotherHead" ng-if="que.commentnum>99">99+</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="no-more-area2" ng-if="!hasNextPage[type] && XtInfoList[type].length>0">
+          <div class="wenzi">没有更多啦，往上看看吧~</div>
+        </div>
+
+        <ion-infinite-scroll
+          on-infinite="loadMoreXTSchoolIndexInfo()"
+          ng-if="hasNextPage[type]"
+          distance="10%"
+          immediate-check="false">
+        </ion-infinite-scroll>
+
+      </ion-content>
+    </ion-slide>
+
+    <ion-slide>
+
+      <ion-content class="xtschoolcontent" delegate-handle="XtSchollBIndexScroll" style="top:0px;">
+        <ion-refresher pulling-text="下拉刷新..." on-refresh="getXTSchoolIndexInfo()"></ion-refresher>
+        <div class="div-top18"></div>
+        <div class="askArea">
+          <ul class="askList">
+            <li class="clearfix" ng-click="goXtSchoolQuestionDetail(que,$index)" ng-repeat="que in XtInfoList[1] track by $index">
+              <div class="leftPart">
+                <div class="readNum">
+                  <span ng-bind="que.readnum"></span><br>
+                  <span>阅读</span>
+                </div>
+              </div>
+              <div class="rightPart">
+                <div class="titlePart">
+                  <span class="titleIcon setTop" ng-if="que.sort!=99">置顶</span>
+                  <span class="titleIcon setOfficial" ng-if="que.ptype==2 && que.sort==99">官方</span>
+                  <span class="{{(checkReaded(que.id))&&'taskListColor'||''}}" ng-bind="que.content"></span>
+                </div>
+                <div class="headPicPart">
+                  <img src="{{avate | avatefilter}}" ng-repeat="avate in que.answerlist track by $index" ng-if="$index < 6" onerror="javascript:this.src='img/default-avatar.png';">
+                  <span class="anotherHead" ng-bind="que.commentnum" ng-if="que.answerlist.length>6 && que.commentnum<100"></span>
+                  <span class="anotherHead" ng-if="que.commentnum>99">99+</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="no-more-area2" ng-if="!hasNextPage[type] && XtInfoList[type].length>0">
+          <div class="wenzi">没有更多啦，往上看看吧~</div>
+        </div>
+
+        <ion-infinite-scroll
+          on-infinite="loadMoreXTSchoolIndexInfo()"
+          ng-if="hasNextPage[type]"
+          distance="10%"
+          immediate-check="false">
+        </ion-infinite-scroll>
+
+      </ion-content>
+    </ion-slide>
+  </ion-slide-box>
+
+<!--<div class="gotoBusBtn" ng-click="goXtBIndex()">
+  <span ng-if="type==0">商家</span>
+  <span ng-if="type==1">销售</span><br>
+  <span>问答</span>
+  <i ng-if="type==0" class="icon ion-ios-arrow-right"></i>
+  <i ng-if="type==1" class="icon ion-ios-arrow-left"></i>
+</div>-->
+  </ion-view>

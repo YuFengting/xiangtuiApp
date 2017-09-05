@@ -1,0 +1,65 @@
+<ion-view>
+  <ion-content on-scroll="cpvIndexScroll()" delegate-handle="cpvIndexHandle">
+      <div class="cpvIndexBanner" ng-click="updataCpvBannerNum(bannerlist[0])">
+        <img src="{{picserver}}{{bannerlist[0].pic}}"  onerror="javascript:this.style='height:100%; position:absolute; top:50%;  left:50%; transform:translate(-50% , -50%)';this.src='img/default_banner.jpg';" >
+      </div>
+    <div class="indexNavBox cpvindexNavBox">
+      <ion-scroll direction="x" scrollbar-x="false" scrollbar-y="false"  has-bouncing="true" class="nav-scroll-list"  delegate-handle="cpvMenuHandle">
+        <ul class="indexlist-nav clearfix static-nav cpvIndexMenuList" ng-style="cpvIndexMenuStyle">
+          <li ng-class="{active:(sort==sort2.indexvalue)}"   ng-click="clicknavBox(sort2);"  ng-repeat="sort2 in sortlist track by $index"><a
+            ng-bind="sort2.name"></a></li>
+          <div class="cpvborderBot" ng-style="borderIndexBotStyle"></div>
+        </ul>
+      </ion-scroll>
+      <div class="menuSlideMask" ng-if="true"></div>
+    </div>
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>
+    <div class="cpvInforListsBox" ng-repeat="list in allsharelist track by $index" style="{{(choosesort.sort==$index)&&('display:block')||('display:none')}}">
+        <div class="cpvInforBox" ng-click="goCpvDetail(cpv)" ng-repeat="cpv in list track by cpv.id" >
+          <img src="{{cpv.pic | avatefilter}}" onerror="javascript:this.src='img/cpv/CPV-default.png';">
+          <div class="cpvUsersNum"><i class="icon icon-join-user"></i><span>{{cpv.worknum}}人</span></div>
+          <div class="cpvNewBox" ng-if="cpv.isnew == 1&&cpv.isshare == 0"><span>新</span></div>
+          <div class="customerStatusBox2 alreadysubmit cpvlistStatusStyle" ng-if="cpv.isshare == 1">
+            <span>已分享</span>
+          </div>
+          <div class="cpvBusinessInfor">
+            <div class="cpvTitleBox" ng-bind="cpv.name"></div>
+            <div class="businessInfor clearfix">
+              <div class="businessName fl"><i class="icon icon-tab-home"></i><span ng-bind="cpv.bname"></span></div>
+              <div class="businessSet fr"><span class="text">推荐红包：立得</span><i class="goldImg"></i><span class="cpv_profitNum">{{cpv.vprice}}元</span></div>
+            </div>
+          </div>
+        </div>
+      <div class="nosearch " style="display:{{notaskflg}};" >
+        <img src="img/nosearchcircle.png"/><br/>
+        还没有相关推广
+      </div>
+    </div>
+    <ion-infinite-scroll
+            on-infinite="loadMore()"
+            ng-if="hasNextPage"
+            distance="10%"
+            immediate-check="false">
+    </ion-infinite-scroll>
+
+
+
+    <div class="no-more-area2 moreTaskOrMerchant" ng-if="!hasNextPage && allsharelist[choosesort.sort].length>0">
+      <div class="wenzi">没有更多啦，往上看看吧~</div>
+    </div>
+  </ion-content>
+
+  <!-- 点击返回顶部 -->
+  <div class="indexGetTop hide indexGetTop_cpv" ng-click="getTop()"><i class="icon icon-xt-backTop"></i></div>
+
+  <div class="mask-loadding-all" ng-if="showloading">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">-->
+      <!--<div></div>-->
+      <!--<div></div>-->
+      <!--<div></div>-->
+      <!--</div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+</ion-view>

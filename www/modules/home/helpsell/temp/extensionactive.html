@@ -1,0 +1,53 @@
+<ion-view class="extension">
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">销售支持</span>
+  </ion-header-bar>
+
+  <ion-content class="has-header bg-grey">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefersh()"></ion-refresher>
+    <ion-item ng-click="goNextPage(exac)" ng-repeat="exac in exaclist">
+      <a class="item-content">
+        <div class="indexlist_pic">
+          <div ng-if="exac.isshare > 0 && exac.type != 3"><div class="customerStatusBox2 alreadysubmit" ><span>已分享</span></div></div>
+          <div ng-if="exac.type == 3" ng-class="{'customerStatusBox2':true,'nosubmit':exac.isshare==0,'settlemented':exac.isshare==2}">
+            <span ng-if="exac.isshare==0">审核中</span>
+            <span ng-if="exac.isshare==2">未通过</span>
+          </div>
+          <img src="{{picserver}}{{exac.shareview}}"  onerror="javascript:this.src='img/default-avatar-square.png'"/>
+        </div>
+        <div class="indexlist_info">
+          <div class="indexlist_title indexlist_title2">
+            <span class="icon_label icon_tuan" ng-if="exac.type == 3">团</span>
+            <span class="icon_label icon_wen" ng-if="exac.type == 0 || exac.type == 1">文</span>
+            <span class="icon_label icon_hui" ng-if="exac.type == 2">惠</span>
+            <span ng-bind="exac.name"></span>
+          </div>
+         <!-- <div class="indexlist_lf extensionActiveShare">
+            <i class="icon icon-xt3-yxs"></i><i ng-bind="exac.sharenum"></i><i>人已分享</i>
+          </div>-->
+        </div>
+      </a>
+    </ion-item>
+
+    <!--上拉刷新-->
+    <!--<ion-infinite-scroll
+            immediate-check="false"
+            ng-if="hasNextPage"
+            on-infinite="loadMore()"
+            distance="1%">
+    </ion-infinite-scroll>-->
+
+    <div class="nosearch " style="display:{{noexten}};" >
+      <img src="./img/nosearch.png"/><br/>
+      没有相关活动~
+    </div>
+
+    <div class="list_nomore" ng-if="exaclist.length > 10">
+      <div class="wenzi">暂时只有这些活动啦！</div>
+    </div>
+  </ion-content>
+</ion-view>

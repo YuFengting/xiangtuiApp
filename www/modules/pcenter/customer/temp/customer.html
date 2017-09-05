@@ -1,0 +1,92 @@
+<ion-view>
+
+
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="mygoback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">我的客户管理</span>
+    <div class="customerHeader"><i class="icon icon-newfriend" ng-click="customersubmit()"></i></div>
+  </ion-header-bar>
+  <!--IOS-->
+  <!--		<ion-refresher style="height:20px;" pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>-->
+  <!--选择分类-->
+  <ul class="customerhead">
+    <li ng-click="showchoseinfo($event)" class="active">
+      <div class="tipa"><span ng-bind="businessname" class="over-ellipsis" style="max-width: 160px;padding-top: 4px "></span><i ng-class="{'ion-chevron-down':!selectBusup,'ion-chevron-up':selectBusup}"></i></div>
+    </li>
+    <li ng-click="showchoseinfo($event)">
+      <div class="tipa"><span ng-bind="statename"></span><i ng-class="{'ion-chevron-down':!selectstateup,'ion-chevron-up':selectstateup}"></i></div>
+    </li>
+  </ul>
+
+  <!-- 下拉菜单-->
+  <div class="selectcustomer has-subheader" ng-style="{'display': showchose}" ng-click="hidechoseinfo()">
+    <ul class="chosebusiness" ng-class="{'hide':showinfo}" >
+      <li ng-click="selectfun(listinfo,$event)" name='business' ng-class="{'active':listinfo.ischose}" ng-repeat="listinfo in listinfo | filter: {state: 0} track by $index">{{listinfo.name}}</li>
+    </ul>
+
+    <ul class="chosebusiness" ng-class="{'hide':!showinfo}"  >
+      <li   ng-click="selectfun(listinfo,$event)"  name='state'  ng-class="{'active':listinfo.ischose}"  ng-repeat="listinfo in listinfo | filter: {state: 1} track by $index">{{listinfo.name}}</li>
+    </ul>
+
+  </div>
+
+
+
+
+  <ion-content class="has-header xt-grey-bg has-subheader" delegate-handle="Scroll">
+    <!--下拉刷新-->
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>
+    <ul class="customerManagementBox" style="padding-top: 16px">
+      <li ng-click="gotoDetail(leads)"  ng-repeat="leads in leadslist track by leads.leadsid">
+        <div class="customerManagementInfor">
+          <div class="customerHeaderImg">
+            <img src="{{picserver}}{{leads.logo}}" onerror="javascript:this.src='img/imgonerror.png';" style="width: 100%;height: 100%"  />
+          </div>
+          <div class="customerInforBox"><i class="icon icon-xt3-customer-user"></i><span class="setLabelStyle" ng-bind="leads.name"></span><i class="icon icon-xt3-customer-phone"></i><span ng-bind="leads.tel"></span></div>
+          <div class="moneyCompanyBox over-ellipsis"><i class="icon icon-uniE9D5"></i><span class="setLabelStyle" ng-bind="'￥'+leads.pay"></span><i class="icon icon-xt2-sj"></i><span ng-bind="leads.alias"></span></div>
+          <div class="customerStatusBox nosubmit" ng-if="leads.status ==0">未提交</div>
+          <div class="customerStatusBox alreadysubmit" ng-if="leads.status ==1">已提交</div>
+          <div class="customerStatusBox alreadysubmit" ng-if="leads.status ==2">已处理</div>
+          <div class="customerStatusBox settlemented" ng-if="leads.status ==3">已结束</div>
+        </div>
+        <div class="clearfix customerRemarksBox" >
+          <i class="icon icon-xt-tx fl" style="{{(leads.memo)&&('visibility:visible')||('visibility:hidden')}}"></i>
+          <p class="fr"  ng-bind="leads.memo"></p>
+        </div>
+      </li>
+    </ul>
+
+
+
+    <div class="nosearch" ng-if="nonetask" ui-sref="tab.cloudsale">
+
+      <div class="nointenet">
+
+        <img src="img/nocost.png" style="margin: 0px">
+        <div class="message-info">
+          <span>暂无相关客户</span>
+        </div>
+      </div>
+    </div>
+    <!--上拉刷新-->
+    <ion-infinite-scroll
+      ng-if="hasNextPageLoad"
+      on-infinite="loadMore()"
+      distance="1%"
+      immediate-check="false">
+    </ion-infinite-scroll>
+
+  </ion-content>
+  <div class="mask-loadding-all" ng-if="showloading">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+      <!--</div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+</ion-view>

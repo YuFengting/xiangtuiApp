@@ -1,0 +1,116 @@
+<ion-view>
+  <ion-content class="coupond_content" style="padding-bottom: 90px">
+
+    <div class="business_back coupond_back" ng-click="goback()">
+      <img src="./img/business_back.png"/>
+    </div>
+    <ion-slide-box class="coupond_head" style="height: 392px" does-continue="true" auto-play="true"
+                   delegate-handle="productdetail" slide-interval="3000" show-pager="{{goods.pics > 1}}">
+      <ion-slide class="top-item" ng-repeat="pic in goods.pics track by $index">
+        <img src="{{picserver}}{{pic}}"/>
+      </ion-slide>
+    </ion-slide-box>
+    <div class="cloudSaleMoney" ng-if="showmoney">
+      <i class="font20">¥</i><i class="newPrice" ng-bind="goods.pfprice"></i>
+      <i class="font20 colorOrange">原价:</i>
+      <i class="font20" style="margin-right: 0px;color: #ffb6b2">¥</i>
+      <del class="colorOrange">
+        <i class="oldPrice"  ng-bind="goods.mprice"></i>
+      </del>
+    </div>
+    <div class="cloudSaleMoney" ng-if="!showmoney">
+      <i class="font20 colorOrange">暂无报价</i>
+    </div>
+    <div class="coupond_intro cloudSalePoint">
+      <dl class="clearfix">
+        <dd ng-bind="goods.name"></dd>
+      </dl>
+      <div class="coupond_shoptitle clearfix businessNameShopTitle">
+        <i class="icon shop icon-xt2-zhuzhi fl"></i>
+        <div class="fl shopname over-ellipsis" style="width:85%;" ng-bind="companyalias"></div>
+      </div>
+    </div>
+
+    <div class="cloudsalerInfor" ng-if="goods.address != '' && goods.address != undefined">
+      <div class="cloudsellTitleCom"><span class="name">购买地址</span></div>
+      <div class="csProductDetailInfor" >
+        <p ng-bind="goods.address"></p>
+      </div>
+    </div>
+
+    <div class="cloudsalerInfor">
+      <div class="cloudsellTitleCom"><span class="name">商品介绍</span></div>
+      <div class="csProductDetailInfor" ng-bind-html="desc">
+
+      </div>
+    </div>
+    <div class="queren-btn" ng-if="goods.url!='' && goods.url != undefined">
+      <button class="btn" ng-click="goAndBuy(goods.url)">立即购买</button>
+    </div>
+
+    <!--设置底部空白间隔-->
+    <div class="footerBottmHeight"></div>
+  </ion-content>
+
+  <!--开始任务-->
+  <button id="startbutton" class="startbtn" ng-click="shareSDK()">分享</button>
+
+  <!--加载中-->
+  <!--<div class="loading_mask hide">-->
+  <!--<div class="loading_icon">-->
+  <!--<img src="./img/loading.gif"/>-->
+  <!--</div>-->
+  <!--</div>-->
+
+  <!--分享弹窗-->
+  <div class="newguidemask " ng-if="ifopensharepopup"  ng-click="closesharepopup()"></div>
+  <div class="share_popup" ng-if="ifopensharepopup">
+    <div class="body">
+      <div class="title">
+        <i class="icon icon-tab-share"></i><span>立即分享至</span>
+      </div>
+      <div class="share_item">
+        <ul class="sharelist">
+          <li ng-click="newShare('weixin')">
+            <div class="shareicon">
+              <div class="iconitem weixin"></div>
+            </div>
+            <div class="share_name">微信</div>
+          </li>
+          <li ng-click="newShare('wxZone')">
+            <div class="shareicon">
+              <div class="iconitem friendcircle"></div>
+            </div>
+            <div class="share_name">朋友圈</div>
+          </li>
+          <li ng-click="newShare('qq')">
+            <div class="shareicon">
+              <div class="iconitem qq"></div>
+            </div>
+            <div class="share_name">QQ</div>
+          </li>
+          <li ng-click="newShare('qqZone')">
+            <div class="shareicon">
+              <div class="iconitem qqzone"></div>
+            </div>
+            <div class="share_name">QQ空间</div>
+          </li>
+          <li ng-click="newShare('sinaweibo')">
+            <div class="shareicon">
+              <div class="iconitem weibo"></div>
+            </div>
+            <div class="share_name">微博</div>
+          </li>
+          <li ng-click="newShare('copylink')">
+            <div class="shareicon">
+              <div class="iconitem browser"></div>
+            </div>
+            <div class="share_name">复制链接</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="buttomgroup" ng-click="closesharepopup()">取消</div>
+  </div>
+
+</ion-view>

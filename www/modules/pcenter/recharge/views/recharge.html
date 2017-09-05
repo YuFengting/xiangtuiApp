@@ -1,0 +1,205 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">手机充值</span>
+  </ion-header-bar>
+  <ul class="subheader mycollectionSub">
+    <li ng-class="{'active':re.billactive}" ng-click="re.changeBox(0)">
+      <a ><span>充话费</span></a>
+    </li>
+    <li ng-class="{'active':re.flowactive}" ng-click="re.changeBox(1)">
+      <a ><span>充流量</span></a>
+    </li>
+  </ul>
+  <ion-content ng-class="{'hide':!re.billactive}" class="has-subheader">
+    <div class="selectPhoneNum clearfix">
+      <div class="phoneNumBox"><input type="text" class="numberInput fl" placeholder="请输入充值手机号码" ng-model="re.phonenumber" /><i class="fr icon icon-xt-maillist" ng-click="re.popupMaillist()"></i><i class="icon-xt2-close fr close hide"></i></div>
+    </div>
+    <div class="rechargeSelect rechargeBillBox clearfix" >
+      <div ng-class="{'rechargeMoney':true,'fl':true,'current':phone.chosen,'phone-grey':phone.dis}" ng-repeat="phone in re.bill track by $index" ng-click="re.choseSize(phone)"><p>{{phone.money}}元</p></div>
+    </div>
+    <div ng-class={'commonBtn':true,'recharge-disabled':re.showhfbtn} ng-click="re.popupSure()">确定</div>
+  </ion-content>
+  <div ng-class="{'hide':!re.flowactive}">
+    <ion-content class="has-subheader">
+      <div class="selectPhoneNum clearfix">
+        <div class="phoneNumBox"><input type="text" class="numberInput fl" placeholder="请输入充值手机号码" ng-model="re.phonenumber" /><i class="fr icon icon-xt-maillist" ng-click="re.popupMaillist()"></i><i class="icon-xt2-close fr close hide"></i></div>
+    </div>
+    <div class="rechargeSelect rechargeFlowBox clearfix">
+      <div ng-class="{'rechargeMoney':true,'fl':true,'current':phone.chosen,'phone-grey':phone.dis}" ng-repeat="phone in re.flow track by $index" ng-click="re.choseSize(phone)">
+        <p class="flowNum">{{phone.size}}M</p>
+        <p class="saleMoney">售价:{{phone.money}}元</p>
+      </div>
+    </div>
+    <div ng-class={'commonBtn':true,'recharge-disabled':re.showllbtn} ng-click="re.popupSure()">确定</div>
+    </ion-content>
+  </div>
+  <div class="mask show" ng-if="re.paymaskshow" ng-click="re.hidepaymask()" style="top:0px;z-index: 301;"></div>
+  <div class="paymentPopover" ng-if="re.paymentshow">
+      <div class="headerText">支付<i class="icon ion-android-close" ng-click="re.hidepaymask()"></i></div>
+      <div class="paymentContent">
+        <div class="rechargFlowNum" ng-if="re.type==0">充值话费{{re.money}}元</div>
+        <div class="rechargFlowNum" ng-if="re.type==1">充值流量{{re.size}}M</div>
+        <div class="paymentMoney">￥{{re.money}}</div>
+        <div class="surePayment" ng-click="re.confirmPayment()">确认支付</div>
+      </div>
+  </div>
+
+<!--  <script id="pay-popup2.html" type="text/ng-template" >
+    <div class="paypopuparea ">
+      <div class="paypopupmain popup-slide-up" >
+        &lt;!&ndash; <div class="title border-bottom1">请输入支付密码</div>&ndash;&gt;
+        <div class="title">
+          <span ng-click="re.hidepaymask()" style="font-size: 50px"><i class="ion-ios-close-empty" style="margin-top: 10px"></i></span>请输入支付密码
+        </div>
+        <div class="body paddLR30">
+          &lt;!&ndash;<div class="wenzi">支付金额</div>
+          <div class="paymoney border-bottom1">
+            <i class="icon ion-social-yen"></i>
+            <span ng-bind="pay.paymoney"></span>
+          </div>&ndash;&gt;
+          <div class="wenzi2">*第一次输入时的密码即为支付密码</div>
+          <ul class="paypasgroup clearfix">
+            <li><i class="icon ion-record" ng-if="pay.passward.length>0"></i></li>
+            <li><i class="icon ion-record" ng-if="pay.passward.length>1"></i></li>
+            <li><i class="icon ion-record" ng-if="pay.passward.length>2"></i></li>
+            <li><i class="icon ion-record" ng-if="pay.passward.length>3"></i></li>
+            <li><i class="icon ion-record" ng-if="pay.passward.length>4"></i></li>
+            <li class="borderright"><i class="icon ion-record" ng-if="pay.passward.length>5"></i></li>
+          </ul>
+          <div class="wenzi fogetpas" ng-click="re.forgetpswd()">忘记密码？</div>
+        </div>
+      </div>
+      <div class="popupmask" ng-click="closepaypopupModal()">
+      </div>
+    </div>
+  </script>-->
+
+  <script id="pay-popup2.html" type="text/ng-template">
+      <div class="mask"  style="z-index: 301; top: 0;display: block" ng-click="closepaypopupModal()"></div>
+      <!--支付密码-->
+      <div class="msg_s_popup paypassword"  style="height: 340px;" ng-style="msgpopupsty">
+        <div class="title">
+          <span ng-click="closepaypopupModal()" style="font-size: 50px"><i class="ion-ios-close-empty" style="margin-top: 10px"></i></span>请输入支付密码
+        </div>
+        <div class="body">
+          <!--<div class="label">金额</div>-->
+          <div class="inputbox clearfix" style="border-bottom: none;">
+            <!--<span>￥</span>-->
+            <div class="pwd_hint">*第一次输入密码即为支付密码(6位数字)</div>
+            <div class="password clearfix"><!--
+              <input type="number" maxlength="6" ng-model="pay.passward" id="per_moneyinput" ng-change="checkPayMoney()" />
+              <div ng-repeat="pwd in paylist" ng-bind="pwd.title" class="paypwdround"></div>-->
+              <ul class="paypasgroup">
+                <li><i ng-if="pswinfo.length>0" class="icon ion-record"></i> </li>
+                <li><i ng-if="pswinfo.length>1" class="icon ion-record"></i> </li>
+                <li><i ng-if="pswinfo.length>2" class="icon ion-record"></i> </li>
+                <li><i ng-if="pswinfo.length>3" class="icon ion-record"></i> </li>
+                <li><i ng-if="pswinfo.length>4" class="icon ion-record"></i> </li>
+                <li class="borderright"><i ng-if="pswinfo.length>5" class="icon ion-record"></i> </li>
+
+                <div class="guangbiao" style="transform:translateX({{pswinfo.length*60+'px'}})" ng-show="pswinfo.length<6"></div>
+
+              </ul>
+            </div>
+            <div class="forgetpwd"><span ng-click="re.forgetpswd()">忘记密码？</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!--正在支付-支付完成-->
+      <div class="loaddingitem" ng-if="showpayload">
+        <div class="loade">
+          <div class="loader-inner ball-spin-fade-loader" style="display: none;">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div class="loadEnd">
+            <i class="icon icon-select-cur"></i>
+          </div>
+        </div>
+        <div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="payload"><span>正在付款</span></div>
+        <div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="paysucc"><span>支付成功</span></div>
+      </div>
+
+
+      <!--支付键盘-->
+      <div class="keyboard-self" >
+        <ul class="numlist">
+          <li ng-click="enterpsw(1)"><button>1</button></li>
+          <li ng-click="enterpsw(2)"><button>2</button></li>
+          <li ng-click="enterpsw(3)"><button>3</button></li>
+          <li ng-click="enterpsw(4)"><button>4</button></li>
+          <li ng-click="enterpsw(5)"><button>5</button></li>
+          <li ng-click="enterpsw(6)"><button>6</button></li>
+          <li ng-click="enterpsw(7)"><button>7</button></li>
+          <li ng-click="enterpsw(8)"><button>8</button></li>
+          <li ng-click="enterpsw(9)"><button>9</button></li>
+          <li class="bg-grey"></li>
+          <li ng-click="enterpsw(0)"><button>0</button></li>
+          <li class="bg-grey"  ng-click="enterpsw(11)">
+            <button><i class="icon icon-code-del"></i></button>
+          </li>
+        </ul>
+      </div>
+  </script>
+
+
+
+  <!--支付密码-->
+  <div class="msg_s_popup paypassword" ng-if="re.payshoukuanPop" style="height: 265px;">
+    <div class="title">
+      <span ng-click="re.hidepaymask()" style="font-size: 50px"><i class="ion-ios-close-empty" style="margin-top: 10px"></i></span>请输入支付密码
+    </div>
+    <div class="body">
+        <div class="pwd_hint">*第一次输入密码即为支付密码(6位数字)</div>
+        <div class="password clearfix">
+          <input type="number" maxlength="6" ng-model="re.passward" ng-change="re.checkPayMoney()"/>
+          <div ng-repeat="pwd in re.paylist" ng-bind="pwd.title" class="paypwdrecharge"></div>
+        </div>
+        <div class="forgetpwd"><span ng-click="re.forgetpswd()">忘记密码？</span></div>
+      </div>
+    </div>
+  </div>
+  <!--正在支付-支付完成-->
+  <div class="loadmask" ng-if="re.showpayload"></div>
+  <div class="loaddingitem" ng-if="re.showpayload">
+    <div class="loade">
+      <div class="loader-inner ball-spin-fade-loader"  ng-if="re.payload">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="loadEnd" ng-if="re.paysucc">
+        <i class="icon icon-select-cur"></i>
+      </div>
+    </div>
+    <div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="re.payload"><span>正在付款</span></div>
+    <div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="re.paysucc"><span>支付成功</span></div>
+    <div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="re.passwrong"><span>支付密码错误</span></div>
+    <div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="re.moneyless"><span>账户余额不足</span></div>
+  </div>
+  <style>
+    /*弹窗样式*/
+    .popup-container{ bottom: 0; top:0;}
+    .popup-container .popup{width: 539px;font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 10px;}
+    .popup-container .popup-title{font-family: "-apple-system", "microsoft yahei";font-size: 27px;padding: 35px;}
+    .popup-container .popup-buttons{padding: 0px;}
+    .popup-container .popup-buttons .button{font-family: "-apple-system", "microsoft yahei";font-size: 25px;  background: none;}
+    .popup-container .popup-buttons .button:first-child{border-right: 2px solid #e6e9ed}
+    .popup-head{border-bottom: 1px solid #e6e9ed}
+  </style>
+</ion-view>

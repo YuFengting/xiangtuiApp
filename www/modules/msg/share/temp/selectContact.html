@@ -1,0 +1,99 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" style="font-size: 25px;padding-left: 14px" ng-click="goback()">
+      取消
+    </div>
+    <span class="title"> </span>
+    <div class="icon_like detial_like queren"  ng-click="defaultShare()" ng-if="checkedList.length>0" style="width: auto;opacity: 1;font-size: 25px">
+      确定（<span ng-bind="checkedList.length"></span>）
+    </div>
+    <div class="icon_like detial_like queren"  ng-if="checkedList.length==0" style="width: auto;opacity: .56;font-size: 25px">
+      确定（<span ng-bind="checkedList.length"></span>）
+    </div>
+  </ion-header-bar>
+  <ion-content class="has-header" delegate-handle="addscroll">
+     <div class="search-bar">
+       <div class="selectper clearfix">
+         <div class="fl" style="height: 94px" ng-repeat="qun in checkedList track by $index" >
+           <div ng-if="qun.isqun != 1"><img src="{{qun.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'" style="margin-right: 14px; height: 72px; width: 72px;" class='haschosepic2'></div>
+           <div ng-if="qun.isqun == 1"style="height: 72px; border-bottom: 0px;margin-left:0px;margin-right: 14px; margin-top: 12px;padding: 0px;float: left" ng-class="{'find-item':true,'group':true,'group1':qun.avate.length == 1,'group2':qun.avate.length == 2,'group3':qun.avate.length == 3,'group4':qun.avate.length == 4,'group5':qun.avate.length == 5,'group6':qun.avate.length == 6,'group7':qun.avate.length == 7,'group8':qun.avate.length == 8,'group9':qun.avate.length >= 9}">
+             <div class="head-pic  fl" style="border-radius: 0px;">
+               <ul class="clearfix">
+                 <li ng-repeat="img in qun.avate track by $index"><img src="{{img | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'"></li>
+               </ul>
+             </div>
+           </div>
+         </div>
+         <i class="icon icon-xt-search" style="display: inline-block;position: relative;top: 3px" ng-hide="checkedList.length>0"></i>
+         <input class="bigSearch searchinput2" ng-change="checkresult()" type="text" ng-model="key" placeholder="搜索"  >
+         <!--<span ng-class="{'bigSearch':anyChecked}">搜索</span>-->
+       </div>
+     </div>
+    <div class="search-bar clearfix goPhonebook" ng-click="go('selectPhonebook',{'checkedList':checkedList,'isbuser':isbuser})">
+      <span class="fl">从通讯录选择</span>
+      <i class="icon ion-ios-arrow-right fr"></i>
+    </div>
+    <div class="recentChat">最近聊天</div>
+    <ion-list class="topnamegroup selectContact">
+      <ion-item class="selectitem clearfix" ng-repeat="contact in contactlist | filter:{name:key} track by $index" ng-click="checkmember(contact,$index)">
+       <div class="fl noselect select" ng-class="{'active':contact.ischecked}"> <i class="icon-select-right" ng-if="contact.ischecked"></i></div>
+       <div class="headpic-item fl" >
+         <div ng-if="contact.imgrouptype == 0"><img src="{{contact.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'"/></div>
+         <div ng-if="contact.imgrouptype == 1" style="height: auto;padding:0px; border-bottom: 0px;margin-left: 0px; float: left" ng-class="{'find-item':true,'group':true,'group1':contact.avate.length == 1,'group2':contact.avate.length == 2,'group3':contact.avate.length == 3,'group4':contact.avate.length == 4,'group5':contact.avate.length == 5,'group6':contact.avate.length == 6,'group7':contact.avate.length == 7,'group8':contact.avate.length == 8,'group9':contact.avate.length >= 9}">
+           <div class="head-pic  fl" style="border-radius: 0px;">
+             <ul class="clearfix">
+               <li ng-repeat="img in contact.avate track by $index"><img src="{{img | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'"></li>
+             </ul>
+           </div>
+         </div>
+       </div>
+       <div class="nameitem fl">
+         {{contact.name}}
+       </div>
+      </ion-item>
+    </ion-list>
+    <div class="searchResult" ng-if="searchresult">
+      <span>无结果</span>
+    </div>
+  </ion-content>
+
+  <!--分享弹窗-->
+  <div class="mask show" style="top: 0px; opacity: 0.3;" ng-if="taskshare"></div>
+  <div class="sharepopup" ng-if="taskshare" ng-style='sharepopupStyle'>
+    <div class="sharepopup_body">
+      <div class="sharepopup_title">分别发送给：</div>
+      <ul class="sharepopup_headpic clearfix" >
+        <li ng-repeat="qun in checkedList track by $index" style="width: 62px">
+          <div ng-if="qun.isqun != 1" class="picinfo"><img src="{{qun.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'" style="margin-right: 14px;" class='haschosepic2 marginTop0'></div>
+          <div ng-if="qun.isqun == 1"  style="height: auto;padding:0px; border-bottom: 0px;margin-left: 0px;" ng-class="{'find-item':true,'group':true,'group1':qun.avate.length == 1,'group2':qun.avate.length == 2,'group3':qun.avate.length == 3,'group4':qun.avate.length == 4,'group5':qun.avate.length == 5,'group6':qun.avate.length == 6,'group7':qun.avate.length == 7,'group8':qun.avate.length == 8,'group9':qun.avate.length >= 9}">
+            <div class="head-pic  fl" style="border-radius: 0px;">
+              <ul class="clearfix"  class="picinfo">
+                <li ng-repeat="img in qun.avate track by $index"><img src="{{img | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'"></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="sharepopup_text" ng-bind="name"></div>
+      <div class="sharepopup_input">
+        <input type="text" ng-model="msg.friendmsg" placeholder="给朋友留言">
+      </div>
+    </div>
+    <div class="sharepopup_btn clearfix">
+      <button ng-click="cancelShare()" style="color: #1c8df6;">取消</button>
+      <button class="redbtn" ng-bind="'发送（'+checkedList.length+'）'" ng-click="ShareTaskOrBuser()"></button>
+    </div>
+  </div>
+
+  <style>
+    /*不要删----选择超过9个弹窗*/
+    .popup-container {bottom: 0; top: 0;}
+    .popup-container .popup {width: 539px; font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 20px;}
+    .popup-container .popup-title { font-family: "-apple-system", "microsoft yahei";font-size: 27px; padding: 35px;}
+    .popup-container .popup-buttons {padding: 0px; }
+    .popup-container .popup-buttons .button { font-family: "-apple-system", "microsoft yahei";font-size: 25px;color: #1c8df6; background: none; }
+    .popup-container .popup-buttons .button.button-default{color: #1c8df6;}
+    .popup-head {border-bottom: 1px solid #e6e9ed }
+  </style>
+</ion-view>
+

@@ -1,0 +1,23 @@
+<ion-view>
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">关联手机号</span>
+  </ion-header-bar>
+  <ion-content class="has-header loginIconContent bgGray">
+    <div class="relatedNumberTips">该手机号已经注册享推</div>
+    <ul class="loginForm selectWaysForm">
+      <li>
+        <input class="loginInput fl" type="tel" placeholder="请输入注册手机号" ng-model="user.tel" readonly="readonly"/>
+      </li>
+      <li>
+        <input class="loginInput fl" style="width: 350px;" type="tel" placeholder="请输入验证码" ng-model="user.code"  ng-focus="showcodeClear()" ng-blur="hidecodeClear()" ng-change="codeChange()"/>
+        <i class="icon-xt2-close fl close"   ng-if="showcodeclear" ng-click="cleancode()"></i>
+        <button id="checkcode" ng-disabled="!showBut" ng-click="sendcode2('3','sms')" ng-bind="timetxt">获取验证码</button>
+      </li>
+    </ul>
+    <div class="registerTips" ng-disabled="showBut1">没有收到短信？<i class="red" ng-click="sendcode2('3','voice')" >点击获取</i>语音验证码！</div>
+    <div class="loginBtn"  ng-click="checkmesg()" >登录</div>
+  </ion-content>
+</ion-view>

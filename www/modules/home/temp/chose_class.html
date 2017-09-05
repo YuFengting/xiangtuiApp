@@ -1,0 +1,22 @@
+<ion-view style="background: #f4f4f4">
+
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back"  ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" >全部分类</span>
+  </ion-header-bar>
+
+  <ion-content class="has-header">
+   <div class="class_group">
+   <ul class="clearfix">
+     <li ng-repeat="ind in industries" ng-click="goAllMerchant(ind)">
+       <img src="{{picserver}}{{ind.icon}}"><br>
+       {{ind.name}}
+     </li>
+   </ul>
+   </div>
+  </ion-content>
+
+</ion-view>

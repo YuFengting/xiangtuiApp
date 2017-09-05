@@ -1,0 +1,189 @@
+﻿﻿﻿<ion-view style="background: #f4f4f4">
+  <div class="msg_head clearfix">
+    <ul class="msg_head_center clearfix">
+      <li id="huihua" ng-click="changeMsgTab('0')"  ng-class="{'active':concatTab == 0}"><span class="has-newfriend">会话<i ng-if="(chatBadge - applys.length) > 0"></i></span></li>
+      <li id="tongxunlu" ng-click="changeMsgTab('1')" ng-class="{'active':concatTab == 1}"><span class="has-newfriend">通讯录<i ng-if="applys.length > 0"></i></span></li>
+      <i class="msg_plus icon-header-add" ng-click="msgPlus($event)"></i>
+    </ul>
+  </div>
+
+  <ion-content class="has-header has-tabs grey_content msg_content" ng-style="hasTabsStyle" delegate-handle="phonebSroll">
+      <!--会话-->
+      <div class="messagebox" ng-if="concatTab == 0">
+        <ion-list class="msg_list" style="border-bottom: 1px solid #d4d4d4;" >
+          <ion-item class="msg_item" ng-click="go('msgfaq')" style="height:133px;">
+            <div class="item-content">
+              <div class="msg_item_head fl">
+                <img src="img/msg_mishu.png"/>
+              </div>
+              <div class="msg_item_cnt fr">
+
+                <div class="msg_nameline clearfix">
+                  <div class="msg_name fl">享推小秘书</div>
+                  <div class="msg_time fr"></div>
+                </div>
+                <div class="msg_decs over-ellipsis">如果您需要帮助，请咨询我！</div>
+              </div>
+            </div>
+          </ion-item>
+          <ion-item class="msg_item" ng-click="gomsgsysytem(msgsystembean.msgsystemid, 0)" ng-if="xtxx != null" style="height:133px;">
+            <div class="item-content">
+              <div class="msg_item_head fl">
+                <img src="img/msgSysIcon.png"/>
+       <!--消息数量-->
+                <span id="msgsystem" class="msg_num"  ng-if="xtxx.count>0">{{xtxx.count}}</span>
+              </div>
+              <div class="msg_item_cnt fr">
+                <div class="msg_nameline clearfix">
+                  <div class="msg_name fl">系统消息</div>
+                  <div class="msg_time fr"></div>
+                </div>
+                <div id="msgsystemcon" class="msg_decs over-ellipsis">{{xtxx.title}}</div>
+              </div>
+            </div>
+          </ion-item>
+          <ion-item class="msg_item" ng-click="gomsgsysytem(msgsystembean.msgsystemid, 1)" ng-if="hdts != null" style="height:133px;">
+            <div class="item-content">
+              <div class="msg_item_head fl">
+                <img src="img/msgTipsIcon.png"/>
+                <!--消息数量-->
+                <span class="msg_num"  ng-if="hdts.count>0">{{hdts.count}}</span>
+              </div>
+              <div class="msg_item_cnt fr">
+                <div class="msg_nameline clearfix">
+                  <div class="msg_name fl">活动推送</div>
+                  <div class="msg_time fr"></div>
+                </div>
+                <div class="msg_decs over-ellipsis">{{hdts.title}}</div>
+              </div>
+            </div>
+          </ion-item>
+
+          <ion-item class="msg_item" ng-repeat="sysMsg in sysMesssageList" ng-click="msgdetailss(sysMsg,$index)">
+            <div class="msg_item_head fl msgGroupHead">
+                <img src="img/msg_setting.png" ng-if="sysMsg.type==5&&sysMsg.msgtype==1"/>
+                <img src="img/msg_tuisong.png" ng-if="sysMsg.type==1&&sysMsg.msgtype==1"/>
+                <img src="img/msg_cloudsale.png" ng-if="sysMsg.type==2&&sysMsg.msgtype==1"/>
+                <img src="img/msg_money.png" ng-if="sysMsg.type==3&&sysMsg.msgtype==1"/>
+                <img src="img/msg_withdraw.png" ng-if="sysMsg.type==4&&sysMsg.msgtype==1"/>
+                <img src="img/msg_client.png" ng-if="sysMsg.type==6&&sysMsg.msgtype==1"/>
+                <img src="img/msg_groupBuy.png" ng-if="sysMsg.type==7&&sysMsg.msgtype==1"/>
+              <img ng-if="sysMsg.msgtype==0 && sysMsg.imgrouptype == 0" src="{{sysMsg.avate | avatefilter}}" ng-if="" onerror="javascript:this.src='img/default-list-square.png'"/>
+              <ul  ng-if="sysMsg.msgtype==0 && sysMsg.imgrouptype == 1" ng-class="{'clearfix':true,'group1':sysMsg.avate.length == 1,'group2':sysMsg.avate.length == 2,'group3':sysMsg.avate.length == 3,'group4':sysMsg.avate.length == 4,'group5':sysMsg.avate.length == 5,'group6':sysMsg.avate.length == 6,'group7':sysMsg.avate.length == 7,'group8':sysMsg.avate.length == 8,'group9':sysMsg.avate.length >= 9}">
+                <li ng-repeat="img in sysMsg.avate track by $index"><img src="{{img | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'"></li>
+              </ul>
+
+              <span id="{{sysMsg.imgroupid}}" class="msg_num"  ng-if="sysMsg.count>0 && sysMsg.notify !== 1">
+                <span ng-if="sysMsg.count<99">{{sysMsg.count}}</span>
+                <span ng-if="sysMsg.count>=99">99+</span>
+              </span>
+              <span class="msg_num_point" ng-if="sysMsg.count>0 && sysMsg.imgrouptype === 1 && sysMsg.notify === 1"></span>
+            </div>
+            <div class="msg_item_cnt fr">
+              <div class="msg_nameline clearfix">
+                <div class="msg_name fl" ng-bind="sysMsg.name"></div>
+                <div class="msg_time fr" ng-bind="(sysMsg.exactlytime | chattimefilter) || sysMsg.inittime"></div>
+              </div>
+
+              <div class="msg_decs over-ellipsis" ng-bind="sysMsg.lastmsg"></div>
+              <div class="ring" ng-if="sysMsg.notify === 1">
+                <i class="icon-noring icon"></i>
+              </div>
+            </div>
+            <ion-option-button class="button-assertive removeItem" ng-click="msgDelete($event,$index)">删除</ion-option-button>
+          </ion-item>
+        </ion-list>
+        <div class="msg_null hide">您还没有推广会话消息</div>
+      </div>
+
+      <!--通讯录-->
+      <!--Android-->
+      <div class="phonebookbox" style="position: relative;padding-bottom: 80px;min-height: 100%;" ng-if="concatTab==1" ng-click="closekeyboard()">
+        <!--个人-->
+          <!--搜索-->
+          <div class="workc_search clearfix" ng-click="go('findfriend')">
+            <i class="icon ion-ios-search fl"></i>
+            <form>
+              <input type="search" placeholder="搜索" readonly/>
+            </form>
+          </div>
+          <div class="businessbox">
+            <ion-list class="phoneb_list">
+              <ion-item class="clearfix" ng-click="go('newfriend')">
+                <div class="fl personal_headpic">
+                  <img src="img/addfriend.png"/>
+                </div>
+                <div class="fl personal_name">新的朋友</div>
+                <span class="tipdot" ng-if="applys.length > 0">{{applys.length}}</span>
+              </ion-item>
+              <ion-item class="clearfix" ng-click="go('groupchat')" style="border-bottom: 1px solid #d8d8d8; border-top: 0px;">
+                <div class="fl personal_headpic">
+                  <img src="img/groupchat.png"/>
+                </div>
+                <div class="fl personal_name">群聊</div>
+              </ion-item>
+              <ion-item class="clearfix" ng-click="go('myfocus')" style="border-bottom: 1px solid #d8d8d8; border-top: 0px;">
+                <div class="fl personal_headpic headPicColor3">
+                  <i class="icon icon-follow-business"></i>
+                </div>
+                <div class="fl personal_name">关注的商家</div>
+              </ion-item>
+            </ion-list>
+
+          <ion-list class="phoneb_list user_phonebook">
+          <div ng-repeat="contact in contacts.susers" style="border-bottom: 1px solid #d8d8d8;">
+            <div class="phoneb_divider" id="{{contact.name_pinyin}}">{{contact.name_pinyin}}</div>
+
+              <ion-item class="clearfix" ng-repeat="suser in contact.array track by suser.userid" ng-click="go('shome', {suserid:suser.userid})" style="padding: 0px;">
+                <div class="fl personal_headpic">
+                  <img src="{{suser.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'"/>
+                </div>
+                <div class="fl personal_name">{{suser.name}}</div>
+                <!--<button class="phoneb_btn invite fr">邀请下载</button>-->
+                <ion-option-button class="button-assertive removeItem" ng-click="friendDelete(suser)">删除</ion-option-button>
+              </ion-item>
+
+          </div>
+
+          </ion-list>
+        </div>
+        <div class="group_num fixNum" ng-show="sfriendCount > 0"><span ng-bind="sfriendCount" ></span>位联系人</div>
+      </div>
+
+    </div>
+
+  </ion-content>
+    <!--导航-->
+<!--    <ul class="fix-nav clearfix show phonebook_nav" ng-if="checked == 1" style="margin-top:{{topinfo}}">
+      <li class="bPhone" ng-class="{active:concatTab == 0}" ng-click="bPhone()"><a><span>商家</span></a></li>
+      <li class="has-newfriend perPhone" ng-class="{active:concatTab == 1}" ng-click="perPhone()"><a><span>个人<i ng-if="applys.length > 0"></i></span></a></li>
+    </ul>-->
+
+    <!--字母排序-->
+    <ul class="phoneb_az" ng-if="concatTab == 1"  on-drag="az2($event)" style="top: 300px;margin-top: 0px">
+      <li ng-click="az2($event)" ng-repeat="le in azlist">{{le}}</li>
+    </ul>
+
+  <!--会话缺省页面
+  <div class="nointenet" style="position: fixed;top: 80px;left: 0px">
+
+    <img src="img/nochat.png" >
+    <div class="message-info">
+      <span>您还没有会话消息呢</span>
+    </div>
+  </div>
+-->
+
+  <style>
+    /*下方comfirm弹窗*/
+    .popup-head{border-bottom: 1px solid #d8d8d8;}
+    .popup-container .popup{width: 539px; border-radius: 10px;}
+    .popup-container{font-size: 25px;}
+    .popup-container .popup-title{font-size: 25px; font-family: "-apple-system", "microsoft yahei";padding: 40px 0;}
+    .popup-buttons{padding: 0px;}
+    .popup-buttons .button{font-size: 25px; font-family: "-apple-system", "microsoft yahei";background: transparent;height: 75px; line-height: 75px; width: 50%;padding: 0px; margin: 0px;}
+    .popup-buttons .button:first-child{border-right: 1px solid #d8d8d8;}
+    .popup-container{ bottom: 0; top:0;}
+
+  </style>
+</ion-view>

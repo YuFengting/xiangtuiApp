@@ -1,0 +1,149 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" ng-bind="task.name | titlefilter"></span>
+    <div class="icon_like detial_like cleafix">
+      <i ng-if="!isstore" class="icon icon-collection-kong" ng-click="storeTask(task.id)"></i>
+      <i ng-if="isstore" class="icon icon-collection-shi" ng-click="storeTask(task.id)"></i>
+      <i class="icon icon-xt3-sj" ng-click="goBusi()"></i>
+    </div>
+  </ion-header-bar>
+
+  <ion-content class="coupond_content has-header"  >
+    <div class='scroll-wrapper'>
+      <iframe id="cpc_iframe" ng-src="{{targetUrl}}" style="min-height: 100%;width: 100%;overflow-y: scroll;" ></iframe>
+    </div>
+
+    <div class="loader loadanimation">
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </ion-content>
+
+  <script id="hamburger-modal.html" type="text/ng-template">
+    <div class="modal hbgModal" ng-class="{'maskbgfade':bgfade}" >
+      <ion-content style="position: fixed">
+        <div class="hbgBox taskdetailHbg">
+
+          <div class="scrollHbg">
+          <div class="hbgTitle">
+            <span ng-if="task.extratype==0">分享说明</span>
+            <span ng-if="task.extratype==1">朋友看了，你就抢到优惠了</span>
+          </div>
+          <div class="hbgContent">
+            <div class="hbgSubtitle">
+              <span ng-bind="task.worknum"></span>人&nbsp;
+              <img src="img/home/hbg-qiang.png"/>&nbsp;
+              <span ng-if="task.extratype==0" ng-bind="task.money | number:2"></span>
+              <span ng-if="task.extratype==0" style="font-size: 20px">元</span>
+              <span ng-if="task.extratype==1">优惠券</span>
+            </div>
+            <div class="hbgP1">
+              <p>有效区域：<span ng-bind="task.area"></span></p>
+              <p>截止日期：<span ng-bind="task.endtime"></span></p>
+            </div>
+            <div class="hbgShare">
+              <img src="img/home/hbg-share.png"/>
+            </div>
+            <div class="hbgP2">
+              <p ng-if="task.extratype==1">阅读数越多，优惠力度越大</p>
+              <p ng-if="task.extratype==0">阅读数越多，红包越大</p>
+            </div>
+            <div class="hbgAnimate clearfix">
+              <div class="people"></div>
+              <div class="arrow">
+                <img src="img/home/hbg-arrow.png"/>
+              </div>
+              <div ng-show="task.extratype==1">
+                <div class="salepurse hamPurse" ng-show="task.extracatagory==1"><span class="wai">{{purseSale}}<span>折</span></span></div><!--折扣券-->
+                <div class="couponpurse hamPurse" ng-show="task.extracatagory==2"><span class="wai">{{purseCoupon}}</span></div><!--兑换券-->
+                <div class="moneypurse hamPurse" ng-show="task.extracatagory==0"><span class="wai">{{purseMoney}}<span>元</span></span></div><!--代金券-->
+              </div>
+              <div ng-show="task.extratype==0" class="purse"></div>
+            </div>
+            </div>
+          </div>
+          <div class="hbgClose taskdetailHbgClose" ng-click="closeHambgModal()">
+            <img src="img/home/hbg-close.png"/>
+          </div>
+        </div>
+      </ion-content>
+    </div>
+  </script>
+
+
+  <!--开始任务-->
+  <button ng-if="showpause" id="begin" class="startbtn" ng-click="showSharePopup()" ng-bind="buttonname"></button>
+  <button ng-if="!showpause" class="startbtnpause" ng-bind="buttonname"></button>
+
+  <div class="hamburgerBtn" ng-click="openHambgModal()" on-drag-down="openHambgModal()">
+    <img src="./img/home/hamburgerIcon.png"/>
+  </div>
+  <div class="nosearch" style="position: relative;" ng-if="nonenet">
+    <img src="./img/nowifi.png"/><br/>
+    网络不给力，请稍后重试
+  </div>
+
+
+  <!--分享弹窗-->
+  <div class="newguidemask " ng-if="ifopensharepopup" ng-click="closesharepopupfun()"></div>
+  <div class="share_popup" ng-if="ifopensharepopup">
+    <div class="body">
+      <div class="title">
+        <i class="icon icon-tab-share"></i><span>立即分享至</span>
+      </div>
+      <div class="share_item">
+        <ul class="sharelist">
+          <li ng-click="newShare('weixin')">
+            <div class="shareicon">
+              <div class="iconitem weixin"></div>
+            </div>
+            <div class="share_name">微信</div>
+          </li>
+          <li ng-click="newShare('wxZone')">
+            <div class="shareicon">
+              <div class="iconitem friendcircle"></div>
+            </div>
+            <div class="share_name">朋友圈</div>
+          </li>
+          <li ng-click="newShare('qq')">
+            <div class="shareicon">
+              <div class="iconitem qq"></div>
+            </div>
+            <div class="share_name">QQ</div>
+          </li>
+          <li ng-click="newShare('qqZone')">
+            <div class="shareicon">
+              <div class="iconitem qqzone"></div>
+            </div>
+            <div class="share_name">QQ空间</div>
+          </li>
+          <li ng-click="newShare('sinaweibo')">
+            <div class="shareicon">
+              <div class="iconitem weibo"></div>
+            </div>
+            <div class="share_name">微博</div>
+          </li>
+          <li ng-click="newShare('copylink')">
+            <div class="shareicon">
+              <div class="iconitem browser"></div>
+            </div>
+            <div class="share_name">复制链接</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="buttomgroup" ng-click="closesharepopupfun()">取消</div>
+  </div>
+
+  <!--新手引导第二版 第四步-->
+  <div class="guide04" ng-if="step4&&bgfade" ng-click="closeNewHandStepFour()"></div>
+
+  <!--新手引导第二版 第五步 有回调的请款-->
+  <div class="guideMask" ng-if="step5==1" ng-click="closeNewHandStepFive1(newhandshare)">
+    <div class="guide05">
+      <img src="img/newguide/guide05.png"/>
+    </div>
+  </div>
+</ion-view>

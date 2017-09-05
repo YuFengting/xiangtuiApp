@@ -1,0 +1,42 @@
+<ion-view style="background: #f4f4f4;">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">群聊邀请</span>
+  </ion-header-bar>
+  <ion-content class="has-header">
+   <div class="invite-top-area">
+    <div class="picarea" >
+      <div class="picitem" style="flex: 3">
+        <img src="{{groupmember.heqadpic}}" ng-class="{'width3':membernum>4,'width2':membernum<=4}"  ng-repeat="groupmember in groupmember track by $index  ">
+
+      </div>
+
+    </div>
+    <div class="tittlearea">那些年我们一起浪</div>
+    <div class="peoplenum">77人</div>
+   </div>
+    <div class="userarea xt-red hide">
+                 该邀请已发送
+    </div>
+
+    <div class="beinvited">
+      <div class="userarea " style="color:#666666 ">
+        小阴天邀请你加入群聊
+      </div>
+
+      <div class="alreadyinto">你已接受邀请</div>
+      <div class="intoGroupbtn hide">
+        加入群聊
+      </div>
+      <div class="intoGroupmsg hide">
+        1、你和群里其他人都不是朋友关系，请注意隐私安全。<br>
+        2、该群聊人数较多，为减少新消息给你带来的打扰，建议谨慎加入
+      </div>
+    </div>
+
+
+  </ion-content>
+
+</ion-view>

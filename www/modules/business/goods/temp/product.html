@@ -1,0 +1,27 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" ng-bind="companyalias" style="width: 60%;text-align: center"></span>
+  </ion-header-bar>
+
+  <ion-content class="businessProduct has-header" >
+    <div class="productTitle"><span class="name">商品列表</span></div>
+    <ul class="productInforList clearfix">
+      <li ng-repeat="goods in goodslist track by goods.id" ng-click="goGoodsDetail(goods,companyalias)">
+        <img src="{{picserver}}{{goods.goodpic}}" />
+        <p class="productName" ng-bind="goods.name"></p>
+        <p class="productTips" ng-bind="goods.description | delhtml"></p>
+      </li>
+    </ul>
+  </ion-content>
+
+<!--  <div class="nointenet hide" style="position: fixed;top: 80px;left: 0px;">
+    <img src="img/noproduct.png" >
+    <div class="message-info">
+      <span>暂无产品</span>
+    </div>
+  </div>-->
+
+</ion-view>

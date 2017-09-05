@@ -1,0 +1,35 @@
+<ion-view class="xt-grey-bg">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <div class="header_search clearfix">
+      <span class="icon icon-xt-search search_icon"></span>
+      <form  ng-submit="goSearchList(search.key)" >
+        <input id="searchFouse" type="text" ng-model="search.key" ng-focus="myfocus($event)" ng-blur="myblur($event)" ng-change="inputChange()" placeholder="请输入要查询的手机号" autocomplete="off" />
+      </form>
+      <span class="icon icon-xt2-close search_close " ng-if="delshow" ng-click="searchClear($event)"></span>
+    </div>
+    <div class="header_searchbtn" ng-click="goSearchList(search.key)">搜索</div>
+  </ion-header-bar>
+  <ion-content class="has-header xt-grey-bg" ng-click="closekeyboard()">
+    <div class="find-head" ng-if="isSearching" ng-click="goSearchList(search.key)">
+      <span class="find-icon-box"><i class="ion-ios-search"></i></span>
+      <span style="margin-right: 16px">搜一搜</span>
+      <span class="xt-red"><b>{{search.key}}</b></span>
+    </div>
+
+    <div class="find_nofriend" ng-if="nouser">
+      该用户不存在
+    </div>
+    <div class="find_list" ng-if="userList.length>0">
+      <div class="find_title">相关用户</div>
+      <div class="find-item clearfix" ng-click="go('shome',{'suserid':user.id})" ng-repeat="user in userList">
+        <div class="head-pic fl">
+          <img src="{{picserver}}{{user.avate}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+        </div>
+        <div class="name fl">  <span class="xt-red" ng-bind="user.name"></span></div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

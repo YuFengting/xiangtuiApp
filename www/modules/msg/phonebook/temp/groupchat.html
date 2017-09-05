@@ -1,0 +1,109 @@
+﻿<ion-view ng-class="{'xt-grey-bg':qunlist.length==0}">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="mygoback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">群聊</span>
+  </ion-header-bar>
+  <ion-content class="has-header scroll-content" >
+    <ion-list class="groupchat" ng-if="qunlist.length!=0">
+      <ion-item ng-repeat="qun in qunlist track by $index" ng-click="go('msggroup', {imgroupid:qun.groupid})"
+                ng-class="{'group1':qun.avate.length == 1,'group2':qun.avate.length == 2,'group3':qun.avate.length == 3,'group4':qun.avate.length == 4,'group5':qun.avate.length == 5,'group6':qun.avate.length == 6,'group7':qun.avate.length == 7,'group8':qun.avate.length == 8,'group9':qun.avate.length >= 9}">
+        <ul class="headpic clearfix fl">
+          <li ng-repeat="img in qun.avate track by $index">
+            <img src="{{picserver}}{{img}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+          </li>
+        </ul>
+        <div class="groupname fl">{{qun.groupname}}</div>
+      </ion-item>
+
+      <!--
+      <ion-item class="group4" ng-click="go('msggroup')">
+        <ul class="headpic clearfix fl">
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+        </ul>
+        <div class="groupname fl">英孚教育销售指导群</div>
+      </ion-item>
+      <ion-item class="group5" ng-click="go('msggroup')">
+        <ul class="headpic clearfix fl">
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+        </ul>
+        <div class="groupname fl">奔驰销售群2</div>
+      </ion-item>
+      <ion-item class="group6" ng-click="go('msggroup')">
+        <ul class="headpic clearfix fl">
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+        </ul>
+        <div class="groupname fl">奔驰销售群2</div>
+      </ion-item>
+      <ion-item class="group7" ng-click="go('msggroup')">
+        <ul class="headpic clearfix fl">
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+        </ul>
+        <div class="groupname fl">奔驰销售群2</div>
+      </ion-item>
+      <ion-item class="group8" ng-click="go('msggroup')">
+        <ul class="headpic clearfix fl">
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+        </ul>
+        <div class="groupname fl">奔驰销售群2</div>
+      </ion-item>
+      <ion-item class="group9" ng-click="go('msggroup')">
+        <ul class="headpic clearfix fl">
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+          <li><img src="img/bg_jh.jpg"></li>
+        </ul>
+        <div class="groupname fl">奔驰销售群2</div>
+      </ion-item>
+      -->
+    </ion-list>
+    <div class="group_num" ng-if="qunlist.length!=0"><span>{{qunlist.length}}</span>个群聊</div>
+
+
+
+    <div class="nosearch" style="margin-top: 0px" ng-if="qunlist.length==0">
+
+      <div style="width: 100%; height: 180px;"></div>
+      <div class="nointenet" >
+        <img src="img/nogroup.png" style="margin: 0px">
+        <div class="message-info">
+          <span>您还没有任何群聊</span>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+
+</ion-view>

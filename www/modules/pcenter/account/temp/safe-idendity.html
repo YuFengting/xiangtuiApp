@@ -1,0 +1,45 @@
+<ion-view>
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">安全认证</span>
+  </ion-header-bar>
+  <ion-content class="find-pasword has-header">
+    <div class="saferz_hint">
+      您当前正在将享推帐号与支付宝帐号：<span ng-bind="alipay"></span>进行绑定<br/>
+      我们将发送短信验证码以确认该操作是享推注册用户本人进行。
+    </div>
+    <div class="saferz_number">
+      <div class="number" ng-bind="user.tel"></div>
+      <div class="number_hint">我们将发送验证码至您的手机</div>
+    </div>
+    <div class="queren-btn">
+      <button ng-disabled="false" class="btn xt-red-bg" ng-click="sendcode2('1','sms')" >获取验证码</button>
+    </div>
+
+  </ion-content>
+  <!-- 验证码弹窗 -->
+  <div class="vertifyCodeDailog" ng-if="checkpicshow" >
+    <div class="contentBox">
+      <div class="codeInputImg clearfix">
+        <input class="codeInput fl" type="text" ng-focus='textinputfocus()' ng-blur='textinputblur()' placeholder="请输入图片验证码" ng-model="user.fscode"/>
+        <img src="" id="alipayurl" class="codeImg fl">
+        <i class="icon-xt2-refresh xt-red fl" ng-click="fscodeRefresh()"> </i>
+      </div>
+      <div class="commonBtn" ng-click="sendcode('1','sms')">确定</div>
+    </div>
+  </div>
+  <div class="vertifyCodeMask" ng-if="checkpicshow" ng-click="hideTC()"></div>
+  <div class="mask-loadding-all" ng-if="showloading">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+        <!--<div></div>-->
+      <!--</div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+
+</ion-view>

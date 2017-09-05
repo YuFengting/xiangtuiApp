@@ -1,0 +1,19 @@
+<ion-view style="background: #f4f4f4;">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">编辑名称</span>
+    <div class="icon_like detial_like queren"  style="width: auto;font-size: 25px" ng-click="save()">
+    保存
+    </div>
+  </ion-header-bar>
+  <ion-content class="has-header">
+    <div style="height: 20px;width: 100%;"></div>
+  <div class="input-area" style="margin-top: 0px">
+    <input class="changename" placeholder="群聊名称" ng-model="form.groupname" value="form.groupname"/>
+  </div>
+
+  </ion-content>
+
+</ion-view>

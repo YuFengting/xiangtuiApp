@@ -1,0 +1,39 @@
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">新增客户信息</span>
+  </ion-header-bar>
+
+  <ion-content class="find-pasword has-header">
+
+<!--<div class="message-add">
+  *为保障您的权益，在行程约定之前，联系方式将不对商家显示。
+</div>-->
+    <div class="find-form">
+      <div class="line border-bottom clearfix">
+        <input type="text" class="fl" id="leads_name_cps" placeholder="客户姓名" ng-model="luser.name" ng-change="changName()" ng-blur="hideCloseName()" ng-focus="changName()">
+        <div class="fr" style="height: 80px;padding-left: 36px;margin-right: 5px">
+          <!-- 这个按钮是点击输入框出现-->
+          <i class="icon-xt2-close  close" ng-if="showname" ng-click="clearName()">  </i>
+        </div>
+      </div>
+      <div class="line ">
+        <input type="tel" class="fl" placeholder="联系电话" ng-model="luser.tel" ng-change="changTel()" ng-blur="hideCloseTel()" ng-focus="changTel()">
+        <!-- 这个按钮是点击输入框出现-->
+        <div class="txl fr"><i class="icon-xt21-p3-iocn close" style="font-size: 45px" ng-click="openContacts()"></i></div>
+        <!-- 点击这个按钮进入通讯录-->
+        <div class="fr" style="height: 80px;padding-left: 16px;width: 70px"><i class="icon-xt2-close  close" ng-if="showtel" ng-click="clearTel()">  </i></div>
+      </div>
+    </div>
+    <div class="queren-btn">
+
+      <button  class="btn xt-red-bg" ng-click="referLeads()">
+        保存
+      </button>
+
+    </div>
+
+  </ion-content>
+</ion-view>

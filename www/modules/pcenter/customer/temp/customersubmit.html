@@ -1,0 +1,22 @@
+<ion-view>
+  <ion-header-bar align-title="middle" >
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">提交至</span>
+  </ion-header-bar>
+  <ion-content class="has-header xt-grey-bg">
+   <div class="customerTopTips" ng-if="!notask">请将客户信息提交至以下商家对应任务</div>
+    <div class="customerTopTips" ng-if="notask">商家暂无任务，请联系商家或客服咨询</div>
+    <div class="businessListBox" ng-repeat="var in mapdata">
+      <div class="cloudsellTitleCom"><span class="name">{{var.alias}}</span></div>
+     <ul class="customerTaskListBox">
+       <li ng-click="addcustomer(task,var.id)" ng-repeat="task in var.tasks">
+         <img class="fl" src="{{picserver}}{{task.view}}" />
+         <p class="fl">{{task.name}}</p>
+       </li>
+     </ul>
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -1,0 +1,109 @@
+
+<ion-view class="chatpage">
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">{{title}}</span>
+  </ion-header-bar>
+  <ion-content class="has-header has-chatheader xt-grey-bg" delegate-handle="msgSystem" >
+    <ion-refresher pulling-text="下拉加载..." on-refresh="queryOld()"></ion-refresher>
+    <ion-list class="message-list">
+      <!--图文展示效果-->
+      <ion-item ng-repeat="msg in msgSystemList track by $index" repeat-finish>
+        <div class="inforDate"><span ng-bind="msg.inittime"></span></div>
+        <div class="picTextBox">
+          <div class="picText" ng-click="gohttp(msg)">
+            <div class="picTextTittle" ng-bind="msg.title"></div>
+            <!--<div class="picTextyimearea" ng-bind="msg.subtime"></div>-->
+            <div class="picTextPicarea" ng-if="msg.pic!=''"><img src="{{picserver}}{{msg.pic}}" onerror="javascript:this.src='img/default-list-square.png'"></div>
+            <div class=" picTextmsg" ng-class="{'hide4line':true}"  ng-bind="msg.content"></div>
+            <div class="readmorebtn clearfix" ><span class="fl">查看全文</span><i class="icon ion-ios-arrow-right fr" style="color: #999"></i></div>
+          </div>
+        </div>
+        <!--<div class="picTextBox" ng-if="msg.type==1&&msg.tasktype==-1">-->
+          <!--<div class="picText">-->
+            <!--<div class="picTextTittle" ng-bind="msg.title"></div>-->
+            <!--<div class="picTextyimearea" ng-bind="msg.subtime"></div>-->
+            <!--<div class="picTextPicarea"><img src="{{picserver}}{{msg.pic}}" onerror="javascript:this.src='img/imgonerror.png'"></div>-->
+            <!--<div class="hide4line  picTextmsg" ng-bind="msg.content"></div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="picTextBox" ng-if="msg.type==1&&msg.tasktype==0" ng-click="go('taskdetail',{taskid:msg.rl})">-->
+          <!--<div class="picText">-->
+            <!--<div class="picTextTittle" ng-bind="msg.title"></div>-->
+            <!--<div class="picTextyimearea" ng-bind="msg.subtime"></div>-->
+            <!--<div class="picTextPicarea"><img src="{{picserver}}{{msg.pic}}" onerror="javascript:this.src='img/imgonerror.png'"></div>-->
+            <!--<div class="hide4line  picTextmsg" ng-bind="msg.content"></div>-->
+            <!--<div class="readmorebtn clearfix"><span class="fl">阅读全文</span><i class="icon ion-ios-arrow-right fr" style="color: #999"></i></div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="picTextBox" ng-if="msg.type==1&&msg.tasktype==1" ng-click="go('helpselldetail',{taskid:msg.rl})">-->
+          <!--<div class="picText">-->
+            <!--<div class="picTextTittle" ng-bind="msg.title"></div>-->
+            <!--<div class="picTextyimearea" ng-bind="msg.subtime"></div>-->
+            <!--<div class="picTextPicarea"><img src="{{picserver}}{{msg.pic}}" onerror="javascript:this.src='img/imgonerror.png'"></div>-->
+            <!--<div class="hide4line  picTextmsg" ng-bind="msg.content"></div>-->
+            <!--<div class="readmorebtn clearfix"><span class="fl">阅读全文</span><i class="icon ion-ios-arrow-right fr" style="color: #999"></i></div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="picTextBox" ng-if="msg.type==2&&msg.busertype==1" ng-click="go('business',{buserid:msg.rl})">-->
+          <!--<div class="picText">-->
+            <!--<div class="picTextTittle" ng-bind="msg.title"></div>-->
+            <!--<div class="picTextyimearea" ng-bind="msg.subtime"></div>-->
+            <!--<div class="picTextPicarea"><img src="{{picserver}}{{msg.pic}}" onerror="javascript:this.src='img/imgonerror.png'"></div>-->
+            <!--<div class="hide4line  picTextmsg" ng-bind="msg.content"></div>-->
+            <!--<div class="readmorebtn clearfix"><span class="fl">阅读全文</span><i class="icon ion-ios-arrow-right fr" style="color: #999"></i></div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="picTextBox" ng-if="msg.type==2&&msg.busertype==-1">-->
+          <!--<div class="picText">-->
+            <!--<div class="picTextTittle" ng-bind="msg.title"></div>-->
+            <!--<div class="picTextyimearea" ng-bind="msg.subtime"></div>-->
+            <!--<div class="picTextPicarea"><img src="{{picserver}}{{msg.pic}}" onerror="javascript:this.src='img/imgonerror.png'"></div>-->
+            <!--<div class="hide4line  picTextmsg" ng-bind="msg.content"></div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="picTextBox" ng-if="msg.type==3">-->
+          <!--<div class="picText">-->
+            <!--<div class="picTextTittle" ng-bind="msg.title"></div>-->
+            <!--<div class="hide4line  picTextmsg" ng-bind="msg.content"></div>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="picTextBox" ng-if="msg.type==4">-->
+          <!--<div class="picText">-->
+            <!--<div class="picTextTittle" ng-bind="msg.title"></div>-->
+            <!--<div class="picTextPicarea"><img src="{{picserver}}{{msg.pic}}" onerror="javascript:this.src='img/imgonerror.png'" ng-click="enlargePic(msg.pic)"></div>-->
+          <!--</div>-->
+        <!--</div>-->
+      </ion-item>
+
+    </ion-list>
+
+  </ion-content>
+  <div class="showPic" ng-if="showimg"  ng-click="shrinkPic()"><img src='{{picserver}}{{imageurl}}' class="big-pic" ng-style="bigpicStyle"></div>
+  <!--<div class="message-foot" style="display: block !important;">
+    <div class="footInforBox clearfix">
+      &lt;!&ndash;<i class="icon ion-ios-volume-high fl"></i>&ndash;&gt;
+      <form ng-submit="sendMessage()">
+        &lt;!&ndash;Android&ndash;&gt;
+        <input id="inputBox" class="input fl" placeholder="" ng-model="message" style="width:525px;"  ng-click="emojiHide()">
+        &lt;!&ndash;IOS&ndash;&gt;
+        &lt;!&ndash;<input id="inputBox" class="input fl" placeholder="" ng-model="message" ng-click="emojiHide()">&ndash;&gt;
+      </form>
+      &lt;!&ndash;class="hold"&ndash;&gt;
+      <button class="sendbtn fr" ng-click="sendMessage()">发送</button>
+    </div>
+  </div>-->
+  <style>
+    /*弹窗样式*/
+    /*.popup-container{ bottom: 0; top:0;}
+    .popup-container .popup{width: 360px;font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 20px;}
+    .popup-container .popup-title{font-family: "-apple-system", "microsoft yahei";font-size: 27px;padding: 35px;}
+    .popup-container .popup-buttons{padding: 0px;}
+    .popup-container .popup-buttons .button{font-family: "-apple-system", "microsoft yahei";font-size: 25px; color: #1c8df6; background: none;}
+    .popup-container .popup-buttons .button:first-child{border-right: 2px solid #e6e9ed}
+    .popup-head{border-bottom: 1px solid #e6e9ed}*/
+  </style>
+</ion-view>

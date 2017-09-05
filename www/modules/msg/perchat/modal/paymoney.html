@@ -1,0 +1,102 @@
+<ion-view>
+    <ion-header-bar align-title="middle" >
+        <div class="header_back" ng-click="closetaskModal()">
+            <i class="icon ion-ios-arrow-left"></i>
+        </div>
+        <span class="title">付款</span>
+    </ion-header-bar>
+    <ion-content class="has-header  bgGray" >
+        <div class="toparea_head">
+            <div class="head_picarea">
+                <img src="{{avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+            </div>
+            <div class="tips">
+                <span>向{{otherusername}}付款</span>
+            </div>
+        </div>
+        <div class="inputareas">
+            <div class="inputarea clearfix">
+                <span class="fl">金额</span>
+                <input class="inputit fl" type="number" placeholder="免服务费" ng-model="pay.paymoney">
+            </div>
+            <div class="inputarea clearfix" style="border-top: 1px solid #e7e7e7">
+                <span class="fl">理由</span>
+                <input class="inputit fl" placeholder="选填" ng-model="pay.payremark">
+            </div>
+        </div>
+        <div class="loginBtn" ng-click="showpaymask()">确认付款</div>
+    </ion-content>
+
+    <div class="mask" ng-if="paymaskshow" style="z-index: 301; top: 0;display: block" ng-click="hidepaymask()"></div>
+    <!--支付密码-->
+    <div class="msg_s_popup paypassword" ng-show="payshoukuanPop" style="height: 415px;" ng-style="msgpopupsty">
+        <div class="title">
+            <span ng-click="hidepaymask()" style="font-size: 50px"><i class="ion-ios-close-empty"  style="margin-top: 10px"></i></span>请输入支付密码
+        </div>
+        <div class="body">
+            <div class="label">金额</div>
+            <div class="inputbox clearfix">
+                <span>￥</span>
+                <input type="number" class="moneyInput"  value={{pay.paymoney}} readonly="readonly"/>
+                <div class="pwd_hint">*第一次输入密码即为支付密码(6位数字)</div>
+                <div class="password clearfix"><!--
+              <input type="number" maxlength="6" ng-model="pay.passward" id="per_moneyinput" ng-change="checkPayMoney()" />
+              <div ng-repeat="pwd in paylist" ng-bind="pwd.title" class="paypwdround"></div>-->
+                    <ul class="paypasgroup">
+                        <li><i ng-if="pswinfo.length> 0" class="icon ion-record"></i> </li>
+                        <li><i ng-if="pswinfo.length>1" class="icon ion-record"></i> </li>
+                        <li><i ng-if="pswinfo.length>2" class="icon ion-record"></i> </li>
+                        <li><i ng-if="pswinfo.length>3" class="icon ion-record"></i> </li>
+                        <li><i ng-if="pswinfo.length>4" class="icon ion-record"></i> </li>
+                        <li class="borderright"><i ng-if="pswinfo.length>5" class="icon ion-record"></i> </li>
+
+                        <div class="guangbiao" style="transform:translateX({{pswinfo.length*60+'px'}})" ng-show="pswinfo.length<6"></div>
+                    </ul>
+                </div>
+                <div class="forgetpwd"><span ng-click="forgetpswd()">忘记密码？</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!--正在支付-支付完成-->
+    <div class="loaddingitem" ng-if="showpayload">
+        <div class="loade">
+            <div class="loader-inner ball-spin-fade-loader" style="display: none;">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="loadEnd">
+                <i class="icon icon-select-cur"></i>
+            </div>
+        </div>
+        <div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="payload"><span>正在付款</span></div>
+        <div class="messages" style="position: absolute; margin: 0px; bottom: 30px;" ng-if="paysucc"><span>支付成功</span></div>
+    </div>
+
+
+    <!--支付键盘-->
+    <div class="keyboard-self"  ng-show="payshoukuanPop">
+        <ul class="numlist">
+            <li ng-click="enterpsw(1)"><button>1</button></li>
+            <li ng-click="enterpsw(2)"><button>2</button></li>
+            <li ng-click="enterpsw(3)"><button>3</button></li>
+            <li ng-click="enterpsw(4)"><button>4</button></li>
+            <li ng-click="enterpsw(5)"><button>5</button></li>
+            <li ng-click="enterpsw(6)"><button>6</button></li>
+            <li ng-click="enterpsw(7)"><button>7</button></li>
+            <li ng-click="enterpsw(8)"><button>8</button></li>
+            <li ng-click="enterpsw(9)"><button>9</button></li>
+            <li class="bg-grey"></li>
+            <li ng-click="enterpsw(0)"><button>0</button></li>
+            <li class="bg-grey"  ng-click="enterpsw(11)">
+                <button><i class="icon icon-code-del"></i></button>
+            </li>
+        </ul>
+    </div>
+</ion-view>

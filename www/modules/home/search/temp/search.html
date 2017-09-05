@@ -1,0 +1,45 @@
+<ion-view>
+	<ion-header-bar align-title="middle">
+		<div class="header_back" ng-click="goback()">
+			<i class="icon ion-ios-arrow-left"></i>
+		</div>
+		<div class="header_search clearfix">
+      <span class="icon icon-xt-search search_icon"></span>
+			<form  ng-submit="goSearchList(search.key)">
+				<input id="searchFouse" type="search" ng-model="search.key" ng-change="showclose()" placeholder="请输入关键词" ng-keyup="myKeyup($event)"/>
+			</form>
+			<span class="icon icon-xt2-close search_close" ng-if="haskey" ng-click="searchClear()"></span>
+		</div>
+		<div class="header_searchbtn" ng-click="goSearchList(search.key)">搜索</div>
+	</ion-header-bar>
+
+	<ion-content class="has-header contentbg" on-touch="closekeyboardcopy()">
+		<div class="search_content">
+			<div class="search_label">热门搜索</div>
+      <ion-slide-box on-slide-changed="slideHasChanged($index)"  slide-interval="3000" delegate-handle="keylist" show-pager="true" >
+        <ion-slide ng-repeat="keys in keylist">
+          <ul class="search_hot clearfix">
+            <li ng-repeat="key in keys track by $index" ng-click="goSearchList(key.name)" > <a ng-bind="key.name" > </a></li>
+          </ul>
+        </ion-slide>
+      </ion-slide-box>
+
+      <div class="search_label history_search" ng-if="showremove">历史记录</div>
+      <ion-list class="search_history">
+        <ion-item class="item-icon-left item-icon-right" ui-sref="searchlist" ng-click="goSearchList(key)" ng-repeat="key in hiskey">
+          <i class="icon ion-android-time"></i>
+          {{key}}
+          <i class="icon ion-ios-arrow-right"></i>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div class="clear_search" ng-click="remove()" ng-if="showremove">清空搜索记录</div>
+
+	</ion-content>
+
+<!--正在搜索-->
+	<div class="searching">正在搜索</div>
+
+
+</ion-view>

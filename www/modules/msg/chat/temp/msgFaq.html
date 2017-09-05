@@ -1,0 +1,96 @@
+<ion-view class="chatpage">
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="back()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">享推小秘书</span>
+  </ion-header-bar>
+  <ion-content class="has-header has-chatheader has-msgfooter  xt-grey-bg" delegate-handle="faqchat" ng-style="contentStyle" ng-click="closefoot()" id="faqchat">
+    <ion-list class="message-list">
+      <!--<ion-item>-->
+        <!--<div class="messagearea clearfix msg_namebox">-->
+          <!--<div class="messageHead fl">-->
+            <!--<img src="img/msg_mishu.png">-->
+          <!--</div>-->
+          <!--<i class="icon icon-xt2-arrow fl"></i>-->
+          <!--<div class="talk-message talk-message-fl fl">-->
+            <!--<div class="talker_name">享推小秘书</div>-->
+            <!--<div>你好，我是享推小秘书，请问有什么可以帮忙的？</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</ion-item>-->
+
+      <ion-item ng-class="{'user':userchat.position==1}" ng-repeat="userchat in userchatlist track by $index">
+        <div class="inforDate" ng-if="userchat.helptypefirst==0"><span ng-bind="userchat.inittime"></span></div>
+        <div class="inforDate" ng-if="userchat.helptypefirst==1"></div>
+        <div ng-class="{'messagearea clearfix msg_namebox':true}">
+          <div ng-class="{'messageHead':true,'fl':userchat.position==0,'fr':userchat.position==1}">
+            <img src="{{picserver}}{{userchat.avate}}" ng-if="userchat.position==1" onerror="javascript:this.src='img/default-avatar-square.png'">
+            <img src="img/msg_mishu.png" ng-if="userchat.position==0" onerror="javascript:this.src='img/default-avatar-square.png'">
+          </div>
+          <i ng-class="{'icon icon-xt2-arrow':true,'fl':userchat.position==0,'':userchat.position==0,'flipx fr':userchat.position==1}"></i>
+          <div ng-class="{'talk-message':true, 'talk-message-fl fl':userchat.position==0,'talk-message-fr fr':userchat.position==1}">
+            <div class="talker_name" ng-bind="userchat.name"></div>
+            <div class="faqbasecontent" ng-if="userchat.resultfaqtype==1&&userchat.inputtype==2" >
+              <div class="title">请用一句话描述您的问题。您是否想知道：</div>
+              <ul  ng-repeat="faq in userchat.content" >
+                <li ng-click="sendMessage(userchat.resulttype_,faq.id,faq.name,userchat.msg_key)"><!--<i class="icon icon-xt3-help"></i>--><span style="color: #1c8df6" ng-bind-html="faq.name"></span><i class="icon2 ion-ios-arrow-right fr"></i></li>
+              </ul>
+            </div>
+            <div ng-bind-html="con.name" ng-repeat="con in userchat.content" ng-if="userchat.resultfaqtype==0&&userchat.inputtype==0"></div>
+            <div ng-bind-html="con.name | emojifilter" ng-repeat="con in userchat.content" ng-if="userchat.resultfaqtype==0&&userchat.inputtype==1&&userchat.helptypefirst==0"></div>
+
+            <div class="faqbasecontent" ng-if="userchat.resultfaqtype==1&&userchat.inputtype==1&&userchat.helptypefirst==1">
+              <div class="title">亲～手指动一动,哪里不会点哪里～</div>
+              <ul  ng-repeat="faq in userchat.content" >
+                <li ng-click="sendMessage(userchat.resulttype_,faq.typeid,faq.typename,faq.typename)"><!--<i class="icon icon-xt3-help"></i>--><span style="color: #1c8df6" ng-bind-html="faq.typename"></span><i class="icon2 ion-ios-arrow-right fr"></i></li>
+              </ul>
+            </div>
+
+            <div  class="faqbasecontent" ng-if="userchat.resultfaqtype==0&&userchat.inputtype==3">
+              <div ng-bind-html="userchat.title" class="title"></div>
+              <div ng-bind-html="con.name" class="content" ng-repeat="con in userchat.content"></div>
+            </div>
+
+            <div ng-if="userchat.position==1">
+              <div class="send_failed" ng-click="repeatSendMsg($index)" ng-if="userchat.sendstatus==2">
+                <i class="ion ion-android-alert"></i>
+              </div>
+              <div class="send_failed send_loading" ng-if="userchat.sendstatus==1">
+                <i class="ion ion-load-c"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-item>
+
+    </ion-list>
+  </ion-content>
+
+  <div class="message-foot" style="display: block !important;" ng-style="footStyle">
+    <div class="footInforBox clearfix" ng-click="stopFun($event)" resize-foot-bar ioncontentname="{{contentBoxName}}">
+      <!--<i class="icon ion-ios-volume-high fl"></i>-->
+      <form ng-submit="sendMessage('0','1','','')">
+        <!--Android-->
+        <textarea msd-elastic id="inputBox" class="input fl" placeholder="点击输入您的问题" ng-model="message" style="width:525px;"></textarea>
+        <!--IOS-->
+        <!--<input id="inputBox" class="input fl" placeholder="" ng-model="message" ng-click="emojiHide()">-->
+      </form>
+      <!--class="hold"-->
+      <div class="sendBox fr">
+        <button class="sendbtn" ng-click="sendMessage('0','1','','')">发送</button>
+        <!--<input class="sendbtn"  ng-click="sendMessage('0','1','','')"  value="发送"/>-->
+      </div>
+    </div>
+  </div>
+  <style>
+    /*弹窗样式*/
+    .popup-container{ bottom: 0; top:0;}
+    .popup-container .popup-title{font-family: "-apple-system", "microsoft yahei";font-size: 27px;padding: 35px;}
+    .popup-container .popup-buttons{padding: 0px;}
+    .popup-container .popup-buttons .button{font-family: "-apple-system", "microsoft yahei";font-size: 25px; color: #1c8df6; background: none;}
+    .popup-container .popup-buttons .button:first-child{border-right: 2px solid #e6e9ed}
+    .popup-head{border-bottom: 1px solid #e6e9ed}
+  </style>
+</ion-view>

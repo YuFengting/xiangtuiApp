@@ -1,0 +1,17 @@
+<ion-view style="background:#f4f4f4;">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">营销技能</span><!--销售方法-->
+  </ion-header-bar>
+  <ion-content class="has-header" style="overflow: hidden;">
+    <div class="getInforListContent setTagInfor">
+      <span  ng-repeat="method in salesMethod" ng-class="{'current':method.class==1}" ng-click="checkon(method)">{{method.name}}</span>
+      <!--<span class="current">网络销售</span>-->
+    </div>
+    <div class="commonBtn" ng-click="settags()">确定</div>
+    <!--设置底部空白间隔-->
+    <div class="footerBottmHeight"></div>
+  </ion-content>
+</ion-view>

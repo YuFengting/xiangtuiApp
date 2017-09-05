@@ -1,0 +1,52 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">更换绑定手机</span>
+  </ion-header-bar>
+
+  <ion-content class="find-pasword has-header">
+
+
+    <div class="find-form">
+
+      <div class="line border-bottom clearfix">
+        <input type="text" class="fl" placeholder="请输入图片验证码" ng-model="user.fscode"  ng-change="checkNull()" >
+
+        <div class="refresh-btn fr" ng-click="fscodeRefresh()">
+          <i class="icon-xt2-refresh xt-red"> </i>
+        </div>
+        <div class="check-num fr">
+          <img id="imgpicurl" src="">
+        </div>
+
+      </div>
+      <div class="line">
+        <input class="fl" type="tel" placeholder="请输入短信验证码" ng-model="user.code" ng-change="checkNull()">
+        <div  ng-class="{'btn1':true,'btn1-1':showBut,'fr':true}" ng-if="showBut"  ng-click="sendcode('1','sms')">
+          <span ng-bind-html="timetxt"></span>
+        </div>
+        <div  ng-class="{'btn1':true,'btn1-2':!showBut,'fr':true}" ng-if="!showBut" >
+          <span ng-bind-html="timetxt"></span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="yuyin-wenzi">
+      没有收到验证码短信？<span class="xt-wenzi-grey" ng-if="!showYyBut">点击获取</span>
+      <span class="xt-red" ng-if="showYyBut" ng-click="sendcode('1','voice')">点击获取</span>语音验证码！
+    </div>
+    <div class="queren-btn">
+
+      <button id="phone1-btn"  style="border: none;box-shadow: none" class="btn xt-red-bg" ng-click="checkcode()">
+        确定
+      </button>
+
+    </div>
+
+  </ion-content>
+
+</ion-view>

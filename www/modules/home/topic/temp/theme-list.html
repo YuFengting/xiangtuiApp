@@ -1,0 +1,224 @@
+<ion-view class="xt-grey-bg">
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback()">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title" ng-bind="topictile"></span>
+  </ion-header-bar>
+
+  <ion-content class="has-header" style="background-color: transparent;z-index: 1">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>
+    <div class="daily-task-banner">
+      <img src="{{picserver}}{{topicimg}}" onerror="javascript:this.src='img/default-list-square.png'">
+    </div>
+    <div style="border: none" class=" daily-task-list-title light-bg">
+      <div class="title">主题专享</div>
+    </div>
+    <ion-list class="taskindex-list">
+
+      <!--<ion-item ng-repeat="task in tasklist track by $index" ng-click="goTaskDetail(task)" ng-if="task.status != 2">
+        <a class="item-content">
+          <div class="indexlist_pic">
+            <div ng-if="task.isshare == 1 ">
+              <div ng-class="{'customerStatusBox2':true,'alreadysubmit':true}">
+                <span ng-if="task.type == 1">销售中</span>
+                <span ng-if="task.type == 0">已分享</span>
+              </div>
+            </div>
+            <img ng-src="{{picserver}}{{task.view}}"
+                 onerror="javascript:this.src='img/default-avatar-square.png';"/>
+            <div class="progressBarNumBox" ng-if="0<task.moneyper && task.moneyper<=30 && task.type == 0"><span ng-bind="'剩余:'+task.moneyper+'%'"></span>
+            </div>
+          </div>
+          <div class="indexlist_info">
+            <div class="indexlist_title indexlist_title2" ng-if="task.type == 0">
+              <span class="newI tipsinfo" ng-if="task.isnew == 1">新</span>
+              <span>{{task.name}}</span>
+            </div>
+            <div class="indexlist_title indexlist_title2"  ng-if="task.type == 1">
+              <span class="highI tipsinfo" ng-if="task.high == 1">高</span>
+              <span class="hotI tipsinfo" ng-if="task.hot == 1">火</span>
+              <span class="newI tipsinfo" ng-if="task.isntime == 1">新</span>
+              <span ng-bind="task.name"></span>
+            </div>
+            <div class="indexlist_lf" >
+              <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">{{task.worknum}}</i></div>
+            </div>
+            <div class="indexlist_rt" style="right: 0px;" ng-if="task.type == 0">
+              <span class="rjsy" ng-cloak>平均分享收益:<span class="money"><i class="icon ion-social-yen"></i><i>{{task.avgincome}}</i></span></span>
+            </div>
+            <div class="indexlist_rt" ng-if="task.type == 1">
+              <i class="icon icon-xt3-money"></i><span ng-bind="task.commission"></span>
+            </div>
+          </div>
+        </a>
+      </ion-item>
+      <ion-item ng-click="goBusiness(bus.id)" ng-repeat="bus in mlist track by $index ">
+        <a class="item-content">
+          <div class="indexlist_pic">
+            <img ng-src="{{picserver}}{{bus.clogopath}}"
+                 onerror="javascript:this.src='img/default-avatar-square.png';"/>
+          </div>
+          <div class="indexlist_info">
+            <div class="indexlist_title">
+              <span>{{bus.companyalias}}</span>
+            </div>
+            <div class="business_evaluate clearfix">
+              <ul class="fl" ng-if="bus.commentscore > 0">
+                <li><span class="score{{bus.commentscore*10}}"></span></li>
+              </ul>
+              <div class="evaluate_noget" ng-if="bus.commentscore == 0">
+                <span>暂无评分</span>
+              </div>
+              <div class="tips_box">
+                <span class="ruzhu" ng-if="bus.isnew == 1">新入驻</span>
+                <span class="shenhe" ng-if="bus.isqr == 1">审核快</span>
+                <span class="yongjin" ng-if="bus.high == 1">高佣金</span>
+                <span class="renwuduo" ng-if="bus.ismore == 1">任务多</span>
+                <span class="huoyue" ng-if="bus.isactive == 1">高活跃</span>
+                <span class="renzheng" ng-if="bus.isauth == '1'">已认证</span>
+                <span class="baozhang" ng-if="bus.hasgf == 1">保障金</span>
+              </div>
+            </div>
+            &lt;!&ndash;信誉&ndash;&gt;
+            <div class="bindex_xinyu">
+              <i class="icon icon-invite-friend"></i><span>{{bus.currentsalernum}}</span>
+            </div>
+          </div>
+        </a>
+      </ion-item>-->
+
+      <!--红包任务静态样式-->
+      <!--<ion-list class="taskindex-list collectionList">-->
+        <ion-item ng-repeat="task in tasklist track by $index" ng-click="goTaskDetail(task)" ng-if="task.status != 2">
+        <div class="cpvInforListsBox" ng-if="task.type==2">
+            <div class="cpvInforBox"  >
+              <img src="{{task.pic | avatefilter}}" onerror="javascript:this.src='img/cpv/CPV-default.png';">
+              <div class="cpvUsersNum"><i class="icon icon-join-user"></i><span>{{task.worknum}}人</span></div>
+              <div class="cpvNewBox" ng-if="task.isnew == 1&&task.isshare != 1"><span>新</span></div>
+              <div class="customerStatusBox2 alreadysubmit cpvlistStatusStyle" ng-if="task.isshare == 1">
+                <span>已分享</span>
+              </div>
+              <div class="cpvBusinessInfor">
+                <div class="cpvTitleBox" ng-bind="task.name"></div>
+                <div class="businessInfor clearfix">
+                  <div class="businessName fl"><i class="icon icon-tab-home"></i><span ng-bind="task.bname"></span></div>
+                  <div class="businessSet fr"><span class="text">推荐扫码：立得</span><i class="goldImg"></i><span class="cpv_profitNum ">{{task.vprice}}元</span></div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <a class="item-content" ng-if="task.type!=2">
+          <div class="indexlist_pic">
+            <div ng-if="task.isshare == 1 ">
+              <div ng-class="{'customerStatusBox2':true,'alreadysubmit':true}">
+                <span ng-if="task.type == 1">审核中</span>
+                <span ng-if="task.type == 0">已分享</span>
+              </div>
+            </div>
+            <div ng-if="task.status==2" >
+              <div ng-class="{'customerStatusBox2':true,'settlemented':true}">
+                <span >已结束</span>
+              </div>
+            </div>
+            <img ng-src="{{picserver}}{{task.view}}" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+            <div class="progressBarNumBox" ng-if="task.status!=2 && 0<task.moneyper && task.moneyper<=30">剩余:{{task.moneyper}}%</div>
+          </div>
+          <div class="indexlist_info">
+            <div class="indexlist_title indexlist_title3" ng-if="task.type == 0">
+              <span class="newI2 tipsinfo2" ng-if="task.isnew == 1">新</span>
+              <span>{{task.name}}</span>
+            </div>
+            <div class="indexlist_busname"><span class="bus_span">{{task.bname}}</span></div>
+            <div class="indexlist_lf">
+
+              <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">{{task.worknum}}</i></div>
+            </div>
+            <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype==0">
+              <span class="rjsy" >平均抢到:<span class="money clearfix"><i class="icon red_port_icon"></i><i class="moneyitem">{{task.avgincome | number:2}}</i></span></span>
+            </div>
+            <div class="indexlist_rt" style="right: 0px;" ng-if="task.incometype==1">
+                    <span class="rjsy"  ng-if="task.coupontype==1">抢折扣:
+                      <span class="money zhekou clearfix">
+                        <i class="icon get_coupon_icon">
+                          <span >折</span>
+                        </i>
+                        <i class="moneyitem">{{task.discount | number:2}}折</i>
+                      </span>
+                    </span>
+              <span class="rjsy" ng-if="task.coupontype==0">最高抢:
+                      <span class="money zhekou clearfix">
+                        <i class="icon get_coupon_icon">
+                          <span >代</span>
+                        </i>
+                        <i class="moneyitem">{{task.voucher}}元</i>
+                      </span>
+                    </span>
+              <span class="rjsy" ng-if="task.coupontype==2">抢优惠:
+                      <span class="money zhekou clearfix">
+                        <i class="icon get_coupon_icon">
+                          <span >兑</span>
+                        </i>
+                        <i class="moneyitem">查看详情</i>
+                      </span>
+                    </span>
+            </div>
+          </div>
+        </a>
+        </ion-item>
+      <!--</ion-list>-->
+      <!--商家静态样式-->
+      <!--<ion-list class="taskindex-list collectionList">-->
+        <ion-item ng-click="goBusiness(bus.id)" ng-repeat="bus in mlist track by $index ">
+
+          <a class="item-content">
+            <div class="indexlist_pic">
+
+              <img ng-src="{{picserver}}{{bus.clogopath}}" onerror="javascript:this.src='img/default-avatar-square.png';"/>
+            </div>
+            <div class="indexlist_info">
+              <div class="indexlist_title indexlist_title3">
+                <span>{{bus.companyalias}}</span>
+              </div>
+              <div class="indexlist_busname">
+                <span class="tab_span" ng-if="bus.isnew == 1">新入驻</span>
+                <span class="tab_span" ng-if="bus.isqr == 1">审核快</span>
+                <span class="tab_span" ng-if="bus.high == 1">高佣金</span>
+                <span class="tab_span" ng-if="bus.ismore == 1">推广多</span>
+                <span class="tab_span" ng-if="bus.isactive == 1">高活跃</span>
+                <span class="tab_span" ng-if="bus.isauth == '1'">已认证</span>
+                <span class="tab_span" ng-if="bus.hasgf == 1">保障金</span>
+
+              </div>
+              <div class="indexlist_lf">
+                <!--<div class="cpc_businessName"><i class="icon icon-xt2-sj"></i><i class="bnamewrap">{{task.bname}}</i></div>-->
+                <div class="cpc_businessName" style="font-size:24px;"><i class="icon icon-join-user" style="margin-top:-3px;"></i><i class="bnamewrap">{{bus.storenum}}</i></div>
+              </div>
+              <div class="indexlist_rt" style="right: 0px;">
+                <span class="rjsy" ><span class="money clearfix"><i class="icon red_port_icon" ng-if="bus.hascpc==1"></i><i class="icon cpvTaskIcon" ng-if="bus.hascpv==1"></i></span></span>
+              </div>
+            </div>
+          </a>
+        </ion-item>
+      <!--</ion-list>-->
+    </ion-list>
+
+    <div class="no-more-area2 moreTaskOrMerchant" ng-if="tasklist.length >10">
+      <div class="wenzi">没有更多啦，往上看看吧~</div>
+    </div>
+
+    <!--没有搜索到-->
+    <div class="nosearch " ng-if="tasklist.length == 0" ui-sref="tab.home">
+      <img src="./img/notdotask.png"/><br/>
+      没有相关内容<br/>
+    </div>
+
+  </ion-content>
+  <!--加载动画-->
+  <div class="mask-loadding-all" ng-if="showloading">
+    <div class="loader">
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+
+</ion-view>

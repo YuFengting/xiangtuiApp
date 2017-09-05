@@ -1,0 +1,124 @@
+<ion-view>
+  <ion-header-bar align-title="middle" >
+
+    <span class="title">登录</span>
+  </ion-header-bar>
+  <div class="loginTabsBox">
+    <ul class="loginTab clearfix">
+      <li ng-click="changelog1()" ng-class="{'active':!isTellogin}"><span class="subactive">账号密码登录</span><span class="loginLine"></span></li>
+      <li ng-click="changelog2()" ng-class="{'active':isTellogin}"><span class="subactive">验证码登录</span></li>
+    </ul>
+  </div>
+
+  <div class="selectLoginWays" ng-style="selectLoginSty">
+    <div class="loginWaysTitle"><span>其他登录方式</span></div>
+    <div class="loginWaysList">
+      <span ng-click="qqlogin()"><img src="img/login/login_qq.png" /></span>
+      <!--<span ng-click="openWeixin()"><img src="img/login/login_weixin.png" /></span>-->
+      <span ng-click="weibologin()"><img src="img/login/login_sina.png" /></span>
+    </div>
+  </div>
+  <ion-content class="has-subheader loginIconContent bgGray" style="overflow: hidden;" ng-style='loginIconContentSty'>
+    <ul class="loginForm" ng-if="!isTellogin">
+      <li>
+        <input class="loginInput fl" type="tel" placeholder="请输入注册手机号" ng-model="user.tel" ng-focus="showtelClear()" ng-blur="hidetelClear()" ng-change="telChange()"/>
+        <i class="icon-xt2-down fr selectIcon" ng-click="selectPhoneNum()" ng-if="showHistory"></i>
+        <i class="icon-xt2-close fr close" ng-if="showtelclear" ng-click="clearUser()"></i>
+      </li>
+      <li>
+        <input class="loginInput fl" type="text" placeholder="请输入登录密码" ng-model="user.pwd" ng-if="showPwdMask" ng-focus="showpswClear()" ng-blur="hidepswClear()" ng-change="pswChange()"/>
+
+        <input class="loginInput fl" type="password" placeholder="请输入登录密码" ng-model="user.pwd" ng-if="!showPwdMask" ng-focus="showpswClear()" ng-blur="hidepswClear()" ng-change="pswChange()"/>
+        <i class="icon-xt2-close fl close" ng-if="showpwdclear"  ng-click="clearPas()"></i>
+        <label class="fr toggle toggle-assertive"><input type="checkbox" ng-click="showpsw()"><div class="track"><div class="handle"></div></div></label>
+      </li>
+    </ul>
+    <ul class="loginForm" ng-if="isTellogin">
+      <li>
+        <input class="loginInput fl" type="tel" placeholder="请输入注册手机号" ng-model="user.tel" ng-focus="showtelClear()" ng-blur="hidetelClear()" ng-change="telChange()"/>
+        <i class="icon-xt2-close fr close" ng-if="showtelclear" ng-click="clearUser()"></i>
+      </li>
+      <li>
+        <input class="loginInput fl" style="width: 350px;" type="tel" placeholder="请输入验证码" ng-model="user.code"  ng-focus="showcodeClear()" ng-blur="hidecodeClear()" ng-change="codeChange()"/>
+        <i class="icon-xt2-close fl close" ng-if="showcodeclear"  ng-click="cleancode()"></i>
+        <button id="checkcode" ng-disabled="!showBut" ng-click="sendcode2('3','sms')" ng-bind="timetxt">获取验证码</button>
+      </li>
+    </ul>
+
+    <div class="registerTips" ng-if="isTellogin" ng-disabled="showBut1">没有收到短信？<i class="red" ng-click="sendcode2('3','voice')" >点击获取</i>语音验证码！</div>
+    <div class="loginBtn"  ng-click="checkmesg()" ng-if="isTellogin">登录</div>
+    <div class="loginBtn"  ng-click="login()" ng-if="!isTellogin">登录</div>
+    <div class="passwordRegisterBtn clearfix">
+      <a class="fl" ui-sref="findpwd">找回密码</a><a ui-sref="regist1" class="fr">极速注册</a>
+    </div>
+    <!--<div class="xtuiPropaganda" xtui-bot-logo>-->
+    <!--<div class="propagandaInfor clearfix">-->
+    <!--<div class="fl" ><img src="./img/loginPig.png" /></div>-->
+    <!--<div class="fr">-->
+    <!--<p>享推一下</p>-->
+    <!--<p>惊喜连连</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--用户名点击右侧的下拉按钮出现-->
+    <div class="chose-user" ng-if="showHisMask" >
+      <div class="chose clearfix" ng-repeat="olduser in hisusers track by olduser.tel">
+
+        <div class="number fl " ng-bind="olduser.tel" ng-click="setTel(olduser)"></div>
+
+        <div class="fr icon"><i class="icon-xt2-close  " ng-click="deleteTel(olduser)"></i></div>
+      </div>
+    </div>
+  </ion-content>
+
+  <!-- 验证码弹窗 -->
+  <div class="vertifyCodeDailog" ng-if="checkpicshow">
+    <div class="contentBox">
+      <div class="codeInputImg clearfix">
+        <input class="codeInput fl" type="text" placeholder="请输入图片验证码"  ng-focus='textinputfocus()' ng-blur='textinputblur()' ng-model="user.fscode"/>
+        <img src="" id="imgpicurl" class="codeImg fl">
+        <i class="icon-xt2-refresh xt-red fl" ng-click="fscodeRefresh()"> </i>
+      </div>
+      <div class="commonBtn" ng-click="checkpicma('3',checkway)">确定</div>
+    </div>
+  </div>
+  <div class="vertifyCodeMask" ng-if="checkpicshow" ng-click="hideTC()"></div>
+  <!--快捷登陆入口-->
+  <!--<div class="quicklogin">
+    <div class="quicklogin_line clearfix">
+      <span class="fl"></span>
+      <i class="fl">其他方式登陆</i>
+      <span class="fr"></span>
+    </div>
+    <ul>
+      <li ng-click="openThird()"><img src="img/login_wx.png"/></li>
+      <li ng-click="go('connectphone')"><img src="img/login_sina.png"/></li>
+      <li ng-click="go('connectphone')"><img src="img/login_qq.png"/></li>
+    </ul>
+  </div>-->
+
+  <!--快捷登陆-打开软件弹窗-->
+
+
+  <!--lodding特效-->
+  <div class="mask-loadding-all" ng-if="showloading">
+    <div class="loader">
+      <!--<div class="loader-inner ball-pulse">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>-->
+      <ion-spinner icon="dots" class="spinner-xtRed"></ion-spinner>
+    </div>
+  </div>
+  <style>
+    /*弹窗样式*/
+    .popup-container{ bottom: 0; top:0;}
+    .popup-container .popup{width: 539px;font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 20px;}
+    .popup-container .popup-title{font-family: "-apple-system", "microsoft yahei";font-size: 27px;padding: 25px;}
+    .popup-container .popup-buttons{padding: 0px;}
+    .popup-container .popup-buttons .button{font-family: "-apple-system", "microsoft yahei";font-size: 25px; color: #1c8df6; background: none;}
+    .popup-container .popup-buttons .button:first-child{border-right: 2px solid #b1b1b1}
+    .popup-head{border-bottom: 1px solid #b1b1b1}
+  </style>
+</ion-view>

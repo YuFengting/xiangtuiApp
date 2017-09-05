@@ -1,0 +1,137 @@
+<ion-view>
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" style="font-size: 25px;padding-left: 14px" ng-click="backSelectContacts()">
+      取消
+    </div>
+    <span class="title" style="width: 350px;"> 选择联系人</span>
+    <div class="icon_like detial_like queren"  ng-click="goback()" ng-if="checkedList.length>0" style="width: auto;opacity: 1;font-size: 25px">
+     确定（<span ng-bind="checkedList.length"></span>）
+    </div>
+    <div class="icon_like detial_like queren"  ng-if="checkedList.length==0" style="width: auto;opacity: .56;font-size: 25px">
+      确定（<span ng-bind="checkedList.length"></span>）
+    </div>
+  </ion-header-bar>
+
+  <ion-content class="has-header" delegate-handle="selectfriendscroll">
+     <div class="search-bar">
+       <div class="selectper clearfix">
+         <div class="fl" style="height: 94px" ng-repeat="qun in checkedList track by $index" >
+           <div ng-if="qun.isqun != 1"><img src="{{qun.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'" style="margin-right: 14px;width: 72px;height: 72px" class='haschosepic2'></div>
+           <div ng-if="qun.isqun == 1"style="height: auto;padding: 12px 14px 0 0; border-bottom: 0px;margin-left: 0px;" ng-class="{'find-item':true,'group':true,'group1':qun.avate.length == 1,'group2':qun.avate.length == 2,'group3':qun.avate.length == 3,'group4':qun.avate.length == 4,'group5':qun.avate.length == 5,'group6':qun.avate.length == 6,'group7':qun.avate.length == 7,'group8':qun.avate.length == 8,'group9':qun.avate.length >= 9}">
+             <div class="head-pic  fl" style="border-radius: 0px;">
+               <ul class="clearfix">
+                 <li ng-repeat="img in qun.avate track by $index"><img src="{{img | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'"></li>
+               </ul>
+             </div>
+           </div>
+         </div>
+         <i class="icon icon-xt-search" style="display: inline-block;position: relative;top: 3px" ng-hide="checkedList.length>0"></i>
+         <input class="bigSearch searchinput2" ng-change="checkresult2()" type="text" ng-model="keys" placeholder="搜索">
+       </div>
+     </div>
+    <div class="search-bar clearfix goPhonebook" ng-click="showGroup()">
+      <span class="fl">选择群聊</span>
+      <i class="icon ion-ios-arrow-right fr"></i>
+    </div>
+    <!--选择商家-->
+    <ion-list ng-if="isbuser2" class="topnamegroup selectContact selectphonebook" ng-repeat="contactlistb in contactlist.busers track by $index">
+      <ion-item class="selectitem clearfix" ng-repeat="buser in contactlistb.array | filter:{name:keys}" ng-click="selectFriend(buser,'buser')">
+        <div class="fl noselect select" ng-class="{'active':buser.ischecked}"><i class="icon-select-right" ng-if="buser.ischecked"></i></div>
+        <div class="headpic-item fl">
+          <img src="{{buser.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+        </div>
+        <div class="nameitem fl over-ellipsis" ng-bind="buser.name">
+        </div>
+      </ion-item>
+    </ion-list>
+    <!--选择个人-->
+    <ion-list class="topnamegroup selectContact selectphonebook" ng-repeat="contactlists in contactlist.susers track by $index">
+      <ion-item class="selectitem clearfix" ng-repeat="suser in contactlists.array | filter:{name:keys}" ng-click="selectFriend(suser,'suser')">
+        <div class="fl noselect select" ng-class="{'active':suser.ischecked}"><i class="icon-select-right" ng-if="suser.ischecked"></i></div>
+        <div class="headpic-item fl" >
+          <img src="{{suser.avate | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'">
+        </div>
+        <div class="nameitem fl" ng-bind="suser.name">
+        </div>
+      </ion-item>
+    </ion-list>
+    <div class="nosearch" style="margin-top: 0px" ng-if="nonecontactlist">
+      <div style="width: 100%; height: 180px;"></div>
+      <div class="nointenet" >
+        <img src="img/nogroup.png" style="margin: 0px">
+        <div class="message-info">
+          <span>您的通讯录空空如也</span>
+        </div>
+      </div>
+    </div>
+    <div class="searchResult" ng-if="searchresult2">
+      <span>无结果</span>
+    </div>
+  </ion-content>
+
+  <!--字母排序-->
+  <ul class="phoneb_az"  on-drag="az2($event)" style="top: 300px;margin-top: 0px">
+    <li ng-click="az2($event)" ng-repeat="le in azlist">{{le}}</li>
+  </ul>
+
+  <div class="loaddingitem hide">
+    <div class="loade">
+      <div class="loader-inner ball-spin-fade-loader">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+    <div class="messages"><span>准备进入群聊</span></div>
+  </div>
+
+  <script id="selectGroup.html" type="text/ng-template">
+    <ion-view>
+      <ion-header-bar align-title="middle" ng-style="groupHead">
+        <div class="header_back" style="font-size: 25px;padding-left: 14px" ng-click="hideGroup2()">返回</div>
+        <span class="title">选择一个群</span>
+        <div class="icon_like detial_like queren"  ng-click="hideGroup()" style="width: auto;font-size: 25px">完成</div>
+      </ion-header-bar>
+      <ion-content class="has-header xt-grey-bg" ng-style="groupContent">
+        <ion-list class="groupchat selectGroup">
+          <ion-item ng-repeat="qun in groupList track by $index" ng-click="selectGroup($index,qun)" ng-class="{'group1':qun.avate.length == 1,'group2':qun.avate.length == 2,'group3':qun.avate.length == 3,'group4':qun.avate.length == 4,'group5':qun.avate.length == 5,'group6':qun.avate.length == 6,'group7':qun.avate.length == 7,'group8':qun.avate.length == 8,'group9':qun.avate.length >= 9}">
+            <div class="fl noselect select" ng-class="{'active':qun.ischecked}"><i class="icon-select-right" ng-if="qun.ischecked"></i></div>
+            <ul class="headpic clearfix fl">
+              <li ng-repeat="img in qun.avate track by $index"><img src="{{img | avatefilter}}" onerror="javascript:this.src='img/default-avatar-square.png'"></li>
+            </ul>
+            <div class="groupname fl" ng-bind="qun.groupname"></div>
+          </ion-item>
+        </ion-list>
+
+        <div class="nosearch" style="margin-top: 0px" ng-if="groupList.length==0">
+          <div style="width: 100%; height: 180px;"></div>
+          <div class="nointenet" >
+            <img src="img/nogroup.png" style="margin: 0px">
+            <div class="message-info">
+              <span>您还没有任何群聊</span>
+            </div>
+          </div>
+        </div>
+
+      </ion-content>
+    </ion-view>
+
+  </script>
+
+  <style>
+    /*不要删----选择超过9个弹窗*/
+    .popup-container {bottom: 0; top: 0;}
+    .popup-container .popup {width: 539px; font-family: "-apple-system", "microsoft yahei";font-size: 25px; border-radius: 20px;}
+    .popup-container .popup-title { font-family: "-apple-system", "microsoft yahei";font-size: 27px; padding: 35px;}
+    .popup-container .popup-buttons {padding: 0px; }
+    .popup-container .popup-buttons .button { font-family: "-apple-system", "microsoft yahei";font-size: 25px;color: #1c8df6; background: none; }
+    .popup-container .popup-buttons .button.button-default{color: #1c8df6;}
+    .popup-head {border-bottom: 1px solid #e6e9ed }
+  </style>
+</ion-view>

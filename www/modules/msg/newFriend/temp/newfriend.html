@@ -1,0 +1,99 @@
+<ion-view ng-class="{'xt-grey-bg':newfriendlist.length==0}">
+
+  <ion-header-bar align-title="middle">
+    <div class="header_back" ng-click="goback();bchecked=true;achecked=false">
+      <i class="icon ion-ios-arrow-left"></i>
+    </div>
+    <span class="title">新的朋友</span>
+    <div class="add_friend" ng-click="go('addnewfriend')">添加朋友</div>
+  </ion-header-bar>
+
+  <ion-content class="has-header new-friend-list" delegate-handle="newfriend">
+    <ion-refresher pulling-text="下拉刷新..." on-refresh="doRefresh()"></ion-refresher>
+    <ion-list class="new-friendlist" ng-if="newfriendlist.length!=0">
+      <ion-item class="friend-item clearfix" ng-repeat="newfriend in newfriendlist track by $index">
+        <div class="head-pic fl" ng-click="openHome(null, newfriend.applicantid, $event)" style="border: none;">
+          <img src="{{newfriend.avate | avatefilter}}" style="min-height: auto;height: 100%;width: 100%" onerror="javascript:this.src='img/default-avatar-square.png'">
+        </div>
+        <div class="message-area fr" ng-class="{'hasRemarkSty':newfriend.remark && newfriend.remark.length > 0}">
+        <div class="title-line clearfix" ng-if="newfriend.result === 0">
+          <div class="name fl" ng-bind="newfriend.applicantname"></div>
+          <button class="btn btn2" ng-click="dealApply($index, 1)">同意</button>
+          <button class="btn btn1" ng-click="dealApply($index, 2)">拒绝</button>
+        </div>
+          <div class="title-line clearfix" ng-if="newfriend.result === 1">
+            <div class="name fl" ng-bind="newfriend.applicantname"></div>
+            <button class="btn btn3">已添加</button>
+          </div>
+          <div class="newfriend_type" ng-if="newfriend.usertype==0">个人</div>
+          <div class="newfriend_type2" ng-if="newfriend.usertype==1">商家</div>
+          <div class="message1 over-ellipsis" ng-if="newfriend.remark" ng-bind="'备注：'+newfriend.remark"></div>
+        </div>
+      </ion-item>
+
+
+      <!--
+      <ion-item class="friend-item clearfix">
+        <div class="head-pic fl" ng-click="go('shome')">
+          <img src="omg/default.png" onerror="javascript:this.src='img/topic.png'">
+        </div>
+        <div class="message-area fr">
+          <div class="title-line clearfix">
+            <div class="name fl">李长安</div>
+            <button class="btn btn2" ng-click="updateIMApplyById(newfriend,'1')">同意</button>
+            <button class="btn btn1" ng-click="updateIMApplyById(newfriend,'2')">拒绝</button>
+          </div>
+          <div class="newfriend_type">个人</div>
+          <div class="message1" ng-bind="'备注：'+'您好，我是李长安，很高兴认识你！'"></div>
+        </div>
+        <ion-option-button class="button-assertive removeItem" ng-click="friendDelete($event)">删除</ion-option-button>
+      </ion-item>
+      <ion-item class="friend-item clearfix">
+        <div class="head-pic fl" ng-click="go('shome')">
+          <img src="omg/default.png" onerror="javascript:this.src='img/topic.png'">
+        </div>
+        <div class="message-area fr">
+          <div class="title-line clearfix">
+            <div class="name fl">中国电信中国电信中国电信中国电信中国电信中国电信</div>
+            <button class="btn btn2" ng-click="updateIMApplyById(newfriend,'1')">同意</button>
+            <button class="btn btn1" ng-click="updateIMApplyById(newfriend,'2')">拒绝</button>
+          </div>
+          <div class="newfriend_type2">商家</div>
+          <div class="message1">备注：<span>我是中国电信的李长安，很高兴认识你啊，很高兴认识你啊</span></div>
+        </div>
+        <ion-option-button class="button-assertive removeItem" ng-click="friendDelete($event)">删除</ion-option-button>
+      </ion-item>
+      -->
+
+
+
+
+
+
+
+
+    </ion-list>
+
+
+
+
+    <div class="nosearch" ng-if="newfriendlist.length==0" style="margin-top: 0px; padding-top: 180px">
+
+      <div class="nointenet">
+
+        <img src="img/nonewfriend.png" style="margin: 0px">
+        <div class="message-info">
+          <span>暂无好友申请</span>
+        </div>
+      </div>
+    </div>
+
+    <ion-infinite-scroll
+            immediate-check="false"
+            ng-if="hasNextPage"
+            on-infinite="loadMore()"
+            distance="1%">
+    </ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>
