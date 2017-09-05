@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/www/css/active/active.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/css/cpv/cpv.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/css/font-style.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/css/pcenter/pcenter.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/css/register/register.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/lib/elastic.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/lib/ionic/fonts/xticon.eot" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/lib/ionic/fonts/xticon.svg" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/lib/ionic/fonts/xticon.ttf" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/lib/ionic/fonts/xticon.woff" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/cpv/controller/cpv.controller.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/cpv/controller/cpvdetail.controller.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/cpv/views/cpvdetail.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/cpv/views/cpvlist.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/home/active/controller/merry.controller.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/home/active/controller/newyear.controller.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/home/active/view/merry.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/home/active/view/newyear.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/pcenter/views/couponlist.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/pcenter/views/myrecommend.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/pcenter/xtschool/controller/xtschooldetail.controller.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/www/modules/pcenter/xtschool/temp/xtschooldetail.html" charset="UTF-8" />
+  </component>
+</project>
